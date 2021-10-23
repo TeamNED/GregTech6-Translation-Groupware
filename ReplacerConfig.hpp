@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 // clang-format off
 #include <ryml/ryml_std.hpp>
@@ -18,15 +19,16 @@
 using std::string;
 using std::vector;
 namespace po = boost::program_options;
+namespace fs = boost::filesystem;
 
 class ReplacerConfig {
 private:
-  string _main_source_path, _extra_source_path, _main_target_path,
-      _extra_target_path, _config_path, _lang, _version;
+  fs::path _main_source_path, _extra_source_path, _main_target_path,
+      _extra_target_path, _config_path;
+  string _lang, _version;
   string _get_file_contents(const string &filename);
 
 public:
-  ReplacerConfig();
   ReplacerConfig(int argc, char const *argv[]);
   ~ReplacerConfig();
 };

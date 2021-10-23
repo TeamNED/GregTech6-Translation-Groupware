@@ -18,4 +18,5 @@ TARGET_LINK_LIBRARIES(GT6TG
   ryml 
   c4core 
   debug boost_program_options-vc140-mt-gd optimized boost_program_options-vc140-mt
+  debug boost_filesystem-vc140-mt-gd optimized boost_filesystem-vc140-mt
 )
