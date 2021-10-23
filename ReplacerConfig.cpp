@@ -81,7 +81,7 @@ string ReplacerConfig::_get_file_contents(const string &filename) {
 
 ReplacerConfig::~ReplacerConfig() {}
 
-string ReplacerConfig::_parse_config() {
+void ReplacerConfig::_parse_config() {
   string config_contents = _get_file_contents(this->_config_path.string());
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
@@ -104,6 +104,7 @@ string ReplacerConfig::_parse_config() {
     auto node = root["generator"];
     if (node.is_seq()) {
       this->_version = string(node.val().str);
+      this->_generators = vector<Generator>{};
       for (const auto &generator_node : node.children()) {
         _parse_generator(generator_node);
       }
@@ -117,6 +118,8 @@ string ReplacerConfig::_parse_config() {
 
 void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
   // TODO
+  // Generator gen(...);
+  // this->_generators.push_back(gen);
 }
 
 const fs::path &ReplacerConfig::main_source_path() {

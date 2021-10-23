@@ -16,6 +16,8 @@
 #include <ryml/ryml.hpp>
 // clang-format on
 
+#include "Generator.hpp"
+
 using std::string;
 using std::vector;
 namespace po = boost::program_options;
@@ -26,8 +28,10 @@ private:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
       _extra_target_path, _config_path;
   string _lang, _version;
+  vector<Generator> _generators;
+
   string _get_file_contents(const string &filename);
-  string _parse_config();
+  void _parse_config();
   void _parse_generator(const ryml::NodeRef &node);
 
 public:
@@ -40,5 +44,6 @@ public:
   const fs::path &config_path();
   const string &lang();
   const string &version();
+  const vector<Generator> generators;
 };
 #endif
