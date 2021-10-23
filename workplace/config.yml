@@ -1,14 +1,16 @@
 version: 1
 lang: zh
 generators:
-  - key: block
+  - group: block
+    completed: true
     cached: true
     rules:
-      - en: Block of {0}
-        zh: "{0}块"
+      - s: Block of {0}
+        t: "{0}块"
         subs:
           - material
-  - key: material
+  - group: material
+    completed: true
     cached: true
     dict:
       - Amber: 琥珀
