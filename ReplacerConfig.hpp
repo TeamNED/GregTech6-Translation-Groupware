@@ -27,9 +27,18 @@ private:
       _extra_target_path, _config_path;
   string _lang, _version;
   string _get_file_contents(const string &filename);
+  string _parse_config();
+  void _parse_generator(const ryml::NodeRef &node);
 
 public:
   ReplacerConfig(int argc, char const *argv[]);
   ~ReplacerConfig();
+  const fs::path &main_source_path();
+  const fs::path &extra_source_path();
+  const fs::path &main_target_path();
+  const fs::path &extra_target_path();
+  const fs::path &config_path();
+  const string &lang();
+  const string &version();
 };
 #endif

@@ -66,13 +66,7 @@ ReplacerConfig::ReplacerConfig(int argc, char const *argv[]) {
   if (this->_config_path.empty()) {
     throw std::invalid_argument("config file not exist");
   }
-
-  string config_contents = _get_file_contents(this->_config_path.string());
-  ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
-  ryml::NodeRef root = tree.rootref();
-  for (ryml::NodeRef const &child : root.children()) {
-    std::cout << "key: " << child.key() << std::endl;
-  }
+  _parse_config();
 }
 
 string ReplacerConfig::_get_file_contents(const string &filename) {
@@ -86,3 +80,57 @@ string ReplacerConfig::_get_file_contents(const string &filename) {
 }
 
 ReplacerConfig::~ReplacerConfig() {}
+
+string ReplacerConfig::_parse_config() {
+  string config_contents = _get_file_contents(this->_config_path.string());
+  ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
+  ryml::NodeRef root = tree.rootref();
+  if (root.has_child("lang")) {
+    auto node = root["lang"];
+    if (node.has_val()) {
+      this->_lang = string(node.val().str);
+      throw std::invalid_argument("invalid lang type in config");
+    }
+  }
+  if (root.has_child("version")) {
+    auto node = root["version"];
+    if (node.has_val()) {
+      this->_version = string(node.val().str);
+    } else {
+      throw std::invalid_argument("invalid version type in config");
+    }
+  }
+  if (root.has_child("generator")) {
+    auto node = root["generator"];
+    if (node.is_seq()) {
+      this->_version = string(node.val().str);
+      for (const auto &generator_node : node.children()) {
+        _parse_generator(generator_node);
+      }
+    } else {
+      throw std::invalid_argument("invalid generator type in config");
+    }
+  } else {
+    throw std::invalid_argument("empty generator in config");
+  }
+}
+
+void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
+  // TODO
+}
+
+const fs::path &ReplacerConfig::main_source_path() {
+  return this->_main_source_path;
+}
+const fs::path &ReplacerConfig::extra_source_path() {
+  return this->_extra_source_path;
+}
+const fs::path &ReplacerConfig::main_target_path() {
+  return this->_main_target_path;
+}
+const fs::path &ReplacerConfig::extra_target_path() {
+  return this->_extra_target_path;
+}
+const fs::path &ReplacerConfig::config_path() { return this->_config_path; }
+const string &ReplacerConfig::lang() { return this->_lang; }
+const string &ReplacerConfig::version() { return this->_version; }
