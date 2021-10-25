@@ -14,13 +14,12 @@ private:
   vector<string> _extentions;
 
 public:
-  Generator(string group, string namespace_prefix, bool cached, bool completed,
-            vector<string> __extentions);
-  ~Generator();
-  const string &group();
-  const string &namespace_prefix();
-  bool cached();
-  bool completed();
-  const vector<string> extentions();
+  Generator();
+  virtual ~Generator();
+  virtual string &group();
+  virtual string &namespace_prefix();
+  virtual bool &cached();
+  virtual bool &completed();
+  virtual vector<string> &extentions();
 };
 #endif

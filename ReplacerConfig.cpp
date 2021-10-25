@@ -69,6 +69,8 @@ ReplacerConfig::ReplacerConfig(int argc, char const *argv[]) {
   _parse_config();
 }
 
+ReplacerConfig::~ReplacerConfig() {}
+
 string ReplacerConfig::_get_file_contents(const string &filename) {
   std::ifstream in(filename, std::ios::in | std::ios::binary);
   if (!in) {
@@ -79,31 +81,15 @@ string ReplacerConfig::_get_file_contents(const string &filename) {
   return contents.str();
 }
 
-ReplacerConfig::~ReplacerConfig() {}
-
 void ReplacerConfig::_parse_config() {
   string config_contents = _get_file_contents(this->_config_path.string());
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
-  if (root.has_child("lang")) {
-    auto node = root["lang"];
-    if (node.has_val()) {
-      this->_lang = string(node.val().str);
-      throw std::invalid_argument("invalid lang type in config");
-    }
-  }
-  if (root.has_child("version")) {
-    auto node = root["version"];
-    if (node.has_val()) {
-      this->_version = string(node.val().str);
-    } else {
-      throw std::invalid_argument("invalid version type in config");
-    }
-  }
+  this->_lang = _read_val(root, "lang");
+  this->_version = _read_val(root, "version");
   if (root.has_child("generator")) {
     auto node = root["generator"];
     if (node.is_seq()) {
-      this->_version = string(node.val().str);
       this->_generators = vector<Generator>{};
       for (const auto &generator_node : node.children()) {
         _parse_generator(generator_node);
@@ -118,10 +104,54 @@ void ReplacerConfig::_parse_config() {
 
 void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
   // TODO
-  // Generator gen(...);
-  // this->_generators.push_back(gen);
+  Generator gen;
+  for (const auto &child : node.children()) {
+    auto ckey = child.key();
+    if (ckey == "group") {
+      gen.group() = _read_val(child);
+    } else if (ckey == "namespace") {
+      gen.namespace_prefix() = _read_val(child);
+    } else if (ckey == "cached") {
+      gen.cached() = _str2bool(_read_val(child));
+    } else if (ckey == "completed") {
+      gen.completed() = _str2bool(_read_val(child));
+    } else if (ckey == "extenstion") {
+      if (child.is_seq()) {
+        for (const auto &ext_node : child.children()) {
+          gen.extentions().emplace_back(_read_val(ext_node));
+        }
+      }
+    }
+  }
+  this->_generators.emplace_back(gen);
 }
 
+string ReplacerConfig::_read_val(const ryml::NodeRef &node) {
+  if (node.has_val()) {
+    auto val = node.val().unquoted();
+    return string(val.str, val.len);
+  } else {
+    throw std::invalid_argument("node has no val.");
+  }
+}
+string ReplacerConfig::_read_val(const ryml::NodeRef &node, const string &key) {
+  auto ckey = ryml::to_csubstr(key);
+  if (node.has_child(ckey)) {
+    return _read_val(node[ckey]);
+  } else {
+    throw std::invalid_argument("node has no child '" + key + "'.");
+  }
+}
+
+bool ReplacerConfig::_str2bool(const string &str) {
+  if (str == "true") {
+    return true;
+  } else if (str == "false") {
+    return false;
+  } else {
+    throw std::invalid_argument("'" + str + "' is neither true nor false.");
+  }
+}
 const fs::path &ReplacerConfig::main_source_path() {
   return this->_main_source_path;
 }

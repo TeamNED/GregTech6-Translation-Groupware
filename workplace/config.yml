@@ -1,6 +1,6 @@
 version: 1
 lang: zh
-generators:
+generator:
   - group: block
     completed: true
     cached: true

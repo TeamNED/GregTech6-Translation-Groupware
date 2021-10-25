@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 
+#include <boost/convert.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 // clang-format off
@@ -33,6 +34,9 @@ private:
   string _get_file_contents(const string &filename);
   void _parse_config();
   void _parse_generator(const ryml::NodeRef &node);
+  static string _read_val(const ryml::NodeRef &node);
+  static string _read_val(const ryml::NodeRef &node, const string &key);
+  static bool _str2bool(const string &str);
 
 public:
   ReplacerConfig(int argc, char const *argv[]);
