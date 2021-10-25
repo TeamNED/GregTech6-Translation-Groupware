@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/convert.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 // clang-format off
