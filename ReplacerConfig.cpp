@@ -87,8 +87,8 @@ void ReplacerConfig::_parse_config() {
   ryml::NodeRef root = tree.rootref();
   this->_lang = _read_val(root, "lang");
   this->_version = _read_val(root, "version");
-  if (root.has_child("generator")) {
-    auto node = root["generator"];
+  if (root.has_child("generators")) {
+    auto node = root["generators"];
     if (node.is_seq()) {
       this->_generators = vector<Generator>{};
       for (const auto &generator_node : node.children()) {
@@ -167,3 +167,6 @@ const fs::path &ReplacerConfig::extra_target_path() {
 const fs::path &ReplacerConfig::config_path() { return this->_config_path; }
 const string &ReplacerConfig::lang() { return this->_lang; }
 const string &ReplacerConfig::version() { return this->_version; }
+const vector<Generator> &ReplacerConfig::generators() {
+  return this->_generators;
+}

@@ -48,6 +48,6 @@ public:
   const fs::path &config_path();
   const string &lang();
   const string &version();
-  const vector<Generator> generators;
+  const vector<Generator> &generators();
 };
 #endif
