@@ -14,8 +14,15 @@ private:
   vector<string> _extentions;
 
 public:
-  Generator();
-  virtual ~Generator();
+  Generator() = default;
+  Generator(string group, string namespace_prefix, bool cached, bool completed,
+            vector<string> extensions);
+  Generator(const Generator &) = default;
+  Generator(Generator &&) = default;
+  Generator &operator=(const Generator &) = default;
+  Generator &operator=(Generator &&) = default;
+  virtual ~Generator() = default;
+
   virtual string &group();
   virtual string &namespace_prefix();
   virtual bool &cached();

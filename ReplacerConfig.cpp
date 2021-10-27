@@ -123,7 +123,7 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       }
     }
   }
-  this->_generators.emplace_back(gen);
+  this->_generators.emplace_back(std::move(gen));
 }
 
 string ReplacerConfig::_read_val(const ryml::NodeRef &node) {
