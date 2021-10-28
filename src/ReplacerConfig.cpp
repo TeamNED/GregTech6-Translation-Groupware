@@ -115,21 +115,33 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       meta->cached() = _str2bool(_read_val(child));
     } else if (ckey == "completed") {
       meta->completed() = _str2bool(_read_val(child));
-    } else if (ckey == "extenstion") {
+    } else if (ckey == "extension") {
       if (child.is_seq()) {
         for (const auto &ext_node : child.children()) {
           meta->extentions().emplace_back(_read_val(ext_node));
         }
+      } else {
+        throw std::invalid_argument("invalid extension for generator");
+      }
+    } else if (ckey == "dict") {
+      // DictGenerator
+      auto gen = DictGenerator(meta);
+      if (child.is_map()) {
+        for (auto dict_item : child.children()) {
+          gen.dict().insert(
+              {_csubstr2str(dict_item.key()), _csubstr2str(dict_item.val())});
+        }
+        this->_generators.emplace_back(std::move(gen));
+      } else {
+        throw std::invalid_argument("invalid dict for generator");
       }
     }
   }
-  // this->_generators.emplace_back(std::move(meta));
 }
 
 string ReplacerConfig::_read_val(const ryml::NodeRef &node) {
   if (node.has_val()) {
-    auto val = node.val().unquoted();
-    return string(val.str, val.len);
+    return _csubstr2str(node.val().unquoted());
   } else {
     throw std::invalid_argument("node has no val.");
   }
@@ -152,6 +164,10 @@ bool ReplacerConfig::_str2bool(const string &str) {
     throw std::invalid_argument("'" + str + "' is neither true nor false.");
   }
 }
+string ReplacerConfig::_csubstr2str(const c4::csubstr &str) {
+  return string(str.str, str.len);
+}
+
 const fs::path &ReplacerConfig::main_source_path() {
   return this->_main_source_path;
 }

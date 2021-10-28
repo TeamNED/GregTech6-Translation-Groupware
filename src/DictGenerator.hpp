@@ -14,6 +14,7 @@ private:
 
 public:
   DictGenerator() = default;
+  DictGenerator(shared_ptr<IGeneratorMeta> meta);
   DictGenerator(shared_ptr<IGeneratorMeta> meta, map<string, string> dict);
   DictGenerator(const DictGenerator &) = default;
   DictGenerator(DictGenerator &&) = default;

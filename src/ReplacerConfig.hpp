@@ -18,6 +18,7 @@
 #include <ryml/ryml.hpp>
 // clang-format on
 
+#include "DictGenerator.hpp"
 #include "Generator.hpp"
 #include "GeneratorMeta.hpp"
 
@@ -39,6 +40,7 @@ private:
   static string _read_val(const ryml::NodeRef &node);
   static string _read_val(const ryml::NodeRef &node, const string &key);
   static bool _str2bool(const string &str);
+  static string _csubstr2str(const c4::csubstr &str);
 
 public:
   ReplacerConfig(int argc, char const *argv[]);
