@@ -2,31 +2,29 @@
 #define GENERATOR_H
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
+
+#include "IGeneratorMeta.hpp"
+
+using std::shared_ptr;
 using std::string;
 using std::vector;
 
 class Generator {
 private:
-  string _group, _namespace_prefix;
-  bool _cached, _completed;
-  vector<string> _extentions;
+  shared_ptr<IGeneratorMeta> _meta;
 
 public:
   Generator() = default;
-  Generator(string group, string namespace_prefix, bool cached, bool completed,
-            vector<string> extensions);
+  Generator(shared_ptr<IGeneratorMeta> meta);
   Generator(const Generator &) = default;
   Generator(Generator &&) = default;
   Generator &operator=(const Generator &) = default;
   Generator &operator=(Generator &&) = default;
   virtual ~Generator() = default;
 
-  virtual string &group();
-  virtual string &namespace_prefix();
-  virtual bool &cached();
-  virtual bool &completed();
-  virtual vector<string> &extentions();
+  virtual shared_ptr<IGeneratorMeta> &meta();
 };
 #endif

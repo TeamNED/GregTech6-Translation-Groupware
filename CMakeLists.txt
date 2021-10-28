@@ -12,7 +12,14 @@ LINK_DIRECTORIES(
 
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
-add_executable(GT6TG main.cpp ReplacerConfig.cpp Generator.cpp DictGenerator.cpp)
+add_executable(GT6TG
+  src/main.cpp
+  src/ReplacerConfig.cpp
+  src/Generator.cpp
+  src/DictGenerator.cpp
+  src/IGeneratorMeta.cpp
+  src/GeneratorMeta.cpp
+)
 
 TARGET_LINK_LIBRARIES(GT6TG
   ryml 

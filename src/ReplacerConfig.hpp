@@ -5,6 +5,7 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -18,6 +19,7 @@
 // clang-format on
 
 #include "Generator.hpp"
+#include "GeneratorMeta.hpp"
 
 using std::string;
 using std::vector;

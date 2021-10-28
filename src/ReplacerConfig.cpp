@@ -104,26 +104,26 @@ void ReplacerConfig::_parse_config() {
 
 void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
   // TODO
-  Generator gen;
+  auto meta = std::make_shared<GeneratorMeta>();
   for (const auto &child : node.children()) {
     auto ckey = child.key();
     if (ckey == "group") {
-      gen.group() = _read_val(child);
+      meta->group() = _read_val(child);
     } else if (ckey == "namespace") {
-      gen.namespace_prefix() = _read_val(child);
+      meta->namespace_prefix() = _read_val(child);
     } else if (ckey == "cached") {
-      gen.cached() = _str2bool(_read_val(child));
+      meta->cached() = _str2bool(_read_val(child));
     } else if (ckey == "completed") {
-      gen.completed() = _str2bool(_read_val(child));
+      meta->completed() = _str2bool(_read_val(child));
     } else if (ckey == "extenstion") {
       if (child.is_seq()) {
         for (const auto &ext_node : child.children()) {
-          gen.extentions().emplace_back(_read_val(ext_node));
+          meta->extentions().emplace_back(_read_val(ext_node));
         }
       }
     }
   }
-  this->_generators.emplace_back(std::move(gen));
+  // this->_generators.emplace_back(std::move(meta));
 }
 
 string ReplacerConfig::_read_val(const ryml::NodeRef &node) {

@@ -14,9 +14,7 @@ private:
 
 public:
   DictGenerator() = default;
-  DictGenerator(string group, string namespace_prefix, bool cached,
-                bool completed, vector<string> extensions,
-                map<string, string> dict);
+  DictGenerator(shared_ptr<IGeneratorMeta> meta, map<string, string> dict);
   DictGenerator(const DictGenerator &) = default;
   DictGenerator(DictGenerator &&) = default;
   DictGenerator &operator=(const DictGenerator &) = default;
