@@ -15,8 +15,8 @@ private:
 
 public:
   Rule() = default;
-  Rule(const string &source, const string &target);
-  Rule(const string &source, const string &target, const vector<string> &subs);
+  Rule(string source, string target);
+  Rule(string source, string target, vector<string> subs);
   Rule(Rule &&) = default;
   ~Rule() = default;
   Rule &operator=(const Rule &) = default;
