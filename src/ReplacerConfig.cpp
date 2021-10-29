@@ -127,16 +127,55 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       // DictGenerator
       if (child.is_map()) {
         auto gen = DictGenerator(meta);
+        auto &dict = gen.dict();
         for (auto dict_item : child.children()) {
-          gen.dict().insert(
+          dict.insert(
               {_csubstr2str(dict_item.key()), _csubstr2str(dict_item.val())});
         }
         this->_generators.emplace_back(std::move(gen));
       } else {
         throw std::invalid_argument("invalid dict for generator");
       }
+    } else if (ckey == "rules") {
+      // RuleGenerator
+      if (child.is_seq()) {
+        auto gen = RuleGenerator(meta);
+        auto &rules = gen.rules();
+        for (auto rule : child.children()) {
+          rules.emplace_back(_parse_rule(rule));
+        }
+        this->_generators.emplace_back(std::move(gen));
+      } else {
+        throw std::invalid_argument("invalid rules for generator");
+      }
     }
   }
+}
+
+Rule ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
+  auto rule = Rule();
+  if (node.is_map()) {
+    for (auto child : node.children()) {
+      auto ckey = child.key();
+      if (ckey == "s") {
+        rule.source() = _csubstr2str(child.val());
+      } else if (ckey == "t") {
+        rule.target() = _csubstr2str(child.val());
+      } else if (ckey == "subs") {
+        if (child.is_seq()) {
+          auto &subs = rule.subs();
+          for (auto sub : child.children()) {
+            subs.emplace_back(_csubstr2str(sub.val()));
+          }
+        } else {
+          throw std::invalid_argument("invalid rule subs");
+        }
+      }
+    }
+  } else {
+    throw std::invalid_argument("invalid rule");
+  }
+  return rule;
 }
 
 string ReplacerConfig::_read_val(const ryml::NodeRef &node) {

@@ -19,6 +19,8 @@ add_executable(GT6TG
   src/DictGenerator.cpp
   src/IGeneratorMeta.cpp
   src/GeneratorMeta.cpp
+  src/RuleGenerator.cpp
+  src/Rule.cpp
 )
 
 TARGET_LINK_LIBRARIES(GT6TG
