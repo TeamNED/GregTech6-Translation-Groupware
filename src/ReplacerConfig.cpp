@@ -125,8 +125,8 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       }
     } else if (ckey == "dict") {
       // DictGenerator
-      auto gen = DictGenerator(meta);
       if (child.is_map()) {
+        auto gen = DictGenerator(meta);
         for (auto dict_item : child.children()) {
           gen.dict().insert(
               {_csubstr2str(dict_item.key()), _csubstr2str(dict_item.val())});
