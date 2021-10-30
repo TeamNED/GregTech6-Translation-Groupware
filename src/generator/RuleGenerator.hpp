@@ -26,5 +26,6 @@ public:
   virtual ~RuleGenerator() = default;
 
   vector<Rule> &rules();
+  virtual vector<shared_ptr<ILangResult>> results() override;
 };
 #endif

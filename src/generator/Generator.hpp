@@ -28,6 +28,6 @@ public:
   virtual ~Generator() = default;
 
   virtual shared_ptr<IGeneratorMeta> &meta();
-  virtual vector<shared_ptr<ILangResult>> results() = 0;
+  virtual vector<shared_ptr<ILangResult>> results();
 };
 #endif

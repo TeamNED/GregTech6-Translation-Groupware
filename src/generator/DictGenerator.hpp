@@ -6,7 +6,6 @@
 
 #include "Generator.hpp"
 
-using std::shared_ptr;
 using kvlist = std::unordered_map<string, string>;
 using pkvlist = shared_ptr<kvlist>;
 

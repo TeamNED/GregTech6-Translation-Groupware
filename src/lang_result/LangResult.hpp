@@ -7,12 +7,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../meta/IGeneratorMeta.hpp"
 #include "ILangResult.hpp"
 
-using std::shared_ptr;
-using std::string;
-using std::unordered_map;
 class LangResult : public virtual ILangResult {
 private:
   shared_ptr<IGeneratorMeta> _meta;
