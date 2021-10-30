@@ -2,6 +2,9 @@
 #define RULELANGRESULT_H
 #pragma once
 
+#include <fmt/args.h>
+#include <fmt/core.h>
+
 #include "../generator/Rule.hpp"
 #include "LangResult.hpp"
 
@@ -13,6 +16,7 @@ private:
   vector<shared_ptr<ILangResult>> _subs;
   pkvlist _result = nullptr;
 
+  inline pkvlist _psubret(size_t index);
   pkvlist RuleLangResult::_generate();
 
 public:
