@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "IGeneratorMeta.hpp"
+#include "../meta/IGeneratorMeta.hpp"
 
 using std::shared_ptr;
 using std::string;

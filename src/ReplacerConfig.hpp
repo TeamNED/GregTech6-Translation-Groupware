@@ -18,11 +18,11 @@
 #include <ryml/ryml.hpp>
 // clang-format on
 
-#include "DictGenerator.hpp"
-#include "Generator.hpp"
-#include "GeneratorMeta.hpp"
-#include "Rule.hpp"
-#include "RuleGenerator.hpp"
+#include "generator/DictGenerator.hpp"
+#include "generator/Generator.hpp"
+#include "generator/Rule.hpp"
+#include "generator/RuleGenerator.hpp"
+#include "meta/GeneratorMeta.hpp"
 
 using std::string;
 using std::vector;
