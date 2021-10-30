@@ -41,7 +41,7 @@ private:
   string _get_file_contents(const string &filename);
   void _parse_config();
   void _parse_generator(const ryml::NodeRef &node);
-  Rule _parse_rule(const ryml::NodeRef &node);
+  shared_ptr<Rule> _parse_rule(const ryml::NodeRef &node);
   static string _read_val(const ryml::NodeRef &node);
   static string _read_val(const ryml::NodeRef &node, const string &key);
   static bool _str2bool(const string &str);

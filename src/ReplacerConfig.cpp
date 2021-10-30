@@ -153,18 +153,18 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
   }
 }
 
-Rule ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
-  auto rule = Rule();
+shared_ptr<Rule> ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
+  auto rule = std::make_shared<Rule>();
   if (node.is_map()) {
     for (auto child : node.children()) {
       auto ckey = child.key();
       if (ckey == "s") {
-        rule.source() = _csubstr2str(child.val());
+        rule->source() = _csubstr2str(child.val());
       } else if (ckey == "t") {
-        rule.target() = _csubstr2str(child.val());
+        rule->target() = _csubstr2str(child.val());
       } else if (ckey == "subs") {
         if (child.is_seq()) {
-          auto &subs = rule.subs();
+          auto &subs = rule->subs();
           for (auto sub : child.children()) {
             subs.emplace_back(_csubstr2str(sub.val()));
           }
@@ -176,7 +176,7 @@ Rule ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
   } else {
     throw std::invalid_argument("invalid rule");
   }
-  return rule;
+  return std::move(rule);
 }
 
 string ReplacerConfig::_read_val(const ryml::NodeRef &node) {
