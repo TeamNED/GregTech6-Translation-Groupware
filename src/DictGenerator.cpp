@@ -2,9 +2,15 @@
 
 DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta)
     : Generator(meta) {}
-
 DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta,
-                             map<string, string> dict)
+                             unordered_map<string, string> dict)
     : Generator(meta), _dict(dict) {}
 
-map<string, string> &DictGenerator::dict() { return this->_dict; }
+unordered_map<string, string> &DictGenerator::dict() { return this->_dict; }
+
+vector<shared_ptr<ILangResult>> DictGenerator::results() {
+  if (_result == nullptr) {
+    _result = std::make_shared<DictLangResult>(this->_dict);
+  }
+  return vector<shared_ptr<ILangResult>>{_result};
+}

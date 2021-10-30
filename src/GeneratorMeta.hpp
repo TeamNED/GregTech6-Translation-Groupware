@@ -7,7 +7,7 @@
 class GeneratorMeta : public virtual IGeneratorMeta {
 private:
   string _group, _namespace_prefix;
-  bool _cached, _completed;
+  bool _cached = true, _completed = true;
   vector<string> _extentions;
 
 public:

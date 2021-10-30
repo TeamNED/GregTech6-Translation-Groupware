@@ -6,7 +6,9 @@
 #include <string>
 #include <vector>
 
+#include "DictLangResult.hpp"
 #include "IGeneratorMeta.hpp"
+#include "ILangResult.hpp"
 
 using std::shared_ptr;
 using std::string;
@@ -26,5 +28,6 @@ public:
   virtual ~Generator() = default;
 
   virtual shared_ptr<IGeneratorMeta> &meta();
+  virtual vector<shared_ptr<ILangResult>> results() = 0;
 };
 #endif
