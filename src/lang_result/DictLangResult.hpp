@@ -2,16 +2,13 @@
 #define DICTLANGRESULT_H
 #pragma once
 
-#include <string>
-#include <unordered_map>
-
 #include "LangResult.hpp"
 
 class DictLangResult : public virtual LangResult {
   using LangResult::LangResult;
 
 private:
-  pkvlist *_dict = nullptr;
+  pkvlist _dict = nullptr;
 
 public:
   DictLangResult(shared_ptr<IGeneratorMeta> meta, pkvlist dict);

@@ -127,7 +127,8 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       // DictGenerator
       if (child.is_map()) {
         auto gen = DictGenerator(meta);
-        auto &dict = gen.dict();
+        gen.dict() = std::make_shared<kvlist>();
+        auto &dict = *(gen.dict());
         for (auto dict_item : child.children()) {
           dict.insert(
               {_csubstr2str(dict_item.key()), _csubstr2str(dict_item.val())});

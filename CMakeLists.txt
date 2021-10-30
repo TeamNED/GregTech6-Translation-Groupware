@@ -24,6 +24,7 @@ add_executable(GT6TG
   src/lang_result/ILangResult.cpp
   src/lang_result/LangResult.cpp
   src/lang_result/DictLangResult.cpp
+  src/lang_result/RuleLangResult.cpp
 )
 
 TARGET_LINK_LIBRARIES(GT6TG

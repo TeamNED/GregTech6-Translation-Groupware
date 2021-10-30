@@ -9,7 +9,7 @@ pkvlist DictGenerator::dict() { return this->_dict; }
 
 vector<shared_ptr<ILangResult>> DictGenerator::results() {
   if (_result == nullptr) {
-    _result = std::make_shared<DictLangResult>(this->_dict);
+    _result = std::make_shared<DictLangResult>(this->meta(), this->_dict);
   }
   return vector<shared_ptr<ILangResult>>{_result};
 }
