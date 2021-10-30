@@ -1,11 +1,3 @@
-#include "LangResult.hpp"  
-	
-LangResult::LangResult()
-{
-	
-}
-	
-LangResult::~LangResult()
-{
-	
-}
+#include "LangResult.hpp"
+
+LangResult::LangResult(shared_ptr<IGeneratorMeta> meta) : _meta(meta) {}

@@ -5,23 +5,20 @@
 #include <string>
 #include <unordered_map>
 
-#include "ILangResult.hpp"
+#include "LangResult.hpp"
 
 using std::string;
 using std::unordered_map;
 
-class DictLangResult : public virtual ILangResult {
+class DictLangResult : public virtual LangResult {
+  using LangResult::LangResult;
+
 private:
   const unordered_map<string, string> *_dict = nullptr;
 
 public:
-  DictLangResult() = default;
-  DictLangResult(const unordered_map<string, string> *dict);
-  DictLangResult(const DictLangResult &) = default;
-  DictLangResult(DictLangResult &&) = default;
-  DictLangResult &operator=(const DictLangResult &) = default;
-  DictLangResult &operator=(DictLangResult &&) = default;
-  virtual ~DictLangResult() = default;
+  DictLangResult(shared_ptr<IGeneratorMeta> meta,
+                 const unordered_map<string, string> *dict);
   virtual const unordered_map<string, string> *result() override;
 };
 #endif
