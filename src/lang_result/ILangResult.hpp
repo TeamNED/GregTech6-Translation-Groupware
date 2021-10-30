@@ -11,12 +11,13 @@
 
 using std::shared_ptr;
 using std::string;
-using std::unordered_map;
+using kvlist = std::unordered_map<string, string>;
+using pkvlist = shared_ptr<kvlist>;
 
 class ILangResult {
 private:
 public:
   virtual shared_ptr<IGeneratorMeta> meta() = 0;
-  virtual const unordered_map<string, string> *result() = 0;
+  virtual pkvlist result() = 0;
 };
 #endif

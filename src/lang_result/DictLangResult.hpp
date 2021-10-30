@@ -7,18 +7,14 @@
 
 #include "LangResult.hpp"
 
-using std::string;
-using std::unordered_map;
-
 class DictLangResult : public virtual LangResult {
   using LangResult::LangResult;
 
 private:
-  const unordered_map<string, string> *_dict = nullptr;
+  pkvlist *_dict = nullptr;
 
 public:
-  DictLangResult(shared_ptr<IGeneratorMeta> meta,
-                 const unordered_map<string, string> *dict);
-  virtual const unordered_map<string, string> *result() override;
+  DictLangResult(shared_ptr<IGeneratorMeta> meta, pkvlist dict);
+  virtual pkvlist result() override;
 };
 #endif

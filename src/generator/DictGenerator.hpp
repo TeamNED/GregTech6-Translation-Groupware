@@ -6,25 +6,20 @@
 
 #include "Generator.hpp"
 
-using std::unordered_map;
+using std::shared_ptr;
+using kvlist = std::unordered_map<string, string>;
+using pkvlist = shared_ptr<kvlist>;
 
 class DictGenerator : public virtual Generator {
 private:
-  unordered_map<string, string> _dict;
+  pkvlist _dict;
   shared_ptr<ILangResult> _result;
 
 public:
-  DictGenerator() = default;
   DictGenerator(shared_ptr<IGeneratorMeta> meta);
-  DictGenerator(shared_ptr<IGeneratorMeta> meta,
-                unordered_map<string, string> dict);
-  DictGenerator(const DictGenerator &) = default;
-  DictGenerator(DictGenerator &&) = default;
-  DictGenerator &operator=(const DictGenerator &) = default;
-  DictGenerator &operator=(DictGenerator &&) = default;
-  virtual ~DictGenerator() = default;
+  DictGenerator(shared_ptr<IGeneratorMeta> meta, pkvlist dict);
 
-  virtual unordered_map<string, string> &dict();
+  virtual pkvlist dict();
   virtual vector<shared_ptr<ILangResult>> results() override;
 };
 #endif

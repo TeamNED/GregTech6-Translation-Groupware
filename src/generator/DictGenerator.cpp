@@ -2,11 +2,10 @@
 
 DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta)
     : Generator(meta) {}
-DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta,
-                             unordered_map<string, string> dict)
+DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta, pkvlist dict)
     : Generator(meta), _dict(dict) {}
 
-unordered_map<string, string> &DictGenerator::dict() { return this->_dict; }
+pkvlist DictGenerator::dict() { return this->_dict; }
 
 vector<shared_ptr<ILangResult>> DictGenerator::results() {
   if (_result == nullptr) {
