@@ -15,14 +15,18 @@ add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 add_executable(GT6TG
   src/main.cpp
   src/ReplacerConfig.cpp
-  src/Generator.cpp
-  src/DictGenerator.cpp
-  src/IGeneratorMeta.cpp
-  src/GeneratorMeta.cpp
-  src/RuleGenerator.cpp
-  src/Rule.cpp
-  src/ILangResult.cpp
-  src/DictLangResult.cpp
+
+  src/generators/Generator.cpp
+  src/generators/DictGenerator.cpp
+  src/generators/RuleGenerator.cpp
+  src/generators/Rule.cpp
+
+  src/meta/IGeneratorMeta.cpp
+  src/meta/GeneratorMeta.cpp
+
+  src/lang_result/ILangResult.cpp
+  src/lang_result/LangResult.cpp
+  src/lang_result/DictLangResult.cpp
 )
 
 TARGET_LINK_LIBRARIES(GT6TG
