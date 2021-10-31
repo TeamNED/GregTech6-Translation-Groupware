@@ -20,32 +20,29 @@ pkvlist RuleLangResult::result(bool cached) {
   }
 };
 
-pkvlist RuleLangResult::_psubret(size_t index) {
-  return _subs[index].get()->result();
-}
-
 pkvlist RuleLangResult::_generate() {
   size_t subs_sz = _subs.size();
   if (_rule == nullptr || subs_sz == 0) {
     return std::make_shared<kvlist>();
   }
   // init
+  vector<pkvlist> sub_results{}; // data holder
   vector<kvlist::const_iterator> begins{};
   vector<kvlist::const_iterator> ends{};
-  // check
-  for (size_t i = 0; i < subs_sz; ++i) {
-    if (_psubret(i)->size() == 0) {
-      return std::make_shared<kvlist>();
-    }
-  }
   pkvlist result = std::make_shared<kvlist>();
   const string &s_fmt = _rule->source();
   const string &t_fmt = _rule->target();
   do {
     // fill zeros
     for (size_t i = begins.size(); i < subs_sz; ++i) {
-      begins.emplace_back(_psubret(i)->cbegin());
-      ends.emplace_back(_psubret(i)->cend());
+      auto sub_result = _subs[i].get()->result();
+      if (sub_result->cbegin() == sub_result->cend()) {
+        // zero-len sub, not valid
+        return std::make_shared<kvlist>();
+      }
+      begins.emplace_back(sub_result->cbegin());
+      ends.emplace_back(sub_result->cend());
+      sub_results.emplace_back(std::move(sub_result));
     }
     // generate
     fmt::dynamic_format_arg_store<fmt::format_context> s_store, t_store;
@@ -60,6 +57,7 @@ pkvlist RuleLangResult::_generate() {
       if (++begins[i] == ends[i]) {
         begins.pop_back();
         ends.pop_back();
+        sub_results.pop_back();
       } else {
         break;
       }

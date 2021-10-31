@@ -21,6 +21,7 @@ add_executable(GT6TG
   src/generator/Rule.cpp
   src/meta/IGeneratorMeta.cpp
   src/meta/GeneratorMeta.cpp
+  src/meta/IGroupRepository.cpp
   src/lang_result/ILangResult.cpp
   src/lang_result/LangResult.cpp
   src/lang_result/DictLangResult.cpp

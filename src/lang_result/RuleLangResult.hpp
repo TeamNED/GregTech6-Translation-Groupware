@@ -16,7 +16,6 @@ private:
   vector<shared_ptr<ILangResult>> _subs;
   pkvlist _result = nullptr;
 
-  inline pkvlist _psubret(size_t index);
   pkvlist RuleLangResult::_generate();
 
 public:
