@@ -12,6 +12,7 @@ private:
 
 public:
   GeneratorMeta() = default;
+  GeneratorMeta(const IGeneratorMeta *); // copy
   GeneratorMeta(string group, string namespace_prefix, bool cached,
                 bool completed, set<string> extensions);
   GeneratorMeta(const GeneratorMeta &) = default;

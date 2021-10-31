@@ -1,5 +1,9 @@
 #include "GeneratorMeta.hpp"
 
+GeneratorMeta::GeneratorMeta(const IGeneratorMeta *that)
+    : _group(that->group()), _namespace_prefix(that->namespace_prefix()),
+      _cached(that->cached()), _completed(that->completed()),
+      _extentions(that->extentions()){};
 GeneratorMeta::GeneratorMeta(string group, string namespace_prefix, bool cached,
                              bool completed, set<string> extentions)
     : _group(group), _namespace_prefix(namespace_prefix), _cached(cached),

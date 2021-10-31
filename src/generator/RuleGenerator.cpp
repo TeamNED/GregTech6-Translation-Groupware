@@ -46,20 +46,15 @@ vector<shared_ptr<ILangResult>> RuleGenerator::results() {
         ends.emplace_back(sub_results[i].cend());
       }
       // generate conbination
-      auto meta_conbination = std::make_shared<GeneratorMeta>(*meta());
+      shared_ptr<GeneratorMeta> meta_conbination =
+          std::make_shared<GeneratorMeta>(meta().get());
       vector<shared_ptr<ILangResult>> lang_conbination;
       for (const auto &begin : begins) {
         *meta_conbination += *((*begin)->meta());
         if (meta_conbination->group().empty()) {
           break;
         }
-        auto meta_conbination_result = (*begin)->result();
-        if (meta_conbination_result->size() == 0) {
-          // zero-length LangResult, not valid
-          meta_conbination->group().clear();
-          break;
-        }
-        lang_conbination.emplace_back(std::move(meta_conbination_result));
+        lang_conbination.emplace_back(std::move(*begin));
       }
       if (meta_conbination->group().empty()) {
         continue; // generate failed.
@@ -70,11 +65,10 @@ vector<shared_ptr<ILangResult>> RuleGenerator::results() {
           [&, meta_conbination](const shared_ptr<IGeneratorMeta> that) -> bool {
             return (*meta_conbination).equals(that.get());
           });
-      shared_ptr<IGeneratorMeta> final_meta = nullptr;
+      shared_ptr<IGeneratorMeta> final_meta(std::move(meta_conbination));
       if (meta_cached != meta_cache.end()) {
         final_meta = *meta_cached;
       } else {
-        final_meta = std::move(meta_conbination);
         meta_cache.emplace_back(final_meta);
       }
       // generate RuleLangResult
