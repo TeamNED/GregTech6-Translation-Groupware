@@ -2,11 +2,11 @@
 #define IGENERATORMETA_H
 #pragma once
 
+#include <set>
 #include <string>
-#include <vector>
 
+using std::set;
 using std::string;
-using std::vector;
 
 class IGeneratorMeta {
 public:
@@ -14,6 +14,14 @@ public:
   virtual const string &namespace_prefix() const = 0;
   virtual bool cached() const = 0;
   virtual bool completed() const = 0;
-  virtual const vector<string> &extentions() const = 0;
+  virtual const set<string> &extentions() const = 0;
+
+  // conbine IGeneratorMetas into one
+  // should affect only at namespace_prefix and extensions
+  // if the result is valid, otherwise
+  // the group field should be cleared
+  virtual IGeneratorMeta &operator+=(const IGeneratorMeta &that) = 0;
+  virtual bool operator==(const IGeneratorMeta &that) const = 0;
+  virtual bool operator!=(const IGeneratorMeta &that) const = 0;
 };
 #endif

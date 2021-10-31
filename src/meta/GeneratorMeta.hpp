@@ -8,12 +8,12 @@ class GeneratorMeta : public virtual IGeneratorMeta {
 private:
   string _group, _namespace_prefix;
   bool _cached = true, _completed = true;
-  vector<string> _extentions;
+  set<string> _extentions;
 
 public:
   GeneratorMeta() = default;
   GeneratorMeta(string group, string namespace_prefix, bool cached,
-                bool completed, vector<string> extensions);
+                bool completed, set<string> extensions);
   GeneratorMeta(const GeneratorMeta &) = default;
   GeneratorMeta(GeneratorMeta &&) = default;
   GeneratorMeta &operator=(const GeneratorMeta &) = default;
@@ -24,12 +24,16 @@ public:
   virtual string &namespace_prefix();
   virtual bool &cached();
   virtual bool &completed();
-  virtual vector<string> &extentions();
+  virtual set<string> &extentions();
 
   virtual const string &group() const override;
   virtual const string &namespace_prefix() const override;
   virtual bool cached() const override;
   virtual bool completed() const override;
-  virtual const vector<string> &extentions() const override;
+  virtual const set<string> &extentions() const override;
+
+  virtual GeneratorMeta &operator+=(const IGeneratorMeta &that) override;
+  virtual bool operator==(const IGeneratorMeta &that) const override;
+  virtual bool operator!=(const IGeneratorMeta &that) const override;
 };
 #endif

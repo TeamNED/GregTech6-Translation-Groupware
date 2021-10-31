@@ -118,7 +118,7 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "extension") {
       if (child.is_seq()) {
         for (const auto &ext_node : child.children()) {
-          meta->extentions().emplace_back(_read_val(ext_node));
+          meta->extentions().emplace(_read_val(ext_node));
         }
       } else {
         throw std::invalid_argument("invalid extension for generator");
