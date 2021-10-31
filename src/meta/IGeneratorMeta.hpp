@@ -21,7 +21,6 @@ public:
   // if the result is valid, otherwise
   // the group field should be cleared
   virtual IGeneratorMeta &operator+=(const IGeneratorMeta &that) = 0;
-  virtual bool operator==(const IGeneratorMeta &that) const = 0;
-  virtual bool operator!=(const IGeneratorMeta &that) const = 0;
+  virtual bool equals(const IGeneratorMeta *that) const = 0;
 };
 #endif

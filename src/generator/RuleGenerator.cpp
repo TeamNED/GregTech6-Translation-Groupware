@@ -68,16 +68,18 @@ vector<shared_ptr<ILangResult>> RuleGenerator::results() {
       auto meta_cached = std::find_if(
           meta_cache.cbegin(), meta_cache.cend(),
           [&, meta_conbination](const shared_ptr<IGeneratorMeta> that) -> bool {
-            return *meta_conbination == *that;
+            return (*meta_conbination).equals(that.get());
           });
+      shared_ptr<IGeneratorMeta> final_meta = nullptr;
       if (meta_cached != meta_cache.end()) {
-        meta_conbination = *meta_cached;
+        final_meta = *meta_cached;
       } else {
-        meta_cache.emplace_back(meta_conbination);
+        final_meta = std::move(meta_conbination);
+        meta_cache.emplace_back(final_meta);
       }
       // generate RuleLangResult
-      auto generated_result = std::make_shared<RuleLangResult>(
-          meta_conbination, rule, lang_conbination);
+      auto generated_result =
+          std::make_shared<RuleLangResult>(final_meta, rule, lang_conbination);
       results.emplace_back(std::move(generated_result));
       // step
       for (size_t i = subs_sz - 1; i >= 0; --i) {

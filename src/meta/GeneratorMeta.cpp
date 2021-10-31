@@ -43,13 +43,10 @@ GeneratorMeta &GeneratorMeta::operator+=(const IGeneratorMeta &that) {
                             that.extentions().cend());
   return *this;
 }
-bool GeneratorMeta::operator==(const IGeneratorMeta &that) const {
-  return this->group() == that.group() &&
-         this->namespace_prefix() == that.namespace_prefix() &&
-         this->cached() == that.cached() &&
-         this->completed() == that.completed() &&
-         this->extentions() == that.extentions();
-}
-bool GeneratorMeta::operator!=(const IGeneratorMeta &that) const {
-  return !(*this == that);
+bool GeneratorMeta::equals(const IGeneratorMeta *that) const {
+  return this->group() == that->group() &&
+         this->namespace_prefix() == that->namespace_prefix() &&
+         this->cached() == that->cached() &&
+         this->completed() == that->completed() &&
+         this->extentions() == that->extentions();
 }
