@@ -1,5 +1,24 @@
 #include "ReplacerConfig.hpp"
 
+const fs::path &ReplacerConfig::main_source_path() {
+  return this->_main_source_path;
+}
+const fs::path &ReplacerConfig::extra_source_path() {
+  return this->_extra_source_path;
+}
+const fs::path &ReplacerConfig::main_target_path() {
+  return this->_main_target_path;
+}
+const fs::path &ReplacerConfig::extra_target_path() {
+  return this->_extra_target_path;
+}
+const fs::path &ReplacerConfig::config_path() { return this->_config_path; }
+const string &ReplacerConfig::lang() { return this->_lang; }
+const string &ReplacerConfig::version() { return this->_version; }
+const vector<Generator> &ReplacerConfig::generators() {
+  return this->_generators;
+}
+
 ReplacerConfig::ReplacerConfig(int argc, char const *argv[]) {
   // declare options
   po::options_description desc("Available options");
@@ -141,6 +160,7 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       // RuleGenerator
       if (child.is_seq()) {
         auto gen = RuleGenerator(meta);
+        gen.repository() = this;
         auto &rules = gen.rules();
         for (auto rule : child.children()) {
           rules.emplace_back(_parse_rule(rule));
@@ -208,21 +228,9 @@ string ReplacerConfig::_csubstr2str(const c4::csubstr &str) {
   return string(str.str, str.len);
 }
 
-const fs::path &ReplacerConfig::main_source_path() {
-  return this->_main_source_path;
-}
-const fs::path &ReplacerConfig::extra_source_path() {
-  return this->_extra_source_path;
-}
-const fs::path &ReplacerConfig::main_target_path() {
-  return this->_main_target_path;
-}
-const fs::path &ReplacerConfig::extra_target_path() {
-  return this->_extra_target_path;
-}
-const fs::path &ReplacerConfig::config_path() { return this->_config_path; }
-const string &ReplacerConfig::lang() { return this->_lang; }
-const string &ReplacerConfig::version() { return this->_version; }
-const vector<Generator> &ReplacerConfig::generators() {
-  return this->_generators;
+vector<shared_ptr<ILangResult>>
+ReplacerConfig::get_group_results(const string &group) {
+  // TODO
+  vector<shared_ptr<ILangResult>> results;
+  return results;
 }

@@ -11,6 +11,6 @@ using std::vector;
 class IGroupRepository {
 public:
   virtual vector<shared_ptr<ILangResult>>
-  get_group_results(const string &group);
+  get_group_results(const string &group) = 0;
 };
 #endif

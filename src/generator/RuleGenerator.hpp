@@ -21,7 +21,7 @@ public:
   RuleGenerator(shared_ptr<IGeneratorMeta> meta,
                 vector<shared_ptr<Rule>> rules);
   vector<shared_ptr<Rule>> &rules();
-  IGroupRepository *repository();
+  IGroupRepository *&repository();
   virtual vector<shared_ptr<ILangResult>> results() override;
 };
 #endif

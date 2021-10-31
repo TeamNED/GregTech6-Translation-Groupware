@@ -6,7 +6,7 @@ RuleGenerator::RuleGenerator(shared_ptr<IGeneratorMeta> meta,
                              vector<shared_ptr<Rule>> rules)
     : Generator(meta), _rules(rules) {}
 vector<shared_ptr<Rule>> &RuleGenerator::rules() { return this->_rules; }
-IGroupRepository *RuleGenerator::repository() { return this->_repository; }
+IGroupRepository *&RuleGenerator::repository() { return this->_repository; }
 
 vector<shared_ptr<ILangResult>> RuleGenerator::results() {
   vector<shared_ptr<ILangResult>> results;

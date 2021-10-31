@@ -23,6 +23,7 @@
 #include "generator/Rule.hpp"
 #include "generator/RuleGenerator.hpp"
 #include "meta/GeneratorMeta.hpp"
+#include "meta/IGroupRepository.hpp"
 
 using std::string;
 using std::vector;
@@ -31,7 +32,7 @@ using pkvlist = std::shared_ptr<kvlist>;
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
-class ReplacerConfig {
+class ReplacerConfig : public virtual IGroupRepository {
 private:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
       _extra_target_path, _config_path;
@@ -58,5 +59,8 @@ public:
   const string &lang();
   const string &version();
   const vector<Generator> &generators();
+
+  virtual vector<shared_ptr<ILangResult>>
+  get_group_results(const string &group) override;
 };
 #endif
