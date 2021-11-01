@@ -4,19 +4,23 @@
 
 #include <memory>
 #include <string>
-#include <unordered_map>
+#include <utility>
+#include <vector>
 
 #include "../meta/IGeneratorMeta.hpp"
 
 using std::shared_ptr;
 using std::string;
-using kvlist = std::unordered_map<string, string>;
-using pkvlist = shared_ptr<kvlist>;
+using std::vector;
+
+using LangItem = std::pair<string, string>;
+using LangList = vector<LangItem>;
+using LangListPointer = shared_ptr<LangList>;
 
 class ILangResult {
 private:
 public:
   virtual shared_ptr<IGeneratorMeta> meta() = 0;
-  virtual pkvlist result() = 0;
+  virtual LangListPointer result() = 0;
 };
 #endif

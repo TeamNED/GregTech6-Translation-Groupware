@@ -146,11 +146,12 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
       // DictGenerator
       if (child.is_map()) {
         auto gen = DictGenerator(meta);
-        gen.dict() = std::make_shared<kvlist>();
+        gen.dict() = std::make_shared<LangList>();
         auto &dict = *(gen.dict());
         for (auto dict_item : child.children()) {
-          dict.insert(
-              {_csubstr2str(dict_item.key()), _csubstr2str(dict_item.val())});
+          dict.emplace_back(std::make_pair<string, string>( //
+              _csubstr2str(dict_item.key()),                //
+              _csubstr2str(dict_item.val())));
         }
         this->_generators.emplace_back(std::move(gen));
       } else {

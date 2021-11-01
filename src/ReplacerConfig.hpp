@@ -27,8 +27,6 @@
 
 using std::string;
 using std::vector;
-using kvlist = std::unordered_map<string, string>;
-using pkvlist = std::shared_ptr<kvlist>;
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 

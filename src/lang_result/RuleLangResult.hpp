@@ -14,16 +14,16 @@ class RuleLangResult : public virtual LangResult {
 private:
   shared_ptr<Rule> _rule;
   vector<shared_ptr<ILangResult>> _subs;
-  pkvlist _result = nullptr;
+  LangListPointer _result = nullptr;
 
-  pkvlist RuleLangResult::_generate();
+  LangListPointer RuleLangResult::_generate();
 
 public:
   RuleLangResult(shared_ptr<IGeneratorMeta> meta, shared_ptr<Rule> rule,
                  vector<shared_ptr<ILangResult>> subs);
   virtual shared_ptr<Rule> &rule();
   virtual vector<shared_ptr<ILangResult>> &subs();
-  virtual pkvlist result() override;
-  virtual pkvlist result(bool cached);
+  virtual LangListPointer result() override;
+  virtual LangListPointer result(bool cached);
 };
 #endif

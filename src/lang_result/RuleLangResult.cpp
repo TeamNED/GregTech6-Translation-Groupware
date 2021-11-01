@@ -8,8 +8,8 @@ RuleLangResult::RuleLangResult(shared_ptr<IGeneratorMeta> meta,
 shared_ptr<Rule> &RuleLangResult::rule() { return this->_rule; }
 vector<shared_ptr<ILangResult>> &RuleLangResult::subs() { return this->_subs; }
 
-pkvlist RuleLangResult::result() { return result(true); };
-pkvlist RuleLangResult::result(bool cached) {
+LangListPointer RuleLangResult::result() { return result(true); };
+LangListPointer RuleLangResult::result(bool cached) {
   if (cached) {
     if (this->_result == nullptr) {
       this->_result = _generate();
@@ -20,16 +20,16 @@ pkvlist RuleLangResult::result(bool cached) {
   }
 };
 
-pkvlist RuleLangResult::_generate() {
+LangListPointer RuleLangResult::_generate() {
   size_t subs_sz = _subs.size();
   if (_rule == nullptr || subs_sz == 0) {
-    return std::make_shared<kvlist>();
+    return std::make_shared<LangList>();
   }
   // init
-  vector<pkvlist> sub_results{}; // data holder
-  vector<kvlist::const_iterator> begins{};
-  vector<kvlist::const_iterator> ends{};
-  pkvlist result = std::make_shared<kvlist>();
+  vector<LangListPointer> sub_results{}; // data holder
+  vector<LangList::const_iterator> begins{};
+  vector<LangList::const_iterator> ends{};
+  LangListPointer result = std::make_shared<LangList>();
   const string &s_fmt = _rule->source();
   const string &t_fmt = _rule->target();
   do {
@@ -38,7 +38,7 @@ pkvlist RuleLangResult::_generate() {
       auto sub_result = _subs[i].get()->result();
       if (sub_result->cbegin() == sub_result->cend()) {
         // zero-len sub, not valid
-        return std::make_shared<kvlist>();
+        return std::make_shared<LangList>();
       }
       begins.emplace_back(sub_result->cbegin());
       ends.emplace_back(sub_result->cend());
@@ -50,8 +50,9 @@ pkvlist RuleLangResult::_generate() {
       s_store.push_back(citor->first);
       t_store.push_back(citor->second);
     }
-    result->insert({fmt::vformat(s_fmt, s_store), //
-                    fmt::vformat(t_fmt, t_store)});
+    result->emplace_back(std::make_pair<string, string>( //
+        fmt::vformat(s_fmt, s_store),                    //
+        fmt::vformat(t_fmt, t_store)));
     // step
     for (size_t i = subs_sz - 1; i >= 0; --i) {
       if (++begins[i] == ends[i]) {

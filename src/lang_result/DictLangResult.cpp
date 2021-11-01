@@ -1,5 +1,6 @@
 #include "DictLangResult.hpp"
 
-DictLangResult::DictLangResult(shared_ptr<IGeneratorMeta> meta, pkvlist dict)
+DictLangResult::DictLangResult(shared_ptr<IGeneratorMeta> meta,
+                               LangListPointer dict)
     : LangResult(meta), _dict(dict) {}
-pkvlist DictLangResult::result() { return this->_dict; }
+LangListPointer DictLangResult::result() { return this->_dict; }

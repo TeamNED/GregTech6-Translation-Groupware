@@ -8,10 +8,10 @@ class DictLangResult : public virtual LangResult {
   using LangResult::LangResult;
 
 private:
-  pkvlist _dict = nullptr;
+  LangListPointer _dict = nullptr;
 
 public:
-  DictLangResult(shared_ptr<IGeneratorMeta> meta, pkvlist dict);
-  virtual pkvlist result() override;
+  DictLangResult(shared_ptr<IGeneratorMeta> meta, LangListPointer dict);
+  virtual LangListPointer result() override;
 };
 #endif
