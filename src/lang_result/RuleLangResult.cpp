@@ -54,8 +54,8 @@ LangListPointer RuleLangResult::_generate() {
         fmt::vformat(s_fmt, s_store),                    //
         fmt::vformat(t_fmt, t_store)));
     // step
-    for (size_t i = subs_sz - 1; i >= 0; --i) {
-      if (++begins[i] == ends[i]) {
+    for (size_t i = subs_sz; i > 0; --i) {
+      if (++begins[i - 1] == ends[i - 1]) {
         begins.pop_back();
         ends.pop_back();
         sub_results.pop_back();
