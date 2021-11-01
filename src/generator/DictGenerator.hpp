@@ -13,7 +13,7 @@ public:
   DictGenerator(shared_ptr<IGeneratorMeta> meta);
   DictGenerator(shared_ptr<IGeneratorMeta> meta, LangListPointer dict);
 
-  virtual LangListPointer dict();
+  virtual LangListPointer &dict();
   virtual vector<shared_ptr<ILangResult>> results() override;
 };
 #endif
