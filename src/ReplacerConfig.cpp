@@ -235,7 +235,8 @@ vector<shared_ptr<ILangResult>> ReplacerConfig::generate() {
   vector<shared_ptr<ILangResult>> results;
   for (auto gen : _generators) {
     if (gen.meta()->completed()) {
-      results.emplace_back(_get_generator_results(&gen));
+      auto new_results = _get_generator_results(&gen);
+      results.insert(results.end(), new_results.begin(), new_results.end());
     }
   }
   return results;
@@ -263,7 +264,8 @@ ReplacerConfig::get_group_results(const string &group) {
     vector<shared_ptr<ILangResult>> results;
     for (auto gen : _generators) {
       if (gen.meta()->group() == group) {
-        results.emplace_back(_get_generator_results(&gen));
+        auto new_results = _get_generator_results(&gen);
+        results.insert(results.end(), new_results.begin(), new_results.end());
       }
     }
     return results;
