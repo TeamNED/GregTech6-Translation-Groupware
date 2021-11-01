@@ -10,7 +10,9 @@ LangListPointer DictGenerator::dict() { return this->_dict; }
 
 vector<shared_ptr<ILangResult>> DictGenerator::results() {
   if (_result == nullptr) {
-    _result = std::make_shared<DictLangResult>(this->meta(), this->_dict);
+    // copy dict to result
+    _result = std::make_shared<DictLangResult>(
+        this->meta(), std::make_shared<LangList>(*(this->_dict)));
   }
   return vector<shared_ptr<ILangResult>>{_result};
 }
