@@ -11,7 +11,9 @@ const fs::path &Replacer::extra_target_path() {
 const fs::path &Replacer::config_path() { return this->_config_path; }
 const string &Replacer::lang() { return this->_lang; }
 const string &Replacer::version() { return this->_version; }
-const vector<Generator> &Replacer::generators() { return this->_generators; }
+const vector<shared_ptr<Generator>> &Replacer::generators() {
+  return this->_generators;
+}
 
 Replacer::Replacer(int argc, char const *argv[]) {
   // declare options
@@ -103,7 +105,7 @@ void Replacer::_parse_config() {
   if (root.has_child("generators")) {
     auto node = root["generators"];
     if (node.is_seq()) {
-      this->_generators = vector<Generator>{};
+      this->_generators = vector<shared_ptr<Generator>>{};
       for (const auto &generator_node : node.children()) {
         _parse_generator(generator_node);
       }
@@ -139,9 +141,9 @@ void Replacer::_parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "dict") {
       // DictGenerator
       if (child.is_map()) {
-        auto gen = DictGenerator(meta);
-        gen.dict() = std::make_shared<LangList>();
-        auto &dict = *(gen.dict());
+        auto gen = std::make_shared<DictGenerator>(meta);
+        gen->dict() = std::make_shared<LangList>();
+        auto &dict = *(gen->dict());
         for (auto dict_item : child.children()) {
           dict.emplace_back(std::make_pair<string, string>( //
               _csubstr2str(dict_item.key()),                //
@@ -154,9 +156,9 @@ void Replacer::_parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "rules") {
       // RuleGenerator
       if (child.is_seq()) {
-        auto gen = RuleGenerator(meta);
-        gen.repository() = this;
-        auto &rules = gen.rules();
+        auto gen = std::make_shared<RuleGenerator>(meta);
+        gen->repository() = this;
+        auto &rules = gen->rules();
         for (auto rule : child.children()) {
           rules.emplace_back(_parse_rule(rule));
         }
@@ -228,8 +230,8 @@ vector<shared_ptr<ILangResult>> Replacer::generate() {
   _group_cache.clear();
   vector<shared_ptr<ILangResult>> results;
   for (auto gen : _generators) {
-    if (gen.meta()->completed()) {
-      auto new_results = _get_generator_results(&gen);
+    if (gen->meta()->completed()) {
+      auto new_results = _get_generator_results(gen);
       results.insert(results.end(), new_results.begin(), new_results.end());
     }
   }
@@ -237,7 +239,7 @@ vector<shared_ptr<ILangResult>> Replacer::generate() {
 }
 
 vector<shared_ptr<ILangResult>>
-Replacer::_get_generator_results(Generator *gen) {
+Replacer::_get_generator_results(shared_ptr<Generator> gen) {
   auto rcache_found = _result_cache.find(gen);
   if (rcache_found == _result_cache.end()) {
     // new result
@@ -257,8 +259,8 @@ Replacer::get_group_results(const string &group) {
     // new group
     vector<shared_ptr<ILangResult>> results;
     for (auto gen : _generators) {
-      if (gen.meta()->group() == group) {
-        auto new_results = _get_generator_results(&gen);
+      if (gen->meta()->group() == group) {
+        auto new_results = _get_generator_results(gen);
         results.insert(results.end(), new_results.begin(), new_results.end());
       }
     }

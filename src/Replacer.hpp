@@ -37,12 +37,14 @@ private:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
       _extra_target_path, _config_path;
   string _lang, _version;
-  vector<Generator> _generators;
+  vector<shared_ptr<Generator>> _generators;
 
-  std::unordered_map<Generator *, vector<shared_ptr<ILangResult>>>
+  std::unordered_map<shared_ptr<Generator>, vector<shared_ptr<ILangResult>>>
       _result_cache;
   std::unordered_map<string, vector<shared_ptr<ILangResult>>> _group_cache;
-  vector<shared_ptr<ILangResult>> _get_generator_results(Generator *gen);
+
+  vector<shared_ptr<ILangResult>>
+  _get_generator_results(shared_ptr<Generator> gen);
 
   string _get_file_contents(const string &filename);
   void _parse_config();
@@ -63,7 +65,7 @@ public:
   const fs::path &config_path();
   const string &lang();
   const string &version();
-  const vector<Generator> &generators();
+  const vector<shared_ptr<Generator>> &generators();
 
   vector<shared_ptr<ILangResult>> generate();
   virtual vector<shared_ptr<ILangResult>>
