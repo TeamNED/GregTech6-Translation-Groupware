@@ -12,7 +12,7 @@ private:
 
 public:
   GeneratorMeta() = default;
-  GeneratorMeta(const IGeneratorMeta *); // copy
+  GeneratorMeta(const IGeneratorMeta &);
   GeneratorMeta(string group, string namespace_prefix, bool cached,
                 bool completed, set<string> extensions);
   GeneratorMeta(const GeneratorMeta &) = default;
@@ -34,6 +34,7 @@ public:
   virtual const set<string> &extentions() const override;
 
   virtual GeneratorMeta &operator+=(const IGeneratorMeta &that) override;
-  virtual bool equals(const IGeneratorMeta *that) const override;
+  virtual bool operator==(const IGeneratorMeta &that) const override;
+  virtual bool operator!=(const IGeneratorMeta &that) const override;
 };
 #endif
