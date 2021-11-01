@@ -1,5 +1,5 @@
-#ifndef REPLACERCONFIG_H
-#define REPLACERCONFIG_H
+#ifndef REPLACER_H
+#define REPLACER_H
 #pragma once
 
 #include <exception>
@@ -31,7 +31,7 @@ using std::vector;
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
-class ReplacerConfig : public virtual IGroupRepository {
+class Replacer : public virtual IGroupRepository {
 
 private:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
@@ -54,8 +54,8 @@ private:
   static string _csubstr2str(const c4::csubstr &str);
 
 public:
-  ReplacerConfig(int argc, char const *argv[]);
-  ~ReplacerConfig();
+  Replacer(int argc, char const *argv[]);
+  ~Replacer();
   const fs::path &main_source_path();
   const fs::path &extra_source_path();
   const fs::path &main_target_path();

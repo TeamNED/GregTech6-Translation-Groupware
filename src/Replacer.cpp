@@ -1,25 +1,19 @@
-#include "ReplacerConfig.hpp"
+#include "Replacer.hpp"
 
-const fs::path &ReplacerConfig::main_source_path() {
-  return this->_main_source_path;
-}
-const fs::path &ReplacerConfig::extra_source_path() {
+const fs::path &Replacer::main_source_path() { return this->_main_source_path; }
+const fs::path &Replacer::extra_source_path() {
   return this->_extra_source_path;
 }
-const fs::path &ReplacerConfig::main_target_path() {
-  return this->_main_target_path;
-}
-const fs::path &ReplacerConfig::extra_target_path() {
+const fs::path &Replacer::main_target_path() { return this->_main_target_path; }
+const fs::path &Replacer::extra_target_path() {
   return this->_extra_target_path;
 }
-const fs::path &ReplacerConfig::config_path() { return this->_config_path; }
-const string &ReplacerConfig::lang() { return this->_lang; }
-const string &ReplacerConfig::version() { return this->_version; }
-const vector<Generator> &ReplacerConfig::generators() {
-  return this->_generators;
-}
+const fs::path &Replacer::config_path() { return this->_config_path; }
+const string &Replacer::lang() { return this->_lang; }
+const string &Replacer::version() { return this->_version; }
+const vector<Generator> &Replacer::generators() { return this->_generators; }
 
-ReplacerConfig::ReplacerConfig(int argc, char const *argv[]) {
+Replacer::Replacer(int argc, char const *argv[]) {
   // declare options
   po::options_description desc("Available options");
   desc.add_options()                                                     //
@@ -88,9 +82,9 @@ ReplacerConfig::ReplacerConfig(int argc, char const *argv[]) {
   _parse_config();
 }
 
-ReplacerConfig::~ReplacerConfig() {}
+Replacer::~Replacer() {}
 
-string ReplacerConfig::_get_file_contents(const string &filename) {
+string Replacer::_get_file_contents(const string &filename) {
   std::ifstream in(filename, std::ios::in | std::ios::binary);
   if (!in) {
     throw std::invalid_argument("config file " + filename + " doesn't exist");
@@ -100,7 +94,7 @@ string ReplacerConfig::_get_file_contents(const string &filename) {
   return contents.str();
 }
 
-void ReplacerConfig::_parse_config() {
+void Replacer::_parse_config() {
   string config_contents = _get_file_contents(this->_config_path.string());
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
@@ -121,7 +115,7 @@ void ReplacerConfig::_parse_config() {
   }
 }
 
-void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
+void Replacer::_parse_generator(const ryml::NodeRef &node) {
   // TODO
   auto meta = std::make_shared<GeneratorMeta>();
   for (const auto &child : node.children()) {
@@ -174,7 +168,7 @@ void ReplacerConfig::_parse_generator(const ryml::NodeRef &node) {
   }
 }
 
-shared_ptr<Rule> ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
+shared_ptr<Rule> Replacer::_parse_rule(const ryml::NodeRef &node) {
   auto rule = std::make_shared<Rule>();
   if (node.is_map()) {
     for (auto child : node.children()) {
@@ -200,14 +194,14 @@ shared_ptr<Rule> ReplacerConfig::_parse_rule(const ryml::NodeRef &node) {
   return std::move(rule);
 }
 
-string ReplacerConfig::_read_val(const ryml::NodeRef &node) {
+string Replacer::_read_val(const ryml::NodeRef &node) {
   if (node.has_val()) {
     return _csubstr2str(node.val().unquoted());
   } else {
     throw std::invalid_argument("node has no val.");
   }
 }
-string ReplacerConfig::_read_val(const ryml::NodeRef &node, const string &key) {
+string Replacer::_read_val(const ryml::NodeRef &node, const string &key) {
   auto ckey = ryml::to_csubstr(key);
   if (node.has_child(ckey)) {
     return _read_val(node[ckey]);
@@ -216,7 +210,7 @@ string ReplacerConfig::_read_val(const ryml::NodeRef &node, const string &key) {
   }
 }
 
-bool ReplacerConfig::_str2bool(const string &str) {
+bool Replacer::_str2bool(const string &str) {
   if (str == "true") {
     return true;
   } else if (str == "false") {
@@ -225,11 +219,11 @@ bool ReplacerConfig::_str2bool(const string &str) {
     throw std::invalid_argument("'" + str + "' is neither true nor false.");
   }
 }
-string ReplacerConfig::_csubstr2str(const c4::csubstr &str) {
+string Replacer::_csubstr2str(const c4::csubstr &str) {
   return string(str.str, str.len);
 }
 
-vector<shared_ptr<ILangResult>> ReplacerConfig::generate() {
+vector<shared_ptr<ILangResult>> Replacer::generate() {
   _result_cache.clear();
   _group_cache.clear();
   vector<shared_ptr<ILangResult>> results;
@@ -243,7 +237,7 @@ vector<shared_ptr<ILangResult>> ReplacerConfig::generate() {
 }
 
 vector<shared_ptr<ILangResult>>
-ReplacerConfig::_get_generator_results(Generator *gen) {
+Replacer::_get_generator_results(Generator *gen) {
   auto rcache_found = _result_cache.find(gen);
   if (rcache_found == _result_cache.end()) {
     // new result
@@ -257,7 +251,7 @@ ReplacerConfig::_get_generator_results(Generator *gen) {
 }
 
 vector<shared_ptr<ILangResult>>
-ReplacerConfig::get_group_results(const string &group) {
+Replacer::get_group_results(const string &group) {
   auto gcache_found = _group_cache.find(group);
   if (gcache_found == _group_cache.end()) {
     // new group
