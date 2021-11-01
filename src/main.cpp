@@ -7,6 +7,6 @@ using std::string;
 
 int main(int argc, char const *argv[]) {
   Replacer config(argc, argv);
-  auto result = config.generate();
+  auto result = config.generate_map();
   return 0;
 }

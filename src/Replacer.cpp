@@ -238,6 +238,21 @@ vector<shared_ptr<ILangResult>> Replacer::generate() {
   return results;
 }
 
+map<string, vector<std::pair<string, string>>> Replacer::generate_map() {
+  map<string, vector<std::pair<string, string>>> result;
+  auto lang_result_list = generate();
+  for (auto lang_result : lang_result_list) {
+    auto lang_result_generated = lang_result->result();
+    for (auto lang_item : *lang_result_generated) {
+      const string &src = lang_item.first;
+      const string &dst = lang_item.second;
+      const string &ns = lang_result->meta()->namespace_prefix();
+      result[src].emplace_back(std::make_pair(ns, dst));
+    }
+  }
+  return result;
+}
+
 vector<shared_ptr<ILangResult>>
 Replacer::_get_generator_results(shared_ptr<Generator> gen) {
   auto rcache_found = _result_cache.find(gen);

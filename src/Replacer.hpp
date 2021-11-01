@@ -5,6 +5,7 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -26,6 +27,7 @@
 #include "meta/GeneratorMeta.hpp"
 #include "meta/IGroupRepository.hpp"
 
+using std::map;
 using std::string;
 using std::vector;
 namespace po = boost::program_options;
@@ -68,6 +70,7 @@ public:
   const vector<shared_ptr<Generator>> &generators();
 
   vector<shared_ptr<ILangResult>> generate();
+  map<string, vector<std::pair<string, string>>> generate_map();
   virtual vector<shared_ptr<ILangResult>>
   get_group_results(const string &group) override;
 };
