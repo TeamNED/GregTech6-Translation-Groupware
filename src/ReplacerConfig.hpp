@@ -8,6 +8,7 @@
 #include <memory>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -31,11 +32,17 @@ namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
 class ReplacerConfig : public virtual IGroupRepository {
+
 private:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
       _extra_target_path, _config_path;
   string _lang, _version;
   vector<Generator> _generators;
+
+  std::unordered_map<Generator *, vector<shared_ptr<ILangResult>>>
+      _result_cache;
+  std::unordered_map<string, vector<shared_ptr<ILangResult>>> _group_cache;
+  vector<shared_ptr<ILangResult>> _get_generator_results(Generator *gen);
 
   string _get_file_contents(const string &filename);
   void _parse_config();
@@ -58,6 +65,7 @@ public:
   const string &version();
   const vector<Generator> &generators();
 
+  vector<shared_ptr<ILangResult>> generate();
   virtual vector<shared_ptr<ILangResult>>
   get_group_results(const string &group) override;
 };

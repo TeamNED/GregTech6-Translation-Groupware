@@ -2,8 +2,6 @@
 #define DICTGENERATOR_H
 #pragma once
 
-#include <unordered_map>
-
 #include "Generator.hpp"
 
 class DictGenerator : public virtual Generator {

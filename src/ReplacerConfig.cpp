@@ -229,9 +229,46 @@ string ReplacerConfig::_csubstr2str(const c4::csubstr &str) {
   return string(str.str, str.len);
 }
 
+vector<shared_ptr<ILangResult>> ReplacerConfig::generate() {
+  _result_cache.clear();
+  _group_cache.clear();
+  vector<shared_ptr<ILangResult>> results;
+  for (auto gen : _generators) {
+    if (gen.meta()->completed()) {
+      results.emplace_back(_get_generator_results(&gen));
+    }
+  }
+  return results;
+}
+
+vector<shared_ptr<ILangResult>>
+ReplacerConfig::_get_generator_results(Generator *gen) {
+  auto rcache_found = _result_cache.find(gen);
+  if (rcache_found == _result_cache.end()) {
+    // new result
+    auto new_results = gen->results();
+    _result_cache[gen] = new_results;
+    return new_results;
+  } else {
+    // old result
+    return rcache_found->second;
+  }
+}
+
 vector<shared_ptr<ILangResult>>
 ReplacerConfig::get_group_results(const string &group) {
-  // TODO
-  vector<shared_ptr<ILangResult>> results;
-  return results;
+  auto gcache_found = _group_cache.find(group);
+  if (gcache_found == _group_cache.end()) {
+    // new group
+    vector<shared_ptr<ILangResult>> results;
+    for (auto gen : _generators) {
+      if (gen.meta()->group() == group) {
+        results.emplace_back(_get_generator_results(&gen));
+      }
+    }
+    return results;
+  } else {
+    // old group
+    return gcache_found->second;
+  }
 }
