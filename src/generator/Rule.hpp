@@ -14,14 +14,8 @@ private:
   vector<string> _subs;
 
 public:
-  Rule() = default;
   Rule(string source, string target);
   Rule(string source, string target, vector<string> subs);
-  Rule(const Rule &) = default;
-  Rule(Rule &&) = default;
-  ~Rule() = default;
-  Rule &operator=(const Rule &) = default;
-  Rule &operator=(Rule &&) = default;
 
   string &source();
   string &target();
