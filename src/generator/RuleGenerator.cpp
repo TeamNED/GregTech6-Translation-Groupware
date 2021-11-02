@@ -6,11 +6,14 @@ RuleGenerator::RuleGenerator(shared_ptr<IGeneratorMeta> meta,
                              vector<shared_ptr<Rule>> rules)
     : Generator(meta), _rules(rules) {}
 vector<shared_ptr<Rule>> &RuleGenerator::rules() { return this->_rules; }
-IGroupRepository *&RuleGenerator::repository() { return this->_repository; }
+const vector<shared_ptr<Rule>> &RuleGenerator::rules() const {
+  return this->_rules;
+}
 
-vector<shared_ptr<ILangResult>> RuleGenerator::results() {
+vector<shared_ptr<ILangResult>>
+RuleGenerator::results(IGroupRepository *repo) const {
   vector<shared_ptr<ILangResult>> results;
-  if (this->_repository == nullptr) {
+  if (repo == nullptr) {
     return results;
   }
   for (const auto &rule : _rules) {
@@ -25,7 +28,7 @@ vector<shared_ptr<ILangResult>> RuleGenerator::results() {
     // init
     vector<vector<shared_ptr<ILangResult>>> sub_results; // data holder
     for (const auto &sub : subs) {
-      auto sub_result = _repository->get_group_results(sub);
+      auto sub_result = repo->get_group_results(sub);
       if (sub_result.size() == 0) {
         // zero-length group, not valid
         sub_results.clear();

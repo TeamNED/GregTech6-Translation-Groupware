@@ -7,12 +7,11 @@ DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta,
     : Generator(meta), _dict(dict) {}
 
 LangListPointer &DictGenerator::dict() { return this->_dict; }
+const LangListPointer &DictGenerator::dict() const { return this->_dict; }
 
-vector<shared_ptr<ILangResult>> DictGenerator::results() {
-  if (_result == nullptr) {
-    // copy dict to result
-    _result = std::make_shared<DictLangResult>(
-        this->meta(), std::make_shared<LangList>(*(this->_dict)));
-  }
-  return vector<shared_ptr<ILangResult>>{_result};
+vector<shared_ptr<ILangResult>>
+DictGenerator::results(IGroupRepository *repo) const {
+  auto result = std::make_shared<DictLangResult>(
+      this->meta(), std::make_shared<LangList>(*(this->dict())));
+  return vector<shared_ptr<ILangResult>>{result};
 }

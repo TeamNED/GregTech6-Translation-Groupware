@@ -7,13 +7,14 @@
 class DictGenerator : public virtual Generator {
 private:
   LangListPointer _dict;
-  shared_ptr<ILangResult> _result;
 
 public:
   DictGenerator(shared_ptr<IGeneratorMeta> meta);
   DictGenerator(shared_ptr<IGeneratorMeta> meta, LangListPointer dict);
 
   virtual LangListPointer &dict();
-  virtual vector<shared_ptr<ILangResult>> results() override;
+  virtual const LangListPointer &dict() const;
+  virtual vector<shared_ptr<ILangResult>>
+  results(IGroupRepository *repo) const override;
 };
 #endif

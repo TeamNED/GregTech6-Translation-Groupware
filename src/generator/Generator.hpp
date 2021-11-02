@@ -9,6 +9,7 @@
 #include "../lang/DictLangResult.hpp"
 #include "../lang/ILangResult.hpp"
 #include "../meta/IGeneratorMeta.hpp"
+#include "../meta/IGroupRepository.hpp"
 
 using std::shared_ptr;
 using std::string;
@@ -28,6 +29,7 @@ public:
   virtual ~Generator() = default;
 
   virtual shared_ptr<IGeneratorMeta> &meta();
-  virtual vector<shared_ptr<ILangResult>> results();
+  virtual shared_ptr<IGeneratorMeta> meta() const;
+  virtual vector<shared_ptr<ILangResult>> results(IGroupRepository *repo) const;
 };
 #endif

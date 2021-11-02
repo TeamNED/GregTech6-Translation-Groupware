@@ -2,11 +2,16 @@
 #include <string>
 
 #include "Replacer.hpp"
+#include "config/ConfigParser.hpp"
+#include "config/RuntimeOptions.hpp"
 
 using std::string;
 
 int main(int argc, char const *argv[]) {
-  Replacer config(argc, argv);
-  auto result = config.generate_map();
+  RuntimeOptions options(argc, argv);
+  Config config =
+      ConfigParser::parse_config_from_path(options.config_path().string());
+  Replacer worker(config.generators());
+  auto result = worker.generate_map();
   return 0;
 }
