@@ -14,6 +14,7 @@ private:
   vector<string> _subs;
 
 public:
+  Rule() = default;
   Rule(string source, string target);
   Rule(string source, string target, vector<string> subs);
 

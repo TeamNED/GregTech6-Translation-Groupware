@@ -40,9 +40,9 @@ LangListPointer RuleLangResult::_generate() {
         // zero-len sub, not valid
         return std::make_shared<LangList>();
       }
-      begins.emplace_back(sub_result->cbegin());
-      ends.emplace_back(sub_result->cend());
-      sub_results.emplace_back(std::move(sub_result));
+      begins.push_back(sub_result->cbegin());
+      ends.push_back(sub_result->cend());
+      sub_results.push_back(std::move(sub_result));
     }
     // generate
     fmt::dynamic_format_arg_store<fmt::format_context> s_store, t_store;
@@ -50,9 +50,8 @@ LangListPointer RuleLangResult::_generate() {
       s_store.push_back(citor->first);
       t_store.push_back(citor->second);
     }
-    result->emplace_back(std::make_pair<string, string>( //
-        fmt::vformat(s_fmt, s_store),                    //
-        fmt::vformat(t_fmt, t_store)));
+    result->emplace_back(fmt::vformat(s_fmt, s_store),
+                         fmt::vformat(t_fmt, t_store));
     // step
     for (size_t i = subs_sz; i > 0; --i) {
       if (++begins[i - 1] == ends[i - 1]) {

@@ -133,7 +133,7 @@ void Replacer::_parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "extension") {
       if (child.is_seq()) {
         for (const auto &ext_node : child.children()) {
-          meta->extentions().emplace(_read_val(ext_node));
+          meta->extentions().insert(_read_val(ext_node));
         }
       } else {
         throw std::invalid_argument("invalid extension for generator");
@@ -145,11 +145,10 @@ void Replacer::_parse_generator(const ryml::NodeRef &node) {
         gen->dict() = std::make_shared<LangList>();
         auto &dict = *(gen->dict());
         for (auto dict_item : child.children()) {
-          dict.emplace_back(std::make_pair<string, string>( //
-              _csubstr2str(dict_item.key()),                //
-              _csubstr2str(dict_item.val())));
+          dict.emplace_back(_csubstr2str(dict_item.key()),
+                            _csubstr2str(dict_item.val()));
         }
-        this->_generators.emplace_back(std::move(gen));
+        this->_generators.push_back(std::move(gen));
       } else {
         throw std::invalid_argument("invalid dict for generator");
       }
@@ -160,9 +159,9 @@ void Replacer::_parse_generator(const ryml::NodeRef &node) {
         gen->repository() = this;
         auto &rules = gen->rules();
         for (auto rule : child.children()) {
-          rules.emplace_back(_parse_rule(rule));
+          rules.push_back(_parse_rule(rule));
         }
-        this->_generators.emplace_back(std::move(gen));
+        this->_generators.push_back(std::move(gen));
       } else {
         throw std::invalid_argument("invalid rules for generator");
       }
@@ -183,7 +182,7 @@ shared_ptr<Rule> Replacer::_parse_rule(const ryml::NodeRef &node) {
         if (child.is_seq()) {
           auto &subs = rule->subs();
           for (auto sub : child.children()) {
-            subs.emplace_back(_csubstr2str(sub.val()));
+            subs.push_back(_csubstr2str(sub.val()));
           }
         } else {
           throw std::invalid_argument("invalid rule subs");
@@ -247,7 +246,7 @@ map<string, vector<std::pair<string, string>>> Replacer::generate_map() {
       const string &src = lang_item.first;
       const string &dst = lang_item.second;
       const string &ns = lang_result->meta()->namespace_prefix();
-      result[src].emplace_back(std::make_pair(ns, dst));
+      result[src].emplace_back(ns, dst);
     }
   }
   return result;
