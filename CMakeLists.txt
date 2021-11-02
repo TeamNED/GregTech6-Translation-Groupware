@@ -22,10 +22,10 @@ add_executable(GT6TG
   src/meta/IGeneratorMeta.cpp
   src/meta/GeneratorMeta.cpp
   src/meta/IGroupRepository.cpp
-  src/lang_result/ILangResult.cpp
-  src/lang_result/LangResult.cpp
-  src/lang_result/DictLangResult.cpp
-  src/lang_result/RuleLangResult.cpp
+  src/lang/ILangResult.cpp
+  src/lang/LangResult.cpp
+  src/lang/DictLangResult.cpp
+  src/lang/RuleLangResult.cpp
 )
 
 TARGET_LINK_LIBRARIES(GT6TG

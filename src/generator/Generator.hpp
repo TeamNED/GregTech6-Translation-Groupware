@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "../lang_result/DictLangResult.hpp"
-#include "../lang_result/ILangResult.hpp"
+#include "../lang/DictLangResult.hpp"
+#include "../lang/ILangResult.hpp"
 #include "../meta/IGeneratorMeta.hpp"
 
 using std::shared_ptr;

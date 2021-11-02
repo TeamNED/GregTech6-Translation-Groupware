@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-#include "../lang_result/RuleLangResult.hpp"
+#include "../lang/RuleLangResult.hpp"
 #include "../meta/GeneratorMeta.hpp"
 #include "../meta/IGroupRepository.hpp"
 #include "Generator.hpp"

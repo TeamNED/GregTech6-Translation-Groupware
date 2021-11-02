@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "../lang_result/ILangResult.hpp"
+#include "../lang/ILangResult.hpp"
 
 using std::vector;
 

@@ -239,13 +239,13 @@ vector<shared_ptr<ILangResult>> Replacer::generate() {
 
 map<string, vector<std::pair<string, string>>> Replacer::generate_map() {
   map<string, vector<std::pair<string, string>>> result;
-  auto lang_result_list = generate();
-  for (auto lang_result : lang_result_list) {
-    auto lang_result_generated = lang_result->result();
-    for (auto lang_item : *lang_result_generated) {
+  auto lang_list = generate();
+  for (auto lang : lang_list) {
+    auto lang_generated = lang->result();
+    for (auto lang_item : *lang_generated) {
       const string &src = lang_item.first;
       const string &dst = lang_item.second;
-      const string &ns = lang_result->meta()->namespace_prefix();
+      const string &ns = lang->meta()->namespace_prefix();
       result[src].emplace_back(ns, dst);
     }
   }
