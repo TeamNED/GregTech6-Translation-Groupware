@@ -34,7 +34,6 @@ public:
   virtual const set<string> &extentions() const override;
 
   virtual GeneratorMeta &operator+=(const IGeneratorMeta &that) override;
-  virtual bool operator==(const IGeneratorMeta &that) const override;
-  virtual bool operator!=(const IGeneratorMeta &that) const override;
+  virtual bool equals(const IGeneratorMeta &that) const override;
 };
 #endif
