@@ -4,17 +4,9 @@
 
 #include <exception>
 #include <map>
-#include <memory>
-#include <string>
 #include <unordered_map>
-#include <utility>
-#include <vector>
 
-#include "generator/DictGenerator.hpp"
 #include "generator/Generator.hpp"
-#include "generator/Rule.hpp"
-#include "generator/RuleGenerator.hpp"
-#include "meta/GeneratorMeta.hpp"
 #include "meta/IGroupRepository.hpp"
 
 using std::map;
