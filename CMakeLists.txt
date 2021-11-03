@@ -26,6 +26,7 @@ add_executable(GT6TG
   src/lang/LangResult.cpp
   src/lang/DictLangResult.cpp
   src/lang/RuleLangResult.cpp
+  src/lang/LangFile.cpp
   src/config/Config.cpp
   src/config/ConfigParser.cpp
   src/config/RuntimeOptions.cpp
