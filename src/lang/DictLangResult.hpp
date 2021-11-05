@@ -4,7 +4,7 @@
 
 #include "LangResult.hpp"
 
-class DictLangResult : public virtual LangResult {
+class DictLangResult : public LangResult {
   using LangResult::LangResult;
 
 private:

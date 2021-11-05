@@ -11,7 +11,7 @@
 
 using std::map;
 
-class Replacer : public virtual IGroupRepository {
+class Replacer : public IGroupRepository {
 
 private:
   const vector<shared_ptr<Generator>> &_generators;

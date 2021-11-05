@@ -8,7 +8,7 @@
 
 #include "ILangResult.hpp"
 
-class LangResult : public virtual ILangResult {
+class LangResult : public ILangResult {
 private:
   shared_ptr<IGeneratorMeta> _meta;
 

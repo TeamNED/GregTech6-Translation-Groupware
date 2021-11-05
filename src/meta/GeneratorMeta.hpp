@@ -4,7 +4,7 @@
 
 #include "IGeneratorMeta.hpp"
 
-class GeneratorMeta : public virtual IGeneratorMeta {
+class GeneratorMeta : public IGeneratorMeta {
 private:
   string _group, _namespace_prefix;
   bool _cached = true, _completed = true;

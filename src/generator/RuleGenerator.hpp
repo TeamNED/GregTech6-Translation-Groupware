@@ -10,7 +10,7 @@
 #include "Generator.hpp"
 #include "Rule.hpp"
 
-class RuleGenerator : public virtual Generator {
+class RuleGenerator : public Generator {
 private:
   vector<shared_ptr<Rule>> _rules;
   vector<shared_ptr<ILangResult>> _results;

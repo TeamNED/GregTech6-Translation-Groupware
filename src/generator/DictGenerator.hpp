@@ -4,7 +4,7 @@
 
 #include "Generator.hpp"
 
-class DictGenerator : public virtual Generator {
+class DictGenerator : public Generator {
 private:
   LangListPointer _dict;
 

@@ -8,7 +8,7 @@
 #include "../generator/Rule.hpp"
 #include "LangResult.hpp"
 
-class RuleLangResult : public virtual LangResult {
+class RuleLangResult : public LangResult {
   using LangResult::LangResult;
 
 private:
