@@ -6,3 +6,5 @@ bool operator==(const IGeneratorMeta &lhs, const IGeneratorMeta &rhs) {
 bool operator!=(const IGeneratorMeta &lhs, const IGeneratorMeta &rhs) {
   return !(lhs == rhs);
 }
+
+IGeneratorMeta::operator bool() const { return !(this->empty()); }

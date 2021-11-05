@@ -53,12 +53,12 @@ RuleGenerator::results(IGroupRepository *repo) const {
       vector<shared_ptr<ILangResult>> lang_conbination;
       for (auto &begin : begins) {
         *meta_conbination += *((*begin)->meta());
-        if (meta_conbination->group().empty()) {
+        if (!meta_conbination) {
           break;
         }
         lang_conbination.push_back(std::move(*begin));
       }
-      if (meta_conbination->group().empty()) {
+      if (!meta_conbination) {
         continue; // generate failed.
       }
       // check meta cache

@@ -26,25 +26,24 @@ const set<string> &GeneratorMeta::extentions() const {
 }
 
 GeneratorMeta &GeneratorMeta::operator+=(const IGeneratorMeta &that) {
-  if (this->group().empty()) {
-    // not valid
-    return *this;
+  if (*this) {
+    // valid
+    string &this_ns = this->namespace_prefix();
+    const string &that_ns = that.namespace_prefix();
+    if (this_ns.rfind(that_ns, 0) == 0) {
+      // this_ns is started with that_ns
+      // unchanged
+    } else if (that_ns.rfind(this_ns, 0) == 0) {
+      // that_ns is started with this_ns
+      this_ns = that_ns;
+    } else {
+      // not valid
+      this->group().clear();
+      return *this;
+    }
+    this->extentions().insert(that.extentions().cbegin(),
+                              that.extentions().cend());
   }
-  string &this_ns = this->namespace_prefix();
-  const string &that_ns = that.namespace_prefix();
-  if (this_ns.rfind(that_ns, 0) == 0) {
-    // this_ns is started with that_ns
-    // unchanged
-  } else if (that_ns.rfind(this_ns, 0) == 0) {
-    // that_ns is started with this_ns
-    this_ns = that_ns;
-  } else {
-    // not valid
-    this->group().clear();
-    return *this;
-  }
-  this->extentions().insert(that.extentions().cbegin(),
-                            that.extentions().cend());
   return *this;
 }
 bool GeneratorMeta::equals(const IGeneratorMeta &that) const {
@@ -54,3 +53,4 @@ bool GeneratorMeta::equals(const IGeneratorMeta &that) const {
          this->completed() == that.completed() &&
          this->extentions() == that.extentions();
 }
+bool GeneratorMeta::empty() const { return this->group().empty(); }

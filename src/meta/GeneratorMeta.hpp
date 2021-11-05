@@ -35,5 +35,6 @@ public:
 
   virtual GeneratorMeta &operator+=(const IGeneratorMeta &that) override;
   virtual bool equals(const IGeneratorMeta &that) const override;
+  virtual bool empty() const override;
 };
 #endif
