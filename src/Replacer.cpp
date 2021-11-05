@@ -43,6 +43,7 @@ Replacer::get_group_results(const string &group) {
         results.insert(results.end(), new_results.begin(), new_results.end());
       }
     }
+    _group_cache.emplace(group, results);
     return results;
   } else {
     // old group
