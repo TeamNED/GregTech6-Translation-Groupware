@@ -13,7 +13,47 @@ const vector<shared_ptr<ILangResult>> &RuleLangResult::subs() const {
   return this->_subs;
 }
 
-LangListPointer RuleLangResult::result() const { return result(true); };
+bool RuleLangResult::empty() const {
+  // misconfigure
+  if (this->meta() == nullptr || this->meta()->empty() ||
+      this->_rule == nullptr || this->_subs.empty() ||
+      this->_rule->subs().size() != this->_subs.size()) {
+    return true;
+  }
+  // empty input result
+  for (const auto &sub : this->_subs) {
+    if (sub->empty()) {
+      return true;
+    }
+  }
+  // saved output is empty
+  if (this->_result && this->_result->empty()) {
+    return true;
+  }
+  return false;
+}
+
+shared_ptr<IGeneratorMeta> RuleLangResult::meta_conbined() const {
+  if (this->empty()) {
+    return nullptr;
+  }
+  const IGeneratorMeta &meta_source = *(this->meta());
+  auto meta_tmp = std::make_shared<GeneratorMeta>(meta_source);
+  for (size_t i = 1; i < this->subs().size(); ++i) {
+    *meta_tmp += *(this->_subs[i]->meta());
+  }
+  return meta_tmp->empty() ? nullptr : meta_tmp;
+}
+
+LangListPointer RuleLangResult::result() const {
+  auto meta = this->meta();
+  if (meta) {
+    return result(meta->cached());
+  } else {
+    return result(true);
+  }
+};
+
 LangListPointer RuleLangResult::result(bool cached) const {
   if (cached) {
     if (this->_result == nullptr) {
@@ -27,7 +67,7 @@ LangListPointer RuleLangResult::result(bool cached) const {
 
 LangListPointer RuleLangResult::_generate() const {
   size_t subs_sz = _subs.size();
-  if (_rule == nullptr || subs_sz == 0) {
+  if (this->empty()) {
     return std::make_shared<LangList>();
   }
   // init

@@ -23,5 +23,7 @@ public:
   virtual shared_ptr<IGeneratorMeta> meta() const = 0;
   virtual LangListPointer result() const = 0;
   virtual ~ILangResult() = default;
+  virtual bool empty() const = 0;
+  explicit operator bool() const;
 };
 #endif

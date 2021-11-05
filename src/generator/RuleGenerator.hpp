@@ -5,7 +5,6 @@
 #include <algorithm>
 
 #include "../lang/RuleLangResult.hpp"
-#include "../meta/GeneratorMeta.hpp"
 #include "../meta/IGroupRepository.hpp"
 #include "Generator.hpp"
 #include "Rule.hpp"
@@ -13,7 +12,6 @@
 class RuleGenerator : public Generator {
 private:
   vector<shared_ptr<Rule>> _rules;
-  vector<shared_ptr<ILangResult>> _results;
 
 public:
   RuleGenerator(shared_ptr<IGeneratorMeta> meta);

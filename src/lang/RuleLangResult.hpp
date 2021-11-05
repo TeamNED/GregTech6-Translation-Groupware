@@ -6,6 +6,7 @@
 #include <fmt/core.h>
 
 #include "../generator/Rule.hpp"
+#include "../meta/GeneratorMeta.hpp"
 #include "LangResult.hpp"
 
 class RuleLangResult : public LangResult {
@@ -27,5 +28,7 @@ public:
   const vector<shared_ptr<ILangResult>> &subs() const;
   virtual LangListPointer result() const override;
   virtual LangListPointer result(bool cached) const;
+  virtual bool empty() const override;
+  shared_ptr<IGeneratorMeta> meta_conbined() const;
 };
 #endif

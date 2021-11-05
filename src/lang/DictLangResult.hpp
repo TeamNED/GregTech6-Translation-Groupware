@@ -15,5 +15,6 @@ public:
   LangListPointer &dict();
   const LangListPointer &dict() const;
   virtual LangListPointer result() const override;
+  virtual bool empty() const override;
 };
 #endif

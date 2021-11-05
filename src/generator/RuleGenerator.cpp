@@ -29,7 +29,14 @@ RuleGenerator::results(IGroupRepository *repo) const {
     vector<vector<shared_ptr<ILangResult>>> sub_results; // data holder
     for (const auto &sub : subs) {
       auto sub_result = repo->get_group_results(sub);
-      if (sub_result.size() == 0) {
+      // remove invalid results
+      sub_result.erase(
+          std::remove_if(sub_result.begin(), sub_result.end(),
+                         [](const shared_ptr<ILangResult> &r) -> bool {
+                           return r->empty();
+                         }),
+          sub_result.end());
+      if (sub_result.empty()) {
         // zero-length group, not valid
         sub_results.clear();
         break;
@@ -46,43 +53,34 @@ RuleGenerator::results(IGroupRepository *repo) const {
       for (size_t i = begins.size(); i < subs_sz; ++i) {
         begins.push_back(sub_results[i].cbegin());
       }
-      // generate conbination
-      const IGeneratorMeta &meta_source = *meta();
-      shared_ptr<GeneratorMeta> meta_conbination =
-          std::make_shared<GeneratorMeta>(meta_source);
+      // generate RuleLangResult
       vector<shared_ptr<ILangResult>> lang_conbination;
       for (auto &begin : begins) {
-        *meta_conbination += *((*begin)->meta());
-        if (!meta_conbination) {
-          break;
-        }
         lang_conbination.push_back(std::move(*begin));
       }
-      if (!meta_conbination) {
-        continue; // generate failed.
-      }
-      // check meta cache
-      auto meta_cached = std::find_if(
-          meta_cache.cbegin(), meta_cache.cend(),
-          [&, meta_conbination](const shared_ptr<IGeneratorMeta> that) -> bool {
-            const IGeneratorMeta &that_ref = *that;
-            return (*meta_conbination) == that_ref;
-          });
-      shared_ptr<IGeneratorMeta> final_meta(std::move(meta_conbination));
-      if (meta_cached != meta_cache.end()) {
-        final_meta = *meta_cached;
-      } else {
-        meta_cache.push_back(final_meta);
-      }
-      // generate RuleLangResult
       auto generated_result =
-          std::make_shared<RuleLangResult>(final_meta, rule, lang_conbination);
-      results.push_back(std::move(generated_result));
+          std::make_shared<RuleLangResult>(meta(), rule, lang_conbination);
+      auto generated_meta = generated_result->meta_conbined();
+      if (generated_meta) {
+        // check meta cache
+        auto meta_cached = std::find_if(
+            meta_cache.cbegin(), meta_cache.cend(),
+            [&, generated_meta](const shared_ptr<IGeneratorMeta> that) -> bool {
+              const IGeneratorMeta &that_ref = *that;
+              return (*generated_meta) == that_ref;
+            });
+        if (meta_cached != meta_cache.end()) {
+          generated_meta = *meta_cached;
+        } else {
+          meta_cache.push_back(generated_meta);
+        }
+        generated_result->meta() = std::move(generated_meta);
+        results.push_back(std::move(generated_result));
+      }
       // step
       for (size_t i = subs_sz; i > 0; --i) {
         if (++begins[i - 1] == sub_results[i - 1].cend()) {
           begins.pop_back();
-          sub_results.pop_back();
         } else {
           break;
         }

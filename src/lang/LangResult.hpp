@@ -23,5 +23,6 @@ public:
   virtual shared_ptr<IGeneratorMeta> meta() const override;
   virtual shared_ptr<IGeneratorMeta> &meta();
   virtual LangListPointer result() const override;
+  virtual bool empty() const override;
 };
 #endif
