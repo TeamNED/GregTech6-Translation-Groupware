@@ -7,10 +7,14 @@ RuleLangResult::RuleLangResult(shared_ptr<IGeneratorMeta> meta,
       _subs(std::move(subs)) {}
 
 shared_ptr<Rule> &RuleLangResult::rule() { return this->_rule; }
+const shared_ptr<Rule> &RuleLangResult::rule() const { return this->_rule; }
 vector<shared_ptr<ILangResult>> &RuleLangResult::subs() { return this->_subs; }
+const vector<shared_ptr<ILangResult>> &RuleLangResult::subs() const {
+  return this->_subs;
+}
 
-LangListPointer RuleLangResult::result() { return result(true); };
-LangListPointer RuleLangResult::result(bool cached) {
+LangListPointer RuleLangResult::result() const { return result(true); };
+LangListPointer RuleLangResult::result(bool cached) const {
   if (cached) {
     if (this->_result == nullptr) {
       this->_result = _generate();
@@ -21,7 +25,7 @@ LangListPointer RuleLangResult::result(bool cached) {
   }
 };
 
-LangListPointer RuleLangResult::_generate() {
+LangListPointer RuleLangResult::_generate() const {
   size_t subs_sz = _subs.size();
   if (_rule == nullptr || subs_sz == 0) {
     return std::make_shared<LangList>();

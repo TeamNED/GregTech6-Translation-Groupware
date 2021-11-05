@@ -20,7 +20,8 @@ using LangListPointer = shared_ptr<LangList>;
 class ILangResult {
 private:
 public:
-  virtual shared_ptr<IGeneratorMeta> meta() = 0;
-  virtual LangListPointer result() = 0;
+  virtual shared_ptr<IGeneratorMeta> meta() const = 0;
+  virtual LangListPointer result() const = 0;
+  virtual ~ILangResult() = default;
 };
 #endif

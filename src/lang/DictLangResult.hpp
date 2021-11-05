@@ -12,6 +12,8 @@ private:
 
 public:
   DictLangResult(shared_ptr<IGeneratorMeta> meta, LangListPointer dict);
-  virtual LangListPointer result() override;
+  LangListPointer &dict();
+  const LangListPointer &dict() const;
+  virtual LangListPointer result() const override;
 };
 #endif

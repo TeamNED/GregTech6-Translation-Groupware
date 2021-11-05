@@ -20,6 +20,8 @@ public:
   LangResult &operator=(const LangResult &) = default;
   LangResult &operator=(LangResult &&) = default;
   virtual ~LangResult() = default;
-  virtual shared_ptr<IGeneratorMeta> meta() override;
+  virtual shared_ptr<IGeneratorMeta> meta() const override;
+  virtual shared_ptr<IGeneratorMeta> &meta();
+  virtual LangListPointer result() const override;
 };
 #endif

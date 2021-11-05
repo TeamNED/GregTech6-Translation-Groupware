@@ -14,16 +14,18 @@ class RuleLangResult : public LangResult {
 private:
   shared_ptr<Rule> _rule;
   vector<shared_ptr<ILangResult>> _subs;
-  LangListPointer _result = nullptr;
+  mutable LangListPointer _result = nullptr;
 
-  LangListPointer RuleLangResult::_generate();
+  LangListPointer RuleLangResult::_generate() const;
 
 public:
   RuleLangResult(shared_ptr<IGeneratorMeta> meta, shared_ptr<Rule> rule,
                  vector<shared_ptr<ILangResult>> subs);
-  virtual shared_ptr<Rule> &rule();
-  virtual vector<shared_ptr<ILangResult>> &subs();
-  virtual LangListPointer result() override;
-  virtual LangListPointer result(bool cached);
+  shared_ptr<Rule> &rule();
+  const shared_ptr<Rule> &rule() const;
+  vector<shared_ptr<ILangResult>> &subs();
+  const vector<shared_ptr<ILangResult>> &subs() const;
+  virtual LangListPointer result() const override;
+  virtual LangListPointer result(bool cached) const;
 };
 #endif
