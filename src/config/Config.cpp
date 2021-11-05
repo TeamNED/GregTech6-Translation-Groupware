@@ -1,6 +1,6 @@
 #include "Config.hpp"
 
-Config::Config(string lang) : _lang(lang) {}
+Config::Config(string lang) : _lang(std::move(lang)) {}
 
 const string &Config::lang() const { return this->_lang; }
 const string &Config::version() const { return this->_version; }

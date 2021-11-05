@@ -1,10 +1,10 @@
 #include "RuleGenerator.hpp"
 
 RuleGenerator::RuleGenerator(shared_ptr<IGeneratorMeta> meta)
-    : Generator(meta) {}
+    : Generator(std::move(meta)) {}
 RuleGenerator::RuleGenerator(shared_ptr<IGeneratorMeta> meta,
                              vector<shared_ptr<Rule>> rules)
-    : Generator(meta), _rules(rules) {}
+    : Generator(std::move(meta)), _rules(std::move(rules)) {}
 vector<shared_ptr<Rule>> &RuleGenerator::rules() { return this->_rules; }
 const vector<shared_ptr<Rule>> &RuleGenerator::rules() const {
   return this->_rules;

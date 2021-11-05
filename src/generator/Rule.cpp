@@ -1,10 +1,11 @@
 #include "Rule.hpp"
 
 Rule::Rule(string source, string target)
-    : _source(source), _target(target), _subs({}) {}
+    : _source(std::move(source)), _target(std::move(target)), _subs({}) {}
 
 Rule::Rule(string source, string target, vector<string> subs)
-    : _source(source), _target(target), _subs(subs) {}
+    : _source(std::move(source)), _target(std::move(target)),
+      _subs(std::move(subs)) {}
 
 string &Rule::source() { return this->_source; }
 string &Rule::target() { return this->_target; }

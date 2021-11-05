@@ -2,5 +2,5 @@
 
 DictLangResult::DictLangResult(shared_ptr<IGeneratorMeta> meta,
                                LangListPointer dict)
-    : LangResult(meta), _dict(dict) {}
+    : LangResult(std::move(meta)), _dict(std::move(dict)) {}
 LangListPointer DictLangResult::result() { return this->_dict; }

@@ -3,7 +3,8 @@
 RuleLangResult::RuleLangResult(shared_ptr<IGeneratorMeta> meta,
                                shared_ptr<Rule> rule,
                                vector<shared_ptr<ILangResult>> subs)
-    : LangResult(meta), _rule(rule), _subs(subs) {}
+    : LangResult(std::move(meta)), _rule(std::move(rule)),
+      _subs(std::move(subs)) {}
 
 shared_ptr<Rule> &RuleLangResult::rule() { return this->_rule; }
 vector<shared_ptr<ILangResult>> &RuleLangResult::subs() { return this->_subs; }

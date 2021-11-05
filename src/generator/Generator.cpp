@@ -1,6 +1,7 @@
 #include "Generator.hpp"
 
-Generator::Generator(shared_ptr<IGeneratorMeta> meta) : _meta(meta){};
+Generator::Generator(shared_ptr<IGeneratorMeta> meta)
+    : _meta(std::move(meta)){};
 
 shared_ptr<IGeneratorMeta> &Generator::meta() { return this->_meta; }
 shared_ptr<IGeneratorMeta> Generator::meta() const { return this->_meta; }

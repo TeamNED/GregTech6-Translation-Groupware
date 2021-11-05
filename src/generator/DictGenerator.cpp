@@ -1,10 +1,10 @@
 #include "DictGenerator.hpp"
 
 DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta)
-    : Generator(meta) {}
+    : Generator(std::move(meta)) {}
 DictGenerator::DictGenerator(shared_ptr<IGeneratorMeta> meta,
                              LangListPointer dict)
-    : Generator(meta), _dict(dict) {}
+    : Generator(std::move(meta)), _dict(std::move(dict)) {}
 
 LangListPointer &DictGenerator::dict() { return this->_dict; }
 const LangListPointer &DictGenerator::dict() const { return this->_dict; }
