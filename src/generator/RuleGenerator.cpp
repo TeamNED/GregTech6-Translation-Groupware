@@ -40,13 +40,11 @@ RuleGenerator::results(IGroupRepository *repo) const {
       continue; // init failed, see clear() above
     }
     vector<vector<shared_ptr<ILangResult>>::const_iterator> begins{};
-    vector<vector<shared_ptr<ILangResult>>::const_iterator> ends{};
     vector<shared_ptr<IGeneratorMeta>> meta_cache{};
     do {
       // fill
       for (size_t i = begins.size(); i < subs_sz; ++i) {
         begins.push_back(sub_results[i].cbegin());
-        ends.push_back(sub_results[i].cend());
       }
       // generate conbination
       const IGeneratorMeta &meta_source = *meta();
@@ -82,9 +80,8 @@ RuleGenerator::results(IGroupRepository *repo) const {
       results.push_back(std::move(generated_result));
       // step
       for (size_t i = subs_sz; i > 0; --i) {
-        if (++begins[i - 1] == ends[i - 1]) {
+        if (++begins[i - 1] == sub_results[i - 1].cend()) {
           begins.pop_back();
-          ends.pop_back();
           sub_results.pop_back();
         } else {
           break;

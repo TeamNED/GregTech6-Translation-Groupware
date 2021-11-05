@@ -32,25 +32,22 @@ LangListPointer RuleLangResult::_generate() const {
   }
   // init
   vector<LangListPointer> sub_results{}; // data holder
+  for (auto sub : _subs) {
+    sub_results.push_back(sub->result());
+  }
   vector<LangList::const_iterator> begins{};
-  vector<LangList::const_iterator> ends{};
   LangListPointer result = std::make_shared<LangList>();
   const string &s_fmt = _rule->source();
   const string &t_fmt = _rule->target();
+  fmt::dynamic_format_arg_store<fmt::format_context> s_store, t_store;
   do {
     // fill zeros
     for (size_t i = begins.size(); i < subs_sz; ++i) {
-      auto sub_result = _subs[i].get()->result();
-      if (sub_result->cbegin() == sub_result->cend()) {
-        // zero-len sub, not valid
-        return std::make_shared<LangList>();
-      }
-      begins.push_back(sub_result->cbegin());
-      ends.push_back(sub_result->cend());
-      sub_results.push_back(std::move(sub_result));
+      begins.push_back(sub_results[i]->cbegin());
     }
     // generate
-    fmt::dynamic_format_arg_store<fmt::format_context> s_store, t_store;
+    s_store.clear();
+    t_store.clear();
     for (const auto &citor : begins) {
       s_store.push_back(citor->first);
       t_store.push_back(citor->second);
@@ -59,10 +56,8 @@ LangListPointer RuleLangResult::_generate() const {
                          fmt::vformat(t_fmt, t_store));
     // step
     for (size_t i = subs_sz; i > 0; --i) {
-      if (++begins[i - 1] == ends[i - 1]) {
+      if (++begins[i - 1] == sub_results[i - 1]->cend()) {
         begins.pop_back();
-        ends.pop_back();
-        sub_results.pop_back();
       } else {
         break;
       }
