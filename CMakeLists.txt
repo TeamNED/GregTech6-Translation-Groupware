@@ -5,13 +5,14 @@ INCLUDE_DIRECTORIES(
     $ENV{VCPKG_ROOT}/installed/x64-windows/include/
 )
 
-LINK_DIRECTORIES(
-    "$<$<CONFIG:DEBUG>:$ENV{VCPKG_ROOT}/installed/x64-windows/debug/lib>"
-    "$<$<CONFIG:RELEASE>:$ENV{VCPKG_ROOT}/installed/x64-windows/lib>"
-)
-
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+FIND_PACKAGE(ryml CONFIG REQUIRED)
+FIND_PACKAGE(fmt CONFIG REQUIRED)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS filesystem)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options)
+
 add_executable(GT6TG
   src/main.cpp
   src/Replacer.cpp
@@ -33,9 +34,9 @@ add_executable(GT6TG
 )
 
 TARGET_LINK_LIBRARIES(GT6TG
-  ryml 
-  c4core 
-  debug boost_program_options-vc140-mt-gd optimized boost_program_options-vc140-mt
-  debug boost_filesystem-vc140-mt-gd optimized boost_filesystem-vc140-mt
-  debug fmtd optimized fmt
+  PRIVATE
+  ryml::ryml
+  fmt::fmt
+  Boost::filesystem
+  Boost::program_options
 )
