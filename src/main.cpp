@@ -22,18 +22,15 @@ void assert_path_exist(const fs::path &path) {
 int main(int argc, char const *argv[]) {
   // runtime options
   RuntimeOptions options(argc, argv);
-  assert_path_exist(options.config_path());
-  assert_path_exist(options.main_source_path());
 
   // Config load & gen
-  Config config =
-      ConfigParser::parse_config_from_path(options.config_path().string());
+  Config config = ConfigParser::parse_config(options);
   Replacer worker(config.generators());
   auto result = worker.generate_map();
 
   // LangFile load & replace
-  LangFile main_source, main_target, extra_source, extra_target;
+  /*LangFile main_source, main_target, extra_source, extra_target;
   std::ifstream ms_lf(options.main_source_path().string(), std::ios::in);
-  ms_lf >> main_source;
+  ms_lf >> main_source;*/
   return 0;
 }

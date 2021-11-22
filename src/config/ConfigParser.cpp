@@ -10,15 +10,17 @@ string ConfigParser::_get_file_contents(const string &filename) {
   return contents.str();
 }
 
-Config ConfigParser::parse_config_from_path(const string &path) {
-  // Config guard
-  if (path.empty()) {
-    throw std::invalid_argument("config file not exist");
-  }
-  return parse_config(_get_file_contents(path));
+bool ConfigParser::_path_valid(const fs::path &path) {
+  return (!path.empty()) && fs::exists(path);
 }
 
-Config ConfigParser::parse_config(const string &config_contents) {
+Config ConfigParser::parse_config(const RuntimeOptions &options) {
+  // get config
+  fs::path config_path = _path_valid(options.config_path())
+                             ? options.config_path()
+                             : options.workplace_path() / "config.yml";
+  string config_contents = _get_file_contents(config_path.string());
+
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
   Config result;

@@ -17,6 +17,7 @@
 #include "../generator/Rule.hpp"
 #include "../generator/RuleGenerator.hpp"
 #include "Config.hpp"
+#include "RuntimeOptions.hpp"
 
 class ConfigParser {
 private:
@@ -25,10 +26,10 @@ private:
   static bool _str2bool(const string &str);
   static string _csubstr2str(const c4::csubstr &str);
   static string _get_file_contents(const string &filename);
+  static bool _path_valid(const fs::path &path);
 
 public:
-  static Config parse_config(const string &content);
-  static Config parse_config_from_path(const string &filename);
+  static Config parse_config(const RuntimeOptions &options);
   static vector<shared_ptr<Generator>>
   parse_generator(const ryml::NodeRef &node);
   static shared_ptr<Rule> parse_rule(const ryml::NodeRef &node);

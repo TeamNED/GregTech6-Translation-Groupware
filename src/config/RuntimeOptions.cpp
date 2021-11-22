@@ -1,19 +1,24 @@
 #include "RuntimeOptions.hpp"
 
-const fs::path &RuntimeOptions::main_source_path() {
+const fs::path &RuntimeOptions::main_source_path() const {
   return this->_main_source_path;
 }
-const fs::path &RuntimeOptions::extra_source_path() {
+const fs::path &RuntimeOptions::extra_source_path() const {
   return this->_extra_source_path;
 }
-const fs::path &RuntimeOptions::main_target_path() {
+const fs::path &RuntimeOptions::main_target_path() const {
   return this->_main_target_path;
 }
-const fs::path &RuntimeOptions::extra_target_path() {
+const fs::path &RuntimeOptions::extra_target_path() const {
   return this->_extra_target_path;
 }
-const fs::path &RuntimeOptions::config_path() { return this->_config_path; }
-const string &RuntimeOptions::lang() { return this->_lang; }
+const fs::path &RuntimeOptions::config_path() const {
+  return this->_config_path;
+}
+const fs::path &RuntimeOptions::workplace_path() const {
+  return this->_workplace_path;
+}
+const string &RuntimeOptions::lang() const { return this->_lang; }
 
 RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // declare options
@@ -42,12 +47,15 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
 
   // --workplace workdir
   if (vm.count("workplace")) {
+    this->_workplace_path = vm["workplace"].as<string>();
+    /*
     fs::path workplace(vm["workplace"].as<string>());
     this->_config_path = workplace / "config.yml";
     this->_main_source_path = workplace / "en" / "GregTech.lang";
     this->_main_target_path = workplace / this->_lang / "GregTech.lang";
     this->_extra_source_path = workplace / "en" / "GregTech.extra.lang";
     this->_extra_target_path = workplace / this->_lang / "GregTech.extra.lang";
+    */
   }
 
   // --config config
