@@ -41,8 +41,6 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // --language lang
   if (vm.count("language")) {
     this->_lang = vm["language"].as<string>();
-  } else {
-    this->_lang = "zh";
   }
 
   // --workplace workdir

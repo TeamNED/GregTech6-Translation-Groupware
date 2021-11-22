@@ -23,6 +23,7 @@ Config ConfigParser::parse_config(const RuntimeOptions &options) {
 
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
+
   Config result;
   result._lang = _read_val(root, "lang");
   result._version = _read_val(root, "version");
@@ -40,6 +41,12 @@ Config ConfigParser::parse_config(const RuntimeOptions &options) {
   } else {
     throw std::invalid_argument("empty generator in config");
   }
+
+  // lang settings
+  if (!options.lang().empty()) {
+    result._lang = options.lang();
+  }
+
   return result;
 }
 
