@@ -239,6 +239,7 @@ generators:
     completed: false
     dict:
       Berry: 莓
+      Billet: 胚料
       Blossom: 花
       Bolt: 螺栓
       Cart Wheels: 车轮
@@ -1082,6 +1083,35 @@ generators:
       Refractory Wax: 耐高温蜡
       Soulful Wax: 灵魂蜜蜡
       Amnesic Wax: 遗忘蜜蜡
+      Asbestos: 石棉
+      Butter: 黄油
+      Salted Butter: 盐味黄油
+      Ferrous Chloride: 氯化亚铁
+      Cooked Fishmeal: 熟鱼肉
+      Cooked Meat: 熟肉
+      Cooked Mince Meat: 熟肉沫
+      Raw Fishmeal: 生鱼肉
+      Raw Meat: 生肉
+      Rotten Fishmeal: 烂鱼肉
+      Rotten Meat: 腐肉
+      Rotten Mince Meat: 烂肉沫
+      Lithium Chlorate: 氯酸锂
+      Lithium Perchlorate: 高氯酸锂
+      Magnesium Carbonate: 碳酸镁
+      Manganese Chloride: 氯化锰
+      Peat: 泥炭
+      Bituminous Peat: 沥青泥炭
+      Potassium Carbonate: 碳酸钾
+      Sodium Carbonate: 碳酸钠
+      Emerald Green: 绿色绿宝石
+      Tofu: 豆腐
+      Niobium Pentoxide: 五氧化二铌
+      Palygorskite Clay: 坡缕石粘土
+      Tantalum Pentoxide: 五氧化二钽
+      Bentonite Clay: 膨润土粘土
+      Coltan: 钶钽铁矿
+      Columbite: 铌铁矿
+      Ferric Oxyhydroxide: 氢氧化铁
   - group: material
     completed: false
     rules:
