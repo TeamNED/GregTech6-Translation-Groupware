@@ -26,7 +26,7 @@ private:
   vector<shared_ptr<ILangResult>>
   _get_generator_results(shared_ptr<Generator> gen);
 
-  static bool _path_valid(const fs::path &path);
+  static bool _path_valid(const fs::path &path, bool require_exist = true);
   static bool _read_language_file(const fs::path &path, LangFile &file);
   static bool _write_language_file(const fs::path &path, const LangFile &file);
 

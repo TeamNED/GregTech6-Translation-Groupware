@@ -66,8 +66,8 @@ Replacer::_get_generator_results(shared_ptr<Generator> gen) {
   }
 }
 
-bool Replacer::_path_valid(const fs::path &path) {
-  return (!path.empty()) && fs::exists(path);
+bool Replacer::_path_valid(const fs::path &path, bool require_exist) {
+  return (!path.empty()) && (!require_exist || fs::exists(path));
 }
 
 bool Replacer::_read_language_file(const fs::path &path, LangFile &file) {
@@ -85,7 +85,7 @@ bool Replacer::_read_language_file(const fs::path &path, LangFile &file) {
 
 bool Replacer::_write_language_file(const fs::path &path,
                                     const LangFile &file) {
-  if (!_path_valid(path)) {
+  if (!_path_valid(path, false)) {
     return false;
   }
   std::ofstream ostrm(path.string(), std::ios::out);
@@ -106,14 +106,21 @@ bool Replacer::replace() {
            _read_language_file(_config.main_source_path(), main_source),
        valid_extra_source =
            _read_language_file(_config.extra_source_path(), extra_source),
-       valid_main_target = _path_valid(_config.main_target_path()),
-       valid_extra_target = _path_valid(_config.extra_target_path());
+       valid_main_target = _path_valid(_config.main_target_path(), false),
+       valid_extra_target = _path_valid(_config.extra_target_path(), false);
   if (!valid_main_source || !valid_main_target) {
     return false;
   }
 
   // replace
   auto dict = generate_map();
+  map<string, string> extra_dict{};
+  if (valid_extra_source) {
+    for (const auto &item : extra_source.items()) {
+      extra_dict.insert(item);
+    }
+  }
+
   const auto &items = main_source.items();
   for (const auto &item : items) {
     const string &key = item.first;
@@ -142,10 +149,8 @@ bool Replacer::replace() {
     // extra
     if (valid_extra_source) {
       const auto &extra_source_items = extra_source.items();
-      auto extra_source_found =
-          std::find_if(extra_source_items.begin(), extra_source_items.end(),
-                       [key](const auto &item) { return item.first == key; });
-      if (extra_source_found != extra_source_items.cend()) {
+      auto extra_source_found = extra_dict.find(key);
+      if (extra_source_found != extra_dict.cend()) {
         // use extra item
         target_text_extra = (*extra_source_found).second;
         succ_extra = true;

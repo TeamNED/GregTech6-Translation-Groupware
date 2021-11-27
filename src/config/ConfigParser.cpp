@@ -10,21 +10,28 @@ string ConfigParser::_get_file_contents(const string &filename) {
   return contents.str();
 }
 
-bool ConfigParser::_path_valid(const fs::path &path) {
-  return (!path.empty()) && fs::exists(path);
+bool ConfigParser::_path_valid(const fs::path &path, bool require_exist) {
+  return (!path.empty()) && (!require_exist || fs::exists(path));
 }
 
 fs::path ConfigParser::_determine_path(const fs::path &original,
                                        const fs::path &workplace,
-                                       const fs::path &replaced) {
-  if (_path_valid(original)) {
+                                       const fs::path &replaced,
+                                       bool require_exist) {
+  if (_path_valid(original, require_exist)) {
     return original;
-  } else if (_path_valid(workplace)) {
-    if (_path_valid(replaced)) {
+  } else if (_path_valid(workplace, require_exist)) {
+    if (_path_valid(replaced, require_exist)) {
       return replaced;
     }
   }
   return fs::path();
+}
+
+void ConfigParser::_determine_config_path(Config &config) {
+  config._config_path = _determine_path( //
+      config._config_path, config._workplace_path,
+      config._workplace_path / "config.yml");
 }
 
 void ConfigParser::_determine_input_paths(Config &config) {
@@ -33,16 +40,13 @@ void ConfigParser::_determine_input_paths(Config &config) {
       config._workplace_path / "en" / "GregTech.lang");
   config._extra_source_path = _determine_path( //
       config._extra_source_path, config._workplace_path,
-      config._workplace_path / "en" / "GregTech.extra.lang");
+      config._workplace_path / config._lang / "GregTech.fallback.lang");
   config._main_target_path = _determine_path( //
       config._main_target_path, config._workplace_path,
-      config._workplace_path / config._lang / "GregTech.lang");
+      config._workplace_path / config._lang / "GregTech.lang", false);
   config._extra_target_path = _determine_path( //
       config._extra_target_path, config._workplace_path,
-      config._workplace_path / config._lang / "GregTech.extra.lang");
-  config._config_path = _determine_path( //
-      config._config_path, config._workplace_path,
-      config._config_path / "config.yml");
+      config._workplace_path / config._lang / "GregTech.unknown.lang", false);
 }
 
 void ConfigParser::_parse_config_file(Config &config) {
@@ -51,7 +55,10 @@ void ConfigParser::_parse_config_file(Config &config) {
   ryml::Tree tree = ryml::parse(ryml::to_csubstr(config_contents));
   ryml::NodeRef root = tree.rootref();
 
-  config._lang = _read_val(root, "lang");
+  string lang_read = _read_val(root, "lang");
+  if (!lang_read.empty()) {
+    config._lang = std::move(lang_read);
+  }
   config._version = _read_val(root, "version");
   if (root.has_child("generators")) {
     auto node = root["generators"];
@@ -67,12 +74,17 @@ void ConfigParser::_parse_config_file(Config &config) {
   } else {
     throw std::invalid_argument("empty generator in config");
   }
+
+  if (config._lang.empty()) {
+    config._lang = "zh";
+  }
 }
 
 Config ConfigParser::parse_config(const RuntimeOptions &options) {
   Config result(options);
-  _determine_input_paths(result);
+  _determine_config_path(result);
   _parse_config_file(result);
+  _determine_input_paths(result);
   return result;
 }
 
