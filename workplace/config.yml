@@ -1,15 +1,7 @@
 version: 1
 lang: zh
 generators:
-  - group: ingotMultiple
-    namespace: S:oredict.ingot
-    rules:
-      - s: "{0} {1} Ingot"
-        t: "{0}{1}锭"
-        subs:
-          - ingotType
-          - material
-  - group: ingotType
+  - group: materialProductPrefix
     namespace: S:oredict.ingot
     completed: false
     dict:
@@ -18,13 +10,31 @@ generators:
       Triple: 三重
       Quadruple: 四重
       Quintuple: 五重
-  - group: ingot
-    namespace: S:oredict.ingot
+      Curved: 弯曲
+      Dense: 致密
+  - group: materialProductType
+    namespace: S:oredict.
+    completed: false
+    dict:
+      Ingot: 锭
+      Plate: 板
+  - group: materialProductMultiple
+    namespace: S:oredict.
     rules:
-      - s: "{0} Ingot"
-        t: "{0}锭"
+      - s: "{0} {1} {2}"
+        t: "{0}{1}{2}"
+        subs:
+          - materialProductPrefix
+          - material
+          - materialProductType
+  - group: materialProduct
+    namespace: S:oredict.
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
         subs:
           - material
+          - materialProductType
   - group: material
     completed: false
     dict:
