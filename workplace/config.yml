@@ -3,14 +3,14 @@ lang: zh
 generators:
   # plates
   - group: plate
-    namespace: S:oredict.plate
+    namespace: S:oredict.
     rules:
       - s: "{0} Plate"
         t: "{0}板"
         subs:
           - material
   - group: plateType
-    namespace: S:oredict.plate
+    namespace: S:oredict.
     completed: false
     dict:
       Double: 双重
@@ -21,7 +21,7 @@ generators:
       Dense: 致密
       Tiny: 小块
   - group: plateComplex
-    namespace: S:oredict.plate
+    namespace: S:oredict.
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -30,14 +30,14 @@ generators:
           - plate
   # ingots
   - group: ingot
-    namespace: S:oredict.ingot
+    namespace: S:oredict.
     rules:
       - s: "{0} Ingot"
         t: "{0}锭"
         subs:
           - material
   - group: ingotType
-    namespace: S:oredict.ingot
+    namespace: S:oredict.
     completed: false
     dict:
       Hot: 热
@@ -46,14 +46,46 @@ generators:
       Quadruple: 四重
       Quintuple: 五重
   - group: ingotComplex
-    namespace: S:oredict.ingot
+    namespace: S:oredict.
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
         subs:
           - ingotType
           - ingot
-  # Product
+  # dusts
+  - group: dustComplex
+    namespace: S:oredict.
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - dustTypePrefix
+          - dust
+  - group: dust
+    namespace: S:oredict.
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - dustTypeSuffix
+  - group: dustTypePrefix
+    namespace: S:oredict.
+    completed: false
+    dict:
+      Impure Pile of : 含杂
+      Purified Pile of : 纯净
+      Small Pile of : 小堆
+      Tiny Pile of : 小搓
+      1/72nd of a Pile of: 1/72份
+  - group: dustTypeSuffix
+    namespace: S:oredict.
+    completed: false
+    dict:
+      Dust: 粉
+      Powder: 粉
+  # product
   - group: materialProductType
     namespace: S:oredict.
     completed: false
@@ -68,6 +100,7 @@ generators:
       Gear: 齿轮
       Item Casing: 外壳
       Nugget: 粒
+      Rail: 导轨
       Ring: 环
       Rotor: 转子
       Round: 垫片
@@ -711,6 +744,7 @@ generators:
       Pink Schist: 粉色片岩
       Gray Schist: 灰色片岩
       Sand: 沙
+      Deepslate: 深板岩
   - group: fallback
     namespace: "S:"
     dict:
