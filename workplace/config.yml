@@ -411,7 +411,24 @@ generators:
         S:oredict.oreSand: 矿沙
         S:oredict.oreRedSand: 红矿沙
       Gravel: 沙砾
-
+  # gem
+  - group: gemComplex
+    namespace: S:oredict.gem
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - gemType
+          - gem
+  - group: gemType
+    namespace: S:oredict.gem
+    completed: false
+    dict:
+      Chipped: 碎裂的
+      Exquisite: 精美的
+      Flawed: 有瑕疵的
+      Flawless: 无瑕的
+      Legendary: 传奇
   # material
   - group: materialGt
     namespace: S:gt.material.
@@ -420,6 +437,13 @@ generators:
         t: "{0}"
         subs:
           - material
+  - group: gemGt
+    namespace: S:oredict.gem
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - gem
   - group: material
     completed: false
     dict:
@@ -631,50 +655,34 @@ generators:
       Sand: 沙
       Deepslate: 深板岩
       Enriched Anti-Naquadah: 浓缩反物质硅岩金属
-      Alexandrite: 紫翠玉
-      Almandine: 铁铝榴石
       Alumina: 氧化铝
       Gibbsite: 水铝矿
       Alunite: 明矾石
-      Amazonite: 天河石
-      Amber: 琥珀
       Ambrosium: 神能晶
-      Amethyst: 紫晶
-      Ender Amethyst: 末影紫晶
       Aluminium Fluoride: 氟化铝
       Ancient Debris: 远古残骸
-      Andradite: 钙铁榴石
       Anthracite: 无烟煤
       Apatite: 磷灰石
       Aqua Middle: 水蓝元素宝石
-      Aquamarine: 海蓝宝石
       Arsenopyrite: 砷黄铁
       Chrysotile: 温石棉
       Azurite: 石青粉块
-      BalasRuby: 红宝石
       Barite: 重晶石
       Basaltic Mineral Sand: 玄武岩砂
       Bastnasite: 氟碳铈
       Bauxite: 铝土
       Biotite: 黑云母
       Bischofite: 水氯镁石
-      Bixbite: 红绿柱石
-      Black Aventurine: 黑色东陵石
-      Black Eye: 黑色虎眼石
       Black Fluorite: 黑色氟石
       Blaze Quartz: 烈焰石英
-      Blue Aventurine: 蓝色东陵石
       Blue Sapphire: 蓝宝石
-      Blue Topaz: 蓝色黄玉
       Bone: 骨
       Borax: 硼砂
       Bromargyrite: 溴银矿
-      Brown Aventurine: 褐色东陵石
       Brown Limonite: 褐铁
       Calcite: 方解石
       Calcium Chloride: 氯化钙
       Cassiterite: 锡石
-      Cat's Eye: 猫眼石
       Celestine: 天青石
       Certus Quartz: 赛特斯石英
       Chalcopyrite: 黄铜
@@ -684,7 +692,6 @@ generators:
       Cheese: 奶酪
       Chimerite: 精灵石
       Chromite: 铬铁
-      Cinnabar: 朱砂
       Clay: 粘土
       Brown Clay: 褐色粘土
       Red Clay: 红色粘土
@@ -693,31 +700,22 @@ generators:
       Cobaltite: 辉砷钴
       Continuum: 命运
       Sheldonite: 硫砷铂
-      Craponite: 焦屎石
       Crimson Middle: 深红元素
       Crude Oil: 原油
       Cryolite: 冰晶石
       Datolite: 硅钙硼石
-      Diamond: 钻石
-      Industrial Diamond: 工业钻石
       Diatomite: 硅藻土
       Diduranium Trioxide: 三氧化二钍瑞铌
-      Dilithium: 双锂
-      Dioptase: 翠铜石
       Dolamide: 酰胺
       Dolomite: 白云岩
-      Dominican Amber: 多米尼加蓝琥珀
-      Dragon Eye: 龙眼石
       Elemental Duranium: 钍瑞铌
       Duranium Hexaastatide: 六砹化钍瑞铌
       Duranium Hexabromide: 六溴化钍瑞铌
       Duranium Hexachloride: 六氯化钍瑞铌
       Duranium Hexafluoride: 六氟化钍瑞铌
       Duranium Hexaiodide: 六碘化钍瑞铌
-      Dragonstone: 龙石
       Elementium: 源质钢
       Elven Quartz: 精灵石英
-      Emerald: 绿宝石
       Emery: 金刚砂
       Unknown: 未知
       Cyan Energium: 青色能量水晶
@@ -734,32 +732,14 @@ generators:
       Garnierite: 硅镁镍
       Glass: 玻璃
       Glauconite: 海绿石
-      Gloomstone: 阴郁荧石
-      Glowstone: 萤石
-      Ceres Glowstone: 谷神星萤石
-      Enceladus Glowstone: 土卫二萤石
-      Io Glowstone: 木卫一萤石
-      Pluto Glowstone: 冥王星萤石
-      Proteus Glowstone: 海卫八萤石
-      Goshenite: 透绿柱石
       Granitic Mineral Sand: 花岗岩类矿砂
       Graphite: 石墨
       Gravitite: 重力晶
-      Green Aventurine: 绿色东陵石
       Green Fluorite: 绿色氟石
-      Green Jasper: 绿色碧玉
       Green Middle: 翠绿元素宝石
       Green Sapphire: 绿色蓝宝石
-      Grossular: 钙铝榴石
       Gypsum: 石膏
-      Hawk's Eye: 鹰眼石
-      Heliodor: 金绿柱石
       Hematite: 赤铁
-      Black Hexorium: 黑色黑克斯
-      Blue Hexorium: 蓝色黑克斯
-      Green Hexorium: 绿色黑克斯
-      Red Hexorium: 红色黑克斯
-      White Hexorium: 白色黑克斯
       Honey: 蜂蜜
       Honeydew: 蜂蜜滴
       Huebnerite: 钨锰
@@ -774,7 +754,6 @@ generators:
       Order infused: 秩序
       Water infused: 水之
       Iodine Salt: 碘盐
-      Jade: 翡翠
       Kaolinite Clay: 高岭石粘土
       Kesterite: 锌黄锡
       Kyanite: 蓝晶石
@@ -792,30 +771,19 @@ generators:
       Magnesium Chloride: 氯化镁
       Magnetite: 磁铁
       Malachite: 孔雀石
-      Mana Diamond: 魔力钻石
       Mana Quartz: 魔力石英
-      Maxixe: 马克西蓝色绿柱石
       Mica: 云母
       Milky Quartz: 乳白色石英
       Mirabilite: 芒硝
       Molybdenite: 辉钼
       Monazite: 独居石
       Moonstone: 月亮石
-      Morganite: 铯绿柱石
       Nether Quartz: 下界石英
-      Nether Star: 下界之星
-      Nikolite: 蓝石
       Niter: 硝石
       Nougat: 牛轧糖
-      Ocean Jasper: 海蓝色碧玉
       Oil Sand: 油砂
       Oil Shale: 含油页岩
-      Olivine: 橄榄石
-      Black Onyx: 黑色缟玛瑙
-      Red Onyx: 红色缟玛瑙
-      Opal: 蛋白石
       Orange Fluorite: 橙色氟石
-      Orange Sapphire: 橙色蓝宝石
       PEZ: 皮礼士糖
       Pentlandite: 镍黄铁
       Perlite: 珍珠岩
@@ -824,7 +792,6 @@ generators:
       Phosphorite: 磷灰石
       Phosphorus: 磷酸钙
       Pinalite: 氯钨铅
-      Pink Diamond: 粉钻
       Pink Fluorite: 粉色氟石
       Pitchblende: 沥青铀
       Platinum Group Sludge: 铂族泥
@@ -835,25 +802,17 @@ generators:
       Prismane: 棱柱烷
       Dark Prismarine: 深色海晶石
       Light Prismarine: 亮色海晶石
-      Purple Sapphire: 紫色蓝宝石
       Pyrolusite: 软锰
-      Pyrope: 镁铝榴石
       Black Quartz: 黑色石英岩
       Quartz Sand: 石英砂
       Quartzite: 石英岩
-      Rainforest Jasper: 雨林碧玉
       Rare Earth: 稀土
-      Red Aventurine: 红色东陵石
       Red Fluorite: 红色氟石
-      Red Jasper: 红色碧玉
       Red Quartz: 红色石英
-      Redstone: 红石
       Rock Salt: 岩盐
-      Ruby: 红宝石
       Russellite: 钨铋
       Rutile: 金红石
       Salt: 盐
-      Sapphire: 蓝宝石
       Scabyst: 痂壳晶
       Scheelite: 白钨
       Silicon Dioxide: 二氧化硅
@@ -864,9 +823,7 @@ generators:
       Sodalite: 方钠石
       Sodium Nitrate: 硝酸钠
       Sperrylite: 砷铂
-      Spessartine: 锰铝榴石
       Sphalerite: 闪锌
-      Spinel: 尖晶石
       Spodumene: 锂辉
       Stannite: 黄锡
       Stibnite: 辉锑
@@ -875,11 +832,7 @@ generators:
       Sunstone: 太阳石
       Soapstone: 皂石
       Tantalite: 钽铁
-      Tanzanite: 坦桑石
       Tetrahedrite: 黝铜
-      Tiger Eye: 虎眼石
-      Tiger Iron: 虎铁石
-      Topaz: 黄玉
       Tritanium Dioxide: 二氧化三钛
       Elemental Tritanium: 三钛
       Tritanium Hexaastatide: 六砹化三钛
@@ -891,27 +844,24 @@ generators:
       Tungstate: 钨酸盐
       Tungsten Trioxide: 三氧化钨
       Uraninite: 晶质铀
-      Uvarovite: 钙铬榴石
       Valonite: 法罗钠
       Vanadium Pentoxide: 五氧化二钒
       Vermiculite: 蛭石粉
       Vinteum: 温特姆
-      Void Crystal: 煤晶
       White Fluorite: 白色氟石
       Wolframite: 钨锰铁
       Wollastonite: 硅灰石
       Wulfenite: 钼铅
       Yellorite: 黄铀
-      Yellow Aventurine: 黄色东陵石
-      Yellow Jasper: 黄色碧玉
       Yellow Limonite: 黄色褐铁
-      Yellow Sapphire: 黄色蓝宝石
-      Zanite: 紫晶
       Zeolite: 沸石
-      Zircon: 锆石
   - group: material
     completed: false
     rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - gem
       - s: "{0}"
         t: "{0}"
         subs:
@@ -920,6 +870,109 @@ generators:
         t: "反物质{0}"
         subs:
           - materalPositive
+  - group: gem
+    completed: false
+    dict:
+      Alexandrite: 紫翠玉
+      Almandine: 铁铝榴石
+      Amazonite: 天河石
+      Amber: 琥珀
+      Amethyst: 紫水晶
+      Ender Amethyst: 末影紫晶
+      Andradite: 钙铁榴石
+      Aquamarine: 海蓝宝石
+      BalasRuby: 红宝石
+      Bixbite: 红绿柱石
+      Black Aventurine: 黑色东陵石
+      Black Eye: 黑色虎眼石
+      Blue Aventurine: 蓝色东陵石
+      Blue Jasper: 蓝色碧玉
+      Blue Topaz: 蓝色黄玉
+      Brown Aventurine: 褐色东陵石
+      Cat's Eye: 猫眼石
+      Cinnabar: 朱砂
+      Craponite: 焦屎石
+      Diamantine: 钻石水晶
+      Diamond: 钻石
+      Industrial Diamond: 工业钻石
+      Dilithium: 双锂
+      Dioptase: 翠铜石
+      Dominican Amber: 多米尼加蓝琥珀
+      Dragon Eye: 龙眼石
+      Electrotine: 蓝石
+      Dragonstone: 龙石
+      Emeradic: 绿宝石水晶
+      Emerald: 绿宝石
+      Empty: 空
+      Enori: 铁晶
+      Gloomstone: 阴郁荧石
+      Glowstone: 萤石
+      Ceres Glowstone: 谷神星萤石
+      Enceladus Glowstone: 土卫二萤石
+      Io Glowstone: 木卫一萤石
+      Pluto Glowstone: 冥王星萤石
+      Proteus Glowstone: 海卫八萤石
+      Goshenite: 透绿柱石
+      Green Aventurine: 绿色东陵石
+      Green Jasper: 绿色碧玉
+      Grossular: 钙铝榴石
+      Hawk's Eye: 鹰眼石
+      Heliodor: 金绿柱石
+      Black Hexorium: 黑色黑克斯
+      Blue Hexorium: 蓝色黑克斯
+      Green Hexorium: 绿色黑克斯
+      Red Hexorium: 红色黑克斯
+      White Hexorium: 白色黑克斯
+      Shard of Infused Air: 风之碎片
+      Balance Shard: 平衡碎片
+      Dull Shard: 枯竭碎片
+      Shard of Infused Earth: 地之碎片
+      Shard of Infused Entropy: 混沌碎片
+      Shard of Infused Fire: 火之碎片
+      Shard of Infused Order: 混沌碎片
+      Magic Shard: 魔力碎片
+      Shard of Infused Water: 水之碎片
+      Jade: 翡翠
+      Jasper: 碧玉
+      Mana Diamond: 魔力钻石
+      Maxixe: 马克西蓝色绿柱石
+      Morganite: 铯绿柱石
+      Nether Star: 下界之星
+      Nikolite: 蓝石
+      Ocean Jasper: 海蓝色碧玉
+      Olivine: 橄榄石
+      Black Onyx: 黑色缟玛瑙
+      Red Onyx: 红色缟玛瑙
+      Opal: 蛋白石
+      Orange Sapphire: 橙色蓝宝石
+      Palis: 青金石水晶
+      Pink Diamond: 粉钻
+      Purple Sapphire: 紫色蓝宝石
+      Pyrope: 镁铝榴石
+      Rainforest Jasper: 雨林碧玉
+      #TODO# Realgar: Realgar
+      Red Aventurine: 红色东陵石
+      Red Jasper: 红色碧玉
+      Redstone: 红石
+      Redstonia: 红石水晶
+      Ruby: 红宝石
+      Sapphire: 蓝宝石
+      Spessartine: 锰铝榴石
+      Spinel: 尖晶石
+      Tanzanite: 坦桑石
+      Teslatite: 特斯拉金属
+      Tiger Eye: 虎眼石
+      Tiger Iron: 虎铁石
+      Topaz: 黄玉
+      Uvarovite: 钙铬榴石
+      Void Crystal: 煤晶
+      Yellow Aventurine: 黄色东陵石
+      Yellow Jasper: 黄色碧玉
+      Yellow Sapphire: 黄色蓝宝石
+      Zanite: 紫晶
+      Zircon: 锆石
+      Zirconium: 锆
+      Any: 任意
   - group: materalPositive
     completed: false
     dict:
