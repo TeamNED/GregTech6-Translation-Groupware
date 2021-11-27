@@ -130,6 +130,65 @@ generators:
         t: "{0}齿轮"
         subs:
           - material
+  # spring
+  - group: springSmall
+    namespace: S:oredict.springSmall
+    rules:
+      - s: "Small {0}"
+        t: "小型{0}"
+        subs:
+          - spring
+  - group: spring
+    namespace: S:oredict.spring
+    rules:
+      - s: "{0} Spring"
+        t: "{0}弹簧"
+        subs:
+          - material
+  # stick
+  - group: stickComplex
+    namespace: S:oredict.stick
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - stickTypePrefix
+          - stick
+  - group: stick
+    namespace: S:oredict.stick
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - stickTypeSuffix
+  - group: stickTypePrefix
+    namespace: S:oredict.stick
+    completed: false
+    dict:
+      Long: 长
+      Short: 短
+  - group: stickTypeSuffix
+    namespace: S:oredict.stick
+    completed: false
+    dict:
+      Stick: 杆
+      Rod: 杆
+  # arrow
+  - group: arrowLight
+    namespace: S:oredict.arrowGtPlastic
+    rules:
+      - s: "Light {0}"
+        t: "轻质{0}"
+        subs:
+          - arrow
+  - group: arrow
+    namespace: S:oredict.arrowGt
+    rules:
+      - s: "{0} Arrow"
+        t: "{0}箭"
+        subs:
+          - material
   # material
   - group: material
     completed: false
