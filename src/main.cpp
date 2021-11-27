@@ -26,11 +26,8 @@ int main(int argc, char const *argv[]) {
   // Config load & gen
   Config config = ConfigParser::parse_config(options);
   Replacer worker(config);
-  auto result = worker.generate_map();
 
   // LangFile load & replace
-  /*LangFile main_source, main_target, extra_source, extra_target;
-  std::ifstream ms_lf(options.main_source_path().string(), std::ios::in);
-  ms_lf >> main_source;*/
+  worker.replace();
   return 0;
 }
