@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "config/Config.hpp"
+#include "lang/LangFile.hpp"
 #include "meta/IGroupRepository.hpp"
 
 using std::map;
@@ -23,11 +24,15 @@ private:
   vector<shared_ptr<ILangResult>>
   _get_generator_results(shared_ptr<Generator> gen);
 
+  static bool _path_valid(const fs::path &path);
+  static bool _read_language_file(const fs::path &path, LangFile &file);
+
 public:
   Replacer(const Config &config);
   map<string, vector<std::pair<string, string>>> generate_map();
   vector<shared_ptr<ILangResult>> generate();
   virtual vector<shared_ptr<ILangResult>>
   get_group_results(const string &group) override;
+  bool replace();
 };
 #endif

@@ -19,6 +19,9 @@ const fs::path &RuntimeOptions::workplace_path() const {
   return this->_workplace_path;
 }
 const string &RuntimeOptions::lang() const { return this->_lang; }
+const vector<string> &RuntimeOptions::extensions() const {
+  return this->_extensions;
+};
 
 RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // declare options
@@ -28,9 +31,9 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
        "workplace for language files and configs")                       //
       ("language,l", po::value<string>(), "language code")               //
       ("source,s", po::value<vector<string>>(), "source language files") //
-      ("target,t", po::value<vector<string>>(),                          //
-       "target language files")                                          //
-      ("config,c", po::value<string>(), "config file");                  //
+      ("target,t", po::value<vector<string>>(), "target language files") //
+      ("config,c", po::value<string>(), "config file")                   //
+      ("extensions,e", po::value<vector<string>>(), "extensions");       //
 
   // parse and store options
   po::variables_map vm;
@@ -73,5 +76,10 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
         this->_extra_target_path = fs::path(target_paths[1]);
       }
     }
+  }
+
+  // --extensions extensions
+  if (vm.count("extensions")) {
+    this->_extensions = vm["extensions"].as<vector<string>>();
   }
 }

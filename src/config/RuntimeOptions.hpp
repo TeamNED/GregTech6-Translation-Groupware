@@ -18,6 +18,7 @@ protected:
   fs::path _main_source_path, _extra_source_path, _main_target_path,
       _extra_target_path, _config_path, _workplace_path;
   string _lang;
+  vector<string> _extensions;
 
 public:
   RuntimeOptions(int argc, char const *argv[]);
@@ -32,6 +33,7 @@ public:
   virtual const fs::path &config_path() const;
   virtual const fs::path &workplace_path() const;
   virtual const string &lang() const;
+  virtual const vector<string> &extensions() const;
   virtual ~RuntimeOptions() = default;
 };
 #endif

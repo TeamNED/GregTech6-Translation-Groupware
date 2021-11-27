@@ -64,3 +64,42 @@ Replacer::_get_generator_results(shared_ptr<Generator> gen) {
     return rcache_found->second;
   }
 }
+
+bool Replacer::_path_valid(const fs::path &path) {
+  return (!path.empty()) && fs::exists(path);
+}
+
+bool Replacer::_read_language_file(const fs::path &path, LangFile &file) {
+  if (!_path_valid(path)) {
+    return false;
+  }
+  std::ifstream istrm(path.string(), std::ios::in);
+  if (istrm) {
+    istrm >> file;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool Replacer::replace() {
+  // check paths, load source
+  LangFile main_source, extra_source, main_target, extra_target;
+  bool valid_main_source =
+           _read_language_file(_config.main_source_path(), main_source),
+       valid_extra_source =
+           _read_language_file(_config.extra_source_path(), extra_source),
+       valid_main_target = _path_valid(_config.main_target_path()),
+       valid_extra_target = _path_valid(_config.extra_target_path());
+  if (!valid_main_source || !valid_main_target) {
+    return false;
+  }
+
+  // replace
+  auto dict = generate_map();
+  const auto &items = main_source.items();
+  for (const auto &item : items) {
+  }
+
+  return true;
+}
