@@ -589,6 +589,14 @@ generators:
         t: "精细{0}线缆"
         subs:
           - material
+  # Bearing Rock
+  - group: rockGt
+    namespace: S:oredict.rockGt
+    rules:
+      - s: "{0} bearing Rock"
+        t: "含{0}岩石"
+        subs:
+          - material
   # material
   - group: materialGt
     namespace: S:gt.material.
