@@ -1092,7 +1092,6 @@ generators:
       Frezarite: 冰霜陨石
       Gabbro: 辉长岩
       Gneiss: 片麻岩
-      Graphene: 石墨烯
       Gravel: 沙砾
       Greywacke: 杂砂岩
       Holystone: 圣石
@@ -1197,6 +1196,10 @@ generators:
         t: "{0}"
         subs:
           - oreSandType
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - entityMaterial
   - group: gem
     completed: false
     dict:
@@ -1748,7 +1751,78 @@ generators:
       Shale: 页岩
       Slate: 板岩
 
-
+  # tools
+  - group: entityMaterial
+    namespace: "S:"
+    completed: false
+    dict:
+      Tin: 锡
+      Lead: 铅
+      HSLA-Steel: HSLA钢
+      Constantan: 康铜
+      Copper: 铜
+      Annealed Copper: 退火铜
+      Efrine: 绿金
+      Kanthal: 铁铬铝合金
+      Silver: 银
+      Gold: 金
+      Electrum: 琥珀金
+      Blue Alloy: 蓝石合金
+      Electrotine Alloy: 蓝石合金
+      Nichrome: 镍铬合金
+      Steel: 钢
+      Aluminium: 铝
+      Tungstensteel: 钨钢
+      Tungsten: 钨
+      Netherite: 下界合金
+      Osmium: 锇
+      Platinum: 铂
+      Osmiridium: 铱锇合金
+      Carborundum: 碳化硅
+      Iridium: 铱
+      Naquadah: 硅岩金属
+      Niobium Titanium: 铌钛合金
+      Vanadium-Gallium: 钒镓合金
+      Yttrium-Barium-Cuprate: 钇钡铜氧合金
+      Graphene: 石墨烯
+      Superconductor: 超导体
+  - group: wire
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1} {2}"
+        t: "{0} {2}{1}线缆"
+        subs:
+          - wireSize
+          - entityMaterial
+          - wireType
+  - group: wireType
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Wire: 未绝缘
+      Cable: 已绝缘
+  - group: wireSize
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      1x: 1x
+      2x: 2x
+      3x: 3x
+      4x: 4x
+      5x: 5x
+      6x: 6x
+      7x: 7x
+      8x: 8x
+      9x: 9x
+      10x: 10x
+      11x: 11x
+      12x: 12x
+      13x: 13x
+      14x: 14x
+      15x: 15x
+      16x: 16x
+  
+    
 
   - group: fallback
     namespace: "S:"
