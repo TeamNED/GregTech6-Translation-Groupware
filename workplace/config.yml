@@ -145,6 +145,29 @@ generators:
         t: "{0}弹簧"
         subs:
           - material
+  # machine casing
+  - group: machineCasingComplex
+    namespace: S:oredict.casingMachine
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - machineCasingType
+          - machineCasing
+  - group: machineCasing
+    namespace: S:oredict.casingMachine
+    rules:
+      - s: "{0} Machine Casing"
+        t: "{0}机械外壳"
+        subs:
+          - material
+  - group: machineCasingType
+    namespace: S:oredict.casingMachine
+    completed: false
+    dict:
+      Dense: 致密
+      Robust: 加强
+      Reinforced: 高强度
   # stick
   - group: stickComplex
     namespace: S:oredict.stick
@@ -638,4 +661,6 @@ generators:
     dict:
       "Any Sub-Block of this one": 任何该方块的子方块
       "Any Sub-Item of this one": 所有此物品的子物品
+      Wooden Panel: 木制覆盖板
+      Wooden Bookshelf: 木制书架
 
