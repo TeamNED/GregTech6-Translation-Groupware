@@ -1,11 +1,28 @@
 version: 1
 lang: zh
 generators:
-  - group: ingotDouble
-    namespace: S:oredict.ingotDouble
+  - group: ingotMultiple
+    namespace: S:oredict.ingot
     rules:
-      - s: Double {0} Ingot
-        t: "双重{0}锭"
+      - s: "{0} {1} Ingot"
+        t: "{0}{1}锭"
+        subs:
+          - ingotType
+          - material
+  - group: ingotType
+    namespace: S:oredict.ingot
+    completed: false
+    dict:
+      Hot: 热
+      Double: 双重
+      Triple: 三重
+      Quadruple: 四重
+      Quintuple: 五重
+  - group: ingot
+    namespace: S:oredict.ingot
+    rules:
+      - s: "{0} Ingot"
+        t: "{0}锭"
         subs:
           - material
   - group: material
