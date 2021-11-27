@@ -113,14 +113,40 @@ ConfigParser::parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "dict") {
       // DictGenerator
       if (child.is_map()) {
-        auto gen = std::make_shared<DictGenerator>(meta);
-        gen->dict() = std::make_shared<LangList>();
-        auto &dict = *(gen->dict());
+        shared_ptr<DictGenerator> gen = nullptr;
         for (auto dict_item : child.children()) {
-          dict.emplace_back(_csubstr2str(dict_item.key()),
-                            _csubstr2str(dict_item.val()));
+          if (dict_item.is_map()) {
+            // NSGeneratorMeta
+            if (gen) {
+              // commit
+              result.push_back(std::move(gen));
+              gen = nullptr;
+            }
+            for (auto dict_item_children : dict_item.children()) {
+              auto local_gen = std::make_shared<DictGenerator>(
+                  std::make_shared<NSGeneratorMeta>(
+                      _csubstr2str(dict_item_children.key()), meta));
+              local_gen->dict() = std::make_shared<LangList>();
+              auto &dict = *(local_gen->dict());
+              dict.emplace_back(_csubstr2str(dict_item.key()),
+                                _csubstr2str(dict_item_children.val()));
+              result.push_back(std::move(local_gen));
+            }
+          } else {
+            // normal dict
+            if (!gen) {
+              gen = std::make_shared<DictGenerator>(meta);
+              gen->dict() = std::make_shared<LangList>();
+            }
+            auto &dict = *(gen->dict());
+            dict.emplace_back(_csubstr2str(dict_item.key()),
+                              _csubstr2str(dict_item.val()));
+          }
         }
-        result.push_back(std::move(gen));
+        if (gen) {
+          // final commit
+          result.push_back(std::move(gen));
+        }
       } else {
         throw std::invalid_argument("invalid dict for generator");
       }

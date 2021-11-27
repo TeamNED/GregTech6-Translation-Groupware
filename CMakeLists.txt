@@ -21,6 +21,7 @@ add_executable(GT6TG
   src/generator/RuleGenerator.cpp
   src/generator/Rule.cpp
   src/meta/IGeneratorMeta.cpp
+  src/meta/NSGeneratorMeta.cpp
   src/meta/GeneratorMeta.cpp
   src/meta/IGroupRepository.cpp
   src/lang/ILangResult.cpp

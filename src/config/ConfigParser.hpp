@@ -16,6 +16,7 @@
 #include "../generator/Generator.hpp"
 #include "../generator/Rule.hpp"
 #include "../generator/RuleGenerator.hpp"
+#include "../meta/NSGeneratorMeta.hpp"
 #include "Config.hpp"
 #include "RuntimeOptions.hpp"
 
