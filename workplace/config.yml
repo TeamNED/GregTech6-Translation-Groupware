@@ -60,6 +60,14 @@ generators:
         subs:
           - ore
   # plates
+  - group: plateComplex
+    namespace: S:oredict.
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - plateType
+          - plate
   - group: plate
     namespace: S:oredict.
     rules:
@@ -71,21 +79,21 @@ generators:
         t: "{0}"
         subs:
           - plateGem
+  - group: plateGemTiny
+    namespace: S:oredict.
+    rules:
+      - s: "Tiny {0}"
+        t: "小块{0}"
+        subs:
+          - plateGem
   - group: plateGem
-    namespace: S:oredict.plateGem
+    namespace: S:oredict.
     completed: false
     rules:
       - s: "Crystalline {0} Plate"
         t: "结晶{0}板"
         subs:
           - material
-  - group: plateGemTiny
-    namespace: S:oredict.plateGem
-    rules:
-      - s: "Tiny {0}"
-        t: "小块{0}"
-        subs:
-          - plateGem
   - group: plateType
     namespace: S:oredict.
     completed: false
@@ -97,14 +105,6 @@ generators:
       Curved: 弯曲
       Dense: 致密
       Tiny: 小块
-  - group: plateComplex
-    namespace: S:oredict.
-    rules:
-      - s: "{0} {1}"
-        t: "{0}{1}"
-        subs:
-          - plateType
-          - plate
   # ingots
   - group: ingot
     namespace: S:oredict.
@@ -208,7 +208,7 @@ generators:
   - group: fiber
     namespace: S:oredict.plantGtFiber
     rules:
-      - s: "{0} Fiber"
+      - s: "Raw {0} Fiber"
         t: "生{0}丝"
         subs:
           - material
@@ -585,8 +585,6 @@ generators:
       Invar: 殷钢
       Compressed Iron: 压缩铁
       Magnetic Iron: 磁化铁
-      Ironwood: 铁木
-      Ironwood: 铁木 
       Kalendrite: 幽冥魂石
       Kanthal: 铁铬铝合金
       Knightmetal: 骑士金属
@@ -907,6 +905,10 @@ generators:
         t: "反物质{0}"
         subs:
           - materalPositive
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - wood
   - group: gem
     completed: false
     dict:
@@ -1155,7 +1157,176 @@ generators:
       Selenium: 硒
       Sulfur: 硫
       Vibranium: 振金
-
+  - group: wood
+    dict:
+      Alder: 桤木
+      Apple: 苹果树
+      Ash: 梣树
+      Beech: 山毛榉
+      Box: 黄杨木
+      Brazilwood: 巴西红木
+      Butternut: 灰核桃树
+      Cedar: 雪松木
+      Elder: 接骨木
+      Elm: 榆树
+      Eucalyptus: 桉树
+      Fig: 无花果树
+      Gingko: 银杏
+      Hawthorn: 山楂木
+      Hemlock: 铁杉
+      Hickory: 山核桃
+      Holly: 冬青
+      Hornbeam: 鹅耳枥
+      Iroko: 大绿柄桑木
+      Locust: 刺槐
+      Logwood: 墨水树
+      Maclura: 桑橙
+      Olive: 橄榄树
+      Pear: 梨树
+      Pink Ivory: 象牙粉红木
+      Purpleheart: 紫心檀木
+      Rowan: 花楸木
+      Rosewood: 蔷薇木
+      Sweetgum: 枫香木
+      Syzgium: 蒲桃木
+      Whitebeam: 白面子树
+      Yew: 红豆杉
+      Aspen: 白杨木
+      Douglas Fir: 花旗松
+      Sycamore: 悬铃木
+      White Cedar: 北美香柏木
+      White Elm: 榆树
+      Skyroot: 天根木
+      Darkwood: 黑树
+      Shimmerwood: 微光木
+      Peanut Wood: 花生木
+      Bamboo: 竹
+      Ethereal: 天域木
+      Hellbark: 地狱皮木
+      Jacaranda: 蓝花楹木
+      Mangrove: 红树
+      Sacred Oak: 神圣橡树
+      Towerwood: 塔木
+      Witchwood: 巫魂木
+      Bloodwood: 血木
+      Fusewood: 熔融木
+      Ghostwood: 幽魂木
+      Hopseed: 车桑子木
+      Silverbell: 银铃
+      Tiger: 核桃木
+      Thorntree: 荆棘树
+      Silver Pine: 银松
+      Quaking Aspen: 颤杨
+      Common Aspen: 欧洲山杨
+      White Poplar: 白杨
+      Boxleaf Azara: 小叶金柞
+      Southern Magnolia: 荷花玉兰
+      Sweetbay: 月桂
+      Marblewood: 编条相思木
+      Tamo Ash: 水曲柳
+      White Meranti: 白娑罗双
+      Compressed: 压缩木
+      Dead Wood: 枯木
+      Bleached Wood: 星光木
+      Frozen Wood: 冻木
+      Mossy Wood: 苔痕木
+      Rotten Wood: 腐木
+      Scorched Wood: 焦皮枯木
+      Tainted Wood: 腐化木
+      Varnished Wood: 漆包木
+      Wyvernwood: 飞龙木
+      Walnutwood: 核桃木
+      Warped Wood: 诡异木
+      Autumn Wood: 秋树木
+      Ashwood: 梣树木
+      Applewood: 苹果树木
+      Boxwood: 黄杨木
+      Butternutwood: 灰核桃树木
+      Cherrywood: 樱桃树木
+      Chestnutwood: 栗树木
+      Citruswood: 柑橘树木
+      Cocobolowood: 黄檀树木
+      Coconut: 椰子树木
+      Crimsonwood: 绯红木
+      Elderwood: 接骨木
+      Etherealwood: 天域树木
+      Figwood: 无花果树木
+      Foxfire: 狐火木
+      Giganteumwood: 巨杉树木
+      Goldwood: 金木
+      Junglewood: 丛林木
+      Limewood: 酸橙树木
+      Magicwood: 魔法树木
+      Ogrewood: 食人魔树木
+      Olivewood: 橄榄树木
+      Papayawood: 木瓜树木
+      Pearwood: 梨树木
+      Plumwood: 李子树木
+      Paduak: 紫檀木
+      Pine: 松树木
+      Weedwood: 杂草木
+      Dreamwood: 梦之木
+      Livingwood: 活木
+      Acacia: 金合欢木
+      Almond: 杏仁
+      Autumn: 秋树
+      Bald Cypress: 落羽松
+      Balsa: 巴尔杉
+      Baobab: 猴面包木
+      Birch: 白桦木
+      Blue Mahoe: 高红槿
+      Cherry: 樱木
+      Chestnut: 栗树木
+      Citrus: 柑橘树木
+      Cocobolo: 黄檀秋木
+      Compressed Wood: 压缩木
+      Cypress: 柏树
+      Dark Oak: 深色橡木
+      Ebony: 乌檀木
+      Fir: 冷杉木
+      Giganteum: 巨杉木
+      Greatwood: 宏伟之木
+      Greenheart: 绿樟木
+      Hazel: 榛树
+      Ipe: 重蚁木
+      Ironwood: 铁木
+      Japanese Maple: 日本枫木
+      Jungle: 丛林木
+      Kapok: 木棉木
+      Lime: 酸橙木
+      Mahoe: 高槿木
+      Mahogany: 桃心木
+      Maple: 枫树
+      Oak: 橡木
+      Padauk: 紫檀木
+      Palm: 棕榈木
+      Papaya: 木瓜木
+      Peach: 桃子
+      Petrified Wood: 石化木
+      Pistachio: 开心果
+      Plum: 李子木
+      Polished Wood: 抛光木
+      Poplar: 白杨木
+      Rainbow Eucalyptus: 彩虹桉
+      Rainbow Wood: 彩虹树
+      Rainforest Jasper: 雨林碧玉
+      Redwood: 红木
+      Rubber Wood: 橡胶木
+      Sakura: 樱花木
+      Sealed Wood: 防腐木
+      Sequoia: 红杉
+      Silverwood: 银树
+      Spruce: 云杉木
+      Teak: 柚树
+      Tea: 茶
+      Treated Wood: 防腐木
+      Vanilla: 香草
+      Walnut: 胡桃木
+      Wenge: 崖豆木
+      Willow: 柳树
+      Wood: 木
+      Zebrawood: 斑木
+      Larch: 落叶松
   - group: fallback
     namespace: "S:"
     dict:
