@@ -12,6 +12,7 @@ generators:
       Quintuple: 五重
       Curved: 弯曲
       Dense: 致密
+      Tiny: 小块
   - group: materialProductType
     namespace: S:oredict.
     completed: false
