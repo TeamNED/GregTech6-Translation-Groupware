@@ -413,6 +413,13 @@ generators:
       Gravel: 沙砾
 
   # material
+  - group: materialGt
+    namespace: S:gt.material.
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - material
   - group: material
     completed: false
     dict:
