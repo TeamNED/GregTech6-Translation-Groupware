@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
 
   // Config load & gen
   Config config = ConfigParser::parse_config(options);
-  Replacer worker(config.generators());
+  Replacer worker(config);
   auto result = worker.generate_map();
 
   // LangFile load & replace

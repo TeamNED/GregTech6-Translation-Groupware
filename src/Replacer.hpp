@@ -6,7 +6,7 @@
 #include <map>
 #include <unordered_map>
 
-#include "generator/Generator.hpp"
+#include "config/Config.hpp"
 #include "meta/IGroupRepository.hpp"
 
 using std::map;
@@ -14,6 +14,7 @@ using std::map;
 class Replacer : public IGroupRepository {
 
 private:
+  const Config &_config;
   const vector<shared_ptr<Generator>> &_generators;
   std::unordered_map<shared_ptr<Generator>, vector<shared_ptr<ILangResult>>>
       _result_cache;
@@ -23,7 +24,7 @@ private:
   _get_generator_results(shared_ptr<Generator> gen);
 
 public:
-  Replacer(const vector<shared_ptr<Generator>> &generators);
+  Replacer(const Config &config);
   map<string, vector<std::pair<string, string>>> generate_map();
   vector<shared_ptr<ILangResult>> generate();
   virtual vector<shared_ptr<ILangResult>>

@@ -1,7 +1,7 @@
 #include "Replacer.hpp"
 
-Replacer::Replacer(const vector<shared_ptr<Generator>> &generators)
-    : _generators(generators) {}
+Replacer::Replacer(const Config &config)
+    : _config(config), _generators(config.generators()) {}
 
 map<string, vector<std::pair<string, string>>> Replacer::generate_map() {
   map<string, vector<std::pair<string, string>>> result;
