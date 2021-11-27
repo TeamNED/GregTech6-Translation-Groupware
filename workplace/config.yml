@@ -30,6 +30,35 @@ generators:
         t: "{0}板条箱"
         subs:
           - ore
+  # block
+  - group: block
+    namespace: S:oredict.blockDust
+    rules:
+      - s: "Block of {0}"
+        t: "{0}块"
+        subs:
+          - dust
+  - group: block
+    namespace: S:oredict.blockIngot
+    rules:
+      - s: "Block of {0}"
+        t: "{0}块"
+        subs:
+          - ingot
+  - group: block
+    namespace: S:oredict.blockPlate
+    rules:
+      - s: "Block of {0}"
+        t: "{0}块"
+        subs:
+          - plate
+  - group: block
+    namespace: S:oredict.blockRaw
+    rules:
+      - s: "Block of {0}"
+        t: "{0}块"
+        subs:
+          - ore
   # plates
   - group: plate
     namespace: S:oredict.
@@ -411,6 +440,14 @@ generators:
         S:oredict.oreSand: 矿沙
         S:oredict.oreRedSand: 红矿沙
       Gravel: 沙砾
+  # lens
+  - group: lens
+    namespace: S:oredict.lens
+    rules:
+      - s: "{0} Lens"
+        t: "{0}透镜"
+        subs:
+          - gem
   # gem
   - group: gemComplex
     namespace: S:oredict.gem
