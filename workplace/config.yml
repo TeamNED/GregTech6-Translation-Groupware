@@ -75,6 +75,10 @@ generators:
         t: "{0}板"
         subs:
           - material
+      - s: "{0} Plank"
+        t: "{0}板"
+        subs:
+          - wood
       - s: "{0}"
         t: "{0}"
         subs:
@@ -147,6 +151,10 @@ generators:
         subs:
           - material
           - dustTypeSuffix
+      - s: "{0} Pulp"
+        t: "{0}锯末"
+        subs:
+          - wood
   - group: dustTypePrefix
     namespace: S:oredict.
     completed: false
@@ -163,6 +171,14 @@ generators:
       Dust: 粉
       Powder: 粉
   # product
+  - group: materialProduct
+    namespace: S:oredict.
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - materialProductType
   - group: materialProductType
     namespace: S:oredict.
     completed: false
@@ -171,11 +187,12 @@ generators:
       Blossom: 花
       Bolt: 螺栓
       Cart Wheels: 车轮
-      Chain: 锁链
+      Chains: 锁链
       Chunk: 小块
       Foil: 箔
       Gear: 齿轮
       Item Casing: 外壳
+      Link: 链环
       Nugget: 粒
       Rail: 导轨
       Ring: 环
@@ -188,14 +205,24 @@ generators:
       Spring: 弹簧
       Twig: 细枝
       Wart: 疣
-  - group: materialProduct
+  # ProductWood
+  - group: materialProductWood
     namespace: S:oredict.
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
         subs:
-          - material
-          - materialProductType
+          - wood
+          - materialProductWoodType
+      - s: "Short {0} Stick"
+        t: "{0}螺栓"
+        subs:
+          - wood
+  - group: materialProductType
+    namespace: S:oredict.
+    completed: false
+    dict:
+      Splinters: 废料
   # tube
   - group: tube
     namespace: S:oredict.chemtube
@@ -1319,6 +1346,7 @@ generators:
       Spruce: 云杉木
       Teak: 柚树
       Tea: 茶
+      Treated: 防腐木
       Treated Wood: 防腐木
       Vanilla: 香草
       Walnut: 胡桃木
@@ -1327,6 +1355,9 @@ generators:
       Wood: 木
       Zebrawood: 斑木
       Larch: 落叶松
+      Cinnamon: 肉桂
+      Blue Spruce: 北美云杉
+
   - group: fallback
     namespace: "S:"
     dict:
