@@ -154,11 +154,14 @@ generators:
   - group: dust
     namespace: S:oredict.
     rules:
-      - s: "{0} {1}"
-        t: "{0}{1}"
+      - s: "{0} Dust"
+        t: "{0}粉"
         subs:
           - material
-          - dustTypeSuffix
+      - s: "{0} Powder"
+        t: "{0}粉"
+        subs:
+          - materialPowder
       - s: "{0} Pulp"
         t: "{0}锯末"
         subs:
@@ -172,12 +175,6 @@ generators:
       Small Pile of : 小堆
       Tiny Pile of : 小搓
       1/72nd of a Pile of: 1/72份
-  - group: dustTypeSuffix
-    namespace: S:oredict.
-    completed: false
-    dict:
-      Dust: 粉
-      Powder: 粉
   # product
   - group: materialProduct
     namespace: S:oredict.
@@ -411,6 +408,30 @@ generators:
       Screwdriver Tip: 螺丝刀头
       Wrench Tip: 扳手头
       Builder's Wand Cap: 建筑之杖帽
+  # crushed ore
+  - group: oreCrushedTiny
+    namespace: S:oredict.crushed
+    rules:
+      - s: "Tiny {0}"
+        t: "小搓{0}"
+        subs:
+          - oreCrushed
+  - group: oreCrushed
+    namespace: S:oredict.crushed
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - oreCrushedType
+          - ore
+  - group: oreCrushedType
+    namespace: S:oredict.crushed
+    completed: false
+    dict:
+      Crushed: 粉碎
+      Ground: 磨碎
+      Refined: 离心
+      Purified: 纯净
   # ores
   - group: oreComplex
     namespace: S:oredict.ore
@@ -527,7 +548,6 @@ generators:
       Aluminium Brass: 铝黄铜
       Alumite: 耐酸铝
       Amordrine: 魔力之石
-      Netherite Scrap: 下界合金废料
       Angmallen: 神圣之金
       Annealed Copper: 退火铜
       Any: 任意
@@ -759,7 +779,6 @@ generators:
       Chalk: 白垩
       Charcoal: 木炭
       Charged Certus Quartz: 充能赛特斯石英
-      Cheese: 奶酪
       Chimerite: 精灵石
       Chromite: 铬铁
       Clay: 粘土
@@ -944,6 +963,10 @@ generators:
         t: "{0}"
         subs:
           - wood
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - materialPowder
   - group: gem
     completed: false
     dict:
@@ -1353,7 +1376,6 @@ generators:
       Silverwood: 银树
       Spruce: 云杉木
       Teak: 柚树
-      Tea: 茶
       Treated: 防腐木
       Treated Wood: 防腐木
       Vanilla: 香草
@@ -1365,6 +1387,32 @@ generators:
       Larch: 落叶松
       Cinnamon: 肉桂
       Blue Spruce: 北美云杉
+  - group: materialPowder
+    dict:
+      Netherite Scrap: 下界合金废料
+      Blaze: 烈焰棒
+      Cheese: 奶酪
+      Chocolate: 巧克力
+      Chili: 辣椒
+      Cocoa: 可可
+      Coffee: 咖啡
+      C-Foam: 建筑泡沫
+      Curry: 咖喱
+      Indigo: 靛蓝
+      Infused Air Crystal: 风之碎片
+      Balance infused: 平衡碎片
+      Dull Crystal: 枯竭碎片
+      Infused Earth Crystal: 地之碎片
+      Infused Entropy Crystal: 混沌碎片
+      Infused Fire Crystal: 火之碎片
+      Infused Order Crystal: 混沌碎片
+      Magic infused: 魔力碎片
+      Infused Water Crystal: 水之碎片
+      Milk: 牛奶
+      Mint: 薄荷
+      #TODO# Palygorskite Clay: Palygorskite Clay
+      Snow: 雪
+      Tea: 茶
 
   - group: fallback
     namespace: "S:"
