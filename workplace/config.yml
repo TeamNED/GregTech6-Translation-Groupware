@@ -667,24 +667,17 @@ generators:
       Alumite: 耐酸铝
       Amordrine: 魔力之石
       Angmallen: 神圣之金
-      Annealed Copper: 退火铜
       Any: 任意
-      Ardite: 阿迪特
       Aredrite: 希尔金
       Astral Silver: 星银
       Atlarus: 深金
       Battery Alloy: 电池合金
-      Bedrock-HSLA-Alloy: 基岩合金
       Bedrockium: 基岩
       Bismuth Bronze: 铋青铜
       Black Bronze: 黑青铜
       Black Steel: 黑钢
-      Blue Alloy: 蓝石合金
       Blue Steel: 蓝钢
       Blutonium: 蓝钚
-      Brass: 黄铜
-      Bronze: 青铜
-      Carborundum: 碳化硅
       Carmot: 闪耀金
       Cast Iron: 铸铁
       Cd-In-Ag-Alloy: 镉铟银合金
@@ -703,7 +696,6 @@ generators:
       Chromium Dioxide: 二氧化铬
       Cobalt Brass: 钴黄铜
       Conductive Iron: 导电铁
-      Constantan: 康铜
       Coralium: 珊瑚
       Cosmic Neutronium: 宇宙中子态素
       Crystal Matrix: 水晶矩阵
@@ -712,20 +704,11 @@ generators:
       Dark Iron: 玄铁
       Dark Thaumium: 黑暗神秘
       Deep Iron: 深渊铁
-      Desh: 戴斯
-      Refined Desh: 精制戴斯 
       Desichalkos: 虚空之魂石
-      Draconium: 龙
-      Awakened Draconium: 觉醒龙
       Dreadium: 恐惧
       Duralumin: 硬铝合金
-      Duranium Alloy: 钍瑞铌合金
-      Efrine: 绿金
       Electrical Steel: 磁钢
-      Electrotine Alloy: 蓝石合金
-      Electrum: 琥珀金
       Electrum Flux: 通量琥珀金
-      Elven Elementium: 源质钢
       Elvorium: 魔灵
       Empty: 空
       Enderium: 末影
@@ -739,64 +722,47 @@ generators:
       Force: 力量
       Frozen Iron: 冰霜之铁
       Gaia Spirit: 盖亚之魂
-      Gilded Iron: 镀金铁
       Refined Glowstone: 精致萤石
       Inductive Alloy: 感应合金
       Spring Steel: 弹簧钢
-      HSLA-Steel: HSLA钢
-      Tungsten Alloy: 钨合金
       HSS-E: 高速钢-E
       HSS-G: 高速钢-G
       HSS-S: 高速钢-S
       Haderoth: 幻铜
       Hepatizon: 幽魂结晶
       Ignatius: 伊格内修斯
-      Infinity: 无尽
       Infuscolium: 精金
       Infused Gold: 附魔金
       Inolashite: 暗影秘银蓝金
-      Invar: 殷钢
       Compressed Iron: 压缩铁
       Magnetic Iron: 磁化铁
       Kalendrite: 幽冥魂石
-      Kanthal: 铁铬铝合金
-      Knightmetal: 骑士金属
       Kreknorite: 炽焰陨石
       Lemurite: 利莫里亚
       Ludicrite: 滑稽
-      Lumium: 流明
       Magnalium: 镁铝合金
-      Manasteel: 魔力钢
-      Manyullyn: 玛玉灵
       Mauftrium: 始源魂灵
       Meteoric Black Steel: 陨黑钢 
       Meteoric Blue Steel: 陨蓝钢 
       Meteoric Iron: 陨铁
       Meteoric Red Steel: 陨红钢 
-      Meteoric Steel: 陨钢
-      Meteorite: 陨石
       Meutoite: 龙之魂石
       Midasium: 溶火金
       Red Copper: 紫铜
       Mithril: 秘银
       Muspelheim Power: 炽热魔灵
-      Naquadah: 硅岩金属
       Enriched Naquadah: 浓缩硅岩金属
       Naquadria: 硅岩金属化合物
       Magnetic Neodymium: 磁化钕
       Netherite: 下界合金
       Netherized Diamond: 下界钻石
-      Nichrome: 镍铬合金
       Niflheim Power: 极寒魔灵
       Nikoline Alloy: 蓝石合金
       Niobium Nitride: 氮化铌
-      Niobium Titanium: 铌钛
       Refined Obsidian: 精致黑曜石
       Obsidian Steel: 黑曜石钢
-      Octine: 炽炎铁
       Orichalcum: 自然之石
       Oriharukon: 山铜
-      Osmiridium: 铱锇合金
       Oureclase: 大地结晶
       Peat Brick: 泥炭
       Bituminous Peat Brick: 沥青泥炭砖
@@ -818,44 +784,31 @@ generators:
       Soldering Alloy: 钎焊合金
       Soularium: 魂金
       Spectre Iron: 灵魂之铁
-      Stainless Steel: 不锈钢
-      Steel: 钢
-      Galvanized Steel: 镀锌钢
       Magnetic Steel: 磁化钢
       Steeleaf: 钢叶
       Sterling Silver: 纯银
       Sunnarium: 太阳合金
-      Syrmorite: 赛摩铜
       Tantalum Hafnium Carbide: 碳化钽铪
       Tartarite: 溶火之石
-      Terrasteel: 泰拉钢
       Teslatine Alloy: 特斯拉合金
       Thaumium: 神秘
-      Tin Alloy: 锡合金
       Titanium Aluminide: 钛铝合金
       Titanium-Gold: 钛金
       Iritanium: 钛铱合金
       Trinaquadalloy: 碳化特林-钍瑞铌合金
       Trinitanium: 特林钛合金
       Trinium: 特林金属
-      Tritanium Alloy: 钛金
-      Tungsten Carbide: 碳化钨
       Sintered Tungsten: 结晶钨
-      Tungstensteel: 钨钢
-      Ultimet: 哈氏合金
-      Vanadium-Gallium: 钒镓合金
       Vanadium Magnetite: 钒磁铁
       Vanadiumsteel: 钒钢
       Vibramantium: 艾德曼振金
       Vibranium Silver: 银振金合金
       Vibranium Steel: 振金钢
       Vibrant Alloy: 脉冲合金
-      Void Metal: 虚空金属
       Vulcanite: 熔岩结晶
       Vyroxeres: 幽冥剧毒结晶
       Wrought Iron: 锻铁
       Yellorium: 黄铀
-      Yttrium-Barium-Cuprate: 钇钡铜氧合金
       Red Phosphorus: 红磷
       White Phosphorus: 白磷
       Pink Schist: 粉色片岩
@@ -961,6 +914,7 @@ generators:
       Water infused: 水之
       Infused Air: 风之
       Infused Earth: 地之
+      Infused Entropy: 混沌
       Infused Fire: 火之
       Infused Order: 秩序
       Infused Water: 水之
@@ -1383,7 +1337,7 @@ generators:
       Niobium: 铌
       Nobelium: 锘
       Oganesson: 118号元素(Og)
-      \'Osmium\': 锇
+      "'Osmium'": 锇
       Osmium: 锇
       Palladium: 钯
       Platinum: 铂
@@ -1751,7 +1705,7 @@ generators:
       Shale: 页岩
       Slate: 板岩
 
-  # tools
+  # entity
   - group: entityMaterial
     namespace: "S:"
     completed: false
@@ -1786,6 +1740,48 @@ generators:
       Yttrium-Barium-Cuprate: 钇钡铜氧合金
       Graphene: 石墨烯
       Superconductor: 超导体
+      Void Metal: 虚空金属
+      Desh: 戴斯
+      Refined Desh: 精制戴斯 
+      Thaumium: 神秘锭
+      Stainless Steel: 不锈钢
+      Titanium: 钛
+      Chromium: 铬
+      Bismuth: 铋
+      Tungsten Carbide: 碳化钨
+      Galvanized Steel: 镀锌钢
+      Gilded Iron: 镀金铁
+      Cobalt: 钴
+      Nickel: 镍
+      Germanium: 锗
+      Meteoric Steel: 陨钢
+      Knightmetal: 骑士金属
+      Duranium Alloy: 钍瑞铌合金
+      Tritanium Alloy: 钛金
+      Adamantium: 艾德曼合金
+      Bedrock-HSLA-Alloy: 基岩合金
+      Draconium: 龙
+      Awakened Draconium: 觉醒龙
+      "'Osmium'": 锇
+      Ardite: 阿迪特
+      Manyullyn: 玛玉灵
+      Lumium: 流明
+      Manasteel: 魔力钢
+      Elven Elementium: 源质钢
+      Terrasteel: 泰拉钢
+      Meteorite: 陨石
+      Syrmorite: 赛摩铜
+      Octine: 炽炎铁
+      Ultimet: 哈氏合金
+      Tin Alloy: 锡合金
+      Infinity: 无尽
+      Invar: 殷钢
+      Brass: 黄铜
+      Bronze: 青铜
+      Manganese: 锰
+      Antimony: 锑
+      Molybdenum: 钼
+      Tungsten Alloy: 钨合金
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -1821,6 +1817,20 @@ generators:
       14x: 14x
       15x: 15x
       16x: 16x
+  - group: entityProduct
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - entityMaterial
+          - entityProductType
+  - group: entityProductType
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Chest: 箱子
+  
   
     
 
