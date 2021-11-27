@@ -340,6 +340,70 @@ generators:
       Screwdriver Tip: 螺丝刀头
       Wrench Tip: 扳手头
       Builder's Wand Cap: 建筑之杖帽
+  # ores
+  - group: oreComplex
+    namespace: S:oredict.ore
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - oreTypePrefix
+          - ore
+  - group: ore
+    namespace: S:oredict.ore
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - oreTypeSuffix
+  - group: oreTypePrefix
+    namespace: S:oredict.ore
+    completed: false
+    dict:
+      Andesite: 安山岩
+      Diorite: 闪长岩
+      Limestone: 石灰岩
+      Marble: 大理石
+      Nether: 下界
+      Netherrack: 下界
+      Endstone: 末地
+      End: 末地
+      Granite:
+        S:oredict.oreRedgranite: 红色花岗岩
+        S:oredict.oreBlackgranite: 黑色花岗岩
+        S:oredict.oreVanillagranite: 花岗岩
+      Sandstone: 沙石
+      Small: 贫瘠
+      Basalt: 玄武岩
+      Mud: 淤泥
+      Space: 太空
+      Bedrock: 基岩
+      Moon: 月球
+      Mars: 火星
+      Blueschist: 蓝片岩
+      Kimberlite: 金伯利岩
+      Komatiite: 科马提岩
+      Quartzite: 石英岩
+      Schist:
+        S:oredict.oreBlueschist: 蓝片岩
+        S:oredict.oreGreenschist: 绿片岩
+      Stone: 石头
+      Prismarine: 海晶石
+      Abyssalnite: 深渊
+      Deadrock: 死岩
+      Betweenstone: 交错石
+      Pitstone: 麻纹石
+  - group: oreTypeSuffix
+    namespace: S:oredict.ore
+    completed: false
+    dict:
+      Ore: 矿石
+      Stone: 矿石
+      Sand:
+        S:oredict.oreSand: 矿沙
+        S:oredict.oreRedSand: 红矿沙
+      Gravel: 沙砾
 
   # material
   - group: material
