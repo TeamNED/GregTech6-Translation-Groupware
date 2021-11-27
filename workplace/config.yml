@@ -902,12 +902,18 @@ generators:
       Ilmenite: 钛铁
       Air infused: 风之
       Balance infused: 平衡
+      Dull: 枯竭
       Earth infused: 地之
       Entropy infused: 混沌
       Fire infused: 火之
       Magic infused: 魔力
       Order infused: 秩序
       Water infused: 水之
+      Infused Air: 风之
+      Infused Earth: 地之
+      Infused Fire: 火之
+      Infused Order: 秩序
+      Infused Water: 水之
       Iodine Salt: 碘盐
       Kaolinite Clay: 高岭石粘土
       Kesterite: 锌黄锡
@@ -1018,6 +1024,64 @@ generators:
       Red CY-11: 红色试剂Y-11
       White CY-11: 白色试剂Y-11
       Yellow CY-11: 黄色试剂Y-11
+      Basalz: 岩石
+      Bedrock: 基岩
+      Betweenstone: 交错石
+      Blackstone: 黑石
+      Blitz: 狂风
+      Blizz: 暴雪
+      Chert: 燧石
+      Concrete: 混凝土
+      Dacite: 英安岩
+      Dark Matter: 暗物质
+      Deadrock: 死岩
+      Eclogite: 榴辉岩
+      Endereye: 末影之眼
+      Enderpearl: 末影珍珠
+      Endstone: 末地石
+      Flint: 燧石
+      Frezarite: 冰霜陨石
+      Gabbro: 辉长岩
+      Gneiss: 片麻岩
+      Graphene: 石墨烯
+      Gravel: 沙砾
+      Greywacke: 杂砂岩
+      Holystone: 圣石
+      Ice: 冰
+      Livingrock: 活石
+      Magic: 魔法
+      Mars: 火星岩石
+      Mars Dust: 火星尘土
+      Mars Sand: 火星沙
+      Mars Turf: 火星草皮
+      Migmatite: 混合岩
+      Moon: 月面岩石
+      Moon Turf: 月面草皮
+      Nether Brick: 地狱砖
+      Netherrack: 地狱岩
+      Obsidian: 黑曜石
+      Pitstone: 麻纹石
+      Red Matter: 红物质
+      Red Meteor: 红色陨石
+      Rhyolite: 流纹岩
+      Redrock: 红岩
+      Shale: 页岩
+      Siltstone: 粉砂岩
+      Slate: 板岩
+      Space: 太空岩石
+      Stone: 石
+      Umberstone: 棕石
+      Purified Vinteum: 纯净温特姆
+      Void: 煤晶
+      Void Quartz: 虚空金属
+      Wax: 蜡
+      Bees Wax: 蜂蜡
+      Magic Wax: 魔力蜂蜡
+      Paraffin Wax: 石蜡
+      Plant Wax: 植物蜡
+      Refractory Wax: 耐高温蜡
+      Soulful Wax: 灵魂蜜蜡
+      Amnesic Wax: 遗忘蜜蜡
   - group: material
     completed: false
     rules:
@@ -1072,10 +1136,11 @@ generators:
       Industrial Diamond: 工业钻石
       Dilithium: 双锂
       Dioptase: 翠铜石
+      DominicanAmber: 多米尼加蓝琥珀
       Dominican Amber: 多米尼加蓝琥珀
       Dragon Eye: 龙眼石
       Electrotine: 蓝石
-      Dragonstone: 龙石
+      Elven Dragonstone: 龙石
       Emeradic: 绿宝石水晶
       Emerald: 绿宝石
       Empty: 空
@@ -1227,7 +1292,7 @@ generators:
       Niobium: 铌
       Nobelium: 锘
       Oganesson: 118号元素(Og)
-      'Osmium': 锇
+      \'Osmium\': 锇
       Osmium: 锇
       Palladium: 钯
       Platinum: 铂
@@ -1465,6 +1530,10 @@ generators:
       Larch: 落叶松
       Cinnamon: 肉桂
       Blue Spruce: 北美云杉
+      Marshmallow: 棉花糖
+      Plastic: 塑料
+      Rubber: 橡胶
+      Shale: 页岩
   - group: materialPowder
     dict:
       Netherite Scrap: 下界合金废料
@@ -1588,8 +1657,8 @@ generators:
       Dark Prismarine: 深色海晶石
       Light Prismarine: 亮色海晶石
       Quartzite: 石英岩
-      #TODO# Shale: Shale
-      #TODO# Slate: Slate
+      Shale: 页岩
+      Slate: 板岩
 
 
 
