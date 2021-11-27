@@ -59,8 +59,10 @@ generators:
     completed: false
     dict:
       Bolt: 螺栓
+      Chain: 锁链
       Foil: 箔
       Gear: 齿轮
+      Item Casing: 外壳
       Ring: 环
       Rotor: 转子
       Round: 垫片
@@ -77,6 +79,30 @@ generators:
         subs:
           - material
           - materialProductType
+  # tube
+  - group: tube
+    namespace: S:oredict.chemtube
+    rules:
+      - s: "Glass Tube containing {0}"
+        t: "{0}试管"
+        subs:
+          - material
+  # bullets
+  - group: bullet
+    namespace: S:oredict.bulletGt
+    rules:
+      - s: "{0} {1} Bullet"
+        t: "{0}{1}子弹"
+        subs:
+          - bulletType
+          - material
+  - group: bulletType
+    namespace: S:oredict.bulletGt
+    completed: false
+    dict:
+      Small: 小号
+      Medium: 中号
+      Large: 大号
   # material
   - group: material
     completed: false
