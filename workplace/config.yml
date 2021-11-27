@@ -59,6 +59,14 @@ generators:
         t: "{0}块"
         subs:
           - ore
+  # block of solid
+  - group: blockSolid
+    namespace: S:oredict.blockSolid
+    rules:
+      - s: "Block of solid {0}"
+        t: "铸造{0}块"
+        subs:
+          - material
   # plates
   - group: plateComplex
     namespace: S:oredict.
