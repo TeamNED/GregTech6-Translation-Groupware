@@ -58,6 +58,8 @@ generators:
     namespace: S:oredict.
     completed: false
     dict:
+      Berry: 莓
+      Blossom: 花
       Bolt: 螺栓
       Chain: 锁链
       Foil: 箔
@@ -71,6 +73,8 @@ generators:
       Shuriken: 飞镖
       Stick: 杆
       Spring: 弹簧
+      Twig: 细枝
+      Wart: 疣
   - group: materialProduct
     namespace: S:oredict.
     rules:
@@ -85,6 +89,14 @@ generators:
     rules:
       - s: "Glass Tube containing {0}"
         t: "{0}试管"
+        subs:
+          - material
+  # fiber
+  - group: fiber
+    namespace: S:oredict.plantGtFiber
+    rules:
+      - s: "{0} Fiber"
+        t: "生{0}丝"
         subs:
           - material
   # bullets
@@ -103,6 +115,21 @@ generators:
       Small: 小号
       Medium: 中号
       Large: 大号
+  # gears
+  - group: gearSmall
+    namespace: S:oredict.gearGtSmall
+    rules:
+      - s: "Small {0}"
+        t: "小型{0}"
+        subs:
+          - gear
+  - group: gear
+    namespace: S:oredict.gearGt
+    rules:
+      - s: "{0} Gear"
+        t: "{0}齿轮"
+        subs:
+          - material
   # material
   - group: material
     completed: false
@@ -526,6 +553,7 @@ generators:
       Uranium-235: 铀-235
       Vanadium: 钒
       Vanadium-Gallium: 钒镓合金
+      Vanadium Magnetite: 钒磁铁
       Vanadiumsteel: 钒钢
       Vibramantium: 艾德曼振金
       Vibranium Silver: 银振金合金
@@ -541,4 +569,14 @@ generators:
       Yttrium-Barium-Cuprate: 钇钡铜氧合金
       Zinc: 锌
       Zirconium: 锆
+      Red Phosphorus: 红磷
+      White Phosphorus: 白磷
+      Pink Schist: 粉色片岩
+      Gray Schist: 灰色片岩
+      Sand: 沙
+  - group: fallback
+    namespace: "S:"
+    dict:
+      "Any Sub-Block of this one": 任何该方块的子方块
+      "Any Sub-Item of this one": 所有此物品的子物品
 
