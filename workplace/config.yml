@@ -1,6 +1,42 @@
 version: 1
 lang: zh
 generators:
+  # crate 16
+  - group: crate16
+    namespace: S:oredict.crateGtDust
+    rules:
+      - s: "Partial Crate of {0}"
+        t: "{0}小板条箱"
+        subs:
+          - dust
+  - group: crate16
+    namespace: S:oredict.crateGtIngot
+    rules:
+      - s: "Partial Crate of {0}"
+        t: "{0}小板条箱"
+        subs:
+          - ingot
+  - group: crate16
+    namespace: S:oredict.crateGtPlate
+    rules:
+      - s: "Partial Crate of {0}"
+        t: "{0}小板条箱"
+        subs:
+          - plate
+  - group: crate16
+    namespace: S:oredict.crateGtRaw
+    rules:
+      - s: "Partial Crate of {0}"
+        t: "{0}小板条箱"
+        subs:
+          - ore
+  - group: crate16
+    namespace: S:oredict.crateGtGem
+    rules:
+      - s: "Partial Crate of {0}"
+        t: "{0}小板条箱"
+        subs:
+          - gem
   # crate 64
   - group: crate64
     namespace: S:oredict.crateGt64Dust
@@ -30,6 +66,13 @@ generators:
         t: "{0}板条箱"
         subs:
           - ore
+  - group: crate64
+    namespace: S:oredict.crateGt64Gem
+    rules:
+      - s: "Crate of {0}"
+        t: "{0}板条箱"
+        subs:
+          - gem
   # block
   - group: block
     namespace: S:oredict.blockDust
@@ -59,6 +102,13 @@ generators:
         t: "{0}块"
         subs:
           - ore
+  - group: block
+    namespace: S:oredict.blockGem
+    rules:
+      - s: "Block of {0}"
+        t: "{0}块"
+        subs:
+          - gem
   # block of solid
   - group: blockSolid
     namespace: S:oredict.blockSolid
