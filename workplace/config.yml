@@ -1,7 +1,42 @@
 version: 1
 lang: zh
 generators:
-  - group: materialProductPrefix
+  # plates
+  - group: plate
+    namespace: S:oredict.plate
+    rules:
+      - s: "{0} Plate"
+        t: "{0}板"
+        subs:
+          - material
+  - group: plateType
+    namespace: S:oredict.plate
+    completed: false
+    dict:
+      Double: 双重
+      Triple: 三重
+      Quadruple: 四重
+      Quintuple: 五重
+      Curved: 弯曲
+      Dense: 致密
+      Tiny: 小块
+  - group: plateComplex
+    namespace: S:oredict.plate
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - plateType
+          - plate
+  # ingots
+  - group: ingot
+    namespace: S:oredict.ingot
+    rules:
+      - s: "{0} Ingot"
+        t: "{0}锭"
+        subs:
+          - material
+  - group: ingotType
     namespace: S:oredict.ingot
     completed: false
     dict:
@@ -10,24 +45,30 @@ generators:
       Triple: 三重
       Quadruple: 四重
       Quintuple: 五重
-      Curved: 弯曲
-      Dense: 致密
-      Tiny: 小块
+  - group: ingotComplex
+    namespace: S:oredict.ingot
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - ingotType
+          - ingot
+  # Product
   - group: materialProductType
     namespace: S:oredict.
     completed: false
     dict:
-      Ingot: 锭
-      Plate: 板
-  - group: materialProductMultiple
-    namespace: S:oredict.
-    rules:
-      - s: "{0} {1} {2}"
-        t: "{0}{1}{2}"
-        subs:
-          - materialProductPrefix
-          - material
-          - materialProductType
+      Bolt: 螺栓
+      Foil: 箔
+      Gear: 齿轮
+      Ring: 环
+      Rotor: 转子
+      Round: 垫片
+      Scrap: 废料
+      Screw: 螺丝
+      Shuriken: 飞镖
+      Stick: 杆
+      Spring: 弹簧
   - group: materialProduct
     namespace: S:oredict.
     rules:
@@ -36,6 +77,7 @@ generators:
         subs:
           - material
           - materialProductType
+  # material
   - group: material
     completed: false
     dict:
