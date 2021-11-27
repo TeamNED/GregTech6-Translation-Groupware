@@ -6,21 +6,27 @@
 #include <string>
 #include <vector>
 
+#include <boost/filesystem.hpp>
+
 #include "../generator/Generator.hpp"
+#include "RuntimeOptions.hpp"
+
+namespace fs = boost::filesystem;
 
 class ConfigParser;
 
-class Config {
+class Config : public RuntimeOptions {
   friend ConfigParser;
 
+  using RuntimeOptions::RuntimeOptions;
+
 private:
-  string _lang, _version;
+  string _version;
   vector<shared_ptr<Generator>> _generators;
 
 public:
-  Config() = default;
-  Config(string lang);
-  const string &lang() const;
+  Config(const RuntimeOptions &);
+  Config(RuntimeOptions &&);
   const string &version() const;
   const vector<shared_ptr<Generator>> &generators() const;
 };

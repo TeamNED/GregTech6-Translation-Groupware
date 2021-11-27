@@ -24,6 +24,8 @@ public:
   virtual bool equals(const IGeneratorMeta &that) const = 0;
   virtual bool empty() const = 0;
   explicit operator bool() const;
+
+  virtual ~IGeneratorMeta() = default;
 };
 
 bool operator==(const IGeneratorMeta &lhs, const IGeneratorMeta &rhs);

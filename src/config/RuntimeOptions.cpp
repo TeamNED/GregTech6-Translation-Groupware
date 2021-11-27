@@ -46,14 +46,6 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // --workplace workdir
   if (vm.count("workplace")) {
     this->_workplace_path = vm["workplace"].as<string>();
-    /*
-    fs::path workplace(vm["workplace"].as<string>());
-    this->_config_path = workplace / "config.yml";
-    this->_main_source_path = workplace / "en" / "GregTech.lang";
-    this->_main_target_path = workplace / this->_lang / "GregTech.lang";
-    this->_extra_source_path = workplace / "en" / "GregTech.extra.lang";
-    this->_extra_target_path = workplace / this->_lang / "GregTech.extra.lang";
-    */
   }
 
   // --config config

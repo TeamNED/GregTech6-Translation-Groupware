@@ -27,6 +27,12 @@ private:
   static string _csubstr2str(const c4::csubstr &str);
   static string _get_file_contents(const string &filename);
   static bool _path_valid(const fs::path &path);
+  static fs::path _determine_path(const fs::path &original,
+                                  const fs::path &workplace,
+                                  const fs::path &replaced);
+
+  static void _parse_config_file(Config &config);
+  static void _determine_input_paths(Config &config);
 
 public:
   static Config parse_config(const RuntimeOptions &options);
