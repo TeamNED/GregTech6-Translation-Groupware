@@ -216,6 +216,10 @@ generators:
         t: "{0}锯末"
         subs:
           - wood
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - oreSandType
   - group: dustTypePrefix
     namespace: S:oredict.
     completed: false
@@ -492,14 +496,22 @@ generators:
         subs:
           - oreTypePrefix
           - ore
-  - group: ore
-    namespace: S:oredict.
-    rules:
-      - s: "{0} {1}"
+      - s: "{1} {0}"
         t: "{0}{1}"
         subs:
           - material
-          - oreTypeSuffix
+          - oreSandTypePrefix
+  - group: ore
+    namespace: S:oredict.
+    rules:
+      - s: "{0} Ore"
+        t: "{0}矿石"
+        subs:
+          - material
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - oreSandType
   - group: oreTypePrefix
     namespace: S:oredict.
     completed: false
@@ -537,16 +549,47 @@ generators:
       Deadrock: 死岩
       Betweenstone: 交错石
       Pitstone: 麻纹石
-  - group: oreTypeSuffix
+  - group: oreSandTypePrefix
     namespace: S:oredict.
     completed: false
     dict:
-      Ore: 矿石
-      Stone: 矿石
-      Sand:
-        S:oredict.oreSand: 矿沙
-        S:oredict.oreRedSand: 红矿沙
       Gravel: 沙砾
+      Sand:
+        S:oredict.oreRedSand: 红矿沙
+        S:oredict.oreSand: 矿沙
+  - group: oreSandType
+    completed: false
+    dict:
+      Basaltic Mineral Sand: 玄武岩砂
+      Bentonite: 膨润土
+      Cassiterite: 锡石
+      Fullers Earth: 漂白土
+      Garnet Sand: 石榴子石沙
+      Glauconite Sand: 海绿石沙
+      Granitic Mineral Sand: 花岗岩类矿砂
+      Infused Air Stone: 风之碎片
+      Balance infused Stone: 平衡碎片
+      Dull Crystals: 枯竭碎片
+      Infused Earth Stone: 地之碎片
+      Infused Entropy Stone: 混沌碎片
+      Infused Fire Stone: 火之碎片
+      Infused Order Stone: 混沌碎片
+      Magic infused Stone: 魔力碎片
+      Infused Water Stone: 水之碎片
+      Kaolinite: 高岭石
+      Oil Sand: 油砂
+      Oilsands: 油砂
+      Oilshale: 含油页岩
+      Oil Shale: 含油页岩
+      Pitchblende: 沥青铀
+      Quartz Sand: 石英砂
+      Rare Earth: 稀土
+      Sluice Sand: 矿物杂质沙
+      Soulsand: 灵魂沙
+      Talc: 滑石
+      Vermiculite: 蛭石
+      Yellow Fluorite: 黄色氟石
+
   # lens
   - group: lens
     namespace: S:oredict.lens
@@ -833,7 +876,6 @@ generators:
       Chrysotile: 温石棉
       Azurite: 石青粉块
       Barite: 重晶石
-      Basaltic Mineral Sand: 玄武岩砂
       Bastnasite: 氟碳铈
       Bauxite: 铝土
       Biotite: 黑云母
@@ -847,7 +889,6 @@ generators:
       Brown Limonite: 褐铁
       Calcite: 方解石
       Calcium Chloride: 氯化钙
-      Cassiterite: 锡石
       Celestine: 天青石
       Certus Quartz: 赛特斯石英
       Chalcopyrite: 黄铜
@@ -963,7 +1004,6 @@ generators:
       Phosphorus: 磷酸钙
       Pinalite: 氯钨铅
       Pink Fluorite: 粉色氟石
-      Pitchblende: 沥青铀
       Platinum Group Sludge: 铂族泥
       Pollucite: 铯榴石
       Potassium Feldspar: 钾长石
@@ -1120,6 +1160,12 @@ generators:
       Coltan: 钶钽铁矿
       Columbite: 铌铁矿
       Ferric Oxyhydroxide: 氢氧化铁
+      Aluminium Hydroxide: 氢氧化铝
+      Blue Fluorite: 蓝色氟石
+      Blue Phosphorus: 蓝磷
+      Ferrovanadium: 钒磁铁
+      Pumice: 浮石
+      Realgar: 雄黄
   - group: material
     completed: false
     rules:
@@ -1147,6 +1193,10 @@ generators:
         t: "{0}"
         subs:
           - stoneType
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - oreSandType
   - group: gem
     completed: false
     dict:
@@ -1713,4 +1763,7 @@ generators:
       Book: 书
       Large Book: 大书
       You need to recharge it: 你需要为其充电
+      Ancient Debris:
+        S:oredict.ore: 远古遗迹矿石
+        "S:": 远古遗迹
 
