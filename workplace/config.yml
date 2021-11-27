@@ -580,6 +580,14 @@ generators:
         t: "熔融{0}"
         subs:
           - material
+  # Fine Wire
+  - group: wireFine
+    namespace: S:oredict.wireFine
+    rules:
+      - s: "Fine {0} Wire"
+        t: "精细{0}线缆"
+        subs:
+          - material
   # material
   - group: materialGt
     namespace: S:gt.material.
@@ -1002,6 +1010,14 @@ generators:
       Yellorite: 黄铀
       Yellow Limonite: 黄色褐铁
       Zeolite: 沸石
+      Blue CY-11: 蓝色试剂Y-11
+      Green CY-11: 绿色试剂Y-11
+      Orange CY-11: 橙色试剂Y-11
+      Pink CY-11: 粉色试剂Y-11
+      Purple CY-11: 紫色试剂Y-11
+      Red CY-11: 红色试剂Y-11
+      White CY-11: 白色试剂Y-11
+      Yellow CY-11: 黄色试剂Y-11
   - group: material
     completed: false
     rules:
@@ -1025,6 +1041,10 @@ generators:
         t: "{0}"
         subs:
           - materialPowder
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - stoneType
   - group: gem
     completed: false
     dict:
@@ -1471,6 +1491,107 @@ generators:
       #TODO# Palygorskite Clay: Palygorskite Clay
       Snow: 雪
       Tea: 茶
+  
+  # stone
+  - group: stoneSlab
+    namespace: "S:gt.stone."
+    rules:
+      - s: "{0} Slab"
+        t: "{0}半砖"
+        subs:
+          - stoneGt
+  - group: stoneGt
+    namespace: "S:gt.stone."
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - stoneType
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - stoneBrick
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - stoneBrickComplex
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - stoneType
+          - stoneShapeType
+      - s: "Small {0} Tiles"
+        t: "小型{0}方块"
+        subs:
+          - stoneType
+      - s: "Mossy {0} Cobblestone"
+        t: "苔藓{0}圆石"
+        subs:
+          - stoneType
+      - s: "Chiseled {0}"
+        t: "錾制{0}"
+        subs:
+          - stoneType
+      - s: "Smooth {0}"
+        t: "平滑{0}"
+        subs:
+          - stoneType
+  - group: stoneBrickComplex
+    namespace: "S:gt.stone."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - stoneBrickType
+          - stoneBrick
+  - group: stoneBrick
+    namespace: "S:gt.stone."
+    rules:
+      - s: "{0} Bricks"
+        t: "{0}砖块"
+        subs:
+          - stoneType
+  - group: stoneBrickType
+    namespace: "S:gt.stone."
+    complete: false
+    dict:
+      Small: 小型
+      Cracked: 裂纹
+      Mossy: 苔藓
+      Reinforced: 钢筋
+      Redstoned: 红石化
+  - group: stoneShapeType
+    namespace: "S:gt.stone."
+    complete: false
+    dict:
+      Cobblestone: 圆石
+      Tiles: 方块
+      Windmill Tiles A: 风车纹砖块A
+      Windmill Tiles B: 风车纹砖块B
+      Square Bricks: 方砖
+  - group: stoneType
+    namespace: "S:"
+    complete: false
+    dict:
+      Andesite: 安山岩
+      Basalt: 玄武岩
+      Blue Schist: 蓝片岩
+      Diorite: 闪长岩
+      Granite: 花岗岩
+      Black Granite: 黑色花岗岩
+      Red Granite: 红色花岗岩
+      Green Schist: 绿片岩
+      Kimberlite: 金伯利岩
+      Komatiite: 科马提岩
+      Limestone: 石灰石
+      Marble: 大理石
+      Dark Prismarine: 深色海晶石
+      Light Prismarine: 亮色海晶石
+      Quartzite: 石英岩
+      #TODO# Shale: Shale
+      #TODO# Slate: Slate
+
+
 
   - group: fallback
     namespace: "S:"
