@@ -522,6 +522,14 @@ generators:
       Flawed: 有瑕疵的
       Flawless: 无瑕的
       Legendary: 传奇
+  # molten fluid
+  - group: molten
+    namespace: S:fluid.molten.
+    rules:
+      - s: "Molten {0}"
+        t: "熔融{0}"
+        subs:
+          - material
   # material
   - group: materialGt
     namespace: S:gt.material.
@@ -1421,4 +1429,10 @@ generators:
       "Any Sub-Item of this one": 所有此物品的子物品
       Wooden Panel: 木制覆盖板
       Wooden Bookshelf: 木制书架
+      Wooden Bucket: 木桶
+      Used: 已使用过
+      Full: 未使用过
+      Book: 书
+      Large Book: 大书
+      You need to recharge it: 你需要为其充电
 
