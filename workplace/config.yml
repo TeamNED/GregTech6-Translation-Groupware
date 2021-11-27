@@ -62,9 +62,11 @@ generators:
       Blossom: 花
       Bolt: 螺栓
       Chain: 锁链
+      Chunk: 小块
       Foil: 箔
       Gear: 齿轮
       Item Casing: 外壳
+      Nugget: 粒
       Ring: 环
       Rotor: 转子
       Round: 垫片
