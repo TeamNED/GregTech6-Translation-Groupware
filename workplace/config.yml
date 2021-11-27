@@ -212,6 +212,58 @@ generators:
         t: "{0}箭"
         subs:
           - material
+  # toolHead
+  - group: toolHeadRaw
+    namespace: S:oredict.toolHeadRaw
+    rules:
+      - s: "Raw {0}"
+        t: "{0}毛坯"
+        subs:
+          - toolHead
+  - group: toolHead
+    namespace: S:oredict.toolHead
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - toolHeadType
+  - group: toolHead
+    namespace: S:oredict.toolHead
+    rules:
+      - s: "{0} tipped Pickaxe Head"
+        t: "表镶{0}镐头"
+        subs:
+          - material
+  - group: toolHeadType
+    namespace: S:oredict.toolHead
+    completed: false
+    dict:
+      Arrow Head: 箭头
+      Axe Head: 斧头
+      Double Axe Head: 双刃斧头
+      Hammer Head: 锤头
+      Hoe Head: 锄头
+      Pickaxe Head: 镐头
+      Plow Head: 犁头
+      Sense Blade: 镰刀片
+      Shovel Head: 锹头
+      Spade Head: 铲头
+      Chisel Head: 凿子头
+      Construction Pickaxe Head: 建筑镐头
+      Sword Blade: 剑身
+      Buzzsaw Blade: 圆锯片
+      Drill Tip: 钻头
+      File Head: 锉刀头
+      Chainsaw Tip: 电锯头
+      Mace Head: 狼牙棒槌头
+      Mattock Head: 鹤嘴锄头
+      Universal Spade Head: 万用铲头
+      Saw Blade: 锯片
+      Screwdriver Tip: 螺丝刀头
+      Wrench Tip: 扳手头
+      Builder's Wand Cap: 建筑之杖帽
+
   # material
   - group: material
     completed: false
