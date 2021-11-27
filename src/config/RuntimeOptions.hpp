@@ -19,6 +19,7 @@ protected:
       _extra_target_path, _config_path, _workplace_path;
   string _lang;
   vector<string> _extensions;
+  bool _remove_redundant_fallback;
 
 public:
   RuntimeOptions(int argc, char const *argv[]);
@@ -34,6 +35,7 @@ public:
   virtual const fs::path &workplace_path() const;
   virtual const string &lang() const;
   virtual const vector<string> &extensions() const;
+  virtual bool remove_redundant_fallback() const;
   virtual ~RuntimeOptions() = default;
 };
 #endif

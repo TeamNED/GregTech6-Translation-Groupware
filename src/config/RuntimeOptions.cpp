@@ -23,6 +23,10 @@ const vector<string> &RuntimeOptions::extensions() const {
   return this->_extensions;
 };
 
+bool RuntimeOptions::remove_redundant_fallback() const {
+  return this->_remove_redundant_fallback;
+}
+
 RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // declare options
   po::options_description desc("Available options");
@@ -33,7 +37,8 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
       ("source,s", po::value<vector<string>>(), "source language files") //
       ("target,t", po::value<vector<string>>(), "target language files") //
       ("config,c", po::value<string>(), "config file")                   //
-      ("extensions,e", po::value<vector<string>>(), "extensions");       //
+      ("extensions,e", po::value<vector<string>>(), "extensions")        //
+      ("remove,r", po::bool_switch(), "remove redundant fallback");      //
 
   // parse and store options
   po::variables_map vm;
@@ -81,5 +86,10 @@ RuntimeOptions::RuntimeOptions(int argc, char const *argv[]) {
   // --extensions extensions
   if (vm.count("extensions")) {
     this->_extensions = vm["extensions"].as<vector<string>>();
+  }
+
+  // --remove remove redundant fallback
+  if (vm.count("remove")) {
+    this->_remove_redundant_fallback = vm["remove"].as<bool>();
   }
 }

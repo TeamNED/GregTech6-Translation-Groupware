@@ -100,8 +100,7 @@ bool Replacer::_write_language_file(const fs::path &path,
 bool Replacer::replace() {
   // check paths, load source
   LangFile main_source, extra_source, main_target, extra_target;
-  bool is_same_extra =
-      _config.extra_source_path() == _config.extra_target_path();
+  set<string> extra_source_removal{};
   bool valid_main_source =
            _read_language_file(_config.main_source_path(), main_source),
        valid_extra_source =
@@ -178,18 +177,15 @@ bool Replacer::replace() {
 
     main_target.items().emplace_back(key, target_text);
     if (valid_extra_target) {
-      if (is_same_extra) {
-        // same extra mode
-        // reduce known items only
-        if (succ_extra && !succ_dict) {
-          extra_target.items().emplace_back(key, target_text);
-        }
-      } else {
-        // different extra mode
-        // output all unknown items
-        if (!succ) {
-          extra_target.items().emplace_back(key, target_text);
-        }
+      // output all unknown items
+      if (!succ) {
+        extra_target.items().emplace_back(key, target_text);
+      }
+    }
+    if (_config.remove_redundant_fallback()) {
+      // remove matched
+      if (succ_extra && succ_dict) {
+        extra_source_removal.emplace(key);
       }
     }
   }
@@ -201,6 +197,18 @@ bool Replacer::replace() {
   if (valid_extra_target) {
     write_success &=
         _write_language_file(_config.extra_target_path(), extra_target);
+  }
+  if (_config.remove_redundant_fallback()) {
+    LangFile extra_source_modified;
+    const auto &extra_source_items = extra_source.items();
+    for (const auto &item : extra_source_items) {
+      if (extra_source_removal.find(item.first) ==
+          extra_source_removal.cend()) {
+        extra_source_modified.items().emplace_back(item);
+      }
+    }
+    write_success &= _write_language_file(_config.extra_source_path(),
+                                          extra_source_modified);
   }
   return write_success;
 }
