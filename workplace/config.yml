@@ -1,6 +1,28 @@
 version: 1
 lang: zh
 generators:
+  # crate 64
+  - group: crate64
+    namespace: S:oredict.crateGt64Dust
+    rules:
+      - s: "Crate of {0}"
+        t: "{0}板条箱"
+        subs:
+          - dust
+  - group: crate64
+    namespace: S:oredict.crateGt64Ingot
+    rules:
+      - s: "Crate of {0}"
+        t: "{0}板条箱"
+        subs:
+          - ingot
+  - group: crate64
+    namespace: S:oredict.crateGt64Plate
+    rules:
+      - s: "Crate of {0}"
+        t: "{0}板条箱"
+        subs:
+          - plate
   # plates
   - group: plate
     namespace: S:oredict.
@@ -9,6 +31,25 @@ generators:
         t: "{0}板"
         subs:
           - material
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - plateGem
+  - group: plateGem
+    namespace: S:oredict.plateGem
+    completed: false
+    rules:
+      - s: "Crystalline {0} Plate"
+        t: "结晶{0}板"
+        subs:
+          - material
+  - group: plateGemTiny
+    namespace: S:oredict.plateGem
+    rules:
+      - s: "Tiny {0}"
+        t: "小块{0}"
+        subs:
+          - plateGem
   - group: plateType
     namespace: S:oredict.
     completed: false
