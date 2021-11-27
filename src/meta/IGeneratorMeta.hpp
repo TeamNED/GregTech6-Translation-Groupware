@@ -14,7 +14,7 @@ public:
   virtual const string &namespace_prefix() const = 0;
   virtual bool cached() const = 0;
   virtual bool completed() const = 0;
-  virtual const set<string> &extentions() const = 0;
+  virtual const set<string> &extensions() const = 0;
 
   // conbine IGeneratorMetas into one
   // should affect only at namespace_prefix and extensions

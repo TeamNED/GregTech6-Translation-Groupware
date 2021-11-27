@@ -93,7 +93,7 @@ ConfigParser::parse_generator(const ryml::NodeRef &node) {
     } else if (ckey == "extension") {
       if (child.is_seq()) {
         for (const auto &ext_node : child.children()) {
-          meta->extentions().insert(_read_val(ext_node));
+          meta->extensions().insert(_read_val(ext_node));
         }
       } else {
         throw std::invalid_argument("invalid extension for generator");
