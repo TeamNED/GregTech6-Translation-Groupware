@@ -3,16 +3,17 @@
 Replacer::Replacer(const Config &config)
     : _config(config), _generators(config.generators()) {}
 
-map<string, vector<std::pair<string, string>>> Replacer::generate_map() {
-  map<string, vector<std::pair<string, string>>> result;
+map<string, vector<std::pair<shared_ptr<IGeneratorMeta>, string>>>
+Replacer::generate_map() {
+  map<string, vector<std::pair<shared_ptr<IGeneratorMeta>, string>>> result;
   auto lang_list = generate();
   for (auto lang : lang_list) {
     auto lang_generated = lang->result();
     for (auto lang_item : *lang_generated) {
       const string &src = lang_item.first;
       const string &dst = lang_item.second;
-      const string &ns = lang->meta()->namespace_prefix();
-      result[src].emplace_back(ns, dst);
+      shared_ptr<IGeneratorMeta> meta = lang->meta();
+      result[src].emplace_back(meta, dst);
     }
   }
   return result;
@@ -82,9 +83,25 @@ bool Replacer::_read_language_file(const fs::path &path, LangFile &file) {
   }
 }
 
+bool Replacer::_write_language_file(const fs::path &path,
+                                    const LangFile &file) {
+  if (!_path_valid(path)) {
+    return false;
+  }
+  std::ofstream ostrm(path.string(), std::ios::out);
+  if (ostrm) {
+    ostrm << file;
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool Replacer::replace() {
   // check paths, load source
   LangFile main_source, extra_source, main_target, extra_target;
+  bool is_same_extra =
+      _config.extra_source_path() == _config.extra_target_path();
   bool valid_main_source =
            _read_language_file(_config.main_source_path(), main_source),
        valid_extra_source =
@@ -99,7 +116,86 @@ bool Replacer::replace() {
   auto dict = generate_map();
   const auto &items = main_source.items();
   for (const auto &item : items) {
+    const string &key = item.first;
+    const string &source_text = item.second;
+    bool succ, succ_dict = false, succ_extra = false;
+    string target_text, target_text_dict, target_text_extra;
+
+    // dict
+    auto dict_found = dict.find(source_text);
+    if (dict_found != dict.cend()) {
+      // replaced
+      const auto &lang_results = (*dict_found).second;
+      const auto &config_extensions = _config.extensions();
+      GeneratorMeta source_meta{};
+      source_meta.namespace_prefix() = key;
+      source_meta.extensions().insert(config_extensions.cbegin(),
+                                      config_extensions.cend());
+      for (const auto &lang_result : lang_results) {
+        if (lang_result.first->contains(source_meta)) {
+          target_text_dict = lang_result.second;
+          succ_dict = true;
+        }
+      }
+    }
+
+    // extra
+    if (valid_extra_source) {
+      const auto &extra_source_items = extra_source.items();
+      auto extra_source_found =
+          std::find_if(extra_source_items.begin(), extra_source_items.end(),
+                       [key](const auto &item) { return item.first == key; });
+      if (extra_source_found != extra_source_items.cend()) {
+        // use extra item
+        target_text_extra = (*extra_source_found).second;
+        succ_extra = true;
+      }
+    }
+
+    // judge
+    if (succ_dict && succ_extra) {
+      // CONFLICT
+      target_text = target_text_dict;
+      succ = true;
+    } else if (succ_dict && !succ_extra) {
+      // REPLACED
+      target_text = target_text_dict;
+      succ = true;
+    } else if (!succ_dict && succ_extra) {
+      // FALLBACK
+      target_text = target_text_extra;
+      succ = true;
+    } else if (!succ_dict && !succ_extra) {
+      // FAILED
+      target_text = source_text;
+      succ = false;
+    }
+
+    main_target.items().emplace_back(key, target_text);
+    if (valid_extra_target) {
+      if (is_same_extra) {
+        // same extra mode
+        // reduce known items only
+        if (succ_extra && !succ_dict) {
+          extra_target.items().emplace_back(key, target_text);
+        }
+      } else {
+        // different extra mode
+        // output all unknown items
+        if (!succ) {
+          extra_target.items().emplace_back(key, target_text);
+        }
+      }
+    }
   }
 
-  return true;
+  // write
+  bool write_success = true;
+  write_success &=
+      _write_language_file(_config.main_target_path(), main_target);
+  if (valid_extra_target) {
+    write_success &=
+        _write_language_file(_config.extra_target_path(), extra_target);
+  }
+  return write_success;
 }

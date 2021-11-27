@@ -23,6 +23,7 @@ public:
   virtual IGeneratorMeta &operator+=(const IGeneratorMeta &that) = 0;
   virtual bool equals(const IGeneratorMeta &that) const = 0;
   virtual bool empty() const = 0;
+  virtual bool contains(const IGeneratorMeta &that) const;
   explicit operator bool() const;
 
   virtual ~IGeneratorMeta() = default;
