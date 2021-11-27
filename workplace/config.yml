@@ -442,7 +442,7 @@ generators:
           - oreTypePrefix
           - ore
   - group: ore
-    namespace: S:oredict.ore
+    namespace: S:oredict.
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -450,7 +450,7 @@ generators:
           - material
           - oreTypeSuffix
   - group: oreTypePrefix
-    namespace: S:oredict.ore
+    namespace: S:oredict.
     completed: false
     dict:
       Andesite: 安山岩
@@ -487,7 +487,7 @@ generators:
       Betweenstone: 交错石
       Pitstone: 麻纹石
   - group: oreTypeSuffix
-    namespace: S:oredict.ore
+    namespace: S:oredict.
     completed: false
     dict:
       Ore: 矿石
