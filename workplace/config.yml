@@ -1,16 +1,448 @@
 version: 1
 lang: zh
 generators:
-  - group: block
-    completed: true
-    cached: true
+  - group: ingotDouble
+    namespace: S:oredict.ingotDouble
     rules:
-      - s: Block of {0}
-        t: "{0}块"
+      - s: Double {0} Ingot
+        t: "双重{0}锭"
         subs:
           - material
   - group: material
-    completed: true
-    cached: true
+    completed: false
     dict:
-      Amber: 琥珀
+      Abyssalnite: 深渊
+      Actinium: 锕
+      Adamantine: 血石
+      Adamantite: 精金
+      Adamantium: 艾德曼合金
+      Alduorite: 神秘蓝金
+      Aluminium: 铝
+      Aluminium Alloy: 铝合金
+      Aluminium Brass: 铝黄铜
+      Alumite: 耐酸铝
+      Americium: 镅
+      Americium-241: 镅-241
+      Americium-242: 镅-242
+      Amordrine: 魔力之石
+      Netherite Scrap: 下界合金废料
+      Angmallen: 神圣之金
+      Annealed Copper: 退火铜
+      Anti-Actinium: 反物质锕
+      Anti-Adamantium: 反物质艾德曼合金
+      Anti-Aluminium: 反物质铝
+      Anti-Americium: 反物质镅
+      Anti-Americium-241: 反物质镅-241
+      Anti-Antimony: 反物质锑
+      Anti-Arsenic: 反物质砷
+      Anti-Astatine: 反物质砹
+      Anti-Barium: 反物质钡
+      Anti-Berkelium: 反物质锫
+      Anti-Beryllium: 反物质铍
+      Anti-Bismuth: 反物质铋
+      Anti-Bohrium: 反物质𬭛
+      Anti-Boron: 反物质硼
+      Anti-Cadmium: 反物质镉
+      Anti-Caesium: 反物质铯
+      Anti-Californium: 反物质锎
+      Anti-Cerium: 反物质铈
+      Anti-Chromium: 反物质铬
+      Anti-Cobalt: 反物质钴
+      Anti-Cobalt-60: 反物质钴-60
+      Anti-Copernicium: 反物质鎶
+      Anti-Copper: 反物质铜
+      Anti-Curium: 反物质锔
+      Anti-Darmstadtium: 反物质鐽
+      Anti-Dubnium: 反物质𬭊
+      Anti-Dysprosium: 反物质镝
+      Anti-Einsteinium: 反物质锿
+      Anti-Erbium: 反物质铒
+      Anti-Europium: 反物质铕
+      Anti-Farnsium: 反物质钫
+      Anti-Fermium: 反物质镄
+      Anti-Flerovium: 反物质鈇
+      Anti-Flerovium-298: 反物质鈇-298
+      Anti-Francium: 反物质钫
+      Anti-Gadolinium: 反物质钆
+      Anti-Gallium: 反物质镓
+      Anti-Germanium: 反物质锗
+      Anti-Gold: 反物质金
+      Anti-Hafnium: 反物质铪
+      Anti-Hassium: 反物质𬭶
+      Anti-Holmium: 反物质钬
+      Anti-Indium: 反物质铟
+      Anti-Iridium: 反物质铱
+      Anti-Iron: 反物质铁
+      Anti-Lantanium: 反物质镧
+      Anti-Lanthanum: 反物质镧
+      Anti-Lawrencium: 反物质铹
+      Anti-Lead: 反物质铅
+      Anti-Livermorium: 反物质鉝
+      Anti-Lutetium: 反物质镥
+      Anti-Magnesium: 反物质镁
+      Anti-Manganese: 反物质锰
+      Anti-Meitnerium: 反物质䥑
+      Anti-Mendelevium: 反物质钔
+      Anti-Mercury: 反物质汞
+      Anti-Molybdenum: 反物质钼
+      Anti-Naquadah: 反物质硅岩金属
+      Enriched Anti-Naquadah: 浓缩反物质硅岩金属
+      Anti-Naquadria: 反物质硅岩金属化合物
+      Anti-Neodymium: 反物质钕
+      Anti-Neptunium: 反物质镎
+      Anti-Nickel: 反物质镍
+      Anti-Niobium: 反物质铌
+      Anti-Nobelium: 反物质锘
+      Anti-Osmium: 反物质锇
+      Anti-Palladium: 反物质钯
+      Anti-Platinum: 反物质铂
+      Anti-Plutonium: 反物质钚
+      Anti-Plutonium-241: 反物质钚-241
+      Anti-Plutonium-243: 反物质钚-243
+      Anti-Polonium: 反物质钋
+      Anti-Praseodymium: 反物质镨
+      Anti-Promethium: 反物质钷
+      Anti-Protactinium: 反物质镤
+      Anti-Radium: 反物质镭
+      Anti-Rhenium: 反物质铼
+      Anti-Rhodium: 反物质铑
+      Anti-Roentgenium: 反物质錀
+      Anti-Rubidium: 反物质铷
+      Anti-Ruthenium: 反物质钌
+      Anti-Rutherfordium: 反物质鑪
+      Anti-Samarium: 反物质钐
+      Anti-Scandium: 反物质钪
+      Anti-Seaborgium: 反物质𬭳
+      Anti-Silicon: 反物质硅
+      Anti-Silver: 反物质银
+      Anti-Strontium: 反物质锶
+      Anti-Tantalum: 反物质钽
+      Anti-Technetium: 反物质锝
+      Anti-Tellurium: 反物质碲
+      Anti-Terbium: 反物质铽
+      Anti-Thallium: 反物质铊
+      Anti-Thorium: 反物质钍
+      Anti-Thulium: 反物质铥
+      Anti-Tin: 反物质锡
+      Anti-Titanium: 反物质钛
+      Anti-Tungsten: 反物质钨
+      Anti-Unbinilium: 反物质120号元素(Ubn)
+      Anti-Ununennium: 反物质119号元素(Uue)
+      Anti-Ununoctium: 反物质118号元素(Og)
+      Anti-Ununpentium: 反物质镆
+      Anti-Ununtrium: 反物质鉨
+      Anti-Uranium: 反物质铀
+      Anti-Uranium-235: 反物质铀-235
+      Anti-Vanadium: 反物质钒
+      Anti-Ytterbium: 反物质镱
+      Anti-Yttrium: 反物质钇
+      Anti-Zinc: 反物质锌
+      Anti-Zirconium: 反物质锆
+      Antimony: 锑
+      Any: 任意
+      Ardite: 阿迪特
+      Aredrite: 希尔金
+      Arsenic: 砷
+      Astatine: 砹
+      Astral Silver: 星银
+      Atlarus: 深金
+      Barium: 钡
+      Battery Alloy: 电池合金
+      Bedrock-HSLA-Alloy: 基岩合金
+      Bedrockium: 基岩
+      Berkelium: 锫
+      Beryllium: 铍
+      Beryllium-7: 铍-7
+      Beryllium-8: 铍-8
+      Bismuth: 铋
+      Bismuth Bronze: 铋青铜
+      Black Bronze: 黑青铜
+      Black Steel: 黑钢
+      Blue Alloy: 蓝石合金
+      Blue Steel: 蓝钢
+      Blutonium: 蓝钚
+      Bohrium: 𬭛
+      Boron: 硼
+      Boron-11: 硼-11
+      Brass: 黄铜
+      Bronze: 青铜
+      Cadmium: 镉
+      Caesium: 铯
+      Calcium: 钙
+      Californium: 锎
+      Carborundum: 碳化硅
+      Carmot: 闪耀金
+      Cast Iron: 铸铁
+      Cd-In-Ag-Alloy: 镉铟银合金
+      Celenegil: 幽冥毒结晶
+      Cerium: 铈
+      Ceruclase: 暗影秘银
+      Chemical Y-1: 试剂Y-1
+      Chemical Y-10: 试剂Y-10
+      Chemical Y-2: 试剂Y-2
+      Chemical Y-3: 试剂Y-3
+      Chemical Y-4: 试剂Y-4
+      Chemical Y-5: 试剂Y-5
+      Chemical Y-6: 试剂Y-6
+      Chemical Y-7: 试剂Y-7
+      Chemical Y-8: 试剂Y-8
+      Chemical Y-9: 试剂Y-9
+      Chromium: 铬
+      Chromium Dioxide: 二氧化铬
+      Cobalt: 钴
+      Cobalt-60: 钴-60
+      Cobalt Brass: 钴黄铜
+      Conductive Iron: 导电铁
+      Constantan: 康铜
+      Copernicium: 鎶
+      Copper: 铜
+      Coralium: 珊瑚
+      Cosmic Neutronium: 宇宙中子态素
+      Crystal Matrix: 水晶矩阵
+      Curium: 锔
+      Cyanite: 蓝晶石
+      Damascus Steel: 大马士革钢
+      Dark Iron: 玄铁
+      Dark Thaumium: 黑暗神秘
+      Darmstadtium: 鐽
+      Deep Iron: 深渊铁
+      Desh: 戴斯
+      Refined Desh: 精制戴斯 
+      Desichalkos: 虚空之魂石
+      Draconium: 龙
+      Awakened Draconium: 觉醒龙
+      Dreadium: 恐惧
+      Dubnium: 𬭊
+      Duralumin: 硬铝合金
+      Duranium Alloy: 钍瑞铌合金
+      Dysprosium: 镝
+      Efrine: 绿金
+      Einsteinium: 锿
+      Electrical Steel: 磁钢
+      Electrotine Alloy: 蓝石合金
+      Electrum: 琥珀金
+      Electrum Flux: 通量琥珀金
+      Elven Elementium: 源质钢
+      Elvorium: 魔灵
+      Empty: 空
+      Enderium: 末影
+      Enderium Base: 末影粗胚
+      Endium: 末金
+      Energetic Alloy: 充能合金
+      Erbium: 铒
+      Ethaxium: 伊桑斯
+      Europium: 铕
+      Eximite: 虚空石
+      Farnsium: 钫
+      Fermium: 镄
+      Ferrite: 铁氧体
+      Fiery Steel: 炙热钢
+      Flerovium: 鈇
+      Flerovium-298: 鈇-298
+      Force: 力量
+      Francium: 钫
+      Frozen Iron: 冰霜之铁
+      Gadolinium: 钆
+      Gaia Spirit: 盖亚之魂
+      Gallium: 镓
+      Germanium: 锗
+      Gilded Iron: 镀金铁
+      Refined Glowstone: 精致萤石
+      Gold: 金
+      Gold-198: 金-198
+      Inductive Alloy: 感应合金
+      Spring Steel: 弹簧钢
+      HSLA-Steel: HSLA钢
+      Tungsten Alloy: 钨合金
+      HSS-E: 高速钢-E
+      HSS-G: 高速钢-G
+      HSS-S: 高速钢-S
+      Haderoth: 幻铜
+      Hafnium: 铪
+      Hassium: 𬭶
+      Hepatizon: 幽魂结晶
+      Holmium: 钬
+      Ignatius: 伊格内修斯
+      Indium: 铟
+      Infinity: 无尽
+      Infuscolium: 精金
+      Infused Gold: 附魔金
+      Inolashite: 暗影秘银蓝金
+      Invar: 殷钢
+      Iridium: 铱
+      Iron: 铁
+      Compressed Iron: 压缩铁
+      Magnetic Iron: 磁化铁
+      Ironwood: 铁木
+      Ironwood: 铁木 
+      Kalendrite: 幽冥魂石
+      Kanthal: 铁铬铝合金
+      Knightmetal: 骑士金属
+      Kreknorite: 炽焰陨石
+      Lantanium: 镧
+      Lanthanum: 镧
+      Lanthanium: 镧
+      Lanthanum: 镧
+      Lawrencium: 铹
+      Lead: 铅
+      Lemurite: 利莫里亚
+      Lithium: 锂
+      Lithium-6: 锂-6
+      Livermorium: 鉝
+      Ludicrite: 滑稽
+      Lumium: 流明
+      Lutetium: 镥
+      Magnalium: 镁铝合金
+      Magnesium: 镁
+      Manasteel: 魔力钢
+      Manganese: 锰
+      Manyullyn: 玛玉灵
+      Mauftrium: 始源魂灵
+      Meitnerium: 䥑
+      Mendelevium: 钔
+      Mercury: 汞
+      Meteoric Black Steel: 陨黑钢 
+      Meteoric Blue Steel: 陨蓝钢 
+      Meteoric Iron: 陨铁
+      Meteoric Red Steel: 陨红钢 
+      Meteoric Steel: 陨钢
+      Meteorite: 陨石
+      Meutoite: 龙之魂石
+      Midasium: 溶火金
+      Red Copper: 紫铜
+      Mithril: 秘银
+      Molybdenum: 钼
+      Moscovium: 镆
+      Muspelheim Power: 炽热魔灵
+      Naquadah: 硅岩金属
+      Enriched Naquadah: 浓缩硅岩金属
+      Naquadria: 硅岩金属化合物
+      Neodymium: 钕
+      Magnetic Neodymium: 磁化钕
+      Neptunium: 镎
+      Netherite: 下界合金
+      Netherized Diamond: 下界钻石
+      Nichrome: 镍铬合金
+      Nickel: 镍
+      Niflheim Power: 极寒魔灵
+      Nihonium: 鉨
+      Nikoline Alloy: 蓝石合金
+      Niobium: 铌
+      Niobium Nitride: 氮化铌
+      Niobium Titanium: 铌钛
+      Nobelium: 锘
+      Refined Obsidian: 精致黑曜石
+      Obsidian Steel: 黑曜石钢
+      Octine: 炽炎铁
+      Oganesson: 118号元素(Og)
+      Orichalcum: 自然之石
+      Oriharukon: 山铜
+      Osmiridium: 铱锇合金
+      'Osmium': 锇
+      Osmium: 锇
+      Oureclase: 大地结晶
+      Palladium: 钯
+      Peat Brick: 泥炭
+      Bituminous Peat Brick: 沥青泥炭砖
+      Pig Iron: 生铁
+      Plastic Bar: 塑料
+      Platinum: 铂
+      Plutonium: 钚
+      Plutonium-238: 钚-238
+      Plutonium-239: 钚-239
+      Plutonium-240: 钚-240
+      Plutonium-241: 钚-241
+      Plutonium-243: 钚-243
+      Polonium: 钋
+      Potassium: 钾
+      Praseodymium: 镨
+      Prometheum: 幻金
+      Promethium: 钷
+      Protactinium: 镤
+      Pulsating Iron: 脉冲铁
+      Purple Alloy: 紫色合金
+      Radium: 镭
+      Red Alloy: 红色合金
+      Red Steel: 红钢
+      Redstone Alloy: 红硅(红石合金)
+      Rhenium: 铼
+      Rhodium: 铑
+      Roentgenium: 錀
+      Rose Gold: 玫瑰金
+      Rubber Bar: 橡胶
+      Rubidium: 铷
+      Rubracium: 褐铜
+      Ruthenium: 钌
+      Rutherfordium: 鑪
+      Samarium: 钐
+      Sanguinite: 狱炎石
+      Scandium: 钪
+      Seaborgium: 𬭳
+      Shadow Iron: 暗影铁
+      Shadow Steel: 暗影钢
+      Signalum: 信素
+      Silicon: 硅
+      Silver: 银
+      Sodium: 钠
+      Soldering Alloy: 钎焊合金
+      Soularium: 魂金
+      Spectre Iron: 灵魂之铁
+      Stainless Steel: 不锈钢
+      Steel: 钢
+      Galvanized Steel: 镀锌钢
+      Magnetic Steel: 磁化钢
+      Steeleaf: 钢叶
+      Sterling Silver: 纯银
+      Strontium: 锶
+      Sunnarium: 太阳合金
+      Syrmorite: 赛摩铜
+      Tantalum: 钽
+      Tantalum Hafnium Carbide: 碳化钽铪
+      Tartarite: 溶火之石
+      Technetium: 锝
+      Tellurium: 碲
+      Terbium: 铽
+      Terrasteel: 泰拉钢
+      Teslatine Alloy: 特斯拉合金
+      Thallium: 铊
+      Thaumium: 神秘
+      Thorium: 钍
+      Thulium: 铥
+      Tin: 锡
+      Tin Alloy: 锡合金
+      Titanium: 钛
+      Titanium Aluminide: 钛铝合金
+      Titanium-Gold: 钛金
+      Iritanium: 钛铱合金
+      Trinaquadalloy: 碳化特林-钍瑞铌合金
+      Trinitanium: 特林钛合金
+      Trinium: 特林金属
+      Tritanium Alloy: 钛金
+      Tungsten: 钨
+      Tungsten Carbide: 碳化钨
+      Sintered Tungsten: 结晶钨
+      Tungstensteel: 钨钢
+      Ultimet: 哈氏合金
+      Unbinilium: 120号元素(Ubn)
+      Ununennium: 119号元素(Uue)
+      Uranium: 铀
+      Uranium-233: 铀-233
+      Uranium-235: 铀-235
+      Vanadium: 钒
+      Vanadium-Gallium: 钒镓合金
+      Vanadiumsteel: 钒钢
+      Vibramantium: 艾德曼振金
+      Vibranium Silver: 银振金合金
+      Vibranium Steel: 振金钢
+      Vibrant Alloy: 脉冲合金
+      Void Metal: 虚空金属
+      Vulcanite: 熔岩结晶
+      Vyroxeres: 幽冥剧毒结晶
+      Wrought Iron: 锻铁
+      Yellorium: 黄铀
+      Ytterbium: 镱
+      Yttrium: 钇
+      Yttrium-Barium-Cuprate: 钇钡铜氧合金
+      Zinc: 锌
+      Zirconium: 锆
+
