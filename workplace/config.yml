@@ -135,6 +135,10 @@ generators:
           - plate
   - group: plate
     namespace: S:oredict.
+    dict:
+      Glass Pane: 玻璃板
+      Plastic Sheet: 塑料板
+      Rubber Sheet: 橡胶片
     rules:
       - s: "{0} Plate"
         t: "{0}板"
@@ -177,6 +181,28 @@ generators:
   # ingots
   - group: ingot
     namespace: S:oredict.
+    dict:
+      Netherite Scrap: 下界合金废料
+      Anthracite Brick: 无烟煤锭
+      Butter: 黄油锭
+      Charcoal Brick: 木炭锭
+      Cheese Bar: 奶酪条
+      Chocolate Bar: 巧克力条
+      Coal Brick: 煤锭
+      Coal Coke Brick: 焦煤锭
+      Lignite Coal Brick: 褐煤锭
+      Lignite Coke Brick: 焦化褐煤锭
+      Lonsdaleite Brick: 六方碳锭
+      Peat Brick: 泥炭锭
+      Bituminous Peat Brick: 沥青泥炭砖锭
+      Petroleum Coke Brick: 石油焦炭锭
+      Plastic Bar: 塑料锭
+      Prismane Brick: 棱柱烷锭
+      Rubber Bar: 橡胶锭
+      Salted Butter: 盐味黄油锭
+      Emerald Green Bar: 绿宝石锭
+      Steeleaf: 钢叶锭
+      Tofu Bar: 豆腐条
     rules:
       - s: "{0} Ingot"
         t: "{0}锭"
@@ -588,6 +614,8 @@ generators:
       Fire infused Stone: 火之碎片矿石
       Order infused Stone: 混沌碎片矿石
       Water infused Stone: 水之碎片矿石
+      Magnetite: 磁铁矿
+      Ancient Debris: 远古残骸
     rules:
       - s: "{0} Ore"
         t: "{0}矿石"
@@ -681,8 +709,15 @@ generators:
       - s: "{0} Lens"
         t: "{0}透镜"
         subs:
+          - material
+  # gem, boule
+  - group: boule
+    namespace: S:oredict.bouleGt
+    rules:
+      - s: "{0} Boule"
+        t: "{0}晶体"
+        subs:
           - gem
-  # gem
   - group: gemComplex
     namespace: S:oredict.gem
     rules:
@@ -691,6 +726,12 @@ generators:
         subs:
           - gemType
           - gem
+    namespace: S:oredict.gem
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - material
   - group: gemType
     namespace: S:oredict.gem
     completed: false
@@ -835,7 +876,6 @@ generators:
       Netherite: 下界合金
       Netherized Diamond: 下界钻石
       Niflheim Power: 极寒魔灵
-      Nikoline Alloy: 蓝石合金
       Niobium Nitride: 氮化铌
       Refined Obsidian: 精致黑曜石
       Obsidian Steel: 黑曜石钢
@@ -850,7 +890,6 @@ generators:
       Pulsating Iron: 脉冲铁
       Purple Alloy: 紫色合金
       Red Alloy: 红色合金
-      Redstone Alloy: 红硅(红石合金)
       Rubber Bar: 橡胶
       Rubracium: 褐铜
       Sanguinite: 狱炎石
@@ -863,7 +902,6 @@ generators:
       Magnetic Steel: 磁化钢
       Sunnarium: 太阳合金
       Tartarite: 溶火之石
-      Teslatine Alloy: 特斯拉合金
       Thaumium: 神秘
       Titanium Aluminide: 钛铝合金
       Sintered Tungsten: 结晶钨
@@ -901,7 +939,6 @@ generators:
       Bischofite: 水氯镁石
       Black Fluorite: 黑色氟石
       Blaze Quartz: 烈焰石英
-      Blue Sapphire: 蓝宝石
       Bone: 骨
       Borax: 硼砂
       Bromargyrite: 溴银矿
@@ -963,7 +1000,6 @@ generators:
       Gravitite: 重力晶
       Green Fluorite: 绿色氟石
       Green Middle: 翠绿元素宝石
-      Green Sapphire: 绿色蓝宝石
       Gypsum: 石膏
       Hematite: 赤铁
       Honey: 蜂蜜
@@ -1178,7 +1214,6 @@ generators:
       Blue Phosphorus: 蓝磷
       Ferrovanadium: 钒磁铁
       Pumice: 浮石
-      Realgar: 雄黄
       Aerotheum: 和谐之空气
       Bluestone: 蓝石
       Calcium Sulfate: 硫酸钙
@@ -1237,6 +1272,21 @@ generators:
       Uranium-238 Tetrafluoride: 四氟化铀-238
       Compost: 堆肥
       Raw Compost: 可堆肥材料
+      Chemical X: 试剂X
+      Chemical Y: 试剂Y
+      Chemical Y-1: 试剂Y-1
+      Chemical Y-10: 试剂Y-10
+      Chemical Y-2: 试剂Y-2
+      Chemical Y-3: 试剂Y-3
+      Chemical Y-4: 试剂Y-4
+      Chemical Y-5: 试剂Y-5
+      Chemical Y-6: 试剂Y-6
+      Chemical Y-7: 试剂Y-7
+      Chemical Y-8: 试剂Y-8
+      Chemical Y-9: 试剂Y-9
+      Chemical Z: 试剂Z
+      Netherite Scrap: 下界合金废料
+      Abyssal Oat: 深渊燕麦
   - group: material
     completed: false
     rules:
@@ -1359,7 +1409,7 @@ generators:
       Purple Sapphire: 紫色蓝宝石
       Pyrope: 镁铝榴石
       Rainforest Jasper: 雨林碧玉
-      #TODO# Realgar: Realgar
+      Realgar: 雄黄
       Red Aventurine: 红色东陵石
       Red Jasper: 红色碧玉
       Redstone: 红石
@@ -1383,6 +1433,13 @@ generators:
       Zircon: 锆石
       Zirconium: 锆
       Any: 任意
+      Blue Sapphire: 蓝宝石
+      Germanium: 锗
+      Green Sapphire: 绿色蓝宝石
+      Nikoline Alloy: 蓝石合金
+      Redstone Alloy: 红石合金
+      Silicon: 硅
+      Teslatine Alloy: 特斯拉合金
   - group: materialPositive
     completed: false
     dict:
