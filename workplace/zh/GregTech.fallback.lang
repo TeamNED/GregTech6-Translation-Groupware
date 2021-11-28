@@ -7726,11 +7726,8 @@ languagefile {
     S:mc.recipe.furnacefuel=熔炉燃料 (燃烧时间(Tick):总HU=1:25)
     S:oredict.arrowGtPlasticEmpty.name=轻质空箭
     S:oredict.arrowGtWoodEmpty.name=空箭
-    S:oredict.blockPlateElectrotine.name=蓝石板块
     S:oredict.blockPlateGemGlass.name=玻璃板块
 
-    S:oredict.blockPlateNikolite.name=蓝石板块
-    S:oredict.blockPlateTeslatite.name=特斯拉金属板块
     S:oredict.bulletGtLargeEmpty.name=大型空包弹
     S:oredict.bulletGtMediumEmpty.name=中型空包弹
     S:oredict.bulletGtSmallEmpty.name=小型空包弹
@@ -7904,10 +7901,7 @@ languagefile {
     S:oredict.crateGt64DustTofu.name=豆腐板条箱
     S:oredict.crateGt64PlateGemGlass.name=玻璃板板条箱
     S:oredict.crateGt64PlateSteeleaf.name=钢叶板板条箱
-    S:oredict.crateGtPlateElectrotine.name=蓝石板板条箱
     S:oredict.crateGtPlateGemGlass.name=玻璃板板条箱
-    S:oredict.crateGtPlateNikolite.name=蓝石板板条箱
-    S:oredict.crateGtPlateTeslatite.name=特斯拉金属板板条箱
     S:oredict.crushedTinyAncientDebris.name=小撮已回收的远古残骸
     S:oredict.dustBlaze.name=烈焰粉
     S:oredict.foilPlastic.name=薄塑料板
@@ -13267,21 +13261,12 @@ languagefile {
     S:oredict.plantGtWartWhite.name=白色疣
     S:oredict.plantGtWartWhiteVitriol.name=硫酸锌疣
     S:oredict.plantGtWartYellow.name=黄色疣
-    S:oredict.plateCurvedElectrotine.name=弯曲蓝石板
-    S:oredict.plateCurvedNikolite.name=弯曲蓝石板
-    S:oredict.plateCurvedTeslatite.name=弯曲特斯拉金属板
     S:oredict.plateDoublePaper.name=两重纸板
-    S:oredict.plateElectrotine.name=蓝石板
     S:oredict.plateGemGlass.name=玻璃板
     S:oredict.plateGemTinyGlass.name=小块玻璃板
-    S:oredict.plateNikolite.name=蓝石板
     S:oredict.plateQuadruplePaper.name=四重纸板
     S:oredict.plateQuintuplePaper.name=五重纸板
-    S:oredict.plateTeslatite.name=特斯拉金属板
-    S:oredict.plateTinyElectrotine.name=小块蓝石板
-    S:oredict.plateTinyNikolite.name=小块蓝石板
     S:oredict.plateTinyPaper.name=纸屑
-    S:oredict.plateTinyTeslatite.name=小块特斯拉金属板
     S:oredict.plateTriplePaper.name=三重纸板
     S:oredict.prefix.alloy=alloy
     S:oredict.prefix.armor=armor
@@ -13741,7 +13726,6 @@ languagefile {
     S:oredict.rockGtBetweenstone.name=交错岩石
     S:oredict.rockGtBlackstone.name=黑石
     S:oredict.rockGtBlueschist.name=含蓝片岩岩石
-    S:oredict.rockGtBluestone.name=含蓝石岩石
     S:oredict.rockGtChert.name=含燧石岩石
     S:oredict.rockGtConcrete.name=含混凝土岩石
     S:oredict.rockGtConstructionFoam.name=含建筑泡沫岩石
@@ -13809,7 +13793,6 @@ languagefile {
     S:oredict.scrapGtBlackstone.name=黑石碎石
     S:oredict.scrapGtBlue.name=蓝色废料
     S:oredict.scrapGtBlueschist.name=蓝片岩碎石
-    S:oredict.scrapGtBluestone.name=蓝石碎石
     S:oredict.scrapGtBrown.name=褐色废料
     S:oredict.scrapGtChert.name=燧石碎石
     S:oredict.scrapGtConcrete.name=混凝土碎石
