@@ -651,6 +651,7 @@ generators:
     completed: false
     dict:
       Andesite: 安山岩
+      Basalt: 玄武岩
       Diorite: 闪长岩
       Limestone: 石灰岩
       Marble: 大理石
@@ -2080,15 +2081,24 @@ generators:
       - s: "{0} ({1})"
         t: "{0} ({1})"
         subs:
-          - randomtoolsType
+          - randomtoolsTypeA
           - color
-  - group: randomtoolsType
+      - s: "{0} {1}"
+        t: "{0} {1}"
+        subs:
+          - color
+          - randomtoolsTypeB
+  - group: randomtoolsTypeA
     namespace: "S:gt.multiitem.randomtools."
     completed: false
     dict:
       Spray Paint: 颜料喷漆
       C-Foam Spray: 建筑泡沫喷罐
       Advanced C-Foam Spray: 加强建筑泡沫喷罐
+  - group: randomtoolsTypeB
+    namespace: "S:gt.multiitem.randomtools."
+    completed: false
+    dict:
       Canvas: 帆布
   # fluidColored
   - group: fluidColored
@@ -2247,6 +2257,146 @@ generators:
       Planks: 木板
       Slab: 半砖
       Sapling: 树苗
+  # bumblebee
+  - group: bumblebeeWithStatus
+    namespace: "S:gt.multiitem.bumblebee"
+    rules:
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
+        subs:
+          - bumblebeeSpecies
+          - bumblebeeStatusA
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
+        subs:
+          - bumblebee
+          - bumblebeeStatusB
+  - group: bumblebeeStatusA
+    namespace: "S:gt.multiitem.bumblebee"
+    completed: false
+    dict:
+      Dead: 死亡
+      Dead & Scanned: 死亡且已扫描
+  - group: bumblebeeStatusB
+    namespace: "S:gt.multiitem.bumblebee"
+    completed: false
+    dict:
+      Scanned: 已扫描
+  - group: bumblebee
+    namespace: "S:gt.multiitem.bumblebee"
+    rules:
+      - s: "{0} Drone"
+        t: "雄性{0}"
+        subs:
+          - bumblebeeSpecies
+      - s: "{0} Princess"
+        t: "雌性{0}"
+        subs:
+          - bumblebeeSpecies
+      - s: "{0} Queen"
+        t: "{0}蜂后"
+        subs:
+          - bumblebeeSpecies
+  - group: bumblebeeSpecies
+    namespace: "S:gt.multiitem.bumblebee"
+    dict:
+      Illuminumblebee: 光明大黄蜂
+      Bumbelvis: 基岩大黄蜂
+      Bumbleknight: 骑士大黄蜂
+      Bumblemonarch: 黑脉金斑大黄蜂
+      Bumbleshroom: 蘑菇大黄蜂
+      Dumblebee: 知识大黄蜂
+      Bumbleheimers: 痴呆大黄蜂
+      Bumble in Black: 黑色大黄蜂
+      Lt. Bumbleson: 中尉大黄蜂
+      Colonel Bumble O'Beeill: 上校大黄蜂
+      General Bumblemond: 将军大黄蜂
+      Bumbletrantor: 川陀大黄蜂
+      Mr. Bumblefreeze: 冷冻人大黄蜂
+      Bumbleaang: 安昂大黄蜂
+      Bumblegoth: 哥特大黄蜂
+      Antichristumblebee: 叛教大黄蜂
+      Jungle Bumblebee (T2): 丛林大黄蜂(T2)
+      Jungle Bumblebee (T3): 丛林大黄蜂(T3)
+      Jungle Bumblebee (T4): 丛林大黄蜂(T4)
+      Sandy Bumblebee (T2): 沙漠大黄蜂(T2)
+      Sandy Bumblebee (T3): 沙漠大黄蜂(T3)
+      Sandy Bumblebee (T4): 沙漠大黄蜂(T4)
+    rules:
+      - s: "Bumble {0}"
+        t: "{0}大黄蜂"
+        subs:
+          - bumblebeeSpeciesType
+      - s: "{0} Bumble"
+        t: "{0}大黄蜂"
+        subs:
+          - bumblebeeSpeciesType
+      - s: "{0} Bumblebee"
+        t: "{0}大黄蜂"
+        subs:
+          - bumblebeeSpeciesType
+  - group: bumblebeeSpeciesType
+    namespace: "S:gt.multiitem.bumblebee"
+    dict:
+      Wild: 野生
+      Captive: 魅惑
+      Surfing: 冲浪
+      Creative: 创造
+      Builder: 建筑
+      Masonic: 粘土
+      Industrial: 工业
+      Overseer: 监工
+      Tycoon: 大亨
+      Monopolistic: 垄断
+      Colonial: 殖民
+      Royal: 皇室
+      Private: 列兵
+      Pyro: 纵火
+      Cryo: 低温
+      Aero: 大气
+      Tera: 大地
+      Occult: 神秘
+      Satanic: 撒旦
+      Forgetful: 健忘
+      Amnesic: 失忆
+      Diving: 潜水
+      Subnautic: 深海
+      Common: 寻常
+      Apprentice: 学徒
+      Blazing: 烈焰
+      Flaming: 火焰
+      Blizzful: 暴雪
+      Freezing: 冷冻
+      Blitzing: 闪击
+      Storming: 暴雨
+      Basalzed: 玄武岩
+      Quakeing: 震动
+      Earth Bound: 地球冒险
+      Magician: 魔法
+      Wizard: 巫术
+      Cultivated: 田野
+      Nether: 下界
+      Hellish: 地狱
+      Impish: 小鬼
+      Demonic: 恶魔
+      End: 末地
+      Void: 虚空
+      Alienated: 厌世
+      Nihilistic: 虚无
+      Stoned: 石化
+      Rocking: 岩化
+      Hard Rock: 硬岩
+      Bedrockium: 基岩
+      Jungle: 丛林
+      Frosty: 冰霜
+      North Pole: 北极
+      Elf: 精灵
+      Claus: 圣诞
+      Toad: 蟾蜍
+      Bro: 兄弟
+      Peach: 桃子
+      Sandy: 沙漠
+      Swimming: 游泳
 
 
   # entity
