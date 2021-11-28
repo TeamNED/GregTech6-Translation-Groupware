@@ -115,7 +115,7 @@ generators:
       - s: "Block of {0}"
         t: "{0}块"
         subs:
-          - gem
+          - material
   # block of solid
   - group: blockSolid
     namespace: S:oredict.blockSolid
