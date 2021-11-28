@@ -43,7 +43,7 @@ generators:
       - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
-          - gem
+          - material
   # crate 64
   - group: crate64
     namespace: S:oredict.crateGt64Dust
@@ -79,7 +79,7 @@ generators:
       - s: "Crate of {0}"
         t: "{0}板条箱"
         subs:
-          - gem
+          - material
   # block
   - group: block
     namespace: S:oredict.blockDust
