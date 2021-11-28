@@ -136,6 +136,7 @@ generators:
   - group: plate
     namespace: S:oredict.
     dict:
+      Cast Glass Pane: 玻璃板
       Glass Pane: 玻璃板
       Plastic Sheet: 塑料板
       Rubber Sheet: 橡胶片
@@ -287,6 +288,7 @@ generators:
       Salt: 盐
       Fine Soulsand: 细灵魂沙
       Emerald Green: 绿色绿宝石
+      Silken Emerald Green: 绿色绿宝石粉
       Magic Tallow: 魔法油脂
       Tofu: 豆腐末
       Volcanic Ashes: 火山灰
@@ -302,6 +304,7 @@ generators:
       Red Sand: 红沙
       Sand: 沙
       Blaze Powder: 烈焰粉
+      Silken Tofu: 豆腐末
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -972,6 +975,7 @@ generators:
       Chimerite: 精灵石
       Chromite: 铬铁
       Clay: 粘土
+      Clay Brick: 粘土砖
       Brown Clay: 褐色粘土
       Red Clay: 红色粘土
       Coal: 煤
@@ -1001,7 +1005,6 @@ generators:
       Red Energium: 能量水晶
       Eudialyte: 异性石
       Ferberite: 钨铁
-      Firestone: 火石
       Fluix: 福鲁伊克斯
       Fluix Crystal: 福鲁伊克斯水晶
       Fluorite: 氟石
@@ -1011,11 +1014,9 @@ generators:
       Garnet: 石榴子石
       Garnierite: 硅镁镍
       Glass: 玻璃
-      Glass Crystal: 玻璃
       Glauconite: 海绿石
       Granitic Mineral Sand: 花岗岩类矿砂
       Graphite: 石墨
-      Gravitite: 重力晶
       Green Fluorite: 绿色氟石
       Green Middle: 翠绿元素宝石
       Gypsum: 石膏
@@ -1027,11 +1028,14 @@ generators:
       Ilmenite: 钛铁
       Air infused: 风之
       Balance infused: 平衡
+      Balance infused Powder: 平衡粉末
       Dull: 枯竭
+      Dull Crystal Powder: 枯竭粉末
       Earth infused: 地之
       Entropy infused: 混沌
       Fire infused: 火之
       Magic infused: 魔力
+      Magic infused Powder: 魔力粉末
       Order infused: 秩序
       Water infused: 水之
       Infused Air: 风之
@@ -1246,7 +1250,6 @@ generators:
       Hydrogen Borate: 硼酸氢盐
       Lithium Hydroxide: 氢氧化锂
       Lithium Oxide: 氧化锂
-      Liveroot: 活根
       Methane Ice: 甲烷冰
       Petrotheum: 构造之地岩
       Porcelain: 瓷器
@@ -1280,7 +1283,6 @@ generators:
       Sodium Sulphate: 硫酸钠
       Sodium Sulphide: 硫化钠
       Sodium Sulphite: 亚硫酸钠
-      Sugar: 糖
       Tungstic Acid: 钨酸
       Uranium Hexafluoride: 六氟化铀
       Uranium Tetrafluoride: 四氟化铀
@@ -1305,6 +1307,114 @@ generators:
       Chemical Z: 试剂Z
       Netherite Scrap: 下界合金废料
       Abyssal Oat: 深渊燕麦
+      Dry: 干
+      SacredOak: 神圣橡树
+      Dark: 暗色
+      Sandstone: 沙石
+      Asphalt: 沥青
+      Air: 空气
+      Aqua Regia: 王水
+      Ammonia: 氨
+      Arcane Ashes: 奥术灰
+      Arcane Compound: 压缩奥术灰
+      Ashes: 灰烬
+      Bark: 树皮
+      Barley: 大麦
+      Bio Diesel: 生物柴油
+      Biomass: 生物质
+      Black Vitriol: 黑矾
+      Blue Vitriol: 五水合硫酸铜
+      Butane: 丁烷
+      Carbon Dioxide: 二氧化碳
+      Carbon Monoxide: 一氧化碳
+      Carbon Trioxide: 三氧化碳
+      Chloroauric Acid: 氯金酸
+      Chloroplatinic Acid: 氯铂酸
+      Corn: 玉米
+      Creosote: 杂酚油
+      Cyan Vitriol: 硫酸镍
+      Dark Ashes: 黑色灰烬
+      Diesel: 柴油
+      Disulfuric Acid: 焦硫酸
+      Ethanol: 乙醇
+      Ethylene: 乙烯
+      Fish Oil: 鱼油
+      Fresh Water: 淡水
+      Hot Frying Oil: 热食用油
+      Fuel Oil: 燃油
+      Glue: 胶水
+      Glycerol: 丙三醇
+      Glyceryl: 甘油
+      Gravitonium: 重力金属
+      Gray Vitriol: 硫酸锰
+      Green Vitriol: 硫酸亚铁
+      Gunpowder: 火药
+      Hazelnut: 榛子
+      Heavy Water: 重水
+      Helium-Neon: 氦氖混合气体
+      Hemp Oil: 大麻籽油
+      Hexafluorosilicic Acid: 六氟硅酸
+      Holy Water: 圣水
+      Hydrochloric Acid: 盐酸
+      Hydrogen Fluoride: 氟化氢
+      Hydrogen Peroxide: 过氧化氢
+      Hydrosulfuric Acid: 硫化氢
+      Kerosine: 煤油
+      Latex: 胶乳
+      Lava: 岩浆
+      Lin Oil: 亚麻籽油
+      Lubricant: 润滑油
+      Mac-Guffium: 乌有岩
+      Martian Vitriol: 硫酸铁
+      Methane: 甲烷
+      Milk: 牛奶
+      Nitric Acid: 硝酸
+      Nitro Carbon: 氮化碳
+      Nitro-Fuel: 硝基燃油
+      Nitrogen Dioxide: 二氧化氮
+      Nitrogen Monoxide: 一氧化氮
+      Nut Oil: 坚果油
+      Nutmeg: 肉豆蔻
+      Oat: 燕麦
+      Oil: 油
+      Olive Oil: 橄榄油
+      Paper: 纸
+      Peanut: 花生
+      Black Pepper: 黑胡椒
+      Petrol: 汽油
+      Pink Vitriol: 硫酸镁
+      Potato: 土豆
+      Propane: 丙烷
+      Propylene: 丙烯
+      Red Sand: 红沙
+      Red Vitriol: 硫酸钴
+      Rice: 米
+      Rye: 黑麦面
+      Salt Water: 盐水
+      Saltwater: 盐水
+      Sea Water: 海水
+      Seed Oil: 种子油
+      Semiheavy Water: 半重水
+      Stannic Chloride: 四氯化锡
+      Steam: 蒸汽
+      Sulfur Dioxide: 二氧化硫
+      Sulfur Trioxide: 三氧化硫
+      Sulfuric Acid: 硫酸
+      Sunflower Oil: 向日葵油
+      Magic Tallow: 魔法油脂
+      Titanium Tetrachloride: 四氯化钛
+      Tritiated Water: 超重水
+      UU-Amplifier: UU增殖液
+      UU-Matter: UU物质
+      Vitriol Of Clay: 硫酸铝
+      Volcanic Ashes: 火山灰
+      Water: 水
+      Dirty Water: 污水
+      WaterDistilled: 蒸馏水
+      Distilled Water: 蒸馏水
+      Whale Oil: 鲸油
+      Wheat: 小麦
+      White Vitriol: 硫酸锌
   - group: material
     completed: false
     rules:
@@ -1462,11 +1572,16 @@ generators:
       Redstone Alloy: 红石合金
       Silicon: 硅
       Teslatine Alloy: 特斯拉合金
-      Dry: 干
-      SacredOak: 神圣橡树
-      Dark: 暗色
-      Sandstone: 沙石
-      Asphalt: 沥青
+      Firestone: 火石
+      Glass Crystal: 玻璃
+      Gravitite: 重力晶
+      Ice Cubes: 碎冰块
+      Medium Ice Cube: 中型冰块
+      Iodine Salt: 碘盐
+      Rock Salt: 岩盐
+      Salt: 盐
+      Sugar: 糖
+      Sugar Cubes: 方糖
   - group: materialPositive
     completed: false
     dict:
@@ -1587,6 +1702,7 @@ generators:
       Thorium-232: 钍-232
       Thulium: 铥
       Tin: 锡
+      Tine: 锡 
       Titanium: 钛
       Tungsten: 钨
       Unbinilium: 120号元素(Ubn)
@@ -1802,6 +1918,8 @@ generators:
       Frozen: 结冰的木
       Ogre: 奥格
       Wyvern: 双足飞龙
+      Liveroot: 活根
+      Steeleaf: 钢叶
   - group: materialPowder
     dict:
       Netherite Scrap: 下界合金废料
@@ -2837,6 +2955,7 @@ generators:
       Biennennium: 299号元素(Bee)
       Biennhexium: 296号元素(Beh)
       Biennilium: 290号元素(Ben)
+      Biennnilium: 290号元素(Ben)
       Biennoctium: 298号元素(Beo)
       Biennpentium: 295号元素(Bep)
       Biennquadium: 294号元素(Beq)
@@ -2937,6 +3056,7 @@ generators:
       Triennennium: 399号元素(Tee)
       Triennhexium: 396号元素(Teh)
       Triennilium: 390号元素(Ten)
+      Triennnilium: 390号元素(Ten)
       Triennoctium: 398号元素(Teo)
       Triennpentium: 395号元素(Tep)
       Triennquadium: 394号元素(Teq)
@@ -3037,6 +3157,7 @@ generators:
       Unennennium: 199号元素(Uee)
       Unennhexium: 196号元素(Ueh)
       Unennilium: 190号元素(Uen)
+      Unennnilium: 190号元素(Uen)
       Unennoctium: 198号元素(Ueo)
       Unennpentium: 195号元素(Uep)
       Unennquadium: 194号元素(Ueq)
