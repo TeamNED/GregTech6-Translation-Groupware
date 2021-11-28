@@ -622,7 +622,17 @@ generators:
       Fire infused Stone: 火之碎片矿石
       Order infused Stone: 混沌碎片矿石
       Water infused Stone: 水之碎片矿石
+      Infused Air Crystals: 风之碎片矿石
+      Infused Earth Crystals: 地之碎片矿石
+      Infused Entropy Crystals: 混沌碎片矿石
+      Infused Fire Crystals: 火之碎片矿石
+      Infused Order Crystals: 混沌碎片矿石
+      Infused Water Crystals: 水之碎片矿石
+      Balance Shards: 平衡碎片矿石
+      Dull Shards: 枯竭碎片矿石
+      Magic Shards: 魔力碎片矿石
       Magnetite: 磁铁矿
+      Recycled Ancient Debris: 已回收的远古残骸
       Ancient Debris: 远古残骸
     rules:
       - s: "{0} Ore"
