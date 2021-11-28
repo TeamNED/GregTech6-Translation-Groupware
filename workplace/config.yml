@@ -1845,6 +1845,23 @@ generators:
       Hopper: 料斗
       Queue Hopper: 队列料斗
       Anvil: 砧
+  # spike
+  - group: spike
+    namespace: "S:gt.block.spikes."
+    rules:
+      - s: "{0} Wall Spike"
+        t: "{0}制壁刺"
+        subs:
+          - entityMaterial
+      - s: "{0} Block Spike"
+        t: "{0}制尖刺方块"
+        subs:
+          - entityMaterial
+      - s: "Falling {0} Spike Block"
+        t: "坠落的{0}制尖刺方块"
+        subs:
+          - entityMaterial
+  # pipe
   - group: pipeRestrictive
     namespace: "S:gt.multitileentity."
     rules:
