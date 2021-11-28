@@ -2,38 +2,45 @@ version: 1
 lang: zh
 generators:
   # crate 16
+  - group: crate16Partial
+    namespace: S:oredict.crateGt
+    rules:
+      - s: "Partial {0}"
+        t: "{0}"
+        subs:
+          - crate16
   - group: crate16
     namespace: S:oredict.crateGtDust
     rules:
-      - s: "Partial Crate of {0}"
+      - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
           - dust
   - group: crate16
     namespace: S:oredict.crateGtIngot
     rules:
-      - s: "Partial Crate of {0}"
+      - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
           - ingot
   - group: crate16
     namespace: S:oredict.crateGtPlate
     rules:
-      - s: "Partial Crate of {0}"
+      - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
           - plate
   - group: crate16
     namespace: S:oredict.crateGtRaw
     rules:
-      - s: "Partial Crate of {0}"
+      - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
           - ore
   - group: crate16
     namespace: S:oredict.crateGtGem
     rules:
-      - s: "Partial Crate of {0}"
+      - s: "Crate of {0}"
         t: "{0}小板条箱"
         subs:
           - gem
@@ -566,11 +573,11 @@ generators:
         subs:
           - oreTypePrefix
           - ore
-      - s: "{1} {0}"
-        t: "{0}{1}"
+      - s: "{0} {1}"
+        t: "{1}{0}"
         subs:
-          - material
           - oreSandTypePrefix
+          - ore
   - group: ore
     namespace: S:oredict.
     rules:
@@ -1891,6 +1898,7 @@ generators:
       Planks: 木板
       Slab: 木半砖
       Unknown Sapling (coming soon): 未知树苗
+      Empty Crate: 空板条箱
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
