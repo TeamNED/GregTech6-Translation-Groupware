@@ -2130,7 +2130,7 @@ generators:
         subs:
           - color
   # gt multiitem bottles
-  - group: gtBehaviour
+  - group: bottle
     namespace: "S:gt.multiitem.bottles."
     rules:
       - s: "Color: {0}"
@@ -2181,6 +2181,37 @@ generators:
       Red: 红色
       White: 白色
       Yellow: 黄色
+  # gt multiitem can
+  - group: can
+    namespace: "S:gt.multiitem.cans."
+    rules:
+      - s: "{0} Food Can ({1})"
+        t: "{0}食物罐头 ({1})"
+        subs:
+          - canSize
+          - canType
+  - group: canSize
+    namespace: "S:gt.multiitem.cans."
+    completed: false
+    dict:
+      Tiny: 迷你
+      Small: 小
+      Tall: 高
+      Wide: 宽
+      Large: 大
+      Huge: 超大
+  - group: canType
+    namespace: "S:gt.multiitem.cans."
+    completed: false
+    dict:
+      Unknown: 未知
+      Rotten: 腐肉
+      Vegetables: 蔬菜
+      Fruits: 水果
+      Bread: 面包
+      Meat: 肉
+      Fish: 鱼
+      Chum: 基友肉
   # wooden block
   - group: woodenBlockFireProof
     namespace: "S:gt.block."
