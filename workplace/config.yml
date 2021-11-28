@@ -788,7 +788,6 @@ generators:
       Electrum Flux: 通量琥珀金
       Elvorium: 魔灵
       Empty: 空
-      Enderium Base: 末影粗胚
       Endium: 末金
       Energetic Alloy: 充能合金
       Ethaxium: 伊桑斯
@@ -860,8 +859,6 @@ generators:
       Teslatine Alloy: 特斯拉合金
       Thaumium: 神秘
       Titanium Aluminide: 钛铝合金
-      Iritanium: 钛铱合金
-      Trinaquadalloy: 碳化特林-钍瑞铌合金
       Sintered Tungsten: 结晶钨
       Vanadium Magnetite: 钒磁铁
       Vibramantium: 艾德曼振金
@@ -1935,7 +1932,6 @@ generators:
       Carborundum: 碳化硅
       Iridium: 铱
       Naquadah: 硅岩金属
-      Niobium Titanium: 铌钛合金
       Vanadium-Gallium: 钒镓合金
       Yttrium-Barium-Cuprate: 钇钡铜氧合金
       Graphene: 石墨烯
@@ -2036,6 +2032,16 @@ generators:
       Soulful Wax: 灵魂蜜蜡
       Amnesic Wax: 遗忘蜜蜡
       Stainless: 不锈钢
+      Trinaquadalloy: 碳化特林-钍瑞铌合金
+      Iritanium: 钛铱合金
+      Wood: 木制
+      Wooden: 木制
+      Niobium Titanium: 铌钛合金
+      Niobium-Titanium: 铌钛合金
+      Titanium: 钛
+      Enderium Base: 末影粗胚
+      Vibranium: 振金
+      Vibramantium: 艾德曼振金
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -2097,6 +2103,18 @@ generators:
         t: "带锁的{0}保险箱"
         subs:
           - entityMaterial
+      - s: "Mechanical {0} Safe"
+        t: "{0}个人机械保险箱"
+        subs:
+          - entityMaterial
+      - s: "Large {0} Coil"
+        t: "大型{0}线圈"
+        subs:
+          - entityMaterial
+      - s: "Large {0} Crucible"
+        t: "大型{0}坩埚"
+        subs:
+          - entityMaterial
   - group: entityProductTypeA
     namespace: "S:gt.multitileentity."
     completed: false
@@ -2115,6 +2133,10 @@ generators:
       Funnel: 漏斗
       Cap Nozzle: 有盖喷嘴
       Transformer Gearbox: 变速箱
+      Boiler Main Barometer: 锅炉气压计核心
+      Steam Turbine Main Housing: 蒸汽涡轮机核心
+      Dynamo Main Housing: 发电机核心
+      Gas Turbine Main Housing: 燃气涡轮机核心
   - group: entityProductTypeB
     namespace: "S:gt.multitileentity."
     completed: false
@@ -2178,12 +2200,68 @@ generators:
       Diesel Engine: 燃油引擎
       Dense Heat Exchanger: 致密热交换器
       Capsule-Cell-Container: 单元式流体容器
+      Flux Heater: 红石通量加热器
+      Flux Engine: 红石通量引擎
+      Flux Motor: 红石通量旋转动能引擎
+      Flux Magnet: 红石通量磁场产生器
+      Flux Laser: 红石通量镭射器
+      Flux Dynamo: 红石通量发电机
+      Thermofluxic Cooler: 红石通量半导体制冷器
   - group: entityProductTypeC
     namespace: "S:gt.multitileentity."
     completed: false
     dict:
       Rotation Engine: 旋转动能引擎
-  # spike
+  # valve
+  - group: valve
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1} Tank Main Valve"
+        t: "{0}{1}储罐主阀门"
+        subs:
+          - valveType
+          - entityMaterial
+  - group: valveType
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Small: 小型
+      Small Dense: 小型致密
+      Large: 大型
+      Large Dense: 大型致密
+  # axle
+  - group: axle
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1} Axle"
+        t: "{0}{1}轴"
+        subs:
+          - axleType
+          - entityMaterial
+  - group: axleType
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Small: 小型
+      Medium: 中型
+      Large: 大型
+      Huge: 巨型
+  # wall
+  - group: wallDense
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "Dense {0}"
+        t: "致密{0}"
+        subs:
+          - wall
+  - group: wall
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} Wall"
+        t: "{0}壁板"
+        subs:
+          - entityMaterial
+  # bars
   - group: bars
     namespace: "S:gt.block.bars."
     rules:
