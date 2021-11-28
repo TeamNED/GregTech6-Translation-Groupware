@@ -615,7 +615,6 @@ generators:
         S:oredict.oreVanillagranite: 花岗岩
       Sandstone: 沙石
       Small: 贫瘠
-      Basalt: 玄武岩
       Mud: 淤泥
       Space: 太空
       Bedrock: 基岩
@@ -780,7 +779,6 @@ generators:
       Crystal Matrix: 水晶矩阵
       Cyanite: 蓝晶石
       Damascus Steel: 大马士革钢
-      Dark Iron: 玄铁
       Dark Thaumium: 黑暗神秘
       Deep Iron: 深渊铁
       Desichalkos: 虚空之魂石
@@ -819,7 +817,6 @@ generators:
       Mauftrium: 始源魂灵
       Meteoric Black Steel: 陨黑钢 
       Meteoric Blue Steel: 陨蓝钢 
-      Meteoric Iron: 陨铁
       Meteoric Red Steel: 陨红钢 
       Meutoite: 龙之魂石
       Midasium: 溶火金
@@ -858,7 +855,6 @@ generators:
       Soularium: 魂金
       Spectre Iron: 灵魂之铁
       Magnetic Steel: 磁化钢
-      Steeleaf: 钢叶
       Sunnarium: 太阳合金
       Tartarite: 溶火之石
       Teslatine Alloy: 特斯拉合金
@@ -866,8 +862,6 @@ generators:
       Titanium Aluminide: 钛铝合金
       Iritanium: 钛铱合金
       Trinaquadalloy: 碳化特林-钍瑞铌合金
-      Trinitanium: 特林钛合金
-      Trinium: 特林金属
       Sintered Tungsten: 结晶钨
       Vanadium Magnetite: 钒磁铁
       Vibramantium: 艾德曼振金
@@ -1066,7 +1060,6 @@ generators:
       Tantalite: 钽铁
       Tetrahedrite: 黝铜
       Tritanium Dioxide: 二氧化三钛
-      Elemental Tritanium: 三钛
       Tritanium Hexaastatide: 六砹化三钛
       Tritanium Hexabromide: 六溴化三钛
       Tritanium Hexachloride: 六氯化三钛
@@ -1097,7 +1090,6 @@ generators:
       Yellow CY-11: 黄色试剂Y-11
       Basalz: 岩石
       Bedrock: 基岩
-      Betweenstone: 交错石
       Blackstone: 黑石
       Blitz: 狂风
       Blizz: 暴雪
@@ -1116,9 +1108,7 @@ generators:
       Gneiss: 片麻岩
       Gravel: 沙砾
       Greywacke: 杂砂岩
-      Holystone: 圣石
       Ice: 冰
-      Livingrock: 活石
       Magic: 魔法
       Mars: 火星岩石
       Mars Dust: 火星尘土
@@ -1127,7 +1117,6 @@ generators:
       Migmatite: 混合岩
       Moon: 月面岩石
       Moon Turf: 月面草皮
-      Nether Brick: 地狱砖
       Netherrack: 地狱岩
       Obsidian: 黑曜石
       Pitstone: 麻纹石
@@ -1140,18 +1129,9 @@ generators:
       Slate: 板岩
       Space: 太空岩石
       Stone: 石
-      Umberstone: 棕石
       Purified Vinteum: 纯净温特姆
       Void: 煤晶
       Void Quartz: 虚空金属
-      Wax: 蜡
-      Bees Wax: 蜂蜡
-      Magic Wax: 魔力蜂蜡
-      Paraffin Wax: 石蜡
-      Plant Wax: 植物蜡
-      Refractory Wax: 耐高温蜡
-      Soulful Wax: 灵魂蜜蜡
-      Amnesic Wax: 遗忘蜜蜡
       Asbestos: 石棉
       Butter: 黄油
       Salted Butter: 盐味黄油
@@ -1192,7 +1172,6 @@ generators:
       Aerotheum: 和谐之空气
       Bluestone: 蓝石
       Calcium Sulfate: 硫酸钙
-      Ceramic: 陶瓷
       Cobalt Hexahydrate: 六水合钴
       Cryotheum: 凛冰
       Dynamite: 锯末炸药
@@ -2018,6 +1997,7 @@ generators:
       Ironwood: 铁木
       Carbon: 碳
       Rubber: 橡胶
+      Gaia: 盖亚
       Gaia Spirit: 盖亚之魂
       Tantalum Hafnium Carbide: 碳化钽铪
       Vanadiumsteel: 钒钢
@@ -2030,6 +2010,32 @@ generators:
       Blackstone: 黑石
       Black Granite: 黑色花岗岩
       Red Granite: 红色花岗岩
+      Basalt: 玄武岩
+      Nether Brick: 地狱砖
+      Ceramic: 陶瓷
+      Umberstone: 棕石
+      Livingrock: 活石
+      Holystone: 圣石
+      Betweenstone: 交错石
+      Quartz: 石英
+      Dark Iron: 玄铁
+      Meteoric Iron: 陨铁
+      Niobium: 铌
+      Tantalum: 钽
+      Vanadium: 钒
+      Steeleaf: 钢叶
+      Elemental Tritanium: 三钛
+      Trinitanium: 特林钛合金
+      Trinium: 特林金属
+      Wax: 蜡
+      Bees Wax: 蜂蜡
+      Magic Wax: 魔力蜂蜡
+      Paraffin Wax: 石蜡
+      Plant Wax: 植物蜡
+      Refractory Wax: 耐高温蜡
+      Soulful Wax: 灵魂蜜蜡
+      Amnesic Wax: 遗忘蜜蜡
+      Stainless: 不锈钢
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -2072,8 +2078,26 @@ generators:
         t: "{0}{1}"
         subs:
           - entityMaterial
-          - entityProductType
-  - group: entityProductType
+          - entityProductTypeA
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
+        subs:
+          - entityProductTypeB
+          - entityMaterial
+      - s: "{0} {1}"
+        t: "{1} ({0})"
+        subs:
+          - entityMaterial
+          - entityProductTypeC
+      - s: "Custom {0} Gearbox"
+        t: "{0}可调变速箱"
+        subs:
+          - entityMaterial
+      - s: "Key Locked {0} Safe"
+        t: "带锁的{0}保险箱"
+        subs:
+          - entityMaterial
+  - group: entityProductTypeA
     namespace: "S:gt.multitileentity."
     completed: false
     dict:
@@ -2083,6 +2107,82 @@ generators:
       Hopper: 料斗
       Queue Hopper: 队列料斗
       Anvil: 砧
+      Drum: 储罐
+      Measuring Pot: 量杯
+      Barometer Gas Cylinder: 制计压瓶
+      Nozzle: 喷嘴
+      Tap: 龙头
+      Funnel: 漏斗
+      Cap Nozzle: 有盖喷嘴
+      Transformer Gearbox: 变速箱
+  - group: entityProductTypeB
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Smelting Crucible: 熔炼坩埚
+      Mold: 模具
+      Steam Boiler Tank: 蒸汽锅炉
+      Strong Steam Boiler Tank: 强化蒸汽锅炉
+      Steam Engine: 蒸汽引擎
+      Strong Steam Engine: 强化蒸汽引擎
+      Automatic Hammer: 自动锻造锤
+      Steam Turbine: 蒸汽涡轮机
+      Rotational Pump: 旋转泵
+      Crucible Faucet: 坩埚浇铸口
+      Basin: 浇铸盆
+      Crucible Crossing: 坩埚浇铸道
+      Oven: 熔炉
+      Shredder: 研磨机
+      Crusher: 破碎机
+      Lathe: 车床
+      Sifter: 筛选机
+      Buzzsaw: 圆锯
+      Squeezer: 榨汁机
+      Centrifuge: 离心机
+      Compressor: 压缩机
+      Rolling Mill: 辊压机
+      Roll Bender: 辊弯机
+      Roll Former: 辊压成型机
+      Cluster Mill: 多辊式轧机
+      Wiremill: 线缆轧制机
+      Roasting Oven: 焙烧炉
+      Mixer: 搅拌机
+      Distillery: 蒸馏室
+      Low Heat Extruder: 压模器
+      Extruder: 压模器
+      Loom: 织布机
+      Polarizer: 电磁偏振器
+      Press: 压力成型机
+      Smelter: 液化炉
+      Crystallisation Crucible: 结晶器
+      Sluice: 洗矿厂
+      Magnetic Separator: 磁选机
+      Dryer: 干燥器
+      Laminator: 过胶机
+      Catalytic Cracker: 催化裂解器
+      Steam Cracker: 蒸汽裂解器
+      Sanding Machine: 砂轮
+      Burner Mixer: 燃烧反应室
+      Debarker: 剥皮器
+      Compartment Drawer: 四联抽屉
+      Advanced Crafting Table: 高级工作台
+      Charging Crafting Table: 充能工作台
+      Mass Storage: 量子存储器
+      Logistics Mass Storage: 物流量子存储器
+      Bookshelf: 书架
+      Locker: 衣橱
+      Charging Locker: 充能衣橱
+      Fluidized Bed Burning Box: 流化床燃烧室
+      Dense Fluidized Bed Burning Box: 致密流化床燃烧室
+      Heat Exchanger: 热交换器
+      Diesel Engine: 燃油引擎
+      Dense Heat Exchanger: 致密热交换器
+      Capsule-Cell-Container: 单元式流体容器
+  - group: entityProductTypeC
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Rotation Engine: 旋转动能引擎
   # spike
   - group: bars
     namespace: "S:gt.block.bars."
