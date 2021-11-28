@@ -2738,9 +2738,14 @@ generators:
   - group: fallback
     namespace: "S:"
     dict:
+      Wooden Panel: 木制覆盖板
+      Asphalt Panel: 沥青覆盖板
+      Concrete Panel: 混凝土覆盖板
+      C-Foam Panel: 建筑泡沫覆盖板
+      Put in Furnace to harden: 放在熔炉里硬化
+      Needs to be soldered properly: 需要焊接
       "Any Sub-Block of this one": 任何该方块的子方块
       "Any Sub-Item of this one": 所有此物品的子物品
-      Wooden Panel: 木制覆盖板
       Wooden Bookshelf: 木制书架
       Wooden Bucket: 木桶
       Used: 已使用过
