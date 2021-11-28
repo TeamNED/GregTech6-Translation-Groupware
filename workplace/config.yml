@@ -1924,11 +1924,11 @@ generators:
   - group: randomtools
     namespace: "S:gt.multiitem.randomtools."
     rules:
-      - s: "{0} {1}"
-        t: "{0}{1}"
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
         subs:
-          - color
           - randomtoolsType
+          - color
   - group: randomtoolsType
     namespace: "S:gt.multiitem.randomtools."
     completed: false
