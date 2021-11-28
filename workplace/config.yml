@@ -663,10 +663,8 @@ generators:
       Adamantite: 精金
       Alduorite: 神秘蓝金
       Aluminium Alloy: 铝合金
-      Aluminium Brass: 铝黄铜
       Alumite: 耐酸铝
       Amordrine: 魔力之石
-      Angmallen: 神圣之金
       Any: 任意
       Aredrite: 希尔金
       Astral Silver: 星银
@@ -674,9 +672,6 @@ generators:
       Battery Alloy: 电池合金
       Bedrockium: 基岩
       Bismuth Bronze: 铋青铜
-      Black Bronze: 黑青铜
-      Black Steel: 黑钢
-      Blue Steel: 蓝钢
       Blutonium: 蓝钚
       Carmot: 闪耀金
       Cast Iron: 铸铁
@@ -694,7 +689,6 @@ generators:
       Chemical Y-8: 试剂Y-8
       Chemical Y-9: 试剂Y-9
       Chromium Dioxide: 二氧化铬
-      Cobalt Brass: 钴黄铜
       Conductive Iron: 导电铁
       Coralium: 珊瑚
       Cosmic Neutronium: 宇宙中子态素
@@ -711,17 +705,14 @@ generators:
       Electrum Flux: 通量琥珀金
       Elvorium: 魔灵
       Empty: 空
-      Enderium: 末影
       Enderium Base: 末影粗胚
       Endium: 末金
       Energetic Alloy: 充能合金
       Ethaxium: 伊桑斯
       Eximite: 虚空石
       Ferrite: 铁氧体
-      Fiery Steel: 炙热钢
       Force: 力量
       Frozen Iron: 冰霜之铁
-      Gaia Spirit: 盖亚之魂
       Refined Glowstone: 精致萤石
       Inductive Alloy: 感应合金
       Spring Steel: 弹簧钢
@@ -740,7 +731,6 @@ generators:
       Kreknorite: 炽焰陨石
       Lemurite: 利莫里亚
       Ludicrite: 滑稽
-      Magnalium: 镁铝合金
       Mauftrium: 始源魂灵
       Meteoric Black Steel: 陨黑钢 
       Meteoric Blue Steel: 陨蓝钢 
@@ -772,9 +762,7 @@ generators:
       Pulsating Iron: 脉冲铁
       Purple Alloy: 紫色合金
       Red Alloy: 红色合金
-      Red Steel: 红钢
       Redstone Alloy: 红硅(红石合金)
-      Rose Gold: 玫瑰金
       Rubber Bar: 橡胶
       Rubracium: 褐铜
       Sanguinite: 狱炎石
@@ -786,23 +774,18 @@ generators:
       Spectre Iron: 灵魂之铁
       Magnetic Steel: 磁化钢
       Steeleaf: 钢叶
-      Sterling Silver: 纯银
       Sunnarium: 太阳合金
-      Tantalum Hafnium Carbide: 碳化钽铪
       Tartarite: 溶火之石
       Teslatine Alloy: 特斯拉合金
       Thaumium: 神秘
       Titanium Aluminide: 钛铝合金
-      Titanium-Gold: 钛金
       Iritanium: 钛铱合金
       Trinaquadalloy: 碳化特林-钍瑞铌合金
       Trinitanium: 特林钛合金
       Trinium: 特林金属
       Sintered Tungsten: 结晶钨
       Vanadium Magnetite: 钒磁铁
-      Vanadiumsteel: 钒钢
       Vibramantium: 艾德曼振金
-      Vibranium Silver: 银振金合金
       Vibranium Steel: 振金钢
       Vibrant Alloy: 脉冲合金
       Vulcanite: 熔岩结晶
@@ -1782,6 +1765,33 @@ generators:
       Antimony: 锑
       Molybdenum: 钼
       Tungsten Alloy: 钨合金
+      Cobalt Brass: 钴黄铜
+      Black Bronze: 黑青铜
+      Aluminium Brass: 铝黄铜
+      Sterling Silver: 纯银
+      Rose Gold: 玫瑰金
+      Angmallen: 神圣之金
+      Magnalium: 镁铝合金
+      Enderium: 末影
+      Vibranium Silver: 银振金合金
+      Wood: 木
+      Treated Wood: 防腐木
+      Plastic: 塑料
+      Ironwood: 铁木
+      Carbon: 碳
+      Rubber: 橡胶
+      Gaia Spirit: 盖亚之魂
+      Tantalum Hafnium Carbide: 碳化钽铪
+      Vanadiumsteel: 钒钢
+      Titanium-Gold: 钛金
+      Fiery Steel: 炙热钢
+      Black Steel: 黑钢
+      Blue Steel: 蓝钢
+      Red Steel: 红钢
+      Stone: 石头
+      Blackstone: 黑石
+      Black Granite: 黑色花岗岩
+      Red Granite: 红色花岗岩
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -1830,6 +1840,54 @@ generators:
     completed: false
     dict:
       Chest: 箱子
+      reinforced wooden Chest: 强化木箱
+      Scaffold: 脚手架
+      Hopper: 料斗
+      Queue Hopper: 队列料斗
+      Anvil: 砧
+  - group: pipeRestrictive
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "Restrictive {0}"
+        t: "限制{0}"
+        subs:
+          - pipeComplex
+      - s: "Restrictive {0}"
+        t: "限制{0}"
+        subs:
+          - pipe
+  - group: pipeComplex
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - pipeTypePrefix
+          - pipe
+  - group: pipe
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - entityMaterial
+          - pipeTypeSuffix
+  - group: pipeTypePrefix
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Tiny: 微型
+      Small: 小型
+      Large: 大型
+      Huge: 巨型
+      Quadruple: 四合一
+      Nonuple: 九合一
+  - group: pipeTypeSuffix
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Fluid Pipe: 流体管道
+      Item Pipe: 物流管道
   
   
     
