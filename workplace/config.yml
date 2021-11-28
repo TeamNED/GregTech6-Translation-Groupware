@@ -220,12 +220,8 @@ generators:
       Asphalt: 沥青
       Tree Bark: 树皮
       Barley Flour: 大麦面粉
-      Black Dye: 黑色染料粉
-      Blue Dye: 蓝色染料粉
       Bonemeal: 骨粉
-      Brown Dye: 褐色染料粉
       Cornmeal: 玉米面粉
-      Cyan Dye: 青色染料粉
       Dark Ashes: 黑色灰烬
       Ectoplasm: 灵气粉
       Cooked Fishmeal: 熟鱼肉
@@ -239,29 +235,19 @@ generators:
       Rotten Meat: 腐肉
       Rotten Mince Meat: 烂肉末
       Gravel: 沙砾粉
-      Gray Dye: 灰色染料
-      Green Dye: 绿色染料
       Gunpowder: 火药
       Crushed Ice: 碎冰
       Iodine Salt: 碘盐
-      Light Blue Dye: 淡蓝色染料
-      Light Gray Dye: 淡灰色染料
-      Lime Dye: 黄绿色染料
-      Magenta Dye: 品红染料
       Mars Dust: 火星尘土
       Mars Sand: 火星沙
       Mars Turf: 火星草皮
       Moon Dust: 月面尘土
       Moon Turf: 月面草皮
       Oatmeal: 燕麦粉
-      Orange Dye: 橙色染料
       Palygorskite Clay Powder: 坡缕石粘土粉
       Chad: 纸屑
       Peat: 泥炭粉
       Bituminous Peat: 沥青泥炭粉
-      Pink Dye: 粉色染料
-      Purple Dye: 紫色染料
-      Red Dye: 红色染料
       Rice: 米粒
       Rock Salt: 岩盐
       Rye Flour: 黑麦面粉
@@ -279,9 +265,7 @@ generators:
       Refractory Wax: 耐高温蜡
       Soulful Wax: 灵魂蜜蜡
       Amnesic Wax: 遗忘蜜蜡
-      Flour: 面粉
-      White Dye: 白色染料
-      Yellow Dye: 黄色染料
+      Flour: 
       Red Sand: 红沙
       Sand: 沙
       Blaze Powder: 烈焰粉
@@ -302,6 +286,10 @@ generators:
         t: "{0}"
         subs:
           - oreSandType
+      - s: "{0} Dye"
+        t: "{0}染料粉"
+        subs:
+          - color
   - group: dustTypePrefix
     namespace: S:oredict.
     completed: false
@@ -1831,6 +1819,54 @@ generators:
       Quartzite: 石英岩
       Shale: 页岩
       Slate: 板岩
+  # dye
+  - group: colorBlockSlab
+    namespace: "S:gt.block."
+    rules:
+      - s: "{0} Slab"
+        t: "{0}半砖"
+        subs:
+          - colorBlock
+  - group: colorBlock
+    namespace: "S:gt.block."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - color
+          - colorBlockType
+  - group: colorBlockType
+    namespace: "S:gt.block."
+    completed: false
+    dict:
+      Asphalt: 沥青
+      C-Foam: 泡沫
+      Fresh C-Foam: 湿泡沫
+      Concrete: 混凝土
+      Reinforced Concrete: 强化混凝土
+      Glass: 玻璃
+      Glow Glass: 荧光玻璃
+      Glowtus: 荧光睡莲
+  - group: color
+    namespace: "S:"
+    completed: false
+    dict:
+      Black: 黑色
+      Blue: 蓝色
+      Brown: 褐色
+      Cyan: 青色
+      Gray: 灰色
+      Green: 绿色
+      Light Blue: 淡蓝色
+      Light Gray: 淡灰色
+      Lime: 黄绿色
+      Magenta: 品红
+      Orange: 橙色
+      Pink: 粉色
+      Purple: 紫色
+      Red: 红色
+      White: 白色
+      Yellow: 黄色
 
   # entity
   - group: entityMaterial
@@ -1990,6 +2026,14 @@ generators:
       Queue Hopper: 队列料斗
       Anvil: 砧
   # spike
+  - group: bars
+    namespace: "S:gt.block.bars."
+    rules:
+      - s: "{0} Bars"
+        t: "{0}栏杆"
+        subs:
+          - entityMaterial
+  # spike
   - group: spike
     namespace: "S:gt.block.spikes."
     rules:
@@ -2049,9 +2093,6 @@ generators:
     dict:
       Fluid Pipe: 流体管道
       Item Pipe: 物流管道
-  
-  
-    
 
   - group: fallback
     namespace: "S:"
