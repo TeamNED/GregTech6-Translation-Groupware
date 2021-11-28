@@ -2223,6 +2223,15 @@ generators:
           - entityProductTypeD
           - physicalState
           - entityMaterial
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
+        subs:
+          - entityProductTypeE
+          - energyTier
+      - s: "Scanner (Visuals, {0})"
+        t: "扫描仪 ({0})"
+        subs:
+          - energyTier
       - s: "Custom {0} Gearbox"
         t: "{0}可调变速箱"
         subs:
@@ -2346,6 +2355,59 @@ generators:
     dict:
       Burning Box: 燃烧室
       Dense Burning Box: 致密燃烧室
+  - group: entityProductTypeE
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Electric Heater: 电力加热器
+      Electric Engine: 电动引擎
+      Electric Motor: 电动机
+      Electromagnet: 电磁铁
+      Transformer: 变压器
+      Long Distance Transformer: 远距传输用高压变压器
+      Buildcraft Assembly Laser: BC镭射器
+      Battery Box: 电池盒
+      Large Battery Box: 大型电池盒
+      Electric CO2 Laser: CO2激光器
+      Electric Dynamo: 发电机
+      Quantum Energizer: 量子充能器
+      Crystal Charger: 晶体充能器
+      Large Crystal Charger: 大型晶体充能器
+      Laser Absorber: 激光接收器
+      Thermoelectric Cooler: 半导体制冷器
+      Red Energium: 能量水晶
+      Cyan Energium: 青能水晶
+      Lead-Acid Battery: 铅酸电池
+      Nickel-Cadmium Battery: 镍镉电池
+      Lithium-Cobalt Battery: 钴酸锂电池
+      Lithium-Manganese Battery: 锂锰电池
+      Alkaline Battery: 碱性电池
+      Red Energium Crystal: 能量水晶
+      Cyan Energium Crystal: 青能水晶
+      Automatic Igniter: 自动点火器
+      Zero-Point-Module: 零点模块
+      Electrolyzer: 电解器
+      Canning Machine: 灌装机
+      Injector: 流体灌装机
+      Printer: 打印机
+      Laser Engraver: 激光刻蚀机
+      Laser Welder: 激光焊接器
+      Autocrafter: 自动工作台
+      Electric Mixer: 电动搅拌机
+      Electric Loom: 电力织布机
+      Electric Sifter: 电动筛矿机
+      Slicer: 切片器
+      Matter Fabricator: 物质制造器
+      Matter Replicator: 物质复制器
+      Nanoscale Fabricator: 纳米制造机
+      Lightning Processor: 闪电处理器
+      Plantalyzer: 植物分析仪
+      Bumblelyzer: 膜翅目昆虫分析仪
+      Freezer: 冷冻机
+      Cryo Mixer: 低温搅拌机
+      Boxinator: 装箱机
+      Unboxinator: 拆箱机
+      Molecular Scanner: 分子扫描仪
   - group: physicalState
     namespace: "S:"
     completed: false
@@ -2353,7 +2415,69 @@ generators:
       Solid: 固体
       Liquid: 液体
       Gas: 气体
-  # fuel Rod: 燃料棒
+  # multiitem with energy
+  - group: itemEnergized
+    namespace: "S:gt.multiitem."
+    rules:
+      - s: "{0} ({1})"
+        t: "{0} ({1})"
+        subs:
+          - itemEnergizedType
+          - energyTier
+  - group: itemEnergizedType
+    namespace: "S:gt.multiitem."
+    completed: false
+    dict:
+      Compact Electric Motor: 微型电机
+      Compact Electric Pump: 电动泵
+      Compact Electric Conveyor: 输送机模块
+      Compact Electric Piston: 电动活塞
+      Compact Robot Arm: 机械臂
+      Compact Force Field Emitter: 发射器
+      Compact Signal Emitter: 信号发射器
+      Compact Sensor: 传感器
+  - group: blockEnergized
+    namespace: "S:gt.block.longdistwire"
+    rules:
+      - s: "Long Distance Electric Wire ({0})"
+        t: "远距输电用高压电缆 ({0})"
+        subs:
+          - energyTier
+  # energyTier
+  - group: energyTier
+    namespace: "S:"
+    completed: false
+    dict:
+      ULV: ULV
+      LV: LV
+      MV: MV
+      HV: HV
+      EV: EV
+      IV: IV
+      LuV: LuV
+      ZPM: ZPM
+      UV: UV
+      PUV1: PUV1
+      ULV-LV: ULV-LV
+      LV-MV: LV-MV
+      MV-HV: MV-HV
+      HV-EV: HV-EV
+      EV-IV: EV-IV
+      IV-LuV: IV-LuV
+      LuV-ZPM: LuV-ZPM
+      ZPM-UV: ZPM-UV
+      UV-PUV1: UV-PUV1
+      T0: T0
+      T1: T1
+      T2: T2
+      T3: T3
+      T4: T4
+      T5: T5
+      T6: T6
+      T7: T7
+      T8: T8
+      T9: T9
+  # fuel rod
   - group: fuelRodDepleted
     namespace: "S:gt.multitileentity."
     rules:
