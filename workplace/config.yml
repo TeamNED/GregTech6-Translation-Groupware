@@ -2027,6 +2027,14 @@ generators:
         t: "{0}纤维"
         subs:
           - color
+  # string, fiber
+  - group: clay
+    namespace: "S:gt.block.diggable"
+    rules:
+      - s: "{0} Clay"
+        t: "{0}粘土"
+        subs:
+          - color
   # color
   - group: colorGtMaterial
     namespace: "S:gt.material"
@@ -2134,6 +2142,7 @@ generators:
       Titanium: 钛
       Chromium: 铬
       Bismuth: 铋
+      Tungstencarbide: 碳化钨
       Tungsten Carbide: 碳化钨
       Galvanized Steel: 镀锌钢
       Gilded Iron: 镀金铁
@@ -2567,6 +2576,22 @@ generators:
         t: "{0}增殖棒"
         subs:
           - material
+  # rail
+  - group: rail
+    namespace: "S:gt.block.rail."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - entityMaterial
+          - railType
+  - group: railType
+    namespace: "S:gt.block.rail."
+    completed: false
+    dict:
+      Track: 轨道
+      Booster Track: 加速轨道
+      Detector Track: 探测轨道
   # valve
   - group: valve
     namespace: "S:gt.multitileentity."
