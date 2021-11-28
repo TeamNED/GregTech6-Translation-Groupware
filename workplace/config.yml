@@ -325,6 +325,7 @@ generators:
       Bolt: 螺栓
       Cart Wheels: 车轮
       Chains: 锁链
+      Chain: 锁链
       Chunk: 小块
       Foil: 箔
       Gear: 齿轮
@@ -580,6 +581,13 @@ generators:
           - ore
   - group: ore
     namespace: S:oredict.
+    dict:
+      Air infused Stone: 风之碎片矿石
+      Earth infused Stone: 地之碎片矿石
+      Entropy infused Stone: 混沌碎片矿石
+      Fire infused Stone: 火之碎片矿石
+      Order infused Stone: 混沌碎片矿石
+      Water infused Stone: 水之碎片矿石
     rules:
       - s: "{0} Ore"
         t: "{0}矿石"
@@ -943,8 +951,8 @@ generators:
       Firestone: 火石
       Fluix: 福鲁伊克斯
       Fluorite: 氟石
-      Forcicium: 力场
-      Forcillium: 力场
+      Forcicium: 力量
+      Forcillium: 力量
       Galena: 方铅
       Garnet: 石榴子石
       Garnierite: 硅镁镍
@@ -1250,11 +1258,11 @@ generators:
       - s: "{0}"
         t: "{0}"
         subs:
-          - materalPositive
+          - materialPositive
       - s: "Anti-{0}"
         t: "反物质{0}"
         subs:
-          - materalPositive
+          - materialPositive
       - s: "{0}"
         t: "{0}"
         subs:
@@ -1306,6 +1314,7 @@ generators:
       Dominican Amber: 多米尼加蓝琥珀
       Dragon Eye: 龙眼石
       Electrotine: 蓝石
+      Dragonstone: 龙石
       Elven Dragonstone: 龙石
       Emeradic: 绿宝石水晶
       Emerald: 绿宝石
@@ -1379,7 +1388,7 @@ generators:
       Zircon: 锆石
       Zirconium: 锆
       Any: 任意
-  - group: materalPositive
+  - group: materialPositive
     completed: false
     dict:
       Actinium: 锕
