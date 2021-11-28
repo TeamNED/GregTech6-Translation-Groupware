@@ -1340,6 +1340,10 @@ generators:
         t: "{0}"
         subs:
           - entityMaterial
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - color
   - group: gem
     completed: false
     dict:
@@ -1951,6 +1955,7 @@ generators:
       Glass: 玻璃
       Glow Glass: 荧光玻璃
       Glowtus: 荧光睡莲
+  # randomtools
   - group: randomtools
     namespace: "S:gt.multiitem.randomtools."
     rules:
@@ -1967,6 +1972,69 @@ generators:
       C-Foam Spray: 建筑泡沫喷罐
       Advanced C-Foam Spray: 加强建筑泡沫喷罐
       Canvas: 帆布
+  # fluidColored
+  - group: fluidColored
+    namespace: "S:fluid"
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - color
+          - fluidColoredType
+      - s: "Advanced {0} C-Foam"
+        t: "高级{0}建筑泡沫"
+        subs:
+          - color
+      - s: "Chemical {0} Dye"
+        t: "{0}化学染料"
+        subs:
+          - color
+      - s: "Water Mixed {0} Dye"
+        t: "{0}水性染料"
+        subs:
+          - color
+  - group: fluidColoredType
+    namespace: "S:fluid"
+    completed: false
+    dict:
+      C-Foam: 建筑泡沫
+      Flower Dye: 植物染料
+  # gt behaviour
+  - group: gtBehaviour
+    namespace: "S:gt.behaviour."
+    rules:
+      - s: "Can place {0} C-Foam"
+        t: "可以喷射{0}泡沫"
+        subs:
+          - color
+      - s: "Can Color things in {0}"
+        t: "可以把东西染成{0}"
+        subs:
+          - color
+  # gt multiitem bottles
+  - group: gtBehaviour
+    namespace: "S:gt.multiitem.bottles."
+    rules:
+      - s: "Color: {0}"
+        t: "颜色: {0}"
+        subs:
+          - color
+  # string, fiber
+  - group: string
+    namespace: "S:oredict.plantGtFiber"
+    rules:
+      - s: "{0} String"
+        t: "{0}纤维"
+        subs:
+          - color
+  # color
+  - group: colorGtMaterial
+    namespace: "S:gt.material"
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - color
   - group: color
     namespace: "S:"
     completed: false
@@ -3051,6 +3119,9 @@ generators:
   - group: fallback
     namespace: "S:"
     dict:
+      Bottled Water Dye: 罐装水性染料
+      Bottled Flower Dye: 罐装植物染料
+      Bottled Chemical Dye: 罐装化学染料
       Wooden Panel: 木制覆盖板
       Asphalt Panel: 沥青覆盖板
       Concrete Panel: 混凝土覆盖板
