@@ -203,6 +203,88 @@ generators:
           - dust
   - group: dust
     namespace: S:oredict.
+    dict:
+      Ground Almond: 碎杏仁
+      Ground Black Pepper: 黑胡椒末
+      Ground Cinnamon: 肉桂粉
+      Ground Hazelnut: 碎榛子
+      Ground Nutmeg: 肉豆蔻粉
+      Ground Peanut: 碎花生
+      Ground Pistachio: 碎开心果
+      Ground Potato: 土豆泥
+      Ground Vanilla: 香草粉
+      Abyssal Oatmeal: 深渊燕麦粉
+      Arcane Ashes: 奥术灰
+      Arcane Compound: 压缩奥术灰
+      Ashes: 灰烬
+      Asphalt: 沥青
+      Tree Bark: 树皮
+      Barley Flour: 大麦面粉
+      Black Dye: 黑色染料粉
+      Blue Dye: 蓝色染料粉
+      Bonemeal: 骨粉
+      Brown Dye: 褐色染料粉
+      Cornmeal: 玉米面粉
+      Cyan Dye: 青色染料粉
+      Dark Ashes: 黑色灰烬
+      Ectoplasm: 灵气粉
+      Cooked Fishmeal: 熟鱼肉
+      Cooked Meat: 熟肉
+      Cooked Mince Meat: 熟肉末
+      Fishmeal: 鱼肉
+      Raw Fishmeal: 生鱼肉
+      Raw Meat: 生肉
+      Mince Meat: 肉末
+      Rotten Fishmeal: 烂鱼肉
+      Rotten Meat: 腐肉
+      Rotten Mince Meat: 烂肉末
+      Gravel: 沙砾粉
+      Gray Dye: 灰色染料
+      Green Dye: 绿色染料
+      Gunpowder: 火药
+      Crushed Ice: 碎冰
+      Iodine Salt: 碘盐
+      Light Blue Dye: 淡蓝色染料
+      Light Gray Dye: 淡灰色染料
+      Lime Dye: 黄绿色染料
+      Magenta Dye: 品红染料
+      Mars Dust: 火星尘土
+      Mars Sand: 火星沙
+      Mars Turf: 火星草皮
+      Moon Dust: 月面尘土
+      Moon Turf: 月面草皮
+      Oatmeal: 燕麦粉
+      Orange Dye: 橙色染料
+      Palygorskite Clay Powder: 坡缕石粘土粉
+      Chad: 纸屑
+      Peat: 泥炭粉
+      Bituminous Peat: 沥青泥炭粉
+      Pink Dye: 粉色染料
+      Purple Dye: 紫色染料
+      Red Dye: 红色染料
+      Rice: 米粒
+      Rock Salt: 岩盐
+      Rye Flour: 黑麦面粉
+      Salt: 盐
+      Fine Soulsand: 细灵魂沙
+      Emerald Green: 绿色绿宝石
+      Magic Tallow: 魔法油脂
+      Tofu: 豆腐末
+      Volcanic Ashes: 火山灰
+      Wax: 蜡
+      Bees Wax: 蜂蜡
+      Magic Wax: 魔力蜂蜡
+      Paraffin Wax: 石蜡
+      Plant Wax: 植物蜡
+      Refractory Wax: 耐高温蜡
+      Soulful Wax: 灵魂蜜蜡
+      Amnesic Wax: 遗忘蜜蜡
+      Flour: 面粉
+      White Dye: 白色染料
+      Yellow Dye: 黄色染料
+      Red Sand: 红沙
+      Sand: 沙
+      Blaze Powder: 烈焰粉
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -1073,12 +1155,14 @@ generators:
       Ferrous Chloride: 氯化亚铁
       Cooked Fishmeal: 熟鱼肉
       Cooked Meat: 熟肉
-      Cooked Mince Meat: 熟肉沫
+      Cooked Mince Meat: 熟肉末
+      Fishmeal: 鱼肉
       Raw Fishmeal: 生鱼肉
       Raw Meat: 生肉
+      Mince Meat: 肉末
       Rotten Fishmeal: 烂鱼肉
       Rotten Meat: 腐肉
-      Rotten Mince Meat: 烂肉沫
+      Rotten Mince Meat: 烂肉末
       Lithium Chlorate: 氯酸锂
       Lithium Perchlorate: 高氯酸锂
       Magnesium Carbonate: 碳酸镁
@@ -1102,6 +1186,65 @@ generators:
       Ferrovanadium: 钒磁铁
       Pumice: 浮石
       Realgar: 雄黄
+      Aerotheum: 和谐之空气
+      Bluestone: 蓝石
+      Calcium Sulfate: 硫酸钙
+      Ceramic: 陶瓷
+      Cobalt Hexahydrate: 六水合钴
+      Cryotheum: 凛冰
+      Dynamite: 锯末炸药
+      Ectoplasm: 灵气
+      Epidote: 绿帘石
+      Ferric Chloride: 氯化铁
+      Greenstone: 绿岩
+      Hydrated Coal: 水合煤
+      Hydrogen Borate: 硼酸氢盐
+      Lithium Hydroxide: 氢氧化锂
+      Lithium Oxide: 氧化锂
+      Liveroot: 活根
+      Methane Ice: 甲烷冰
+      Petrotheum: 构造之地岩
+      Porcelain: 瓷器
+      Potassium Aluminate: 偏铝酸钾
+      Potassium Bisulfate: 硫酸氢钾
+      Potassium Carbonate: 碳酸钾
+      Potassium Feldspar: 钾长石
+      Potassium Hydroxide: 氢氧化钾
+      Potassium Nitrate: 硝酸钾
+      Potassium Persulfate: 过硫酸钾
+      Potassium Pyrosulfate: 焦硫酸钾
+      Potassium Sulfate: 硫酸钾
+      Potassium Sulfide: 硫化钾
+      Potassium Sulfite: 亚硫酸钾
+      Pyrite: 黄铁
+      Pyrotheum: 炽焱
+      Sodium Aluminate: 偏铝酸钠
+      Sodium Bisulfate: 硫酸氢钠
+      Sodium Bisulphate: 硫酸氢钠
+      Sodium Carbonate: 碳酸钠
+      Sodium Hydroxide: 氢氧化钠
+      Sodium Nitrate: 硝酸钠
+      Sodium Peroxide: 过氧化钠
+      Sodium Persulfate: 过硫酸钠
+      Sodium Persulphate: 过硫酸钠
+      Sodium Pyrosulfate: 焦硫酸钠
+      Sodium Pyrosulphate: 焦硫酸钠
+      Sodium Sulfate: 硫酸钠
+      Sodium Sulfide: 硫化钠
+      Sodium Sulfite: 亚硫酸钠
+      Sodium Sulphate: 硫酸钠
+      Sodium Sulphide: 硫化钠
+      Sodium Sulphite: 亚硫酸钠
+      Sugar: 糖
+      Tungstic Acid: 钨酸
+      Uranium Hexafluoride: 六氟化铀
+      Uranium Tetrafluoride: 四氟化铀
+      Uranium-235 Hexafluoride: 六氟化铀-235
+      Uranium-235 Tetrafluoride: 四氟化铀-235
+      Uranium-238 Hexafluoride: 六氟化铀-238
+      Uranium-238 Tetrafluoride: 四氟化铀-238
+      Compost: 堆肥
+      Raw Compost: 可堆肥材料
   - group: material
     completed: false
     rules:
@@ -1367,6 +1510,7 @@ generators:
       Uranium: 铀
       Uranium-233: 铀-233
       Uranium-235: 铀-235
+      Uranium-238: 铀-238
       Vanadium: 钒
       Ytterbium: 镱
       Yttrium: 钇
