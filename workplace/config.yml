@@ -1458,6 +1458,11 @@ generators:
       Redstone Alloy: 红石合金
       Silicon: 硅
       Teslatine Alloy: 特斯拉合金
+      Dry: 干
+      SacredOak: 神圣橡树
+      Dark: 暗色
+      Sandstone: 沙石
+      Asphalt: 沥青
   - group: materialPositive
     completed: false
     dict:
@@ -1772,6 +1777,7 @@ generators:
       Wenge: 崖豆木
       Willow: 柳树
       Wood: 木
+      Wooden: 木制
       Zebrawood: 斑木
       Larch: 落叶松
       Cinnamon: 肉桂
@@ -1786,6 +1792,8 @@ generators:
       Rotten: 腐败的木
       Mossy: 苔痕木
       Frozen: 结冰的木
+      Ogre: 奥格
+      Wyvern: 双足飞龙
   - group: materialPowder
     dict:
       Netherite Scrap: 下界合金废料
@@ -2837,6 +2845,39 @@ generators:
       Ununoctium: 118号元素(Og)
       Ununseptium: 117号元素(Ts)
 
+  # --- QT ---
+  # qt_machine
+  - group: qt_machineSmooth
+    namespace: "S:qwertech.machines"
+    extensions: "qt"
+    rules:
+      - s: "Smooth {0}"
+        t: "光滑{0}"
+        subs:
+          - qt_machine
+  - group: qt_machine
+    namespace: "S:qwertech.machines"
+    extensions: "qt"
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - material
+          - qt_machineType
+  - group: qt_machineType
+    namespace: "S:qwertech.machines"
+    completed: false
+    extensions: "qt"
+    dict:
+      Crafting Table: 合成站
+      Counterdrawers: 抽屉柜
+      Chest: 箱子
+      Nesting Box: 木巢箱
+      Crafting Anvil: 合成砧
+      Upgrade Desk: 升级台
+      Countertop: 操作台
+      Compost Bin: 堆肥桶
+      Cobblestone Countertop: 圆石操作台
 
   - group: fallback
     namespace: "S:"
