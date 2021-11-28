@@ -2439,6 +2439,109 @@ generators:
     dict:
       Fluid Pipe: 流体管道
       Item Pipe: 物流管道
+  # mold
+  - group: mold
+    namespace: "S:gt."
+    rules:
+      - s: "Clay {0} Mold"
+        t: "粘土模具 ({0})"
+        subs:
+          - shape
+      - s: "Clay {0}"
+        t: "粘土{0}"
+        subs:
+          - shape
+      - s: "Extruder Shape ({0})"
+        t: "模具 ({0})"
+        subs:
+          - shape
+      - s: "Low Heat Extruder Shape ({0})"
+        t: "低热容压模模具 ({0})"
+        subs:
+          - shape
+      - s: "Extruder Shape for making {0}s"
+        t: "用来制造{0}的压模模具"
+        subs:
+          - shape
+      - s: "Extruder Shape for making {0}s"
+        t: "用来制造{0}的压模模具"
+        subs:
+          - shapeAlias
+  - group: shapeAlias
+    namespace: "S:"
+    completed: false
+    dict:
+      long Rod: 长杆
+      tiny Pipe: 微型管道
+      small Pipe: 小型管道
+      Pipe: 管道
+      large Pipe: 大型管道
+      full Block Pipe: 巨型管道
+      small Gear: 小型齿轮
+  - group: shape
+    namespace: "S:"
+    completed: false
+    dict:
+      Plate: 板
+      Long Rod: 长杆
+      Bolt: 螺栓
+      Ring: 环
+      Cell: 槽
+      Ingot: 锭
+      Wire: 线缆
+      Casing: 外壳
+      Tiny Pipe: 微型管道
+      Small Pipe: 小型管道
+      Normal Pipe: 管道
+      Large Pipe: 大型管道
+      Huge Pipe: 巨型管道
+      Block: 方块
+      Sword Blade: 剑身
+      Pickaxe Head: 镐头
+      Shovel Head: 锹头
+      Axe Head: 斧头
+      Hoe Head: 锄头
+      Hammer Head: 锤头
+      File Head: 锉刀刀头
+      Spade: 铲
+      Universal Spade: 万用铲
+      Saw Blade: 锯刃
+      Sword: 剑
+      Pickaxe: 镐
+      Shovel: 锹
+      Axe: 斧
+      Double Axe: 双刃斧
+      Hoe: 锄
+      Hammer: 锤
+      File: 锉刀
+      Saw: 锯
+      Gear: 齿轮
+      Bottle: 瓶子
+      Curved Plate: 弯曲板
+      Small Gear: 小型齿轮
+      Rod: 杆
+      Capsule-Cell-Container: 单元式流体容器
+      Foil: 箔
+      Tiny Plate: 小块板
+      Chunk: 小块
+      Item Casing: 外壳
+      Builder's Wand: 建筑之杖
+      Chisel: 凿子
+      Arrow: 箭
+      Screwdriver: 螺丝刀
+      Tap: 龙头
+      Funnel: 料斗
+      Crucible: 坩埚
+      Basin: 浇铸盆
+      Mold: 模具
+      Faucet: 坩埚浇铸口
+      Crossing: 浇筑道
+      Juicer: 榨汁机
+      Bowl: 碗
+      Plow: 犁
+      Sense: 镰刀
+      Nugget: 粒
+      Billet: 胚料
   # useless elements
   - group: elementUselessAnti
     namespace: "S:"
@@ -2743,6 +2846,7 @@ generators:
       Concrete Panel: 混凝土覆盖板
       C-Foam Panel: 建筑泡沫覆盖板
       Put in Furnace to harden: 放在熔炉里硬化
+      Put in Furnace to harden it: 放在熔炉里硬化
       Needs to be soldered properly: 需要焊接
       "Any Sub-Block of this one": 任何该方块的子方块
       "Any Sub-Item of this one": 所有此物品的子物品
