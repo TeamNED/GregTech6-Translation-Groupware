@@ -1472,6 +1472,7 @@ generators:
       Americium: 镅
       Americium-241: 镅-241
       Americium-242: 镅-242
+      Americium-245: 镅-245
       Antimony: 锑
       Arsenic: 砷
       Astatine: 砹
@@ -1552,6 +1553,7 @@ generators:
       Plutonium-240: 钚-240
       Plutonium-241: 钚-241
       Plutonium-243: 钚-243
+      Plutonium-244: 钚-244
       Polonium: 钋
       Potassium: 钾
       Praseodymium: 镨
@@ -1577,6 +1579,8 @@ generators:
       Terbium: 铽
       Thallium: 铊
       Thorium: 钍
+      Thorium-230: 钍-230
+      Thorium-232: 钍-232
       Thulium: 铥
       Tin: 锡
       Titanium: 钛
@@ -2213,6 +2217,12 @@ generators:
         subs:
           - entityMaterial
           - entityProductTypeC
+      - s: "{0} ({1}, {2})"
+        t: "{0} ({1}, {2})"
+        subs:
+          - entityProductTypeD
+          - physicalState
+          - entityMaterial
       - s: "Custom {0} Gearbox"
         t: "{0}可调变速箱"
         subs:
@@ -2330,6 +2340,41 @@ generators:
     completed: false
     dict:
       Rotation Engine: 旋转动能引擎
+  - group: entityProductTypeD
+    namespace: "S:gt.multitileentity."
+    completed: false
+    dict:
+      Burning Box: 燃烧室
+      Dense Burning Box: 致密燃烧室
+  - group: physicalState
+    namespace: "S:"
+    completed: false
+    dict:
+      Solid: 固体
+      Liquid: 液体
+      Gas: 气体
+  # fuel Rod: 燃料棒
+  - group: fuelRodDepleted
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "Depleted {0}"
+        t: "枯竭{0}"
+        subs:
+          - fuelRod
+  - group: fuelRod
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} Fuel Rod"
+        t: "{0}燃料棒"
+        subs:
+          - material
+  - group: fuelRodBreeder
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} Breeder Rod"
+        t: "{0}增殖棒"
+        subs:
+          - material
   # valve
   - group: valve
     namespace: "S:gt.multitileentity."
