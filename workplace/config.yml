@@ -732,6 +732,13 @@ generators:
         t: "{0}"
         subs:
           - material
+  - group: fluidGt
+    namespace: S:fluid.
+    rules:
+      - s: "{0}"
+        t: "{0}"
+        subs:
+          - material
   - group: gemGt
     namespace: S:oredict.gem
     rules:
@@ -941,6 +948,7 @@ generators:
       Ferberite: 钨铁
       Firestone: 火石
       Fluix: 福鲁伊克斯
+      Fluix Crystal: 福鲁伊克斯水晶
       Fluorite: 氟石
       Forcicium: 力量
       Forcillium: 力量
@@ -948,6 +956,7 @@ generators:
       Garnet: 石榴子石
       Garnierite: 硅镁镍
       Glass: 玻璃
+      Glass Crystal: 玻璃
       Glauconite: 海绿石
       Granitic Mineral Sand: 花岗岩类矿砂
       Graphite: 石墨
@@ -1025,6 +1034,8 @@ generators:
       Prismane: 棱柱烷
       Dark Prismarine: 深色海晶石
       Light Prismarine: 亮色海晶石
+      Dark Prismarine Crystal: 深色海晶石
+      Light Prismarine Crystal: 亮色海晶石
       Pyrolusite: 软锰
       Black Quartz: 黑色石英岩
       Quartz Sand: 石英砂
@@ -1101,11 +1112,13 @@ generators:
       Endstone: 末地石
       Flint: 燧石
       Frezarite: 冰霜陨石
+      Frezarite Crystal: 冰霜陨石
       Gabbro: 辉长岩
       Gneiss: 片麻岩
       Gravel: 沙砾
       Greywacke: 杂砂岩
       Ice: 冰
+      Large Ice Cube: 冰
       Magic: 魔法
       Mars: 火星岩石
       Mars Dust: 火星尘土
@@ -1282,9 +1295,11 @@ generators:
       Cinnabar: 朱砂
       Craponite: 焦屎石
       Diamantine: 钻石水晶
+      Diamantine Crystal: 钻石水晶
       Diamond: 钻石
       Industrial Diamond: 工业钻石
       Dilithium: 双锂
+      Dilithium Crystal: 双锂
       Dioptase: 翠铜石
       DominicanAmber: 多米尼加蓝琥珀
       Dominican Amber: 多米尼加蓝琥珀
@@ -1293,9 +1308,11 @@ generators:
       Dragonstone: 龙石
       Elven Dragonstone: 龙石
       Emeradic: 绿宝石水晶
+      Emeradic Crystal: 绿宝石水晶
       Emerald: 绿宝石
       Empty: 空
       Enori: 铁晶
+      Enori Crystal: 铁晶
       Gloomstone: 阴郁荧石
       Glowstone: 萤石
       Ceres Glowstone: 谷神星萤石
@@ -1337,6 +1354,7 @@ generators:
       Opal: 蛋白石
       Orange Sapphire: 橙色蓝宝石
       Palis: 青金石水晶
+      Palis Crystal: 青金石水晶
       Pink Diamond: 粉钻
       Purple Sapphire: 紫色蓝宝石
       Pyrope: 镁铝榴石
@@ -1346,6 +1364,7 @@ generators:
       Red Jasper: 红色碧玉
       Redstone: 红石
       Redstonia: 红石水晶
+      Redstonia Crystal: 红石水晶
       Ruby: 红宝石
       Sapphire: 蓝宝石
       Spessartine: 锰铝榴石
@@ -1845,6 +1864,22 @@ generators:
       Glass: 玻璃
       Glow Glass: 荧光玻璃
       Glowtus: 荧光睡莲
+  - group: randomtools
+    namespace: "S:gt.multiitem.randomtools."
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - color
+          - randomtoolsType
+  - group: randomtoolsType
+    namespace: "S:gt.multiitem.randomtools."
+    completed: false
+    dict:
+      Spray Paint: 颜料喷漆
+      C-Foam Spray: 建筑泡沫喷罐
+      Advanced C-Foam Spray: 加强建筑泡沫喷罐
+      Canvas: 帆布
   - group: color
     namespace: "S:"
     completed: false
