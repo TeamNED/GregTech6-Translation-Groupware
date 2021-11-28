@@ -1691,9 +1691,15 @@ generators:
       Cinnamon: 肉桂
       Blue Spruce: 北美云杉
       Marshmallow: 棉花糖
+      Rainbowood: 彩虹树
       Plastic: 塑料
       Rubber: 橡胶
-      Shale: 页岩
+      Rubberwood: 橡胶树
+      Empty Crate: 空板条箱
+      Dead: 枯死的木
+      Rotten: 腐败的木
+      Mossy: 苔痕木
+      Frozen: 结冰的木
   - group: materialPowder
     dict:
       Netherite Scrap: 下界合金废料
@@ -1867,6 +1873,41 @@ generators:
       Red: 红色
       White: 白色
       Yellow: 黄色
+  # wooden block
+  - group: woodenBlockFireProof
+    namespace: "S:gt.block."
+    rules:
+      - s: "{0} (Fireproof)"
+        t: "{0} (防火)"
+        subs:
+          - woodenBlock
+  - group: woodenBlock
+    namespace: "S:gt.block."
+    dict:
+      Beam: 木梁
+      Leaves: 树叶
+      Log: 原木
+      " Log": 原木
+      Planks: 木板
+      Slab: 木半砖
+      Unknown Sapling (coming soon): 未知树苗
+    rules:
+      - s: "{0} {1}"
+        t: "{0}{1}"
+        subs:
+          - wood
+          - woodenBlockType
+  - group: woodenBlockType
+    namespace: "S:gt.block."
+    completed: false
+    dict:
+      Beam: 梁
+      Leaves: 叶
+      Log: 原木
+      Planks: 木板
+      Slab: 半砖
+      Sapling: 树苗
+
 
   # entity
   - group: entityMaterial
