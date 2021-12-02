@@ -605,6 +605,8 @@ generators:
   # ores
   - group: oreComplex
     namespace: S:oredict.ore
+    dict:
+      Soulsand: 灵魂沙
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -683,6 +685,8 @@ generators:
       Deadrock: 死岩
       Betweenstone: 交错石
       Pitstone: 麻纹石
+      Shale: 页岩
+      Slate: 板岩
   - group: oreSandTypePrefix
     namespace: S:oredict.
     completed: false
@@ -691,6 +695,8 @@ generators:
       Sand:
         S:oredict.oreRedSand: 红矿沙
         S:oredict.oreSand: 矿沙
+      Raw: 原矿
+      Strange Sand: 怪沙
   - group: oreSandType
     completed: false
     dict:
