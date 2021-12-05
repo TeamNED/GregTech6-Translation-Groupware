@@ -333,7 +333,7 @@ generators:
       Impure Pile of : 含杂
       Purified Pile of : 纯净
       Small Pile of : 小堆
-      Tiny Pile of : 小搓
+      Tiny Pile of : 小撮
       1/72nd of a Pile of: 1/72份
   # product
   - group: materialProduct
@@ -583,7 +583,7 @@ generators:
     namespace: S:oredict.crushed
     rules:
       - s: "Tiny {0}"
-        t: "小搓{0}"
+        t: "小撮{0}"
         subs:
           - oreCrushed
   - group: oreCrushed
