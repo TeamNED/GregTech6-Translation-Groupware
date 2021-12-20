@@ -959,7 +959,7 @@ generators:
       Aqua Middle: 水蓝元素宝石
       Arsenopyrite: 砷黄铁
       Chrysotile: 温石棉
-      Azurite: 石青粉块
+      Azurite: 石青
       Barite: 重晶石
       Bastnasite: 氟碳铈
       Bauxite: 铝土
@@ -975,7 +975,7 @@ generators:
       Calcium Chloride: 氯化钙
       Celestine: 天青石
       Certus Quartz: 赛特斯石英
-      Chalcopyrite: 黄铜
+      Chalcopyrite: 黄铜矿
       Chalk: 白垩
       Charcoal: 木炭
       Charged Certus Quartz: 充能赛特斯石英
@@ -1206,7 +1206,7 @@ generators:
       Stone: 石
       Purified Vinteum: 纯净温特姆
       Void: 煤晶
-      Void Quartz: 虚空金属
+      Void Quartz: 虚空石英
       Asbestos: 石棉
       Butter: 黄油
       Salted Butter: 盐味黄油
@@ -2414,7 +2414,7 @@ generators:
       Constantan: 康铜
       Copper: 铜
       Annealed Copper: 退火铜
-      Efrine: 绿金
+      Efrine: 绿晶
       Kanthal: 铁铬铝合金
       Silver: 银
       Gold: 金
