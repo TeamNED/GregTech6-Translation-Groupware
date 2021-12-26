@@ -625,13 +625,13 @@ generators:
       Earth infused Stone: 地之碎片矿石
       Entropy infused Stone: 混沌碎片矿石
       Fire infused Stone: 火之碎片矿石
-      Order infused Stone: 混沌碎片矿石
+      Order infused Stone: 秩序碎片矿石
       Water infused Stone: 水之碎片矿石
       Infused Air Crystals: 风之碎片矿石
       Infused Earth Crystals: 地之碎片矿石
       Infused Entropy Crystals: 混沌碎片矿石
       Infused Fire Crystals: 火之碎片矿石
-      Infused Order Crystals: 混沌碎片矿石
+      Infused Order Crystals: 秩序碎片矿石
       Infused Water Crystals: 水之碎片矿石
       Balance Shards: 平衡碎片矿石
       Dull Shards: 枯竭碎片矿石
@@ -713,7 +713,7 @@ generators:
       Infused Earth Stone: 地之碎片
       Infused Entropy Stone: 混沌碎片
       Infused Fire Stone: 火之碎片
-      Infused Order Stone: 混沌碎片
+      Infused Order Stone: 秩序碎片
       Magic infused Stone: 魔力碎片
       Infused Water Stone: 水之碎片
       Kaolinite: 高岭石
@@ -1312,7 +1312,7 @@ generators:
       Chemical Y-8: 试剂Y-8
       Chemical Y-9: 试剂Y-9
       Chemical Z: 试剂Z
-      Netherite Scrap: 下界合金废料
+      Netherite Scrap: 远古残骸废料
       Abyssal Oat: 深渊燕麦
       Dry: 干
       SacredOak: 神圣橡树
@@ -1526,7 +1526,7 @@ generators:
       Shard of Infused Earth: 地之碎片
       Shard of Infused Entropy: 混沌碎片
       Shard of Infused Fire: 火之碎片
-      Shard of Infused Order: 混沌碎片
+      Shard of Infused Order: 秩序碎片
       Magic Shard: 魔力碎片
       Shard of Infused Water: 水之碎片
       Jade: 翡翠
@@ -1927,7 +1927,7 @@ generators:
       Steeleaf: 钢叶
   - group: materialPowder
     dict:
-      Netherite Scrap: 下界合金废料
+      Netherite Scrap: 远古残骸废料
       Blaze: 烈焰棒
       Cheese: 奶酪
       Chocolate: 巧克力
@@ -1943,7 +1943,7 @@ generators:
       Infused Earth Crystal: 地之碎片
       Infused Entropy Crystal: 混沌碎片
       Infused Fire Crystal: 火之碎片
-      Infused Order Crystal: 混沌碎片
+      Infused Order Crystal: 秩序碎片
       Magic infused: 魔力碎片
       Infused Water Crystal: 水之碎片
       Milk: 牛奶
@@ -3470,6 +3470,6 @@ generators:
       Large Book: 大书
       You need to recharge it: 你需要为其充电
       Ancient Debris:
-        S:oredict.ore: 远古遗迹矿石
-        "S:": 远古遗迹
+        S:oredict.ore: 远古残骸矿石
+        "S:": 远古残骸
 
