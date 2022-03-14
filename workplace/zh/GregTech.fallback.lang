@@ -1392,7 +1392,7 @@ languagefile {
     S:gt.lang.blastresistance=爆炸抗性:
     S:gt.lang.cheap.overclocking=在消耗额外能量时可以超频
     S:gt.lang.contained.materials=含有材料:
-    S:gt.lang.cover.tooltip=可以用作覆盖版
+    S:gt.lang.cover.tooltip=可以用作覆盖板
     S:gt.lang.efficiency=效率
     S:gt.lang.emits.redstoneflux.lossless=可以无损地输出红石通量(RF)
     S:gt.lang.emits.redstoneflux.lossy=可以有损耗地输出红石通量(RF)，损耗:
@@ -1566,7 +1566,7 @@ languagefile {
     S:gt.lang.tool.to.harvest=采集工具
     S:gt.lang.tool.tooltip.axe=超能GT斧
     S:gt.lang.tool.tooltip.chisel=凿刻可被凿刻的方块
-    S:gt.lang.tool.tooltip.crowbar=拆卸覆盖版和旋转铁轨
+    S:gt.lang.tool.tooltip.crowbar=拆卸覆盖板和旋转铁轨
     S:gt.lang.tool.tooltip.cutter=剪线钳
     S:gt.lang.tool.tooltip.drill=放置锯末炸药和强化砖块
     S:gt.lang.tool.tooltip.ducttape=
@@ -1589,7 +1589,7 @@ languagefile {
     S:gt.lang.tool.tooltip.saw=可以给树剥皮
     S:gt.lang.tool.tooltip.scissors=
     S:gt.lang.tool.tooltip.scoop=捕捉昆虫
-    S:gt.lang.tool.tooltip.screwdriver=调整覆盖版, 机器和红石中继器
+    S:gt.lang.tool.tooltip.screwdriver=调整覆盖板, 机器和红石中继器
     S:gt.lang.tool.tooltip.scythe=大面积地收割农作物
     S:gt.lang.tool.tooltip.sense=大面积地收割农作物
     S:gt.lang.tool.tooltip.shears=
@@ -1607,9 +1607,9 @@ languagefile {
     S:gt.lang.unburnable=不可燃!
     S:gt.lang.use.chisel.to.decalcify=使用凿子除去钙化残留物
     S:gt.lang.use.chisel.to.switch.design=使用凿子改变表面纹理图案
-    S:gt.lang.use.controlcover.to.toggle=Use Cover Controller Cover to toggle ON/OFF
+    S:gt.lang.use.controlcover.to.toggle=使用控制器覆盖板控制开关
     S:gt.lang.use.crowbar.to.open=使用撬棍打开
-    S:gt.lang.use.crowbar.to.uncover=使用撬棍移除覆盖版
+    S:gt.lang.use.crowbar.to.uncover=使用撬棍移除覆盖板
     S:gt.lang.use.cutter.to.toggle=使用剪线钳切换模式
     S:gt.lang.use.geigercoutner.to.measure=使用盖革计数器测量
     S:gt.lang.use.magnifyingglass.to.detail=使用放大镜观察细节
@@ -1634,8 +1634,8 @@ languagefile {
     S:gt.lang.use.x.to.toggle.connection.pre=使用
     S:gt.lang.use.x.to.toggle.facing.post=设置朝向
     S:gt.lang.use.x.to.toggle.facing.pre=使用
-    S:gt.lang.use.x.to.toggle.facing2.post= to set secondary Facing
-    S:gt.lang.use.x.to.toggle.facing2.pre=Use 
+    S:gt.lang.use.x.to.toggle.facing2.post= 设置次要面
+    S:gt.lang.use.x.to.toggle.facing2.pre=使用 
     S:gt.lang.walkspeed=这个方块会改变行走速度
     S:gt.lang.wire.stats.amperage=电流(A):
     S:gt.lang.wire.stats.loss=损耗:
@@ -2072,7 +2072,7 @@ languagefile {
     S:gt.metatool.01.141.name=圆锯 (LV) (空)
     S:gt.metatool.01.15.name=软锤(空)
     S:gt.metatool.01.150.name=螺丝刀 (LV)
-    S:gt.metatool.01.150.tooltip=调整机器和覆盖版
+    S:gt.metatool.01.150.tooltip=调整机器和覆盖板
     S:gt.metatool.01.151.name=螺丝刀 (LV) (空)
     S:gt.metatool.01.16.name=扳手
     S:gt.metatool.01.16.tooltip=按住左键以拆卸机器
@@ -4099,13 +4099,13 @@ languagefile {
     S:gt.multiitem.randomtools.9999.name=世界生成工具(调试用)
     S:gt.multiitem.randomtools.9999.tooltip=
     S:gt.multiitem.randomtools.name=生成的物品
-    S:gt.multiitem.technological.1000.name=空白覆盖版
+    S:gt.multiitem.technological.1000.name=空白覆盖板
     S:gt.multiitem.technological.1000.tooltip=*空白*
     S:gt.multiitem.technological.10000.name=空白模具
     S:gt.multiitem.technological.10000.tooltip=用来制造其他模具
-    S:gt.multiitem.technological.1001.name=工作台覆盖版
-    S:gt.multiitem.technological.1001.tooltip=只是把工作台改成了覆盖版
-    S:gt.multiitem.technological.1002.name=状态显示覆盖版
+    S:gt.multiitem.technological.1001.name=工作台覆盖板
+    S:gt.multiitem.technological.1001.tooltip=只是把工作台改成了覆盖板
+    S:gt.multiitem.technological.1002.name=状态显示覆盖板
     S:gt.multiitem.technological.1002.tooltip=显示机器是否工作, 附带开关
     S:gt.multiitem.technological.10029.tooltip=该模具只能用于生产非金属箔
     S:gt.multiitem.technological.1003.name=自动开关
