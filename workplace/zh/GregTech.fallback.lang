@@ -6,7 +6,7 @@ enablelangfile {
 languagefile {
     S:"Dirty Water.name"=污水
     S:"Heavy Oil.name"=重油
-    S:"Hot Spring Water.name"=Hot Spring Water
+    S:"Hot Spring Water.name"=热温泉水
     S:"Light Oil.name"=清油
     S:"Natural Gas.name"=天然气
     S:"Raw Oil.name"=原油
@@ -725,8 +725,8 @@ languagefile {
     S:fluid.tritium.name=氚
     S:fluid.vinegar=葡萄醋
     S:fluid.vinegar.name=葡萄醋
-    S:fluid.watergeothermal=Hot Spring Water
-    S:fluid.watergeothermal.name=Hot Spring Water
+    S:fluid.watergeothermal=热温泉水
+    S:fluid.watergeothermal.name=热温泉水
     S:fluid.wheathopsmash=麦芽浆
     S:fluid.wheathopsmash.name=麦芽浆
     S:fluid.whitegrapesmoothie=白葡萄冰沙
