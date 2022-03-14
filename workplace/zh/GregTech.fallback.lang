@@ -175,8 +175,6 @@ languagefile {
     S:fluid.binnie.winered.name=红葡萄酒
     S:fluid.binnie.winewhite=白葡萄酒
     S:fluid.binnie.winewhite.name=白葡萄酒
-    S:fluid.bioethanol=生物乙醇
-    S:fluid.bioethanol.name=生物乙醇
     S:fluid.blackberryjuice=黑莓汁
     S:fluid.blackberryjuice.name=黑莓汁
     S:fluid.blackberrysmoothie=黑莓冰沙
@@ -305,8 +303,6 @@ languagefile {
     S:fluid.hottritiatedwater.name=热超重水
     S:fluid.hydrogen=氢
     S:fluid.hydrogen.name=氢
-    S:fluid.ic2constructionfoam=建筑泡沫
-    S:fluid.ic2constructionfoam.name=建筑泡沫
     S:fluid.ic2coolant=冷却液
     S:fluid.ic2coolant.name=冷却液
     S:fluid.ic2hotcoolant=热冷却液
@@ -1401,6 +1397,7 @@ languagefile {
     S:gt.lang.emits.redstoneflux.lossless=可以无损地输出红石通量(RF)
     S:gt.lang.emits.redstoneflux.lossy=可以有损耗地输出红石通量(RF)，损耗:
     S:gt.lang.emits.used.steam=输出蒸馏水
+    S:gt.lang.enchantment.bonus=可以像书架那样影响附魔台
     S:gt.lang.energy.capacity=容量
     S:gt.lang.energy.contained=存储的能量
     S:gt.lang.energy.convert.from=将
@@ -1894,7 +1891,6 @@ languagefile {
     S:gt.material.PotassiumSulphide=硫肝石
     S:gt.material.PotassiumSulphite=亚硫酸钾
     S:gt.material.Primitive=远古
-    S:gt.material.Prismarine=海晶石
     S:gt.material.Proton=质子
     S:gt.material.Pu238=Pu238
     S:gt.material.Pu239=Pu239
@@ -1948,7 +1944,6 @@ languagefile {
     S:gt.material.Starconium=Starconium
     S:gt.material.Starmetal=星辉
     S:gt.material.StrengthenedTerrasteelAlloy=强化泰拉钢合金
-    S:gt.material.Sugilite=硅铁锂钠石 (苏纪石)
     S:gt.material.Sulphur=硫
     S:gt.material.SulphurDioxide=二氧化硫
     S:gt.material.SulphurTrioxide=三氧化硫
@@ -3336,12 +3331,9 @@ languagefile {
     S:gt.multiitem.food.12201.tooltip=用于制造简单的起火器
     S:gt.multiitem.food.12300.name=泥球
     S:gt.multiitem.food.12300.tooltip=
-    S:gt.multiitem.food.12310.name=褐色粘土球
     S:gt.multiitem.food.12310.tooltip=
-    S:gt.multiitem.food.12311.name=红色粘土球
     S:gt.multiitem.food.12311.tooltip=只有粘土能打败挑战!
     S:gt.multiitem.food.12312.name=Yellow Clay
-    S:gt.multiitem.food.12312.tooltip=Bentonite Clay
     S:gt.multiitem.food.12313.name=Blue Clay
     S:gt.multiitem.food.12313.tooltip=Palygorskite Clay / Fullers Earth
     S:gt.multiitem.food.12314.name=White Clay
@@ -4115,8 +4107,10 @@ languagefile {
     S:gt.multiitem.technological.1001.tooltip=只是把工作台改成了覆盖版
     S:gt.multiitem.technological.1002.name=状态显示覆盖版
     S:gt.multiitem.technological.1002.tooltip=显示机器是否工作, 附带开关
+    S:gt.multiitem.technological.10029.tooltip=该模具只能用于生产非金属箔
     S:gt.multiitem.technological.1003.name=自动开关
     S:gt.multiitem.technological.1003.tooltip=当需要时自动开/关机器
+    S:gt.multiitem.technological.10031.tooltip=该模具只能用于生产非金属精细线缆
     S:gt.multiitem.technological.1004.name=能量显示面板
     S:gt.multiitem.technological.1004.tooltip=显示存储的能量
     S:gt.multiitem.technological.1005.name=红石机器开关
@@ -4157,8 +4151,10 @@ languagefile {
     S:gt.multiitem.technological.1021.tooltip=发出可控的红石信号
     S:gt.multiitem.technological.1022.name=通风口
     S:gt.multiitem.technological.1022.tooltip=向管道或机器内通入空气
+    S:gt.multiitem.technological.10229.tooltip=该模具只能用于生产非金属箔
     S:gt.multiitem.technological.1023.name=物品过滤器
     S:gt.multiitem.technological.1023.tooltip=允许指定物品通过
+    S:gt.multiitem.technological.10231.tooltip=该模具只能用于生产非金属精细线缆
     S:gt.multiitem.technological.1024.name=液体过滤器
     S:gt.multiitem.technological.1024.tooltip=允许指定液体通过
     S:gt.multiitem.technological.1025.name=控制器覆盖板
@@ -4735,7 +4731,6 @@ languagefile {
     S:gt.multitileentity.32713.name=锯末炸药
     S:gt.multitileentity.32714.name=木制储罐
     S:gt.multitileentity.32715.name=塑料储罐
-    S:gt.multitileentity.32716.name=不锈钢储罐
     S:gt.multitileentity.32720.name=木质浸洗桌
     S:gt.multitileentity.32721.name=木质浸洗盆
     S:gt.multitileentity.32722.name=榨汁机
@@ -4764,7 +4759,6 @@ languagefile {
     S:gt.multitileentity.32764.name=赞助者证书
     S:gt.multitileentity.32765.name=脚手架建筑泡沫方块
     S:gt.multitileentity.32766.name=微型下界传送门
-    S:gt.multitileentity.6241.name=物流量子存储器 (源质钢)
     S:gt.multitileentity.6983.name=天根木储物桶
     S:gt.multitileentity.6984.name=银树储物桶
     S:gt.multitileentity.6985.name=宏伟之木储物桶
@@ -4782,7 +4776,6 @@ languagefile {
     S:gt.multitileentity.6997.name=铁木储物桶
     S:gt.multitileentity.6998.name=木制储物桶
     S:gt.multitileentity.6999.name=木制储物桶
-    S:gt.multitileentity.8441.name=源质钢脚手架
     S:gt.multitileentity.9200.name=反应堆核心
     S:gt.multitileentity.9201.name=空燃料棒
     S:gt.multitileentity.9202.name=中子吸收棒
@@ -4996,7 +4989,6 @@ languagefile {
     S:gt.td.long.prefix.gem_based=宝石
     S:gt.td.long.prefix.ingot_based=锭
     S:gt.td.long.prefix.is_container=容器
-    S:gt.td.long.prefix.is_crate=板条箱
     S:gt.td.long.prefix.material_based=基于材料
     S:gt.td.long.prefix.needs_handle=需要手柄
     S:gt.td.long.prefix.needs_sharpening=需要锉削
@@ -5164,7 +5156,6 @@ languagefile {
     S:gt.td.short.prefix.gem_based=宝石
     S:gt.td.short.prefix.ingot_based=锭
     S:gt.td.short.prefix.is_container=容器
-    S:gt.td.short.prefix.is_crate=板条箱
     S:gt.td.short.prefix.material_based=基于材料
     S:gt.td.short.prefix.needs_handle=需要手柄
     S:gt.td.short.prefix.needs_sharpening=需要锉削
@@ -5710,7 +5701,6 @@ languagefile {
     S:oredict.arrowGtPlasticEmpty.name=轻质空箭
     S:oredict.arrowGtWoodEmpty.name=空箭
     S:oredict.billetAncientDebris.name=下界合金废料胚料
-    S:oredict.blockPlateGemGlass.name=玻璃板块
     S:oredict.bulletGtLargeEmpty.name=大型空包弹
     S:oredict.bulletGtMediumEmpty.name=中型空包弹
     S:oredict.bulletGtSmallEmpty.name=小型空包弹
@@ -5754,9 +5744,7 @@ languagefile {
     S:oredict.chemtubeTritium.name=氚试管
     S:oredict.chemtubeXenon.name=氙试管
     S:oredict.chunkGtAncientDebris.name=下界合金废料小块
-    S:oredict.crateGtPlateGemGlass.name=玻璃板板条箱
     S:oredict.crushedTinyAncientDebris.name=小撮已回收的远古残骸
-    S:oredict.dustBlaze.name=烈焰粉
     S:oredict.foilPlastic.name=薄塑料板
     S:oredict.foilRubber.name=薄橡胶片
     S:oredict.nuggetAncientDebris.name=下界合金废料粒
@@ -5787,7 +5775,6 @@ languagefile {
     S:oredict.plantGtWartMilk.name=牛奶疣
     S:oredict.plateDoublePaper.name=两重纸板
     S:oredict.plateGemGlass.name=玻璃板
-    S:oredict.plateGemTinyGlass.name=小块玻璃板
     S:oredict.plateQuadruplePaper.name=四重纸板
     S:oredict.plateQuintuplePaper.name=五重纸板
     S:oredict.plateTinyPaper.name=纸屑
@@ -6319,7 +6306,6 @@ languagefile {
     S:oredict.scrapGtDeepslate.name=Deepslate Pebbles
     S:oredict.scrapGtDiorite.name=闪长岩碎石
     S:oredict.scrapGtEclogite.name=榴辉岩碎石
-    S:oredict.scrapGtEmpty.name=玻璃碎片
     S:oredict.scrapGtEndstone.name=末地石碎石
     S:oredict.scrapGtEpidote.name=绿帘石碎石
     S:oredict.scrapGtFlint.name=燧石碎石

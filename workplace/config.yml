@@ -305,6 +305,18 @@ generators:
       Sand: 沙
       Blaze Powder: 烈焰粉
       Silken Tofu: 豆腐末
+      Flavourite: 焦屎石粉
+      End Sand: 末地沙
+      Air infused Powder: 风之粉末
+      Balance infused Powder: 平衡粉末
+      Dull Crystal Powder: 枯竭粉末
+      Earth infused Powder: 地之粉末
+      Entropy infused Powder: 混沌粉末
+      Fire infused Powder: 火之粉末
+      Magic infused Powder: 魔力粉末
+      Order infused Powder: 秩序粉末
+      Water infused Powder: 水之粉末
+      Magnetite: 磁铁矿粉
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -338,6 +350,11 @@ generators:
   # product
   - group: materialProduct
     namespace: S:oredict.
+    dict:
+      Steeleaf Chip: 钢叶粒
+      Brittle Ceramic Scraps: 陶瓷废料
+      Glass Shards: 玻璃渣
+      Pumice Pebbles: 浮石废料
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -633,9 +650,15 @@ generators:
       Infused Fire Crystals: 火之碎片矿石
       Infused Order Crystals: 秩序碎片矿石
       Infused Water Crystals: 水之碎片矿石
+      Air Shards: 风之碎片矿石
       Balance Shards: 平衡碎片矿石
       Dull Shards: 枯竭碎片矿石
+      Earth Shards: 地之碎片矿石
+      Entropy Shards: 混沌碎片矿石
+      Fire Shards: 火之碎片矿石
       Magic Shards: 魔力碎片矿石
+      Order Shards: 秩序碎片矿石
+      Water Shards: 水之碎片矿石
       Magnetite: 磁铁矿
       Recycled Ancient Debris: 已回收的远古残骸
       Ancient Debris: 远古残骸
@@ -704,8 +727,10 @@ generators:
       Bentonite: 膨润土
       Cassiterite: 锡石
       Fullers Earth: 漂白土
+      FullersEarth: 漂白土
       Garnet Sand: 石榴子石沙
       Glauconite Sand: 海绿石沙
+      GlauconiteSand: 海绿石沙
       Granitic Mineral Sand: 花岗岩类矿砂
       Infused Air Stone: 风之碎片
       Balance infused Stone: 平衡碎片
@@ -788,6 +813,8 @@ generators:
   # Bearing Rock
   - group: rockGt
     namespace: S:oredict.rockGt
+    dict:
+      Pumice Rock: 含浮石岩石
     rules:
       - s: "{0} bearing Rock"
         t: "含{0}岩石"
@@ -981,10 +1008,7 @@ generators:
       Charged Certus Quartz: 充能赛特斯石英
       Chimerite: 精灵石
       Chromite: 铬铁
-      Clay: 粘土
       Clay Brick: 粘土砖
-      Brown Clay: 褐色粘土
-      Red Clay: 红色粘土
       Coal: 煤
       Coal Coke: 焦煤
       Cobaltite: 辉砷钴
@@ -1004,7 +1028,6 @@ generators:
       Duranium Hexachloride: 六氯化钍瑞铌
       Duranium Hexafluoride: 六氟化钍瑞铌
       Duranium Hexaiodide: 六碘化钍瑞铌
-      Elementium: 源质钢
       Elven Quartz: 精灵石英
       Emery: 金刚砂
       Unknown: 未知
@@ -1035,14 +1058,11 @@ generators:
       Ilmenite: 钛铁
       Air infused: 风之碎片
       Balance infused: 平衡碎片
-      Balance infused Powder: 平衡粉末
       Dull: 枯竭碎片
-      Dull Crystal Powder: 枯竭粉末
       Earth infused: 地之碎片
       Entropy infused: 混沌碎片
       Fire infused: 火之碎片
       Magic infused: 魔力碎片
-      Magic infused Powder: 魔力粉末
       Order infused: 秩序碎片
       Water infused: 水之碎片
       Infused Air: 风之碎片
@@ -1051,8 +1071,16 @@ generators:
       Infused Fire: 火之碎片
       Infused Order: 秩序碎片
       Infused Water: 水之碎片
+      Air infused Powder: 风之粉末
+      Balance infused Powder: 平衡粉末
+      Dull Crystal Powder: 枯竭粉末
+      Earth infused Powder: 地之粉末
+      Entropy infused Powder: 混沌粉末
+      Fire infused Powder: 火之粉末
+      Magic infused Powder: 魔力粉末
+      Order infused Powder: 秩序粉末
+      Water infused Powder: 水之粉末
       Iodine Salt: 碘盐
-      Kaolinite Clay: 高岭石粘土
       Kesterite: 锌黄锡
       Kyanite: 蓝晶石
       Lapis: 青金石
@@ -1161,11 +1189,8 @@ generators:
       Red CY-11: 红色试剂Y-11
       White CY-11: 白色试剂Y-11
       Yellow CY-11: 黄色试剂Y-11
-      Basalz: 岩石
       Bedrock: 基岩
       Blackstone: 黑石
-      Blitz: 狂风
-      Blizz: 暴雪
       Chert: 燧石
       Concrete: 混凝土
       Dacite: 英安岩
@@ -1234,7 +1259,6 @@ generators:
       Niobium Pentoxide: 五氧化二铌
       Palygorskite Clay: 坡缕石粘土
       Tantalum Pentoxide: 五氧化二钽
-      Bentonite Clay: 膨润土粘土
       Coltan: 钶钽铁矿
       Columbite: 铌铁矿
       Ferric Oxyhydroxide: 氢氧化铁
@@ -1399,6 +1423,7 @@ generators:
       Rye: 黑麦面
       Salt Water: 盐水
       Saltwater: 盐水
+      SaltWater: 盐水
       Sea Water: 海水
       Seed Oil: 种子油
       Semiheavy Water: 半重水
@@ -1422,6 +1447,7 @@ generators:
       Whale Oil: 鲸油
       Wheat: 小麦
       White Vitriol: 硫酸锌
+      End Sand: 末地沙
   - group: material
     completed: false
     rules:
@@ -1520,14 +1546,20 @@ generators:
       Green Hexorium: 绿色黑克斯
       Red Hexorium: 红色黑克斯
       White Hexorium: 白色黑克斯
-      Shard of Infused Air: 风之碎片
+      Air Shard: 风之碎片
       Balance Shard: 平衡碎片
+      Earth Shard: 地之碎片
+      Entropy Shard: 混沌碎片
+      Fire Shard: 火之碎片
       Dull Shard: 枯竭碎片
+      Magic Shard: 魔力碎片
+      Order Shard: 秩序碎片
+      Water Shard: 水之碎片
+      Shard of Infused Air: 风之碎片
       Shard of Infused Earth: 地之碎片
       Shard of Infused Entropy: 混沌碎片
       Shard of Infused Fire: 火之碎片
       Shard of Infused Order: 秩序碎片
-      Magic Shard: 魔力碎片
       Shard of Infused Water: 水之碎片
       Jade: 翡翠
       Jasper: 碧玉
@@ -1579,6 +1611,7 @@ generators:
       Redstone Alloy: 红石合金
       Silicon: 硅
       Teslatine Alloy: 特斯拉合金
+      TeslatineAlloy: 特斯拉合金
       Firestone: 火石
       Glass Crystal: 玻璃
       Gravitite: 重力晶
@@ -1589,6 +1622,7 @@ generators:
       Salt: 盐
       Sugar: 糖
       Sugar Cubes: 方糖
+      Sugilite: 杉石
   - group: materialPositive
     completed: false
     dict:
@@ -1871,6 +1905,7 @@ generators:
       Hazel: 榛树
       Ipe: 重蚁木
       Ironwood: 铁木
+      IronWood: 铁木
       Japanese Maple: 日本枫木
       Jungle: 丛林木
       Kapok: 木棉木
@@ -1895,6 +1930,7 @@ generators:
       Rubber Wood: 橡胶木
       Sakura: 樱花木
       Sealed Wood: 防腐木
+      WoodSealed: 防腐木
       Sequoia: 红杉
       Silverwood: 银树
       Spruce: 云杉木
@@ -1925,6 +1961,7 @@ generators:
       Wyvern: 双足飞龙
       Liveroot: 活根
       Steeleaf: 钢叶
+      Crate: 板条箱
   - group: materialPowder
     dict:
       Netherite Scrap: 远古残骸废料
@@ -1951,6 +1988,15 @@ generators:
       #TODO# Palygorskite Clay: Palygorskite Clay
       Snow: 雪
       Tea: 茶
+      Basalz: 岩石
+      Bentonite Clay: 膨润土粘土
+      Blitz: 狂风
+      Blizz: 暴雪
+      Dry Clay: 干粘土
+      Clay: 粘土
+      Brown Clay: 褐色粘土
+      Red Clay: 红色粘土
+      Kaolinite Clay: 高岭石粘土
   
   # stone
   - group: stoneSlab
@@ -2245,6 +2291,7 @@ generators:
       Slab: 木半砖
       Unknown Sapling (coming soon): 未知树苗
       Empty Crate: 空板条箱
+      Crate: 板条箱木板
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -2544,6 +2591,8 @@ generators:
       Enderium Base: 末影粗胚
       Vibranium: 振金
       Vibramantium: 艾德曼振金
+      Workers Alloy: 工人合金
+      Elementium: 源质钢
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -2788,6 +2837,7 @@ generators:
       Boxinator: 装箱机
       Unboxinator: 拆箱机
       Molecular Scanner: 分子扫描仪
+      Long Distance Transformer Endpoint: 远距离变压器终端
   - group: physicalState
     namespace: "S:"
     completed: false
@@ -3115,6 +3165,7 @@ generators:
       Sense: 镰刀
       Nugget: 粒
       Billet: 胚料
+      Fine Wire: 精细线缆
   # useless elements
   - group: elementUselessAnti
     namespace: "S:"
