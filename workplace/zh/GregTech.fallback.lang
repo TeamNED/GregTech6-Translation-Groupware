@@ -721,8 +721,6 @@ languagefile {
     S:fluid.thoriumsalt.name=熔融钍盐
     S:fluid.tomatosauce=番茄酱
     S:fluid.tomatosauce.name=番茄酱
-    S:fluid.tritium=氚
-    S:fluid.tritium.name=氚
     S:fluid.vinegar=葡萄醋
     S:fluid.vinegar.name=葡萄醋
     S:fluid.watergeothermal=热温泉水
@@ -789,6 +787,7 @@ languagefile {
     S:gt.armor.hazmat.universal.legs.name=全防裤
     S:gt.armor.hazmat.universal.legs.tooltip_main=穿齐一套可以抵御一切危险
     S:gt.autocrafting.insert.blueprint=把自动合成表蓝图放在这里
+    S:gt.behaviour.chunkremove=删除区块，只保留基岩层
     S:gt.behaviour.cropnalyzer=能扫描世界中的作物
     S:gt.behaviour.cure.zombie.strong=可以治愈强壮的僵尸村民
     S:gt.behaviour.cure.zombie.weak=可以治愈虚弱的僵尸村民
@@ -1340,6 +1339,7 @@ languagefile {
     S:gt.drink.seedoil=
     S:gt.drink.short.mead=维京人的最爱
     S:gt.drink.slime=绿史莱姆汁，黏黏的！和**一样！
+    S:gt.drink.slime.blue=蓝史莱姆汁
     S:gt.drink.sluicejuice=
     S:gt.drink.soda=普通的二氧化碳水溶物
     S:gt.drink.soymilk=乳糖不耐受症患者的牛奶替代品
@@ -1965,7 +1965,6 @@ languagefile {
     S:gt.material.Titan=铌钛合金
     S:gt.material.TitaniumIron=钛铁合金
     S:gt.material.Tourmaline=碧玺
-    S:gt.material.Tritium=氚
     S:gt.material.Tumbaga=Tumbaga
     S:gt.material.TungstenOxide=氧化钨
     S:gt.material.TungstenSteel=钨钢
@@ -1975,7 +1974,6 @@ languagefile {
     S:gt.material.U238=U238
     S:gt.material.Ultimate=极限
     S:gt.material.Unobtainium=难得素
-    S:gt.material.Unstable=不稳定
     S:gt.material.Unstableingot=不稳定锭
     S:gt.material.Uran=乌兰
     S:gt.material.Uranium238=铀-238
@@ -2204,12 +2202,14 @@ languagefile {
     S:gt.multiitem.books.1007.tooltip=
     S:gt.multiitem.books.2.tooltip=
     S:gt.multiitem.books.3.tooltip=
-    S:gt.multiitem.books.32000.tooltip=上面有一个青铜GT徽章
-    S:gt.multiitem.books.32001.tooltip=上面有一个青铜GT徽章
+    S:gt.multiitem.books.32000.tooltip=封面有一个青铜GT徽章
+    S:gt.multiitem.books.32001.tooltip=封面有一个青铜GT徽章
     S:gt.multiitem.books.32002.name=材料词典
     S:gt.multiitem.books.32002.tooltip=包含了材料的数据
     S:gt.multiitem.books.32003.name=材料词典
     S:gt.multiitem.books.32003.tooltip=包含了材料的数据
+    S:gt.multiitem.books.32004.tooltip=封面有一个辐射符号
+    S:gt.multiitem.books.32005.tooltip=封面有一个辐射符号
     S:gt.multiitem.books.4.tooltip=
     S:gt.multiitem.books.5.tooltip=
     S:gt.multiitem.books.6.tooltip=
@@ -2333,6 +2333,8 @@ languagefile {
     S:gt.multiitem.bottles.2200.tooltip=可以用来做胶水
     S:gt.multiitem.bottles.2201.name=粉色粘液瓶
     S:gt.multiitem.bottles.2201.tooltip=可以用来做胶水
+    S:gt.multiitem.bottles.2202.name=蓝色粘液瓶
+    S:gt.multiitem.bottles.2202.tooltip=可以用来做胶水
     S:gt.multiitem.bottles.2210.name=瓜拿纳
     S:gt.multiitem.bottles.2210.tooltip=
     S:gt.multiitem.bottles.2300.name=西瓜汁
@@ -2387,6 +2389,8 @@ languagefile {
     S:gt.multiitem.bottles.3200.tooltip=
     S:gt.multiitem.bottles.32000.name=墨水瓶
     S:gt.multiitem.bottles.32001.name=罐装靛蓝色染料
+    S:gt.multiitem.bottles.32763.name=鲜血瓶
+    S:gt.multiitem.bottles.32763.tooltip=
     S:gt.multiitem.bottles.32764.name=润滑油瓶
     S:gt.multiitem.bottles.32764.tooltip=
     S:gt.multiitem.bottles.32765.name=汞瓶
@@ -4096,6 +4100,8 @@ languagefile {
     S:gt.multiitem.randomtools.998.tooltip=用来把食物装罐
     S:gt.multiitem.randomtools.999.name=空喷罐
     S:gt.multiitem.randomtools.999.tooltip=用来制造喷漆之类的东西
+    S:gt.multiitem.randomtools.9998.name=区块删除器
+    S:gt.multiitem.randomtools.9998.tooltip=
     S:gt.multiitem.randomtools.9999.name=世界生成工具(调试用)
     S:gt.multiitem.randomtools.9999.tooltip=
     S:gt.multiitem.randomtools.name=生成的物品
@@ -5013,6 +5019,7 @@ languagefile {
     S:gt.td.long.prefix.unificatable=可统一
     S:gt.td.long.prefix.unificatable_recipes=可统一的配方
     S:gt.td.long.prefix.weapon_alike=武器
+    S:gt.td.long.prefix.wire_based=线缆
     S:gt.td.long.processing.blacklisted_smelter=不能在坩埚中融化
     S:gt.td.long.processing.centrifugable=可离心
     S:gt.td.long.processing.crucible_alloy=可用于冶炼合金
@@ -5032,6 +5039,7 @@ languagefile {
     S:gt.td.long.processing.soldering_material_good=好的焊接用金属
     S:gt.td.long.processing.unrecyclable=不可回收
     S:gt.td.long.processing.uum_synthesisable=可通过UU物质合成
+    S:gt.td.long.processing.washing_firestone=可用火石浸洗
     S:gt.td.long.processing.washing_mercury=可用汞浸洗
     S:gt.td.long.processing.washing_persulfate=可用过硫酸盐浸洗
     S:gt.td.long.processing.washing_sodiumpersulfate=可用过硫酸钠浸洗
@@ -5051,6 +5059,7 @@ languagefile {
     S:gt.td.long.properties.crystal=水晶
     S:gt.td.long.properties.dont_show_this_component=不作为部件显示
     S:gt.td.long.properties.ender_dragon_proof=防末影龙
+    S:gt.td.long.properties.explodes_in_nonvanilla_crafting_grid=在非原版合成台中会爆炸!
     S:gt.td.long.properties.explosive=易爆
     S:gt.td.long.properties.flammable=易燃
     S:gt.td.long.properties.food=食物
@@ -5180,6 +5189,7 @@ languagefile {
     S:gt.td.short.prefix.unificatable=可统一
     S:gt.td.short.prefix.unificatable_recipes=可统一的配方
     S:gt.td.short.prefix.weapon_alike=武器
+    S:gt.td.short.prefix.wire_based=线缆
     S:gt.td.short.processing.blacklisted_smelter=不能在坩埚中融化
     S:gt.td.short.processing.centrifugable=可离心
     S:gt.td.short.processing.crucible_alloy=可用于冶炼合金
@@ -5199,6 +5209,7 @@ languagefile {
     S:gt.td.short.processing.soldering_material_good=好的焊接用金属
     S:gt.td.short.processing.unrecyclable=不可回收
     S:gt.td.short.processing.uum_synthesisable=可通过UU物质合成
+    S:gt.td.short.processing.washing_firestone=可用火石浸洗
     S:gt.td.short.processing.washing_mercury=可用汞浸洗
     S:gt.td.short.processing.washing_persulfate=可用过硫酸盐浸洗
     S:gt.td.short.processing.washing_sodiumpersulfate=可用过硫酸钠浸洗
@@ -5218,6 +5229,7 @@ languagefile {
     S:gt.td.short.properties.crystal=水晶
     S:gt.td.short.properties.dont_show_this_component=不作为部件显示
     S:gt.td.short.properties.ender_dragon_proof=防末影龙
+    S:gt.td.short.properties.explodes_in_nonvanilla_crafting_grid=在非原版合成台中会爆炸!
     S:gt.td.short.properties.explosive=易爆
     S:gt.td.short.properties.flammable=易燃
     S:gt.td.short.properties.food=食物
@@ -5741,7 +5753,6 @@ languagefile {
     S:oredict.chemtubePositron.name=正电子试管
     S:oredict.chemtubeProton.name=质子试管
     S:oredict.chemtubeRadon.name=氡试管
-    S:oredict.chemtubeTritium.name=氚试管
     S:oredict.chemtubeXenon.name=氙试管
     S:oredict.chunkGtAncientDebris.name=下界合金废料小块
     S:oredict.crushedTinyAncientDebris.name=小撮已回收的远古残骸

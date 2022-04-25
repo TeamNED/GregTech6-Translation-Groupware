@@ -1448,6 +1448,28 @@ generators:
       Wheat: 小麦
       White Vitriol: 硫酸锌
       End Sand: 末地沙
+      Zephyrean Aerotheum: 和谐之空气
+      Gelid Cryotheum: 极寒之凛冰 
+      "Honey (Forestry, most other Mods)": 蜂蜜(林业)
+      Tectonic Petrotheum: 构造之地岩
+      Blazing Pyrotheum: 烈焰之炽焱
+      Clay Compound: 导管粘合胚料
+      CrudeSteel: 粗钢
+      Crystalline Alloy: 晶化合金
+      Crystalline Pink Slime: 晶化粉红史莱姆
+      End Steel: 末影钢
+      Energetic Silver: 充能银
+      HOPGraphite: HOP石墨
+      Melodic Alloy: 旋律合金
+      Potassium Fluoride: 氟化钾
+      Potassium Heptafluorotantalate: 氟钽酸钾
+      Radium226: 镭226
+      Sodium Fluoride: 氟化钠
+      Stellar Alloy: 恒星合金
+      Vivid Alloy: 生动合金
+      Unstable: 不稳定金属
+      Tritium: 氚
+
   - group: material
     completed: false
     rules:
@@ -2373,6 +2395,8 @@ generators:
       Sandy Bumblebee (T2): 沙漠大黄蜂(T2)
       Sandy Bumblebee (T3): 沙漠大黄蜂(T3)
       Sandy Bumblebee (T4): 沙漠大黄蜂(T4)
+      Bumblezan: 泰山大黄蜂
+      Bumbobee: 巨鲲大黄蜂
     rules:
       - s: "Bumble {0}"
         t: "{0}大黄蜂"
@@ -2927,6 +2951,13 @@ generators:
     rules:
       - s: "{0} Breeder Rod"
         t: "{0}增殖棒"
+        subs:
+          - material
+  - group: fuelRodEnriched
+    namespace: "S:gt.multitileentity."
+    rules:
+      - s: "{0} Enriched Rod"
+        t: "{0}浓缩燃料棒"
         subs:
           - material
   # rail
