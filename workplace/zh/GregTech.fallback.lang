@@ -5422,7 +5422,7 @@ languagefile {
     S:gt.tooltip.multiblock.logisticscore.7=每个控制处理器可以将最大网络半径增加1m
     S:gt.tooltip.multiblock.logisticscore.8=每个存储处理器可以将缓冲区容量增加一格或16000L
     S:gt.tooltip.multiblock.logisticscore.9=每个转换处理器可以将吞吐量增加一格或16000L
-    S:gt.tooltip.multiblock.matterfabricator.1=5x5x5 “空心”的97个铅壁板
+    S:gt.tooltip.multiblock.matterfabricator.1=5x5x5 “空心”的97个致密铅壁板
     S:gt.tooltip.multiblock.matterfabricator.2=在以上5x5x5铅外壳中放入3x3x3 “空心”的26个锇线圈
     S:gt.tooltip.multiblock.matterfabricator.3=顶部5x5摆放成环状的16个通风单元
     S:gt.tooltip.multiblock.matterfabricator.4=在环内部放置4个控制四核处理器
