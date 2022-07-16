@@ -5495,7 +5495,6 @@ languagefile {
     S:gt.tooltip.stone.mushroom.yes=蘑菇可以扩散到这块粗糙岩石上!
     S:gt.weapon.sneak.rightclick.reload=潜行右击以重新装填
     S:ic2.fluidBiomass=生物质
-    S:ic2.fluidConstructionFoam=建筑泡沫
     S:ic2.fluidCoolant=冷却液
     S:ic2.fluidDistilledWater=蒸馏水
     S:ic2.fluidHotCoolant=热冷却液
