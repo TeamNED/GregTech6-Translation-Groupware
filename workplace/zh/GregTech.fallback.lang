@@ -5343,7 +5343,7 @@ languagefile {
     S:gt.tooltip.multiblock.bedrockdrill.3=主基岩钻位于钛结构顶层中央
     S:gt.tooltip.multiblock.bedrockdrill.4=需求润滑油、能量以及基岩(基岩矿石)来挖掘
     S:gt.tooltip.multiblock.bedrockdrill.5=Also works on HBM's Bedrock Ores, even if it's not a full 3x3 of Bedrock
-    S:gt.tooltip.multiblock.centrifuge.1=3x3x2 大型离心机组件方块
+    S:gt.tooltip.multiblock.centrifuge.1=3x3x2 大型离心机部件
     S:gt.tooltip.multiblock.centrifuge.2=控制器置于底层任一边中央并面向外侧
     S:gt.tooltip.multiblock.centrifuge.3=任意方块均可输入输出
     S:gt.tooltip.multiblock.coagulator.1=5x5x2 不锈钢壁板
