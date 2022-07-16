@@ -5351,7 +5351,7 @@ languagefile {
     S:gt.tooltip.multiblock.coagulator.3=任意方块均可输入输出
     S:gt.tooltip.multiblock.cokeoven.1=3x3x3 耐火砖, 中空
     S:gt.tooltip.multiblock.cokeoven.2=焦炉主方块放在侧面中心, 正面朝外
-    S:gt.tooltip.multiblock.crucible.1=3x3x3 大型坩埚壁，桶装结构，中空，顶部中心开口
+    S:gt.tooltip.multiblock.crucible.1=3x3x3 相应材料的壁板，桶装结构，中空，顶部中心开口
     S:gt.tooltip.multiblock.crucible.2=主方块放在底面中心
     S:gt.tooltip.multiblock.crucible.3=底层输入能量，顶层输入物品
     S:gt.tooltip.multiblock.crucible.4=在第二层导出至模具
