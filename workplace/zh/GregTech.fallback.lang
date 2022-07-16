@@ -5393,9 +5393,9 @@ languagefile {
     S:gt.tooltip.multiblock.gasturbine.2=燃气涡轮机核心放在 3x3 那一面的中心, 正面朝外
     S:gt.tooltip.multiblock.gasturbine.3=仅能在主方块处输入燃气
     S:gt.tooltip.multiblock.gasturbine.4=必须输出废气！
-    S:gt.tooltip.multiblock.heatexchanger.1=3x3 环状热传输器，中心放置一致密钨壁板
+    S:gt.tooltip.multiblock.heatexchanger.1=3x3 环状热吸收装置，中心放置一致密钨壁板
     S:gt.tooltip.multiblock.heatexchanger.2=3x3 环状致密钨壁板，中心放置主方块
-    S:gt.tooltip.multiblock.heatexchanger.3=热输出由顶层的8个热传输器均分
+    S:gt.tooltip.multiblock.heatexchanger.3=热输出由顶层的8个热吸收装置均分
     S:gt.tooltip.multiblock.heatexchanger.4=底层输入，仅能在主方块处输出流体
     S:gt.tooltip.multiblock.implosioncompressor.1=3x3x3 空心致密钨钢壁板
     S:gt.tooltip.multiblock.implosioncompressor.2=主方块放在侧面底层的中心, 正面朝外
