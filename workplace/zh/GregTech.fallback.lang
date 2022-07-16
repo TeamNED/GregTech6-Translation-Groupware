@@ -5342,7 +5342,7 @@ languagefile {
     S:gt.tooltip.multiblock.bedrockdrill.2=放满 3x4x3 致密钛壁板
     S:gt.tooltip.multiblock.bedrockdrill.3=主基岩钻位于钛结构顶层中央
     S:gt.tooltip.multiblock.bedrockdrill.4=需求润滑油、能量以及基岩(基岩矿石)来挖掘
-    S:gt.tooltip.multiblock.bedrockdrill.5=Also works on HBM's Bedrock Ores, even if it's not a full 3x3 of Bedrock
+    S:gt.tooltip.multiblock.bedrockdrill.5=同样适用于HBM的基岩矿石，即使其大小并不是3x3
     S:gt.tooltip.multiblock.centrifuge.1=3x3x2 大型离心机部件
     S:gt.tooltip.multiblock.centrifuge.2=控制器置于底层任一边中央并面向外侧
     S:gt.tooltip.multiblock.centrifuge.3=任意方块均可输入输出
@@ -5378,9 +5378,9 @@ languagefile {
     S:gt.tooltip.multiblock.electrolyzer.1=3x3x2 电解器部件
     S:gt.tooltip.multiblock.electrolyzer.2=主方块放在侧面底层的中央, 正面朝外
     S:gt.tooltip.multiblock.electrolyzer.3=底层接收输入, 顶层和主方块输出
-    S:gt.tooltip.multiblock.fermenter.1=5x5 热传输器基座
+    S:gt.tooltip.multiblock.fermenter.1=5x5 热吸收装置
     S:gt.tooltip.multiblock.fermenter.2=5x5x2 不锈钢壁板
-    S:gt.tooltip.multiblock.fermenter.3=主方块放在长方体任意侧面的中央, 正面朝外
+    S:gt.tooltip.multiblock.fermenter.3=主方块放在长方体任意侧面底层的中央, 正面朝外
     S:gt.tooltip.multiblock.fermenter.4=侧面输入，背面顶层输出物品，背面底层输出流体
     S:gt.tooltip.multiblock.fusionreactor.1=若想了解有关建设聚变反应堆的细节，请参阅说明书或打开主方块GUI
     S:gt.tooltip.multiblock.fusionreactor.2=需要144个铱线圈，576个钨钢壁板，50个通风单元
