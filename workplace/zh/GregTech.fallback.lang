@@ -5454,10 +5454,10 @@ languagefile {
     S:gt.tooltip.multiblock.steamturbine.2=大型蒸汽涡轮主方块放在 3x3 那一面的中心, 正面朝外
     S:gt.tooltip.multiblock.steamturbine.3=仅能在正面 3x3 处输入蒸汽
     S:gt.tooltip.multiblock.steamturbine.4=底层可泵出蒸馏水
-    S:gt.tooltip.multiblock.tank3x3x3.1=3x3x3 相应材料的蓄水槽壁板
+    S:gt.tooltip.multiblock.tank3x3x3.1=3x3x3 相应材料的壁板
     S:gt.tooltip.multiblock.tank3x3x3.2=这个阀门方块放在结构顶面/底面/侧面的中心, 正面朝外
     S:gt.tooltip.multiblock.tank3x3x3.3=如果阀门的位置允许液体由于重力自然流出, 该阀门可以自动输出液体
-    S:gt.tooltip.multiblock.tank5x5x5.1=5x5x5 相应材料的蓄水槽壁板
+    S:gt.tooltip.multiblock.tank5x5x5.1=5x5x5 相应材料的壁板
     S:gt.tooltip.multiblock.tank5x5x5.2=这个阀门方块放在结构顶面/底面/侧面的中心, 正面朝外
     S:gt.tooltip.multiblock.tank5x5x5.3=如果阀门的位置允许液体由于重力自然流出, 该阀门可以自动输出液体
     S:gt.tooltip.pump.1=用于清除大量流体
