@@ -695,8 +695,8 @@ languagefile {
     S:fluid.soda.name=苏打水
     S:fluid.soulsandoil=灵魂沙油
     S:fluid.soulsandoil.name=灵魂沙油
-    S:fluid.soymilk=酸牛奶
-    S:fluid.soymilk.name=酸牛奶
+    S:fluid.soymilk=豆浆
+    S:fluid.soymilk.name=豆浆
     S:fluid.spectral_dew=光谱露
     S:fluid.spectral_dew.name=光谱露
     S:fluid.squidink=墨水
@@ -3812,7 +3812,7 @@ languagefile {
     S:gt.multiitem.randomtools.2011.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2012.tooltip=枫树液
     S:gt.multiitem.randomtools.2013.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2014.tooltip=豆奶
+    S:gt.multiitem.randomtools.2014.tooltip=豆浆
     S:gt.multiitem.randomtools.2015.tooltip=胶水
     S:gt.multiitem.randomtools.2016.tooltip=光谱露
     S:gt.multiitem.randomtools.2017.tooltip=Seed Oil
@@ -3830,7 +3830,7 @@ languagefile {
     S:gt.multiitem.randomtools.2111.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2112.tooltip=枫树液
     S:gt.multiitem.randomtools.2113.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2114.tooltip=豆奶
+    S:gt.multiitem.randomtools.2114.tooltip=豆浆
     S:gt.multiitem.randomtools.2115.tooltip=胶水
     S:gt.multiitem.randomtools.2116.tooltip=光谱露
     S:gt.multiitem.randomtools.2117.tooltip=Seed Oil
@@ -3848,7 +3848,7 @@ languagefile {
     S:gt.multiitem.randomtools.2211.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2212.tooltip=枫树液
     S:gt.multiitem.randomtools.2213.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2214.tooltip=豆奶
+    S:gt.multiitem.randomtools.2214.tooltip=豆浆
     S:gt.multiitem.randomtools.2215.tooltip=胶水
     S:gt.multiitem.randomtools.2216.tooltip=光谱露
     S:gt.multiitem.randomtools.2217.tooltip=Seed Oil
@@ -3866,7 +3866,7 @@ languagefile {
     S:gt.multiitem.randomtools.2311.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2312.tooltip=枫树液
     S:gt.multiitem.randomtools.2313.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2314.tooltip=豆奶
+    S:gt.multiitem.randomtools.2314.tooltip=豆浆
     S:gt.multiitem.randomtools.2315.tooltip=胶水
     S:gt.multiitem.randomtools.2316.tooltip=光谱露
     S:gt.multiitem.randomtools.2317.tooltip=Seed Oil
@@ -3884,7 +3884,7 @@ languagefile {
     S:gt.multiitem.randomtools.2411.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2412.tooltip=枫树液
     S:gt.multiitem.randomtools.2413.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2414.tooltip=豆奶
+    S:gt.multiitem.randomtools.2414.tooltip=豆浆
     S:gt.multiitem.randomtools.2415.tooltip=胶水
     S:gt.multiitem.randomtools.2416.tooltip=光谱露
     S:gt.multiitem.randomtools.2417.tooltip=Seed Oil
@@ -3902,7 +3902,7 @@ languagefile {
     S:gt.multiitem.randomtools.2511.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2512.tooltip=枫树液
     S:gt.multiitem.randomtools.2513.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2514.tooltip=豆奶
+    S:gt.multiitem.randomtools.2514.tooltip=豆浆
     S:gt.multiitem.randomtools.2515.tooltip=胶水
     S:gt.multiitem.randomtools.2516.tooltip=光谱露
     S:gt.multiitem.randomtools.2517.tooltip=Seed Oil
@@ -3920,7 +3920,7 @@ languagefile {
     S:gt.multiitem.randomtools.2611.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2612.tooltip=枫树液
     S:gt.multiitem.randomtools.2613.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2614.tooltip=豆奶
+    S:gt.multiitem.randomtools.2614.tooltip=豆浆
     S:gt.multiitem.randomtools.2615.tooltip=胶水
     S:gt.multiitem.randomtools.2616.tooltip=光谱露
     S:gt.multiitem.randomtools.2617.tooltip=Seed Oil
@@ -3938,7 +3938,7 @@ languagefile {
     S:gt.multiitem.randomtools.2711.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2712.tooltip=枫树液
     S:gt.multiitem.randomtools.2713.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2714.tooltip=豆奶
+    S:gt.multiitem.randomtools.2714.tooltip=豆浆
     S:gt.multiitem.randomtools.2715.tooltip=胶水
     S:gt.multiitem.randomtools.2716.tooltip=光谱露
     S:gt.multiitem.randomtools.2717.tooltip=Seed Oil
@@ -3956,7 +3956,7 @@ languagefile {
     S:gt.multiitem.randomtools.2811.tooltip=牛奶 (你不能从桶里痛饮! )
     S:gt.multiitem.randomtools.2812.tooltip=枫树液
     S:gt.multiitem.randomtools.2813.tooltip=彩虹树汁
-    S:gt.multiitem.randomtools.2814.tooltip=豆奶
+    S:gt.multiitem.randomtools.2814.tooltip=豆浆
     S:gt.multiitem.randomtools.2815.tooltip=胶水
     S:gt.multiitem.randomtools.2816.tooltip=光谱露
     S:gt.multiitem.randomtools.2817.tooltip=Seed Oil
@@ -6462,7 +6462,7 @@ languagefile {
     S:qwertech.dna.102.tooltip=
     S:qwertech.dna.103.name=DNA注射器
     S:qwertech.dna.103.tooltip=
-    S:qwertech.dna.104.name=豆奶注射器
+    S:qwertech.dna.104.name=豆浆注射器
     S:qwertech.dna.104.tooltip=Not actually milk
     S:qwertech.dna.105.name=烈焰棒注射器
     S:qwertech.dna.105.tooltip=IT BURNS!
