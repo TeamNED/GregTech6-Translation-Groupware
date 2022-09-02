@@ -2018,6 +2018,7 @@ generators:
       Brown Clay: 褐色粘土
       Red Clay: 红色粘土
       Kaolinite Clay: 高岭石粘土
+      Porcelain Clay: 瓷土
   
   # stone
   - group: stoneSlab
