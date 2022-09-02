@@ -273,8 +273,6 @@ languagefile {
     S:fluid.helium-3=氦-3
     S:fluid.helium-3.name=氦-3
     S:fluid.helium.name=氦
-    S:fluid.helium3=氦-3
-    S:fluid.helium3.name=氦-3
     S:fluid.heliumplasma=氦离子
     S:fluid.heliumplasma.name=氦离子
     S:fluid.hellderberryjuice=下界莓汁
@@ -301,8 +299,6 @@ languagefile {
     S:fluid.hotsemiheavywater.name=热半重水
     S:fluid.hottritiatedwater=热超重水
     S:fluid.hottritiatedwater.name=热超重水
-    S:fluid.hydrogen=氢
-    S:fluid.hydrogen.name=氢
     S:fluid.ic2coolant=冷却液
     S:fluid.ic2coolant.name=冷却液
     S:fluid.ic2hotcoolant=热冷却液
@@ -1510,6 +1506,7 @@ languagefile {
     S:gt.lang.spawnproof.sp.broken=虽然怪物能生成在这个方块上，但那是意料之外的事情。
     S:gt.lang.spawnproof.sp.bug=虽然怪物不能生成在这个方块上，但那是意料之外的事情。
     S:gt.lang.structure=结构
+    S:gt.lang.thermal.mass=热质量: 
     S:gt.lang.time.day=天
     S:gt.lang.time.days=天
     S:gt.lang.time.hour=小时
@@ -1800,10 +1797,8 @@ languagefile {
     S:gt.material.HSLA=HSLA
     S:gt.material.HeeEndium=末影矿
     S:gt.material.Helium=氦
-    S:gt.material.Helium3=氦-3
     S:gt.material.Hexcite=Hexcite
     S:gt.material.Hexorium=黑克斯
-    S:gt.material.Hydrogen=氢
     S:gt.material.Illmenite=钛铁矿
     S:gt.material.Infernal=地狱
     S:gt.material.Infinite=无尽
@@ -4590,6 +4585,7 @@ languagefile {
     S:gt.multiitem.technological.32024.tooltip=同时存储16项文件
     S:gt.multiitem.technological.name=生成的物品
     S:gt.multitileentity.10050.name=太阳能电池板
+    S:gt.multitileentity.10051.name=太阳能电池板 (锗)
     S:gt.multitileentity.10060.name=远距传输用物品管道
     S:gt.multitileentity.10061.name=远距传输用流体管道
     S:gt.multitileentity.11170.name=零点模块放能器 (量子能)
@@ -5582,6 +5578,7 @@ languagefile {
     S:itemGroup.gt.multitileentity.1304=动能引擎
     S:itemGroup.gt.multitileentity.14000=电池
     S:itemGroup.gt.multitileentity.14013=电池
+    S:itemGroup.gt.multitileentity.14700=便携电池
     S:itemGroup.gt.multitileentity.14999=ZPM
     S:itemGroup.gt.multitileentity.15002=自动工具
     S:itemGroup.gt.multitileentity.1538=涡轮
@@ -5739,8 +5736,6 @@ languagefile {
     S:oredict.chemtubeEmpty.name=空试管
     S:oredict.chemtubeFierySteel.name=炙热钢试管
     S:oredict.chemtubeHelium.name=氦试管
-    S:oredict.chemtubeHelium3.name=氦-3试管
-    S:oredict.chemtubeHydrogen.name=氢试管
     S:oredict.chemtubeKrypton.name=氪试管
     S:oredict.chemtubeLeather.name=皮革试管
     S:oredict.chemtubeNeon.name=氖试管

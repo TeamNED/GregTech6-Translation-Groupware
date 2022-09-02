@@ -890,7 +890,6 @@ generators:
       Electrical Steel: 磁钢
       Electrum Flux: 通量琥珀金
       Elvorium: 魔灵
-      Empty: 空
       Endium: 末金
       Energetic Alloy: 充能合金
       Ethaxium: 伊桑斯
@@ -2617,6 +2616,9 @@ generators:
       Vibramantium: 艾德曼振金
       Workers Alloy: 工人合金
       Elementium: 源质钢
+      Hydrogen: 氢气
+      Helium-3: 氦-3
+      Empty: 空
   - group: wire
     namespace: "S:gt.multitileentity."
     rules:
@@ -2797,6 +2799,8 @@ generators:
       Flux Laser: 红石通量镭射器
       Flux Dynamo: 红石通量发电机
       Thermofluxic Cooler: 红石通量半导体制冷器
+      Aneutronic Fusion Power Cell: 无中子聚变电池
+      Power Cell: 燃料电池
   - group: entityProductTypeC
     namespace: "S:gt.multitileentity."
     completed: false
