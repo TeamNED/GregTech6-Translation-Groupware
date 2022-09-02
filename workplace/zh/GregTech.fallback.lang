@@ -810,7 +810,7 @@ languagefile {
     S:gt.behaviour.paintremoverspray.uses=剩余使用次数:
     S:gt.behaviour.paintspray.uses=剩余使用次数:
     S:gt.behaviour.path=右键草方块制造草径
-    S:gt.behaviour.placedynamite=Places Dynamite and links it to Remote Activators in Hotbar
+    S:gt.behaviour.placedynamite=放置炸药并绑定到快捷栏中的远程激活器
     S:gt.behaviour.plunger.fluid=从水槽中移除1000L液体
     S:gt.behaviour.plunger.item=清除管道中的物品
     S:gt.behaviour.remote=在128m范围内激活16个方块
@@ -936,8 +936,8 @@ languagefile {
     S:gt.block.rockores.7.name=乳白色石英矿
     S:gt.block.rockores.8.name=下界石英
     S:gt.block.sands.0.name=黑沙
-    S:gt.block.sands.1.name=Basaltic Black Sand
-    S:gt.block.sands.2.name=Granitic Black Sand
+    S:gt.block.sands.1.name=玄武岩黑沙
+    S:gt.block.sands.2.name=花岗岩类黑沙
     S:gt.block.vanillaores.a.0.name=硫矿石
     S:gt.block.vanillaores.a.1.name=磷灰石矿石
     S:gt.block.vanillaores.a.10.name=白钨矿石
@@ -4080,7 +4080,7 @@ languagefile {
     S:gt.multiitem.randomtools.8008.tooltip=在自动工作台中无限耐久
     S:gt.multiitem.randomtools.8009.name=锉刀机械臂
     S:gt.multiitem.randomtools.8009.tooltip=在自动工作台中无限耐久
-    S:gt.multiitem.randomtools.899.name=Modeled Porcelain Cup
+    S:gt.multiitem.randomtools.899.name=已成型的瓷杯
     S:gt.multiitem.randomtools.9000.name=远程激活器
     S:gt.multiitem.randomtools.9000.tooltip=
     S:gt.multiitem.randomtools.9001.name=调试扫描仪
@@ -4182,7 +4182,7 @@ languagefile {
     S:gt.multiitem.technological.10803.tooltip=
     S:gt.multiitem.technological.10804.name=食物模具 (圆柱体)
     S:gt.multiitem.technological.10804.tooltip=
-    S:gt.multiitem.technological.10805.name=Food Grade Mold (Toast)
+    S:gt.multiitem.technological.10805.name=食物模具 (吐司)
     S:gt.multiitem.technological.10805.tooltip=
     S:gt.multiitem.technological.1086.name=物流监视器 (逻辑处理器)
     S:gt.multiitem.technological.1086.tooltip=用于配合物流核心及管线
@@ -5486,7 +5486,7 @@ languagefile {
     S:gt.tooltip.sensor.tachometer=测量轴的转速 (单位: RU)
     S:gt.tooltip.sensor.thermometer=测量温度(单位: 开尔文)
     S:gt.tooltip.sensor.tpsmeter=测量整个服务器的TPS值
-    S:gt.tooltip.stone.moss.bonemeal=Use Bonemeal or similar to spread the Moss
+    S:gt.tooltip.stone.moss.bonemeal=使用骨粉之类的物品来扩散菌丝!
     S:gt.tooltip.stone.mushroom.no=蘑菇无法扩散到这块平滑岩石上!
     S:gt.tooltip.stone.mushroom.yes=蘑菇可以扩散到这块粗糙岩石上!
     S:gt.weapon.sneak.rightclick.reload=潜行右击以重新装填
@@ -5504,7 +5504,7 @@ languagefile {
     S:itemGroup.blockIngot=块状锭
     S:itemGroup.blockPlate=块状板
     S:itemGroup.blockPlateGem=块状宝石板
-    S:itemGroup.blockRaw=Blocks of Ore
+    S:itemGroup.blockRaw=块状矿石
     S:itemGroup.blockSolid=铸造金属块
     S:itemGroup.bolt=螺栓
     S:itemGroup.bouleGt=人造宝石
@@ -5524,7 +5524,7 @@ languagefile {
     S:itemGroup.crateGt64Ingot=板条箱: 锭
     S:itemGroup.crateGt64Plate=板条箱: 板
     S:itemGroup.crateGt64PlateGem=板条箱: 宝石板
-    S:itemGroup.crateGt64Raw=Crates of Ore
+    S:itemGroup.crateGt64Raw=板条箱: 矿石
     S:itemGroup.crateGtDust=板条箱: 粉末
     S:itemGroup.crateGtGem=板条箱: 宝石
     S:itemGroup.crateGtIngot=板条箱: 锭
@@ -5622,7 +5622,7 @@ languagefile {
     S:itemGroup.link=链环
     S:itemGroup.minecartWheels=车轮
     S:itemGroup.nugget=粒
-    S:itemGroup.oreRaw=Raw Ores
+    S:itemGroup.oreRaw=矿石
     S:itemGroup.oreVanillastone=矿石
     S:itemGroup.plantGtBerry=莓
     S:itemGroup.plantGtBlossom=花
@@ -5694,16 +5694,16 @@ languagefile {
     S:itemGroup.toolHeadUniversalSpade=铲头毛坯
     S:itemGroup.toolHeadWrench=扳手头
     S:itemGroup.wireFine=细线缆
-    S:loot.bonusChest=Bonus Chest
-    S:loot.dungeonChest=Dungeon
-    S:loot.mineshaftCorridor=Mineshaft
-    S:loot.pyramidDesertyChest=Desert Pyramid
-    S:loot.pyramidJungleChest=Jungle Temple
-    S:loot.pyramidJungleDispenser=Dispenser
-    S:loot.strongholdCorridor=Corridor
-    S:loot.strongholdCrossing=Storage
-    S:loot.strongholdLibrary=Library
-    S:loot.villageBlacksmith=Blacksmith
+    S:loot.bonusChest=奖励箱
+    S:loot.dungeonChest=地牢
+    S:loot.mineshaftCorridor=矿井
+    S:loot.pyramidDesertyChest=沙漠神庙
+    S:loot.pyramidJungleChest=丛林神庙
+    S:loot.pyramidJungleDispenser=发射器
+    S:loot.strongholdCorridor=走廊
+    S:loot.strongholdCrossing=仓库
+    S:loot.strongholdLibrary=图书馆
+    S:loot.villageBlacksmith=铁匠铺
     S:mc.recipe.furnace=熔炉
     S:mc.recipe.furnacefuel=熔炉燃料 (燃烧时间(Tick):总HU=1:25)
     S:oredict.arrowGtPlasticEmpty.name=轻质空箭
