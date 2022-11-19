@@ -1468,6 +1468,32 @@ generators:
       Vivid Alloy: 生动合金
       Unstable: 不稳定金属
       Tritium: 氚
+      Blue Diamond: 蓝色钻石
+      Callisto: 木卫四
+      Ceres: 谷神星
+      Deimos: 火卫二
+      Eris: 阋神星
+      Europa: 木卫二
+      Ganymede: 木卫三
+      Green Diamond: 绿色钻石
+      Iapetus: 土卫八
+      Io: 木卫一
+      Jupiter: 木星
+      Kepler22b: 开普勒-22b
+      Neptune: 海王星
+      Oberon: 天卫四
+      Phobos: 火卫一
+      Pluto: 冥王星
+      Purple Diamond: 紫色钻石
+      Red Diamond: 红色钻石
+      Rhea: 土卫五
+      Saturn: 土星
+      Titan: 土卫六
+      Titania: 天卫三
+      Triton: 海卫一
+      Uranus: 天王星
+      Venus: 金星
+      Yellow Diamond: 黄色钻石
 
   - group: material
     completed: false
