@@ -354,7 +354,6 @@ generators:
       Steeleaf Chip: 钢叶粒
       Brittle Ceramic Scraps: 陶瓷废料
       Glass Shards: 玻璃渣
-      Pumice Pebbles: 浮石废料
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -383,6 +382,7 @@ generators:
       Rotor: 转子
       Round: 垫片
       Scrap: 废料
+      Pebbles: 碎石
       Screw: 螺丝
       Shuriken: 飞镖
       Stick: 杆
