@@ -39,7 +39,7 @@ shared_ptr<IGeneratorMeta> RuleLangResult::meta_conbined() const {
   }
   const IGeneratorMeta &meta_source = *(this->meta());
   auto meta_tmp = std::make_shared<GeneratorMeta>(meta_source);
-  for (size_t i = 1; i < this->subs().size(); ++i) {
+  for (size_t i = 0; i < this->subs().size(); ++i) {
     *meta_tmp += *(this->_subs[i]->meta());
   }
   return meta_tmp->empty() ? nullptr : meta_tmp;
