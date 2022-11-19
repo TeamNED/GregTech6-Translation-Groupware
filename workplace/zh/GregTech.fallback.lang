@@ -1696,7 +1696,6 @@ languagefile {
     S:gt.material.AnyMagicalWood=任意魔法木头
     S:gt.material.AnyMetal=任意金属
     S:gt.material.AnyNormalWood=任意木头
-    S:gt.material.AnyPrismarine=任意海晶石
     S:gt.material.AnySteel=任意钢
     S:gt.material.AnyThaumicCrystal=任意神秘碎片
     S:gt.material.AnyUntreatedWood=任意未防腐木头
@@ -1836,7 +1835,6 @@ languagefile {
     S:gt.material.Mercassium=Mercassium
     S:gt.material.Microcline=微斜长石
     S:gt.material.Mimichite=模仿石
-    S:gt.material.Mud=淤泥
     S:gt.material.MutatedIron=突变铁
     S:gt.material.Mutation=突变
     S:gt.material.NULL=无
@@ -1845,7 +1843,6 @@ languagefile {
     S:gt.material.NaturalAluminum=原生铝
     S:gt.material.Neon=氖
     S:gt.material.Neptunium237=Neptunium237
-    S:gt.material.Nether=下界
     S:gt.material.Neutrino=中微子
     S:gt.material.Neutron=中子
     S:gt.material.Neutronium=0号元素
