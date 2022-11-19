@@ -1466,6 +1466,7 @@ languagefile {
     S:gt.lang.prospecting.nothing=未发现矿物
     S:gt.lang.prospecting.traces=发现
     S:gt.lang.railspeed=车速限制:
+    S:gt.lang.ranged.enchants=可用远程武器附魔: 
     S:gt.lang.recipe=配方
     S:gt.lang.recipes=配方
     S:gt.lang.recipes.anvil.usage=将原料放置在顶部并用锤子敲打顶部或侧面
@@ -1560,6 +1561,7 @@ languagefile {
     S:gt.lang.tool.name.thermometer=温度计
     S:gt.lang.tool.name.whacker=除草机
     S:gt.lang.tool.name.wrench=扳手
+    S:gt.lang.tool.possible.enchants=可用的附魔: 
     S:gt.lang.tool.to.harvest=采集工具
     S:gt.lang.tool.tooltip.axe=超能GT斧
     S:gt.lang.tool.tooltip.chisel=凿刻可被凿刻的方块
@@ -1634,6 +1636,7 @@ languagefile {
     S:gt.lang.use.x.to.toggle.facing2.post= 设置次要面
     S:gt.lang.use.x.to.toggle.facing2.pre=使用 
     S:gt.lang.walkspeed=这个方块会改变行走速度
+    S:gt.lang.weapon.enchants=可用武器附魔: 
     S:gt.lang.wire.stats.amperage=电流(A):
     S:gt.lang.wire.stats.loss=损耗:
     S:gt.lang.wire.stats.lossless=无损地传输能量
