@@ -2802,6 +2802,7 @@ generators:
       Thermofluxic Cooler: 红石通量半导体制冷器
       Aneutronic Fusion Power Cell: 无中子聚变电池
       Power Cell: 燃料电池
+      Bottlecrate: 瓶筐
   - group: entityProductTypeC
     namespace: "S:gt.multitileentity."
     completed: false
@@ -3551,6 +3552,7 @@ generators:
       "Any Sub-Item of this one": 所有此物品的子物品
       Wooden Bookshelf: 木制书架
       Wooden Bucket: 木桶
+      Wooden Bottlecrate: 木制瓶筐
       Used: 已使用过
       Full: 未使用过
       Book: 书
