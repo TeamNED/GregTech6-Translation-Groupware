@@ -732,6 +732,14 @@ generators:
       Triton: 海卫一
       Uranus: 天王星
       Venus: 金星
+  - group: oredictPrefix
+    namespace: S:oredict.prefix.ore
+    completed: true
+    rules:
+      - s: "{0} Ores"
+        t: "{0}矿石"
+        subs:
+          - oreTypePrefix
   - group: oreSandTypePrefix
     namespace: S:oredict.
     completed: false
