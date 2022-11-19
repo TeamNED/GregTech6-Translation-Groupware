@@ -1502,11 +1502,6 @@ generators:
       Vivid Alloy: 生动合金
       Unstable: 不稳定金属
       Tritium: 氚
-      Blue Diamond: 蓝色钻石
-      Green Diamond: 绿色钻石
-      Purple Diamond: 紫色钻石
-      Red Diamond: 红色钻石
-      Yellow Diamond: 黄色钻石
 
   - group: material
     completed: false
@@ -1687,6 +1682,12 @@ generators:
       Sugar: 糖
       Sugar Cubes: 方糖
       Sugilite: 杉石
+      Blue Diamond: 蓝色钻石
+      Green Diamond: 绿色钻石
+      Purple Diamond: 紫色钻石
+      Red Diamond: 红色钻石
+      Yellow Diamond: 黄色钻石
+      
   - group: materialPositive
     completed: false
     dict:
