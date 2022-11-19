@@ -2140,6 +2140,15 @@ languagefile {
     S:gt.metatool.01.5.name=铲(空)
     S:gt.metatool.01.50.name=打火石
     S:gt.metatool.01.50.tooltip=
+    S:gt.metatool.01.5000.name=手枪
+    S:gt.metatool.01.5000.tooltip=单发, 伤害中等
+    S:gt.metatool.01.5001.name=手枪 (空)
+    S:gt.metatool.01.5002.name=卡宾枪
+    S:gt.metatool.01.5002.tooltip=单发, 伤害高
+    S:gt.metatool.01.5003.name=卡宾枪 (空)
+    S:gt.metatool.01.5004.name=步枪
+    S:gt.metatool.01.5004.tooltip=单发, 伤害极高
+    S:gt.metatool.01.5005.name=步枪 (空)
     S:gt.metatool.01.51.name=打火石(空)
     S:gt.metatool.01.52.name=活动扳手
     S:gt.metatool.01.52.tooltip=按住左键以拆卸机器
