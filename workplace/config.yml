@@ -2200,7 +2200,7 @@ generators:
           - randomtoolsTypeA
           - color
       - s: "{0} {1}"
-        t: "{0} {1}"
+        t: "{0}{1}"
         subs:
           - color
           - randomtoolsTypeB
