@@ -850,6 +850,10 @@ generators:
         t: "含{0}岩石"
         subs:
           - material
+      - s: "{0} Rock"
+        t: "含{0}岩石"
+        subs:
+          - oreTypePrefix
   # material
   - group: materialGt
     namespace: S:gt.material.
