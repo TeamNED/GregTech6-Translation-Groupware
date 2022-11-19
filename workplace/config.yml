@@ -2662,6 +2662,7 @@ generators:
       Elementium: 源质钢
       Hydrogen: 氢气
       Helium-3: 氦-3
+      Bismuth Bronze: 铋青铜
       Empty: 空
   - group: wire
     namespace: "S:gt.multitileentity."
