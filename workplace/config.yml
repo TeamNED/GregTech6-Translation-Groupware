@@ -1687,7 +1687,7 @@ generators:
       Purple Diamond: 紫色钻石
       Red Diamond: 红色钻石
       Yellow Diamond: 黄色钻石
-      
+
   - group: materialPositive
     completed: false
     dict:
@@ -2938,7 +2938,7 @@ generators:
       Compact Electric Conveyor: 输送机模块
       Compact Electric Piston: 电动活塞
       Compact Robot Arm: 机械臂
-      Compact Force Field Emitter: 发射器
+      Compact Force Field Emitter: 力场发生器
       Compact Signal Emitter: 信号发射器
       Compact Sensor: 传感器
   - group: blockEnergized
