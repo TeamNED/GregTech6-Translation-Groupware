@@ -688,6 +688,7 @@ generators:
         S:oredict.oreRedgranite: 红色花岗岩
         S:oredict.oreBlackgranite: 黑色花岗岩
         S:oredict.oreVanillagranite: 花岗岩
+        S:oredict.rockGtGranite: 花岗岩
       Sandstone: 沙石
       Small: 贫瘠
       Mud: 淤泥
