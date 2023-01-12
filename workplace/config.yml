@@ -721,7 +721,70 @@ generators:
       Io: 木卫一
       Jupiter: 木星
       Kepler22b: 开普勒-22b
-      Mercury: 水星
+      # issue #6 #7
+      Mercury:
+        S:oredict.oreMercury: 水星
+        S:gt.material.MercuryRock: 水星
+        S:oredict.arrowGtPlasticMercuryRock.name: 水星
+        S:oredict.arrowGtWoodMercuryRock.name: 水星
+        S:oredict.blockDustMercuryRock.name: 水星
+        S:oredict.blockPlateMercuryRock.name: 水星
+        S:oredict.boltMercuryRock.name: 水星
+        S:oredict.bulletGtLargeMercuryRock.name: 水星
+        S:oredict.bulletGtMediumMercuryRock.name: 水星
+        S:oredict.bulletGtSmallMercuryRock.name: 水星
+        S:oredict.casingSmallMercuryRock.name: 水星
+        S:oredict.chainMercuryRock.name: 水星
+        S:oredict.chemtubeMercuryRock.name: 水星
+        S:oredict.crateGt64DustMercuryRock.name: 水星
+        S:oredict.crateGt64PlateMercuryRock.name: 水星
+        S:oredict.crateGtDustMercuryRock.name: 水星
+        S:oredict.crateGtPlateMercuryRock.name: 水星
+        S:oredict.dustDiv72MercuryRock.name: 水星
+        S:oredict.dustMercuryRock.name: 水星
+        S:oredict.dustSmallMercuryRock.name: 水星
+        S:oredict.dustTinyMercuryRock.name: 水星
+        S:oredict.gearGtMercuryRock.name: 水星
+        S:oredict.gearGtSmallMercuryRock.name: 水星
+        S:oredict.linkMercuryRock.name: 水星
+        S:oredict.plantGtBerryMercuryRock.name: 水星
+        S:oredict.plantGtBlossomMercuryRock.name: 水星
+        S:oredict.plantGtFiberMercuryRock.name: 水星
+        S:oredict.plantGtTwigMercuryRock.name: 水星
+        S:oredict.plantGtWartMercuryRock.name: 水星
+        S:oredict.plateCurvedMercuryRock.name: 水星
+        S:oredict.plateMercuryRock.name: 水星
+        S:oredict.plateTinyMercuryRock.name: 水星
+        S:oredict.ringMercuryRock.name: 水星
+        S:oredict.rockGtMercuryRock.name: 水星
+        S:oredict.rotorMercuryRock.name: 水星
+        S:oredict.roundMercuryRock.name: 水星
+        S:oredict.scrapGtMercuryRock.name: 水星
+        S:oredict.screwMercuryRock.name: 水星
+        S:oredict.shurikenMercuryRock.name: 水星
+        S:oredict.stickLongMercuryRock.name: 水星
+        S:oredict.stickMercuryRock.name: 水星
+        S:oredict.toolHeadArrowMercuryRock.name: 水星
+        S:oredict.toolHeadAxeMercuryRock.name: 水星
+        S:oredict.toolHeadHammerMercuryRock.name: 水星
+        S:oredict.toolHeadHoeMercuryRock.name: 水星
+        S:oredict.toolHeadMattockMercuryRock.name: 水星
+        S:oredict.toolHeadPickaxeMercuryRock.name: 水星
+        S:oredict.toolHeadPlowMercuryRock.name: 水星
+        S:oredict.toolHeadRawArrowMercuryRock.name: 水星
+        S:oredict.toolHeadRawAxeMercuryRock.name: 水星
+        S:oredict.toolHeadRawHoeMercuryRock.name: 水星
+        S:oredict.toolHeadRawMattockMercuryRock.name: 水星
+        S:oredict.toolHeadRawPickaxeMercuryRock.name: 水星
+        S:oredict.toolHeadRawPlowMercuryRock.name: 水星
+        S:oredict.toolHeadRawSenseMercuryRock.name: 水星
+        S:oredict.toolHeadRawShovelMercuryRock.name: 水星
+        S:oredict.toolHeadRawSpadeMercuryRock.name: 水星
+        S:oredict.toolHeadRawSwordMercuryRock.name: 水星
+        S:oredict.toolHeadSenseMercuryRock.name: 水星
+        S:oredict.toolHeadShovelMercuryRock.name: 水星
+        S:oredict.toolHeadSpadeMercuryRock.name: 水星
+        S:oredict.toolHeadSwordMercuryRock.name: 水星
       Neptune: 海王星
       Oberon: 天卫四
       Phobos: 火卫一
