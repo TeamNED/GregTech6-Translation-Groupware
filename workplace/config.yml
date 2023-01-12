@@ -342,10 +342,10 @@ generators:
     namespace: S:oredict.
     completed: false
     dict:
-      Impure Pile of : 含杂
-      Purified Pile of : 纯净
-      Small Pile of : 小堆
-      Tiny Pile of : 小撮
+      Impure Pile of: 含杂
+      Purified Pile of: 纯净
+      Small Pile of: 小堆
+      Tiny Pile of: 小撮
       1/72nd of a Pile of: 1/72份
   # product
   - group: materialProduct
@@ -809,8 +809,6 @@ generators:
         subs:
           - gemType
           - gem
-    namespace: S:oredict.gem
-    rules:
       - s: "{0}"
         t: "{0}"
         subs:
@@ -899,16 +897,6 @@ generators:
       Cd-In-Ag-Alloy: 镉铟银合金
       Celenegil: 幽冥毒结晶
       Ceruclase: 暗影秘银
-      Chemical Y-1: 试剂Y-1
-      Chemical Y-10: 试剂Y-10
-      Chemical Y-2: 试剂Y-2
-      Chemical Y-3: 试剂Y-3
-      Chemical Y-4: 试剂Y-4
-      Chemical Y-5: 试剂Y-5
-      Chemical Y-6: 试剂Y-6
-      Chemical Y-7: 试剂Y-7
-      Chemical Y-8: 试剂Y-8
-      Chemical Y-9: 试剂Y-9
       Chromium Dioxide: 二氧化铬
       Conductive Iron: 导电铁
       Coralium: 珊瑚
@@ -950,9 +938,9 @@ generators:
       Lemurite: 利莫里亚
       Ludicrite: 滑稽
       Mauftrium: 始源魂灵
-      Meteoric Black Steel: 陨黑钢 
-      Meteoric Blue Steel: 陨蓝钢 
-      Meteoric Red Steel: 陨红钢 
+      Meteoric Black Steel: 陨黑钢
+      Meteoric Blue Steel: 陨蓝钢
+      Meteoric Red Steel: 陨红钢
       Meutoite: 龙之魂石
       Midasium: 溶火金
       Red Copper: 紫铜
@@ -1118,7 +1106,7 @@ generators:
       Kyanite: 蓝晶石
       Lapis: 青金石
       Lavender Quartz: 熏香石英
-      Lazurite: 天青石  
+      Lazurite: 天青石
       Lepidolite: 锂云母
       Licorice: 盐甘草糖
       Lignite Coal: 褐煤
@@ -1154,8 +1142,6 @@ generators:
       Pink Fluorite: 粉色氟石
       Platinum Group Sludge: 铂族泥
       Pollucite: 铯榴石
-      Potassium Feldspar: 钾长石
-      Potassium Nitrate: 硝酸钾
       Powellite: 钼钙
       Prismane: 棱柱烷
       Dark Prismarine: 深色海晶石
@@ -1181,7 +1167,6 @@ generators:
       Smithsonite: 菱锌
       Smokey Quartz: 烟熏石英
       Sodalite: 方钠石
-      Sodium Nitrate: 硝酸钠
       Sperrylite: 砷铂
       Sphalerite: 闪锌
       Spodumene: 锂辉
@@ -1285,8 +1270,6 @@ generators:
       Manganese Chloride: 氯化锰
       Peat: 泥炭
       Bituminous Peat: 沥青泥炭
-      Potassium Carbonate: 碳酸钾
-      Sodium Carbonate: 碳酸钠
       Emerald Green: 绿色绿宝石
       Tofu: 豆腐
       Niobium Pentoxide: 五氧化二铌
@@ -1482,7 +1465,7 @@ generators:
       White Vitriol: 硫酸锌
       End Sand: 末地沙
       Zephyrean Aerotheum: 和谐之空气
-      Gelid Cryotheum: 极寒之凛冰 
+      Gelid Cryotheum: 极寒之凛冰
       "Honey (Forestry, most other Mods)": 蜂蜜(林业)
       Tectonic Petrotheum: 构造之地岩
       Blazing Pyrotheum: 烈焰之炽焱
@@ -1812,7 +1795,7 @@ generators:
       Thorium-232: 钍-232
       Thulium: 铥
       Tin: 锡
-      Tine: 锡 
+      Tine: 锡
       Titanium: 钛
       Tungsten: 钨
       Unbinilium: 120号元素(Ubn)
@@ -2067,7 +2050,7 @@ generators:
       Red Clay: 红色粘土
       Kaolinite Clay: 高岭石粘土
       Porcelain Clay: 瓷土
-  
+
   # stone
   - group: stoneSlab
     namespace: "S:gt.stone."
@@ -2521,7 +2504,6 @@ generators:
       Sandy: 沙漠
       Swimming: 游泳
 
-
   # entity
   - group: entityMaterial
     namespace: "S:"
@@ -2558,7 +2540,7 @@ generators:
       Superconductor: 超导体
       Void Metal: 虚空金属
       Desh: 戴斯
-      Refined Desh: 精制戴斯 
+      Refined Desh: 精制戴斯
       Thaumium: 神秘锭
       Stainless Steel: 不锈钢
       Titanium: 钛
@@ -2655,11 +2637,9 @@ generators:
       Stainless: 不锈钢
       Trinaquadalloy: 碳化特林-钍瑞铌合金
       Iritanium: 钛铱合金
-      Wood: 木制
       Wooden: 木制
       Niobium Titanium: 铌钛合金
       Niobium-Titanium: 铌钛合金
-      Titanium: 钛
       Enderium Base: 末影粗胚
       Vibranium: 振金
       Vibramantium: 艾德曼振金
@@ -3252,7 +3232,7 @@ generators:
       Nugget: 粒
       Billet: 胚料
       Fine Wire: 精细线缆
-  
+
   # gtww
   - group: gtwwBulletSG
     namespace: "S:oredict.gtweaponsBulletSG"
@@ -3275,7 +3255,6 @@ generators:
       High Caliber: 大号
       Medium Caliber: 中号
       Low Caliber: 小号
-  
 
   # useless elements
   - group: elementUselessAnti
@@ -3635,4 +3614,3 @@ generators:
       Ancient Debris:
         S:oredict.ore: 远古残骸矿石
         "S:": 远古残骸
-
