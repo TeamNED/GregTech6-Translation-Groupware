@@ -1502,6 +1502,10 @@ generators:
       Vivid Alloy: 生动合金
       Unstable: 不稳定金属
       Tritium: 氚
+      Quicklime: 生石灰
+      Coal Gas: 煤气
+      Liquefacted Coal: 液态煤炭
+      Molotov Mixture: 易燃液体
 
   - group: material
     completed: false

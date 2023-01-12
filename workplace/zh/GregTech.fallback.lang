@@ -201,6 +201,8 @@ languagefile {
     S:fluid.chocolatecream.name=巧克力冰淇淋
     S:fluid.chocolatemilk=巧克力牛奶
     S:fluid.chocolatemilk.name=巧克力牛奶
+    S:"fluid.coal gas"=煤气
+    S:"fluid.coal gas.name"=煤气
     S:fluid.coconutcream=椰奶油
     S:fluid.coconutcream.name=椰奶油
     S:fluid.coconutmilk=椰奶
@@ -329,6 +331,8 @@ languagefile {
     S:fluid.limesmoothie.name=酸橙冰沙
     S:fluid.limoncello=柠檬切罗利口酒
     S:fluid.limoncello.name=柠檬切罗利口酒
+    S:"fluid.liquefacted coal"=液化煤炭
+    S:"fluid.liquefacted coal.name"=液化煤炭
     S:fluid.liquid_extra_heavy_oil=超重油
     S:fluid.liquid_extra_heavy_oil.name=超重油
     S:fluid.liquid_heavy_oil=重油
@@ -365,6 +369,8 @@ languagefile {
     S:fluid.mildsalsa.name=微辣萨尔萨酱
     S:fluid.mineralsoda=含汽矿泉水
     S:fluid.mineralsoda.name=含汽矿泉水
+    S:"fluid.molotov mixture"=易燃液体
+    S:"fluid.molotov mixture.name"=易燃液体
     S:"fluid.molten hsla"=熔融HSLA钢
     S:"fluid.molten hsla.name"==熔融HSLA钢
     S:fluid.molten.enderpearl=熔融末影珍珠
@@ -1894,7 +1900,6 @@ languagefile {
     S:gt.material.Quantum=量子
     S:gt.material.QuartzSmoky=烟熏石英
     S:gt.material.QuickSilver=水银(汞)
-    S:gt.material.Quicklime=生石灰
     S:gt.material.Quicksilver=水银(汞)
     S:gt.material.Radon=氡
     S:gt.material.Randomite=随机
