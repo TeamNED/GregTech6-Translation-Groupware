@@ -3252,6 +3252,31 @@ generators:
       Nugget: 粒
       Billet: 胚料
       Fine Wire: 精细线缆
+  
+  # gtww
+  - group: gtwwBulletSG
+    namespace: "S:oredict.gtweaponsBulletSG"
+    rules:
+      - s: "{0} Blunderbuss shot"
+        t: "{0}霰弹枪子弹"
+        subs:
+          - material
+  - group: gtwwMagazine
+    namespace: "S:oredict.gtweaponsMagazine"
+    rules:
+      - s: "{0} {1} Bullet Magazine"
+        t: "{0}{1}子弹弹匣"
+        subs:
+          - gtwwMagazineType
+          - material
+  - group: gtwwMagazineType
+    namespace: "S:oredict.gtweaponsMagazine"
+    dict:
+      High Caliber: 大号
+      Medium Caliber: 中号
+      Low Caliber: 小号
+  
+
   # useless elements
   - group: elementUselessAnti
     namespace: "S:"
