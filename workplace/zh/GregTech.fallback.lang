@@ -5503,6 +5503,13 @@ languagefile {
     S:gt.tooltip.stone.mushroom.no=蘑菇无法扩散到这块平滑岩石上!
     S:gt.tooltip.stone.mushroom.yes=蘑菇可以扩散到这块粗糙岩石上!
     S:gt.weapon.sneak.rightclick.reload=潜行右击以重新装填
+    S:gtww.multitiles.0.name=镀锌钢壁板 (GTWW)
+    S:gtww.multitiles.1.name=小型镀锌钢储罐主阀门 (GTWW)
+    S:gtww.multitiles.2.name=致密镀锌钢壁板 (GTWW)
+    S:gtww.multitiles.3.name=小型致密镀锌钢储罐主阀门 (GTWW)
+    S:gtww.multitiles.4.name=镀锌钢储罐 (GTWW)
+    S:gtww.multitiles.5.name=大型镀锌钢储罐主阀门 (GTWW)
+    S:gtww.multitiles.6.name=大型致密镀锌钢储罐主阀门 (GTWW)
     S:ic2.fluidBiomass=生物质
     S:ic2.fluidCoolant=冷却液
     S:ic2.fluidDistilledWater=蒸馏水
