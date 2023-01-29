@@ -662,6 +662,7 @@ generators:
       Magnetite: 磁铁矿
       Recycled Ancient Debris: 已回收的远古残骸
       Ancient Debris: 远古残骸
+      Mercury Mercury Ore: 水星汞矿石
     rules:
       - s: "{0} Ore"
         t: "{0}矿石"
