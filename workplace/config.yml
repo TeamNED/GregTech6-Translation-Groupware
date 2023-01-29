@@ -1892,7 +1892,9 @@ generators:
   - group: wood
     dict:
       Alder: 桤木
-      Apple: 苹果树
+      Apple:
+        S:gt.multiitem.food: 苹果
+        S:qwertech.machines: 苹果树
       Ash: 梣树
       Beech: 山毛榉
       Box: 黄杨木
