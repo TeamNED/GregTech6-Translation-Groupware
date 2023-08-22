@@ -2715,6 +2715,8 @@ generators:
       Hydrogen: 氢气
       Helium-3: 氦-3
       Bismuth Bronze: 铋青铜
+      Arsenic Bronze: 砷青铜
+      Arsenic Copper: 砷铜
       Empty: 空
   - group: wire
     namespace: "S:gt.multitileentity."
