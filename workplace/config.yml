@@ -1592,6 +1592,14 @@ generators:
       Templerock: 圣殿岩
       Hard Plastic: 硬塑料
       Bakelite: 电木
+      Castlerock: 城堡石头
+      Mazestone: 遗迹石头
+      Cragrock: 峭壁岩
+      Flamascus Steel: 炙热大马士革钢
+      Meteoflame Black Steel: 炙热陨黑钢
+      Meteoflame Blue Steel: 炙热陨蓝钢
+      Meteoflame Red Steel: 炙热陨红钢
+      Meteoflame Steel: 炙热陨钢
     rules:
       - s: "{0}"
         t: "{0}"
@@ -2100,6 +2108,7 @@ generators:
       Zebrawood: 斑木
       Larch: 落叶松
       Cinnamon: 肉桂
+      Cinnawood: 肉桂木
       Blue Spruce: 北美云杉
       Marshmallow: 棉花糖
       Rainbowood: 彩虹树
