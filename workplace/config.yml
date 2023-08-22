@@ -1563,9 +1563,9 @@ generators:
       Coal Gas: 煤气
       Liquefacted Coal: 液态煤炭
       Molotov Mixture: 易燃液体
-
-  - group: material
-    completed: false
+      Soda:
+        S:fluid.soda: 苏打水
+        "S:": 碳酸氢钠
     rules:
       - s: "{0}"
         t: "{0}"
