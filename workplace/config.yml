@@ -1613,6 +1613,21 @@ generators:
       Black End Sand: 黑色末地沙
       White End Sand: 白色末地沙
       Salted Water: 盐水
+      AbyssalOats: 深渊燕麦
+      Apalachia: 附魔山脉
+      Arcanium: 秘金
+      Arlemite: 阿勒
+      Bloodgem: 血宝石
+      Eden: 伊甸
+      Mortum: 死域
+      Netheryte: 下界合金
+      PTFE: 聚四氟乙烯
+      Polycarbonate: 聚碳酸酯
+      Realmite: 现石
+      Rupee: 卢比
+      Saltedwater: 盐水
+      Skythern: 空境
+      Wildwood: 原始森林
     rules:
       - s: "{0}"
         t: "{0}"
