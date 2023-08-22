@@ -3373,12 +3373,12 @@ generators:
       Arrow: 箭
       Screwdriver: 螺丝刀
       Tap: 龙头
-      Funnel: 料斗
+      Funnel: 漏斗
       Crucible: 坩埚
       Basin: 浇铸盆
       Mold: 模具
-      Faucet: 坩埚浇铸口
-      Crossing: 浇筑道
+      Faucet: 浇铸口
+      Crossing: 浇铸道
       Juicer: 榨汁机
       Bowl: 碗
       Plow: 犁
