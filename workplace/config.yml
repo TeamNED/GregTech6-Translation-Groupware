@@ -142,8 +142,8 @@ generators:
       Rubber Sheet: 橡胶片
       PVC Sheet: 聚氯乙烯板
       Teflon Sheet: 聚四氟乙烯板
-      Thin PVC Sheet: 聚氯乙烯板
-      Thin Teflon Sheet: 聚四氟乙烯板
+      Hard Plastic Sheet: 硬塑料板
+      Bakelite Sheet: 电木板
     rules:
       - s: "{0} Plate"
         t: "{0}板"
@@ -208,8 +208,10 @@ generators:
       Emerald Green Bar: 绿宝石锭
       Steeleaf: 钢叶锭
       Tofu Bar: 豆腐条
-      PVC Bar: 聚氯乙烯条
-      Teflon Bar: 聚四氟乙烯条
+      PVC Bar: 聚氯乙烯锭
+      Teflon Bar: 聚四氟乙烯锭
+      Hard Plastic Bar: 硬塑料锭
+      Bakelite Bar: 电木锭
     rules:
       - s: "{0} Ingot"
         t: "{0}锭"
@@ -325,6 +327,8 @@ generators:
       Magnetite: 磁铁矿粉
       PVC Pulp: 聚氯乙烯粉末
       Teflon Pulp: 聚四氟乙烯粉末
+      Hard Plastic Pulp: 硬塑料粉末
+      Bakelite Pulp: 电木粉末
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -364,6 +368,12 @@ generators:
       Glass Shards: 玻璃渣
       PVC Chip: 聚氯乙烯粒
       Teflon Chip: 聚四氟乙烯粒
+      Hard Plastic Chip: 硬塑料粒
+      Bakelite Chip: 电木粒
+      Thin PVC Sheet: 聚氯乙烯箔
+      Thin Teflon Sheet: 聚四氟乙烯箔
+      Thin Hard Plastic Sheet: 硬塑料箔
+      Thin Bakelite Sheet: 电木箔
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -1580,6 +1590,8 @@ generators:
       "Sky Stone": 陨石
       Teflon: 聚四氟乙烯
       Templerock: 圣殿岩
+      Hard Plastic: 硬塑料
+      Bakelite: 电木
     rules:
       - s: "{0}"
         t: "{0}"
