@@ -329,6 +329,8 @@ generators:
       Teflon Pulp: 聚四氟乙烯粉末
       Hard Plastic Pulp: 硬塑料粉末
       Bakelite Pulp: 电木粉末
+      Black End Sand: 黑色末地沙
+      White End Sand: 白色末地沙
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -1608,6 +1610,9 @@ generators:
       Meteoflame Blue Steel: 炙热陨蓝钢
       Meteoflame Red Steel: 炙热陨红钢
       Meteoflame Steel: 炙热陨钢
+      Black End Sand: 黑色末地沙
+      White End Sand: 白色末地沙
+      Salted Water: 盐水
     rules:
       - s: "{0}"
         t: "{0}"
