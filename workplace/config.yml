@@ -686,6 +686,8 @@ generators:
       Ancient Debris: 远古残骸
       Mercury Mercury Ore: 水星汞矿石
       Anti-Palladium: 反物质钯
+      Fossil: 化石
+      Bones: 骨头
     rules:
       - s: "{0} Ore"
         t: "{0}矿石"
