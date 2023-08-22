@@ -3768,3 +3768,5 @@ generators:
       Ancient Debris:
         S:oredict.ore: 远古残骸矿石
         "S:": 远古残骸
+      Processed Unknown Ore: 处理过的未知矿石
+      Non-Functional-Tool for Crafting only: 该工具只能用于合成
