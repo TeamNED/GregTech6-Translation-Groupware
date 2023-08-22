@@ -140,6 +140,10 @@ generators:
       Glass Pane: 玻璃板
       Plastic Sheet: 塑料板
       Rubber Sheet: 橡胶片
+      PVC Sheet: 聚氯乙烯板
+      Teflon Sheet: 聚四氟乙烯板
+      Thin PVC Sheet: 聚氯乙烯板
+      Thin Teflon Sheet: 聚四氟乙烯板
     rules:
       - s: "{0} Plate"
         t: "{0}板"
@@ -204,6 +208,8 @@ generators:
       Emerald Green Bar: 绿宝石锭
       Steeleaf: 钢叶锭
       Tofu Bar: 豆腐条
+      PVC Bar: 聚氯乙烯条
+      Teflon Bar: 聚四氟乙烯条
     rules:
       - s: "{0} Ingot"
         t: "{0}锭"
@@ -317,6 +323,8 @@ generators:
       Order infused Powder: 秩序粉末
       Water infused Powder: 水之粉末
       Magnetite: 磁铁矿粉
+      PVC Pulp: 聚氯乙烯粉末
+      Teflon Pulp: 聚四氟乙烯粉末
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -354,6 +362,8 @@ generators:
       Steeleaf Chip: 钢叶粒
       Brittle Ceramic Scraps: 陶瓷废料
       Glass Shards: 玻璃渣
+      PVC Chip: 聚氯乙烯粒
+      Teflon Chip: 聚四氟乙烯粒
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -1566,6 +1576,10 @@ generators:
       Soda:
         S:fluid.soda: 苏打水
         "S:": 碳酸氢钠
+      PVC: 聚氯乙烯
+      "Sky Stone": 陨石
+      Teflon: 聚四氟乙烯
+      Templerock: 圣殿岩
     rules:
       - s: "{0}"
         t: "{0}"
