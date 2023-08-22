@@ -663,11 +663,16 @@ generators:
       Recycled Ancient Debris: 已回收的远古残骸
       Ancient Debris: 远古残骸
       Mercury Mercury Ore: 水星汞矿石
+      Anti-Palladium: 反物质钯
     rules:
       - s: "{0} Ore"
         t: "{0}矿石"
         subs:
           - material
+      - s: "Native {0} Ore"
+        t: "原生{0}矿石"
+        subs:
+          - materialPositive
       - s: "{0}"
         t: "{0}"
         subs:
@@ -913,6 +918,10 @@ generators:
         t: "含{0}岩石"
         subs:
           - material
+      - s: "Native {0} bearing Rock"
+        t: "含原生{0}矿石"
+        subs:
+          - materialPositive
       - s: "{0} Rock"
         t: "含{0}岩石"
         subs:
@@ -1822,6 +1831,7 @@ generators:
       Oganesson: 118号元素(Og)
       "'Osmium'": 锇
       Osmium: 锇
+      Palladium: 钯
       Platinum: 铂
       Plutonium: 钚
       Plutonium-238: 钚-238
