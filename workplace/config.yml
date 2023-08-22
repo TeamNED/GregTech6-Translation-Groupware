@@ -946,6 +946,14 @@ generators:
         t: "含{0}岩石"
         subs:
           - oreTypePrefix
+  # Fossil
+  - group: bone
+    namespace: S:oredict.ore
+    rules:
+      - s: "{0} Fossil"
+        t: "{0}化石"
+        subs:
+          - oreTypePrefix
   # material
   - group: materialGt
     namespace: S:gt.material.
