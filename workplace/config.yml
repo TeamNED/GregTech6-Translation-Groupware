@@ -1822,7 +1822,6 @@ generators:
       Oganesson: 118号元素(Og)
       "'Osmium'": 锇
       Osmium: 锇
-      Palladium: 钯
       Platinum: 铂
       Plutonium: 钚
       Plutonium-238: 钚-238
@@ -2717,6 +2716,7 @@ generators:
       Bismuth Bronze: 铋青铜
       Arsenic Bronze: 砷青铜
       Arsenic Copper: 砷铜
+      Palladium: 钯
       Empty: 空
   - group: wire
     namespace: "S:gt.multitileentity."
@@ -3336,6 +3336,7 @@ generators:
   - group: elementUseless
     namespace: "S:"
     dict:
+      Palladium: 钯
       Bibibium: 222号元素(Bbb)
       Bibiennium: 229号元素(Bbe)
       Bibihexium: 226号元素(Bbh)
