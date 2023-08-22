@@ -2985,6 +2985,7 @@ generators:
       Aneutronic Fusion Power Cell: 无中子聚变电池
       Power Cell: 燃料电池
       Bottlecrate: 瓶筐
+      Pressure Washer: 水压清洗机
   - group: entityProductTypeC
     namespace: "S:gt.multitileentity."
     completed: false

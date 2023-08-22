@@ -4598,6 +4598,7 @@ languagefile {
     S:gt.recipe.plantalyzer=植物分析仪
     S:gt.recipe.polarizer=电磁偏振器
     S:gt.recipe.press=压力成型机
+    S:gt.recipe.pressurewasher=水压清洗机
     S:gt.recipe.printer=打印机
     S:gt.recipe.replicator=物质复制机
     S:gt.recipe.roaster=焙烧炉
