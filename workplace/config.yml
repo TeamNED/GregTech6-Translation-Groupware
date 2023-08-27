@@ -1606,7 +1606,8 @@ generators:
       Molotov Mixture: 易燃液体
       Soda:
         S:fluid.soda: 苏打水
-        "S:": 碳酸氢钠
+        S:gt: 碳酸氢钠
+        S:oredict: 碳酸氢钠
       PVC: 聚氯乙烯
       Sky Stone: 陨石
       Teflon: 聚四氟乙烯
