@@ -3019,9 +3019,9 @@ languagefile {
     S:gt.multiitem.food.1200=生的肋排
     S:gt.multiitem.food.1200.tooltip=从大型动物上掉落
     S:gt.multiitem.food.12000=草
-    S:gt.multiitem.food.12000.tooltip=
+    S:gt.multiitem.food.12000.tooltip=用9个草制作草堆来使其干燥
     S:gt.multiitem.food.12001=干草
-    S:gt.multiitem.food.12001.tooltip=
+    S:gt.multiitem.food.12001.tooltip=用于制造简单的起火器
     S:gt.multiitem.food.12002=发霉的草
     S:gt.multiitem.food.12002.tooltip=
     S:gt.multiitem.food.12003=烂草
