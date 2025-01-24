@@ -5201,8 +5201,8 @@ languagefile {
     S:gt.tooltip.multiblock.sluice.1=最底层和第二层是 3x7 的钛壁板
     S:gt.tooltip.multiblock.sluice.2=第三层是 3x7 的洗矿厂部件
     S:gt.tooltip.multiblock.sluice.3=主方块放在 3x3 侧面底层的中心, 正面朝外
-    S:gt.tooltip.multiblock.sluice.4=输入口在第二层的远端
-    S:gt.tooltip.multiblock.sluice.5=输出口在第二层的近端
+    S:gt.tooltip.multiblock.sluice.4=输入口在第三层的远端
+    S:gt.tooltip.multiblock.sluice.5=输出口在第一层的近端
     S:gt.tooltip.multiblock.squeezer.1=5x5x3 空心结构，由65个钢壁板搭建
     S:gt.tooltip.multiblock.squeezer.2=主方块放在侧面底层的中心, 正面朝外
     S:gt.tooltip.multiblock.squeezer.3=顶部输入，底部输出
