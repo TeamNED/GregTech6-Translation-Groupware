@@ -2493,6 +2493,7 @@ generators:
       Meat: 肉
       Fish: 鱼
       Chum: 基友肉
+      Cookies: 饼干
   # wooden block
   - group: woodenBlockFireProof
     namespace: "S:gt.block."
