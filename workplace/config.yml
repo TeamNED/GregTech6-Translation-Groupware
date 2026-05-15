@@ -1652,7 +1652,6 @@ generators:
       Breeze: 旋风
       Carminite: 砷铅铁
       Fireleaf: 炙热钢叶
-      Golden Amber: 金琥珀
       # material_eol
 
     rules:
@@ -1837,6 +1836,7 @@ generators:
       Purple Diamond: 紫色钻石
       Red Diamond: 红色钻石
       Yellow Diamond: 黄色钻石
+      Golden Amber: 金琥珀
       Peridot: 橄榄石
       Sylvite: 钾石盐
 
