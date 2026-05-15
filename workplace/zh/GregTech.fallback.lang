@@ -1935,7 +1935,7 @@ languagefile {
     S:gt.multiitem.books.32003.tooltip=包含了材料的数据
     S:gt.multiitem.books.32004.tooltip=封面有一个辐射符号
     S:gt.multiitem.books.32005.tooltip=封面有一个辐射符号
-	S:gt.multiitem.books.32700=要素宝典
+    S:gt.multiitem.books.32700=要素宝典
     S:gt.multiitem.books.32700.tooltip=要素和物品都在这里
     S:gt.multiitem.books.32765=落灰的指导书
     S:gt.multiitem.books.32765.tooltip=战利品：一本随机的手册
@@ -2120,7 +2120,7 @@ languagefile {
     S:gt.multiitem.bottles.3200.tooltip=
     S:gt.multiitem.bottles.32000=墨水瓶
     S:gt.multiitem.bottles.32001=罐装靛蓝色染料
-	S:gt.multiitem.bottles.32761=浑浊的瓶子
+    S:gt.multiitem.bottles.32761=浑浊的瓶子
     S:gt.multiitem.bottles.32761.tooltip=战利品：随机的药水
     S:gt.multiitem.bottles.32762=焦油瓶
     S:gt.multiitem.bottles.32762.tooltip=也可以用作胶水
@@ -2939,7 +2939,7 @@ languagefile {
     S:gt.multiitem.cans.3.tooltip=
     S:gt.multiitem.cans.31.tooltip=
     S:gt.multiitem.cans.32.tooltip=
-	S:gt.multiitem.cans.32764=罐装太空空气
+    S:gt.multiitem.cans.32764=罐装太空空气
     S:gt.multiitem.cans.32764.tooltip=自然通风、无空气的太空空气（用于水下）
     S:gt.multiitem.cans.32765=罐装热空气
     S:gt.multiitem.cans.32765.tooltip=自然烟熏，无水的空气（用于水下）
@@ -3544,7 +3544,7 @@ languagefile {
     S:gt.multiitem.randomtools.12008.tooltip=未开封
     S:gt.multiitem.randomtools.12009=大脑科技高级强化航空布胶带 FAL-84
     S:gt.multiitem.randomtools.12009.tooltip=已开封
-	S:gt.multiitem.randomtools.13000=树苗袋
+    S:gt.multiitem.randomtools.13000=树苗袋
     S:gt.multiitem.randomtools.13000.tooltip=战利品：树苗
     S:gt.multiitem.randomtools.13001=种子袋
     S:gt.multiitem.randomtools.13001.tooltip=战利品：一些随机的种子
@@ -4383,7 +4383,7 @@ languagefile {
     S:gt.multitileentity.17197=大型热交换器
     S:gt.multitileentity.17198=聚变反应堆
     S:gt.multitileentity.17199=大型物质制造器
-	S:gt.multitileentity.17996=范德格雷起电机
+    S:gt.multitileentity.17996=范德格雷起电机
     S:gt.multitileentity.17997=物流核心
     S:gt.multitileentity.17998=避雷针电力输出口
     S:gt.multitileentity.17999=主基岩钻
@@ -4411,7 +4411,7 @@ languagefile {
     S:gt.multitileentity.22002=浸洗器
     S:gt.multitileentity.22003=发酵器
     S:gt.multitileentity.22004=高压釜
-	S:gt.multitileentity.22010=熔化器
+    S:gt.multitileentity.22010=熔化器
     S:gt.multitileentity.24900=光纤
     S:gt.multitileentity.24901=物流线缆
     S:gt.multitileentity.27000=未绝缘红色合金线缆
@@ -4451,7 +4451,7 @@ languagefile {
     S:gt.multitileentity.31019=转速传感器
     S:gt.multitileentity.31020=盖革传感器
     S:gt.multitileentity.31021=激光传感器
-	S:gt.multitileentity.31022=流体体积传感器(单位: 千桶)
+    S:gt.multitileentity.31022=流体体积传感器(单位: 千桶)
     S:gt.multitileentity.32000=微型末影传送门
     S:gt.multitileentity.32001=微型暮色传送门
     S:gt.multitileentity.32002=微型混沌传送门
@@ -4498,10 +4498,10 @@ languagefile {
     S:gt.multitileentity.32104=火药棒
     S:gt.multitileentity.32105=三明治
     S:gt.multitileentity.32108=藤蔓绳
-	S:gt.multitileentity.32109=彩虹木储罐
+    S:gt.multitileentity.32109=彩虹木储罐
     S:gt.multitileentity.32110=战利品板条箱
-	S:gt.multitileentity.32111=手动曲柄
-	S:gt.multitileentity.32112=钢绳
+    S:gt.multitileentity.32111=手动曲柄
+    S:gt.multitileentity.32112=钢绳
     S:gt.multitileentity.32700=硬币
     S:gt.multitileentity.32701=铸币模具
     S:gt.multitileentity.32702=筛选台
@@ -5245,7 +5245,7 @@ languagefile {
     S:gt.tooltip.multiblock.tank5x5x5.1=5x5x5 相应材料的壁板
     S:gt.tooltip.multiblock.tank5x5x5.2=这个阀门方块放在结构顶面/底面/侧面的中心, 正面朝外
     S:gt.tooltip.multiblock.tank5x5x5.3=如果阀门的位置允许液体由于重力自然流出, 该阀门可以自动输出液体
-	S:gt.tooltip.multiblock.von.da.graagg.1=41块致密镀锌钢壁板摆成缺角的5x5x2基座，底部中央为主方块
+    S:gt.tooltip.multiblock.von.da.graagg.1=41块致密镀锌钢壁板摆成缺角的5x5x2基座，底部中央为主方块
     S:gt.tooltip.multiblock.von.da.graagg.2=中间5格高的一根大型铜线圈柱，顶部一块致密钢壁板
     S:gt.tooltip.multiblock.von.da.graagg.3=在顶部用缺角的3x3x3的16个致密钢壁板包住
     S:gt.tooltip.multiblock.von.da.graagg.4=防止怪物生成，除非在苔石上，范围取决于输入。
