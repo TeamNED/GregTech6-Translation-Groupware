@@ -144,6 +144,7 @@ generators:
       Teflon Sheet: 聚四氟乙烯板
       Hard Plastic Sheet: 硬塑料板
       Bakelite Sheet: 电木板
+      Fireleaf Plank: 炙热钢叶板
     rules:
       - s: "{0} Plate"
         t: "{0}板"
@@ -212,6 +213,7 @@ generators:
       Teflon Bar: 聚四氟乙烯锭
       Hard Plastic Bar: 硬塑料锭
       Bakelite Bar: 电木锭
+      Fireleaf: 炙热钢叶锭
     rules:
       - s: "{0} Ingot"
         t: "{0}锭"
@@ -331,6 +333,10 @@ generators:
       Bakelite Pulp: 电木粉末
       Black End Sand: 黑色末地沙
       White End Sand: 白色末地沙
+      Breeze Powder: 旋风粉
+      Fireleaf Pulp: 炙热钢叶粉末
+      Olivine: 橄榄石粉末
+
     rules:
       - s: "{0} Dust"
         t: "{0}粉"
@@ -376,6 +382,9 @@ generators:
       Thin Teflon Sheet: 聚四氟乙烯箔
       Thin Hard Plastic Sheet: 硬塑料箔
       Thin Bakelite Sheet: 电木箔
+      Fireleaf Chip: 炙热钢叶粒
+      Fireleaf Leaf: 炙热钢叶花
+      Short Fireleaf Stick: 炙热钢叶螺栓
     rules:
       - s: "{0} {1}"
         t: "{0}{1}"
@@ -1640,6 +1649,12 @@ generators:
       Saltedwater: 盐水
       Skythern: 空境
       Wildwood: 原始森林
+      Breeze: 旋风
+      Carminite: 砷铅铁
+      Fireleaf: 炙热钢叶
+      Golden Amber: 金琥珀
+      # material_eol
+
     rules:
       - s: "{0}"
         t: "{0}"
@@ -1822,6 +1837,8 @@ generators:
       Purple Diamond: 紫色钻石
       Red Diamond: 红色钻石
       Yellow Diamond: 黄色钻石
+      Peridot: 橄榄石
+      Sylvite: 钾石盐
 
   - group: materialPositive
     completed: false

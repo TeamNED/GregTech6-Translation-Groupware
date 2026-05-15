@@ -1588,7 +1588,6 @@ languagefile {
     S:gt.material.Paraffinwax=石蜡
     S:gt.material.Peanutwood=花生木
     S:gt.material.Pepper=胡椒
-    S:gt.material.Peridot=橄榄石
     S:gt.material.PetCoke=石油焦炭
     S:gt.material.Petroleum=石油
     S:gt.material.Pewter=白镴
@@ -1666,7 +1665,6 @@ languagefile {
     S:gt.material.SulphurTrioxide=三氧化硫
     S:gt.material.SulphuricAcid=硫酸
     S:gt.material.Sweet=糖果
-    S:gt.material.Sylvite=钾石盐
     S:gt.material.TNT=TNT
     S:gt.material.Tantalium=Tantalium
     S:gt.material.Tapazite=磷酸钙
