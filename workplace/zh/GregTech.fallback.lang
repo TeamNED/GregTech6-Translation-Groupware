@@ -6606,5 +6606,37 @@ languagefile {
     S:vd_core.ceramic_bucket.0.tooltip=空
     S:vd_core.ceramic_bucket.1=陶瓷水桶
     S:vd_core.ceramic_bucket.1.tooltip=水
+    S:oredict.fluxCrystalAncientDebris=远古遗骸熔体结晶
+    S:oredict.fluxCrystalBedrock=基岩熔体结晶
+    S:oredict.fluxCrystalCassiterite=锡石熔体结晶
+    S:oredict.fluxCrystalCertusQuartz=赛特斯石英熔体结晶
+    S:oredict.fluxCrystalChromite=铬铁矿熔体结晶
+    S:oredict.fluxCrystalCobaltite=辉钴矿熔体结晶
+    S:oredict.fluxCrystalColtan=钶钽铁矿熔体结晶
+    S:oredict.fluxCrystalDiamond=钻石熔体结晶
+    S:oredict.fluxCrystalEmerald=绿宝石熔体结晶
+    S:oredict.fluxCrystalEmpty=空熔体结晶
+    S:oredict.fluxCrystalFluorite=氟石熔体结晶
+    S:oredict.fluxCrystalGalena=方铅矿熔体结晶
+    S:oredict.fluxCrystalGarnierite=硅镁镍矿熔体结晶
+    S:oredict.fluxCrystalGold=金矿熔体结晶
+    S:oredict.fluxCrystalLapis=青金石熔体结晶
+    S:oredict.fluxCrystalMagnesiumCarbonate=菱镁矿熔体结晶
+    S:oredict.fluxCrystalMagnetite=磁铁矿熔体结晶
+    S:oredict.fluxCrystalMolybdenite=辉钼矿熔体结晶
+    S:oredict.fluxCrystalMonazite=独居石熔体结晶
+    S:oredict.fluxCrystalNaquadah=惯习熔体结晶
+    S:oredict.fluxCrystalNetherQuartz=下界石英熔体结晶
+    S:oredict.fluxCrystalNiter=硝石熔体结晶
+    S:oredict.fluxCrystalPitchblende=沥青铀矿熔体结晶
+    S:oredict.fluxCrystalPyrolusite=软锰矿熔体结晶
+    S:oredict.fluxCrystalRedstone=红石熔体结晶
+    S:oredict.fluxCrystalSilver=银矿熔体结晶
+    S:oredict.fluxCrystalSperrylite=砷铂矿熔体结晶
+    S:oredict.fluxCrystalSphalerite=闪锌矿熔体结晶
+    S:oredict.fluxCrystalStibnite=辉锑矿熔体结晶
+    S:oredict.fluxCrystalTetrahedrite=黝铜矿熔体结晶
+    S:oredict.fluxCrystalWolframite=钨锰铁矿熔体结晶
+    S:oredict.fluxCrystalZircon=锆石熔体结晶
 }
 
