@@ -1659,6 +1659,11 @@ generators:
       Breeze: 旋风
       Fireleaf: 炙热钢叶
       Blue Amber: 多米尼加蓝琥珀
+      Magic Iron: 魔法铁
+      Ardaite: 阿尔达矿
+      Fettelite: 弗硫砷汞银矿
+      Mythril: 秘银
+      Sylvine: 钾盐
       # material_eol
 
     rules:
