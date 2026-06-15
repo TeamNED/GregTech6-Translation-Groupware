@@ -188,7 +188,7 @@ generators:
   - group: ingot
     namespace: S:oredict.
     dict:
-      Netherite Scrap: 下界合金废料
+      Netherite Scrap: 远古残骸
       Anthracite Brick: 无烟煤锭
       Butter: 黄油锭
       Charcoal Brick: 木炭锭
