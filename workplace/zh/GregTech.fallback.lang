@@ -6593,5 +6593,19 @@ languagefile {
     S:tc.research_text.GT_TRANSSOLDERINGALLOY=[GT] 转换金属为钎焊合金
     S:tc.research_text.GT_TRANSZINC=[GT] 转换金属为锌
     S:tc.research_text.GT_WOOD_TO_CHARCOAL=[GT] 把木头变成木炭
+    S:vd.multitileentity.17991=镁铝合金燃油涡轮机核心
+    S:vd.multitileentity.17992=特林钛合金燃油涡轮机核心
+    S:vd.multitileentity.17993=石墨烯燃油涡轮机核心
+    S:vd.multitileentity.17994=艾德曼振金燃油涡轮机核心
+    S:vd.multitileentity.17996=大型热交换器 (艾德曼合金)
+    S:vd.multitileentity.18000=晶体电池 (IV)
+    S:vd.multitileentity.18001=晶体电池 (LuV)
+    S:vd.multitileentity.18002=晶体电池 (ZPM)
+    S:vd_core.ceramic_bucket=Generated Item
+    S:vd_core.ceramic_bucket.0=陶瓷桶
+    S:vd_core.ceramic_bucket.0.tooltip=空
+    S:vd_core.ceramic_bucket.1=陶瓷水桶
+    S:vd_core.ceramic_bucket.1.tooltip=水
+    S:vd_core.item.fluxCrystal.32767=所有此物品的子物品
 }
 
