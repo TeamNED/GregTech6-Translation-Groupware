@@ -1657,7 +1657,6 @@ generators:
       Skythern: 空境
       Wildwood: 原始森林
       Breeze: 旋风
-      Carminite: 砷铅铁
       Fireleaf: 炙热钢叶
       Blue Amber: 多米尼加蓝琥珀
       # material_eol
@@ -1847,6 +1846,9 @@ generators:
       Golden Amber: 金琥珀
       Peridot: 橄榄石
       Sylvite: 钾石盐
+      Carminite: 
+        "S:": 砷铅铁
+        S:oredict.gem: 砷铅铁矿石
 
   - group: materialPositive
     completed: false
@@ -3794,7 +3796,7 @@ generators:
       Large Book: 大书
       You need to recharge it: 你需要为其充电
       Ancient Debris:
-        S:oredict.ore: 远古残骸矿石
         "S:": 远古残骸
+        S:oredict.ore: 远古残骸矿石
       Processed Unknown Ore: 处理过的未知矿石
       Non-Functional-Tool for Crafting only: 该工具只能用于合成
