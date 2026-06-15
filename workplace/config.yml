@@ -598,6 +598,13 @@ generators:
         t: "表镶{0}镐头"
         subs:
           - material
+  - group: toolHead
+    namespace: S:oredict.toolHeadCrushHammer
+    rules:
+      - s: "{0}Crush Hammer Head" # Bad
+        t: "{0}碎石锤头"
+        subs:
+          - material
   - group: toolHeadType
     namespace: S:oredict.toolHead
     completed: false

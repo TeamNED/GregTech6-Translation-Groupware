@@ -6606,6 +6606,5 @@ languagefile {
     S:vd_core.ceramic_bucket.0.tooltip=空
     S:vd_core.ceramic_bucket.1=陶瓷水桶
     S:vd_core.ceramic_bucket.1.tooltip=水
-    S:vd_core.item.fluxCrystal.32767=所有此物品的子物品
 }
 
