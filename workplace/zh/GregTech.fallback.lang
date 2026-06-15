@@ -5547,7 +5547,7 @@ languagefile {
     S:mc.recipe.furnacefuel=熔炉燃料 (燃烧时间(Tick):总HU=1:25)
     S:oredict.arrowGtPlasticEmpty=轻质空箭
     S:oredict.arrowGtWoodEmpty=空箭
-    S:oredict.billetAncientDebris=下界合金废料胚料
+    S:oredict.billetAncientDebris=远古残骸胚料
     S:oredict.bulletGtLargeEmpty=大型空包弹
     S:oredict.bulletGtMediumEmpty=中型空包弹
     S:oredict.bulletGtSmallEmpty=小型空包弹
@@ -5587,11 +5587,11 @@ languagefile {
     S:oredict.chemtubeProton=质子试管
     S:oredict.chemtubeRadon=氡试管
     S:oredict.chemtubeXenon=氙试管
-    S:oredict.chunkGtAncientDebris=下界合金废料小块
+    S:oredict.chunkGtAncientDebris=远古残骸小块
     S:oredict.crushedTinyAncientDebris=小撮已回收的远古残骸
     S:oredict.foilPlastic=薄塑料板
     S:oredict.foilRubber=薄橡胶片
-    S:oredict.nuggetAncientDebris=下界合金废料粒
+    S:oredict.nuggetAncientDebris=远古残骸粒
     S:oredict.nuggetAnthracite=无烟煤粒
     S:oredict.nuggetCharcoal=木炭粒
     S:oredict.nuggetCoal=煤粒
