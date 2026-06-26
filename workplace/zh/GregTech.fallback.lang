@@ -5206,7 +5206,7 @@ languagefile {
     S:gt.tooltip.multiblock.fusionreactor.5=在电力交互界面输出能量
     S:gt.tooltip.multiblock.fusionreactor.6=在“玻璃环”处输入激光
     S:gt.tooltip.multiblock.fusionreactor.7=在壁板处输入输出物品
-    S:gt.tooltip.multiblock.gasturbine.1=3x3x4 相应材料的致密壁板
+    S:gt.tooltip.multiblock.gasturbine.1=3x3x4 的
     S:gt.tooltip.multiblock.gasturbine.2=燃气涡轮机核心放在 3x3 那一面的中心, 正面朝外
     S:gt.tooltip.multiblock.gasturbine.3=仅能在主方块处输入燃气
     S:gt.tooltip.multiblock.gasturbine.4=必须输出废气！
@@ -5272,7 +5272,7 @@ languagefile {
     S:gt.tooltip.multiblock.squeezer.1=5x5x3 空心结构，由65个钢壁板搭建
     S:gt.tooltip.multiblock.squeezer.2=主方块放在侧面底层的中心, 正面朝外
     S:gt.tooltip.multiblock.squeezer.3=顶部输入，底部输出
-    S:gt.tooltip.multiblock.steamturbine.1=3x3x4 相应材料的壁板
+    S:gt.tooltip.multiblock.steamturbine.1=3x3x4 的
     S:gt.tooltip.multiblock.steamturbine.2=大型蒸汽涡轮主方块放在 3x3 那一面的中心, 正面朝外
     S:gt.tooltip.multiblock.steamturbine.3=仅能在正面 3x3 处输入蒸汽
     S:gt.tooltip.multiblock.steamturbine.4=底层可泵出蒸馏水
@@ -6709,10 +6709,5 @@ languagefile {
     S:gt.td.short.properties.auto_collecting=自动收集
     S:gt.td.short.properties.soft=柔软
     S:gt.td.short.properties.warping=传送
-    S:gt.material.AnyMagicIron=魔法铁
-    S:gt.material.Ardaite=阿尔达矿
-    S:gt.material.Fettelite=弗硫砷汞银矿
-    S:gt.material.Mythril=秘银
-    S:gt.material.Sylvine=钾盐
 }
 
