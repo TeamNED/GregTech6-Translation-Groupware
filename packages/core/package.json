@@ -12,11 +12,14 @@
   "scripts": {
     "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
+    "verify": "tsc --noEmit && vitest run",
     "test": "vitest run",
     "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "parity": "tsx scripts/check-parity.ts"
+    "parity": "tsx scripts/check-parity.ts",
+    "perf": "tsx scripts/check-perf.ts",
+    "perf:compare": "tsx scripts/check-perf.ts --compare"
   },
   "dependencies": {
     "jsonc-parser": "^3.3.1",

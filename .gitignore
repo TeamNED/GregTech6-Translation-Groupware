@@ -131,6 +131,8 @@ packages/*/.rush/
 **/*.tsbuildinfo
 *.log
 .cache/
+# 本地性能记录（每轮测试一个 JSON，不入库）
+packages/core/.perf/
 project.jsonc.bak-*
 
 

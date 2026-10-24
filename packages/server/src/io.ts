@@ -13,6 +13,7 @@ import {
   type GenerateResult,
   type IoCheckReport,
   type LangDocument,
+  type OperationTiming,
   type TargetConfig,
 } from '@gt6tg/core';
 import { readTextIfExists, repoRelative, resolveInsideRepo, writeWithBackup } from './paths';
@@ -122,19 +123,42 @@ function buildNotes(
 }
 
 export async function checkIo(store: ProjectStore, targetId: string): Promise<IoCheckReport> {
+  const totalStarted = performance.now();
   const paths = resolveTarget(store, targetId);
+
+  const readStarted = performance.now();
   const [source, fallback, output, unknown] = await Promise.all([
     readLang(paths.source),
     readLang(paths.fallback),
     readLang(paths.output),
     readLang(paths.unknown),
   ]);
+  const readMs = performance.now() - readStarted;
 
+  const compileStarted = performance.now();
   const compiled = store.getCompiled();
+  const compileMs = performance.now() - compileStarted;
+
   const generateStarted = performance.now();
   const generated = generateFromEntries(compiled, source.document.entries, fallback.document.entries);
-  const durationMs = performance.now() - generateStarted;
+  const generateMs = performance.now() - generateStarted;
+
+  const diffStarted = performance.now();
   const diffVsCurrent = diffLangMaps(output.document.map, generated.output);
+  const diffMs = performance.now() - diffStarted;
+
+  const hash = hashOutput(generated.output);
+  const notes = buildNotes(store, source, fallback, output, unknown);
+
+  const timings: OperationTiming = {
+    totalMs: performance.now() - totalStarted,
+    readMs,
+    compileMs,
+    generateMs,
+    diffMs,
+    compile: compiled.timings,
+    generate: generated.timings,
+  };
 
   return {
     targetId: paths.target.id,
@@ -148,11 +172,13 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
       unknownKeys: generated.unknown.size,
       sameAsEnglish: generated.stats.sameAsEnglish,
       conflictKeys: generated.stats.conflictKeys,
-      durationMs: Math.round(durationMs),
-      hash: hashOutput(generated.output),
+      durationMs: Math.round(generateMs),
+      hash,
+      timings: generated.timings,
     },
+    timings,
     diffVsCurrent,
-    notes: buildNotes(store, source, fallback, output, unknown),
+    notes,
   };
 }
 
@@ -162,22 +188,36 @@ export async function generate(
   write: boolean,
   includeOutput = false,
 ): Promise<GenerateResult> {
+  const totalStarted = performance.now();
   const paths = resolveTarget(store, targetId);
+
+  const readStarted = performance.now();
   const [source, fallback, output] = await Promise.all([
     readLang(paths.source),
     readLang(paths.fallback),
     readLang(paths.output),
   ]);
+  const readMs = performance.now() - readStarted;
   if (!source.info.exists) throw new Error(`源文件不存在：${source.info.path}`);
 
+  const compileStarted = performance.now();
   const compiled = store.getCompiled();
-  const started = performance.now();
+  const compileMs = performance.now() - compileStarted;
+
+  const generateStarted = performance.now();
   const generated = generateFromEntries(compiled, source.document.entries, fallback.document.entries);
-  const durationMs = performance.now() - started;
+  const generateMs = performance.now() - generateStarted;
+
+  const diffStarted = performance.now();
   const diffVsCurrent = diffLangMaps(output.document.map, generated.output);
+  const diffMs = performance.now() - diffStarted;
+
+  const hash = hashOutput(generated.output);
 
   let written: GenerateResult['written'];
+  let writeMs = 0;
   if (write) {
+    const writeStarted = performance.now();
     const outputEntries = source.document.entries.map((entry) => ({
       ...entry,
       value: generated.output.get(entry.key) ?? entry.value,
@@ -197,18 +237,31 @@ export async function generate(
       unknownPath: repoRelative(unknownPath),
       backupPaths: backupPaths.map(repoRelative),
     };
+    writeMs = performance.now() - writeStarted;
   }
+
+  const timings: OperationTiming = {
+    totalMs: performance.now() - totalStarted,
+    readMs,
+    compileMs,
+    generateMs,
+    diffMs,
+    writeMs,
+    compile: compiled.timings,
+    generate: generated.timings,
+  };
 
   return {
     targetId: paths.target.id,
     dryRun: !write,
-    durationMs: Math.round(durationMs),
+    durationMs: Math.round(generateMs),
+    timings,
     sourceKeys: source.document.entries.length,
     outputKeys: generated.output.size,
     unknownKeys: generated.unknown.size,
     sameAsEnglish: generated.stats.sameAsEnglish,
     conflictKeys: generated.stats.conflictKeys,
-    hash: hashOutput(generated.output),
+    hash,
     diffVsCurrent,
     written,
     output: includeOutput ? Object.fromEntries(generated.output) : undefined,

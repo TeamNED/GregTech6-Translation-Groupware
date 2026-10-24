@@ -55,7 +55,37 @@ unknown = 774
 hash = db41064a4b4c34dd
 ```
 
-### 1.3 单测、类型、lint、格式
+### 1.3 本地性能记录与前后对比
+
+计时结果**不进入 git**。每次运行都会在 `packages/core/.perf/`（已在 `.gitignore` 中）下写一个独立 JSON：
+
+```bash
+cd packages/core
+
+# 修改前
+npx tsx scripts/check-perf.ts --label=before
+
+# ... 修改代码 ...
+
+# 修改后
+npx tsx scripts/check-perf.ts --label=after
+
+# 对比最近两次记录；也可以显式传两个文件
+npx tsx scripts/check-perf.ts --compare
+npx tsx scripts/check-perf.ts --compare=.perf/xxx.json,.perf/yyy.json
+```
+
+每份记录包含：
+
+- `compile` / `generate` / `total` 的中位数、各阶段中位数（`match`、`dedupe`、`apply` 等）和原始样本；
+- 对象计数：pattern 数、lexEntries、source/output/unknown key 数、候选桶数与候选条目数等；
+- 内存快照（heap、RSS、maxRSS）、机器信息、git HEAD/branch/dirty、运行参数。
+
+`--compare` 默认取 `.perf/` 下最新的两份记录，逐项打印变化百分比和计数差；默认只报告，不判定失败。加 `--strict` 后，generate/total 超过 fail 阈值（默认 30%，可用 `GT6TG_PERF_FAIL` 调整）才返回退出码 1。测量本身默认 1 次预热 + 3 次测量，可用 `--runs=5` 提高稳定性。
+
+> 当前工作流以 legacy 产出的 `zh/GregTech.lang` 为权威；迁移阶段只需要 parity 保证输出不变，后续阶段由规则和门禁约束，因此这里不再记录/校验产物 hash。
+
+### 1.4 单测、类型、lint、格式
 
 ```bash
 cd packages/core
@@ -63,9 +93,12 @@ npx vitest run
 npx tsc --noEmit
 npx oxlint
 npx oxfmt --check
+
+# 类型 + 单测，一条命令即可作为提交前检查
+npm run verify
 ```
 
-### 1.4 通过本地控制台间接运行
+### 1.5 通过本地控制台间接运行
 
 ```bash
 # 仓库根目录
@@ -74,7 +107,7 @@ node scripts/dev.mjs
 
 它会同时启动 `packages/server`（WebSocket RPC，127.0.0.1:5175）和 `packages/web`（Vite，127.0.0.1:5173）。core 的编译/匹配/生成都在 server 进程里执行。
 
-### 1.5 core 不做什么
+### 1.6 core 不做什么
 
 - 不读文件：调用方把 JSONC/YAML/`.lang` 文本传进来，或把解析后的词条数组传进来。
 - 不解析相对路径：`TargetConfig` 里的路径由 server 解析和做越界校验。
@@ -89,7 +122,11 @@ node scripts/dev.mjs
 packages/core/
 ├── project.jsonc                 # JSONC v2 工程配置
 ├── docs/                         # 算法/性能/迁移文档
-├── scripts/check-parity.ts       # 真实语料 parity
+├── .perf/                        # 本地性能记录（每次运行一个 JSON，不入库）
+├── scripts/
+│   ├── check-parity.ts           # 真实语料 parity
+│   ├── check-perf.ts             # 性能记录与前后对比
+│   └── lib.ts                    # check-perf 使用的语料/统计工具
 ├── test/                         # vitest 单测
 └── src/
     ├── index.ts                  # 公共 API 汇总
@@ -97,6 +134,7 @@ packages/core/
     │   ├── config.ts             # 配置模型
     │   ├── issues.ts             # 诊断/统计
     │   ├── lang.ts               # 旧版 .lang 文档
+    │   ├── timing.ts             # 计时报告类型
     │   └── api.ts                # RPC/控制台 DTO
     ├── config/
     │   ├── schema.ts             # zod schema
@@ -112,6 +150,7 @@ packages/core/
         ├── apply.ts              # 生成、去重、fallback、unknown
         ├── entryTest.ts          # 单条测试
         ├── legacyLang.ts         # .lang 读写
+        ├── timing.ts             # 分阶段计时（只做观测）
         └── stats.ts              # 统计/diff
 ```
 
@@ -285,6 +324,7 @@ core 只保存路径字符串，**不解析、不校验越界**。`packages/serv
 | `GenerationResult` | `output: Map<string,string>`, `unknown: Set<string>`, `stats`, `candidatesByValue` |
 | `EntryTestResult` | 单条测试结果：`tokens`, `selected`, `candidates`, `fallback`, `unknown`, `steps`, `issues` |
 | `TraceStep` | 单步 trace：`stage`, `message`, `data` |
+| `TimingReport` | 计时报告：`label`, `totalMs`, `phases[{name,ms}]` |
 
 ### 5.4 RPC / 控制台 DTO
 
@@ -295,8 +335,9 @@ core 只保存路径字符串，**不解析、不校验越界**。`packages/serv
 | `TargetPatch` | 目标字段补丁（不能改 `id`/`format`/`encoding`） |
 | `FileInfo` | 文件是否存在、大小、行数、key 数、空值、重复、`¶`/`=`、换行符 |
 | `DiffStats` / `DiffSample` | 两个 key→value 映射的差异统计和样例 |
-| `IoCheckReport` | IO 检查结果：四个文件信息、生成摘要、diff、notes |
-| `GenerateResult` | 生成结果：统计、hash、diff、写入路径/备份 |
+| `IoCheckReport` | IO 检查结果：四个文件信息、生成摘要、`timings`、diff、notes |
+| `GenerateResult` | 生成结果：统计、hash、`timings`、diff、写入路径/备份 |
+| `OperationTiming` | server 端到端计时：`readMs` / `compileMs` / `generateMs` / `diffMs` / `writeMs`，并带 core 的 `compile`/`generate` 分阶段报告 |
 | `EntryTestRequest` / `EntryTestResult` | 单条测试请求/结果 |
 | `ServerMethodMap` | RPC 方法签名表，server 实现、web 只 type-import |
 
@@ -389,6 +430,8 @@ const compiled = compileProject(model, lexicon);
 ```
 
 `compileConfig` 约 30 ms（当前配置）；一次编译后可以多次 `generateFromEntries` 或 `testEntry`。
+
+返回的 `CompiledProject.timings` 记录 `model` / `lexicon` / `groups` / `topPatterns` / `namespaces` / `candidateSets` 各阶段耗时，形式为 `TimingReport`。直接调用 `compileProject(model, lexicon, timer?)` 时只有传入 `timer` 才会有分阶段记录。
 
 #### `buildModel(config): GeneratorModel`
 
@@ -499,6 +542,7 @@ const result = matcher.match(key, value, {
     sameAsEnglish, conflictKeys, matchedKeys
   };
   candidatesByValue: Map<string, Candidate[]>;
+  timings: TimingReport; // match / dedupe / apply
 }
 ```
 
@@ -771,6 +815,8 @@ pattern 匹配前会依次检查：
 - `generateFromEntries` 每次新建 `Matcher`，适合一次完整生成；如果需要多次生成，编译结果可复用，匹配器不必跨次共享。
 - `Matcher` 含可变缓存（token/namespace），不要并发共享同一个实例；为每个 worker/请求创建独立实例。
 - `generateFromEntries` 的 `candidatesByValue` 会保留候选；如果只需要统计，可在调用后丢弃引用，避免长期占用。
+- 每次调用都会返回 `timings`（几个 `performance.now()` 调用，开销可忽略）。需要跨运行比较时用 `scripts/check-perf.ts`，不要只看单次交互里的 `durationMs`。
+- 当前真实语料的耗时主要落在 `generate.match`；`compile` 只占几十毫秒。速度异常时先看 `timings.generate.phases`。
 
 ---
 

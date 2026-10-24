@@ -1,5 +1,7 @@
+import type { TimingReport } from '../types/timing';
 import type { LexEntry, Lexicon, RuleMeta } from './lexicon';
 import type { GeneratorModel, TemplatePart } from './model';
+import type { Timer } from './timing';
 import { tokenize } from './tokenizer';
 
 export const MAX_TOKENS = 128;
@@ -47,6 +49,8 @@ export interface CompiledProject {
   topPatterns: CompiledPattern[];
   namespaceRoot: NamespaceNode;
   stats: CompileStats;
+  /** 仅通过 `compileConfig` 编译时填写；直接调用 `compileProject` 时为 undefined。 */
+  timings?: TimingReport;
 }
 
 interface GroupBounds {
@@ -76,7 +80,7 @@ function pushLiteralOps(seqs: PatternOp[][], tokens: string[]): PatternOp[][] {
 }
 
 /** 编译期把所有规则展开成 LIT/LEX/REDUCE 模式。 */
-export function compileProject(model: GeneratorModel, lexicon: Lexicon): CompiledProject {
+export function compileProject(model: GeneratorModel, lexicon: Lexicon, timer?: Timer): CompiledProject {
   let nextPatternId = 0;
   const groupPatternMemo = new Map<number, CompiledPattern[]>();
   const groupVisiting = new Set<number>();
@@ -264,6 +268,7 @@ export function compileProject(model: GeneratorModel, lexicon: Lexicon): Compile
 
   // 先编译所有组，保证子组 memo 完整。
   for (let groupId = 0; groupId < model.groupArr.length; groupId++) compileGroup(groupId);
+  timer?.mark('groups');
 
   const topPatterns: CompiledPattern[] = [];
   const topSeen = new Set<string>();
@@ -293,6 +298,8 @@ export function compileProject(model: GeneratorModel, lexicon: Lexicon): Compile
       }
     }
   }
+
+  timer?.mark('topPatterns');
 
   const namespaceRoot: NamespaceNode = { children: new Map(), patterns: null, candidates: null };
 
@@ -330,6 +337,8 @@ export function compileProject(model: GeneratorModel, lexicon: Lexicon): Compile
     }
   }
 
+  timer?.mark('namespaces');
+
   const buildCandidates = (node: NamespaceNode, parent: Set<CompiledPattern>) => {
     let candidates = parent;
     if (node.patterns) {
@@ -340,6 +349,7 @@ export function compileProject(model: GeneratorModel, lexicon: Lexicon): Compile
     for (const child of node.children.values()) buildCandidates(child, candidates);
   };
   buildCandidates(namespaceRoot, new Set());
+  timer?.mark('candidateSets');
 
   return {
     model,

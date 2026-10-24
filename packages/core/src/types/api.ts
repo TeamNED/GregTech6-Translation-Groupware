@@ -3,6 +3,7 @@
 import type { ProjectConfigV2, LineEnding, TargetConfig } from './config';
 import type { ConfigIssue, ProjectStats } from './issues';
 import type { DetectedLineEnding } from './lang';
+import type { TimingReport } from './timing';
 
 export interface ProjectSnapshot {
   raw: string;
@@ -59,6 +60,18 @@ export interface DiffStats {
   samples: DiffSample[];
 }
 
+/** server 侧一次操作的端到端计时；core 的分阶段计时单独放在 compile/generate。 */
+export interface OperationTiming {
+  totalMs: number;
+  readMs: number;
+  compileMs: number;
+  generateMs: number;
+  diffMs: number;
+  writeMs?: number;
+  compile?: TimingReport;
+  generate?: TimingReport;
+}
+
 export interface IoCheckReport {
   targetId: string;
   workplace: string;
@@ -73,7 +86,9 @@ export interface IoCheckReport {
     conflictKeys: number;
     durationMs: number;
     hash: string;
+    timings?: TimingReport;
   };
+  timings: OperationTiming;
   diffVsCurrent: DiffStats;
   notes: string[];
 }
@@ -82,6 +97,7 @@ export interface GenerateResult {
   targetId: string;
   dryRun: boolean;
   durationMs: number;
+  timings: OperationTiming;
   sourceKeys: number;
   outputKeys: number;
   unknownKeys: number;

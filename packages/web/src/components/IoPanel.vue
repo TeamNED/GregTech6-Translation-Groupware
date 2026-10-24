@@ -28,6 +28,23 @@
   const targetId = computed(() => state.project?.activeTargetId ?? '');
   const canUse = computed(() => state.status === 'open' && targetId.value !== '');
 
+  const timingItems = computed(() => {
+    const value = report.value;
+    if (!value) return [];
+    const timings = value.timings;
+    const items = [
+      { label: '总计', value: `${timings.totalMs.toFixed(1)} ms` },
+      { label: '读取/解析', value: `${timings.readMs.toFixed(1)} ms` },
+      { label: '编译', value: `${timings.compileMs.toFixed(1)} ms` },
+      { label: '生成', value: `${timings.generateMs.toFixed(1)} ms` },
+      { label: 'diff', value: `${timings.diffMs.toFixed(1)} ms` },
+    ];
+    for (const phase of timings.generate?.phases ?? []) {
+      items.push({ label: `generate.${phase.name}`, value: `${phase.ms.toFixed(1)} ms` });
+    }
+    return items;
+  });
+
   const files = computed(() => {
     if (!report.value) return [];
     return [
@@ -144,6 +161,13 @@
         <n-statistic label="耗时" :value="`${report.generated.durationMs} ms`" />
         <n-statistic label="hash" :value="report.generated.hash" />
       </div>
+
+      <div class="section-title">计时</div>
+      <n-descriptions bordered :column="3" size="small" class="section">
+        <n-descriptions-item v-for="item in timingItems" :key="item.label" :label="item.label">
+          {{ item.value }}
+        </n-descriptions-item>
+      </n-descriptions>
 
       <div class="section-title">与当前输出对比</div>
       <n-descriptions bordered :column="4" size="small" class="section">

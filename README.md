@@ -56,6 +56,11 @@ GT6TG_RPC_PORT=5185 VITE_RPC_URL=ws://127.0.0.1:5185/__gt6tg_rpc node scripts/de
 cd packages/core
 npx tsx scripts/check-parity.ts
 
+# 本地性能记录（每次运行写一个 JSON 到 packages/core/.perf/，不入库）
+npx tsx scripts/check-perf.ts --label=before
+npx tsx scripts/check-perf.ts --label=after
+npx tsx scripts/check-perf.ts --compare
+
 # core 单测
 npx vitest run
 
@@ -78,5 +83,7 @@ cd packages/web && npx vue-tsc --noEmit && npx oxlint && npx oxfmt --check
 ## 数据与备份
 
 - `packages/legacy/workplace/zh/GregTech.lang` 和 `GregTech.unknown.lang` 是生成物，已被 `.gitignore` 忽略。
+- 迁移阶段以 legacy 产出的 `zh/GregTech.lang` 为权威，用 parity 保证输出不变；后续阶段由规则和门禁约束，因此仓库不记录产物 hash。
+- 性能记录写入 `packages/core/.perf/`，同样不入库；修改前后各跑一次，用 `check-perf.ts --compare` 对比。
 - 保存 `project.jsonc`、目标配置或写入输出时，会在同目录保留 `*.bak-*` 备份。
 - 控制台的 RPC 只绑定 `127.0.0.1`，不会暴露到局域网。

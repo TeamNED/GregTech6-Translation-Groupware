@@ -1,7 +1,9 @@
 import type { LangEntry } from '../types/lang';
+import type { TimingReport } from '../types/timing';
 import type { CompiledProject } from './compile';
 import type { Candidate } from './matcher';
 import { Matcher, dedupeCandidates, selectCandidate } from './matcher';
+import { createTimer } from './timing';
 
 export interface GenerationStats {
   sourceKeys: number;
@@ -18,6 +20,8 @@ export interface GenerationResult {
   stats: GenerationStats;
   /** 按原文值聚合的候选；调用方可在测试/调试时查看。 */
   candidatesByValue: Map<string, Candidate[]>;
+  /** 匹配、去重、apply 的分阶段耗时。 */
+  timings: TimingReport;
 }
 
 /** fallback 必须首次获胜，对齐 C++ 的 std::map::insert。 */
@@ -40,6 +44,7 @@ export function generateFromEntries(
   sourceEntries: LangEntry[],
   fallbackEntries: LangEntry[],
 ): GenerationResult {
+  const timer = createTimer('generate');
   const matcher = new Matcher(compiled);
   const candidatesByValue = new Map<string, Candidate[]>();
 
@@ -50,10 +55,12 @@ export function generateFromEntries(
     if (!list) candidatesByValue.set(entry.value, (list = []));
     for (const candidate of matched.candidates) list.push(candidate);
   }
+  timer.mark('match');
 
   for (const [value, list] of candidatesByValue) {
     if (list.length > 1) candidatesByValue.set(value, dedupeCandidates(compiled, list));
   }
+  timer.mark('dedupe');
 
   const fallbackMap = buildFallbackMap(fallbackEntries);
   const output = new Map<string, string>();
@@ -90,10 +97,13 @@ export function generateFromEntries(
     sameAsEnglish++;
   }
 
+  timer.mark('apply');
+
   return {
     output,
     unknown,
     candidatesByValue,
+    timings: timer.finish(),
     stats: {
       sourceKeys: sourceEntries.length,
       outputKeys: output.size,

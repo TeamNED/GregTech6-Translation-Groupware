@@ -1,12 +1,14 @@
 import { compileProject, type CompiledProject } from './engine/compile';
 import { buildLexicon } from './engine/lexicon';
 import { buildModel } from './engine/model';
+import { createTimer } from './engine/timing';
 import type { ProjectConfigV2 } from './types/config';
 
 export * from './types/config';
 export * from './types/issues';
 export * from './types/lang';
 export * from './types/api';
+export * from './types/timing';
 
 export { parseProjectJsonc, getTarget, updateTargetJsonc, stringifyProjectConfig } from './config/jsonc';
 export { lintProject } from './config/lint';
@@ -50,10 +52,14 @@ export { generateFromEntries, buildFallbackMap, type GenerationResult, type Gene
 export { testEntry } from './engine/entryTest';
 export { parseLegacyLang, writeLegacyLang } from './engine/legacyLang';
 export { analyzeLangDocument, diffLangMaps } from './engine/stats';
+export { Timer, createTimer, formatTiming, roundMs } from './engine/timing';
 
-/** 一次性把配置编译成可复用的 matcher 数据。 */
+/** 一次性把配置编译成可复用的 matcher 数据；`timings` 记录各编译阶段耗时。 */
 export function compileConfig(config: ProjectConfigV2): CompiledProject {
-  const model = buildModel(config);
-  const lexicon = buildLexicon(model);
-  return compileProject(model, lexicon);
+  const timer = createTimer('compile');
+  const model = timer.measure('model', () => buildModel(config));
+  const lexicon = timer.measure('lexicon', () => buildLexicon(model));
+  const compiled = compileProject(model, lexicon, timer);
+  compiled.timings = timer.finish();
+  return compiled;
 }
