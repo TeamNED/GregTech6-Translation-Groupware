@@ -138,3 +138,5 @@ project.jsonc.bak-*
 packages/legacy/workplace/zh/GregTech.lang
 packages/legacy/workplace/zh/GregTech.unknown.lang
 packages/legacy/build/
+
+packages/legacy/build-rush/

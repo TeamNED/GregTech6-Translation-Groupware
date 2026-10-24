@@ -14,4 +14,8 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
+  build: {
+    // Naive UI 全量组件会让 main chunk 超过默认 500 kB；本地自测工具不追求拆包。
+    chunkSizeWarningLimit: 800,
+  },
 });
