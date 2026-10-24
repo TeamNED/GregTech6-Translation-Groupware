@@ -69,6 +69,7 @@ cd packages/web && npx vue-tsc --noEmit && npx oxlint && npx oxfmt --check
 
 ## 设计文档
 
+- [core 使用与 API](packages/core/README.md)
 - [算法实现说明](packages/core/docs/algorithms.md)
 - [性能评估](packages/core/docs/perf-evaluation.md)
 - [迁移方案](packages/core/docs/migration-plan.md)
