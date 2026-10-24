@@ -193,7 +193,7 @@ export function buildModel(config: ProjectConfigV2): GeneratorModel {
         const srcParts = compileTemplate(rule.s);
         const tgtParts = compileTemplate(rule.t);
         const count = arrays.length;
-        const position = new Array<number>(count).fill(0);
+        const position = Array.from({ length: count }, () => 0);
         let combo = 0;
 
         while (true) {

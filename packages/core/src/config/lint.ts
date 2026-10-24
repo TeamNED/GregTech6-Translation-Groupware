@@ -1,4 +1,4 @@
-import type { GeneratorConfig, ProjectConfigV2 } from '../types/config';
+import type { ProjectConfigV2 } from '../types/config';
 import type { ConfigIssue, LintReport, ProjectStats } from '../types/issues';
 
 const PLACEHOLDER_RE = /\{(\d+)\}/g;
@@ -134,7 +134,8 @@ export function lintProject(config: ProjectConfigV2): LintReport {
             path: `generators.${generatorIndex}.dict`,
           });
         }
-        const values = value !== null && typeof value === 'object' && !Array.isArray(value) ? Object.values(value) : [value];
+        const values =
+          value !== null && typeof value === 'object' && !Array.isArray(value) ? Object.values(value) : [value];
         if (values.some((item) => item === '')) {
           issues.push({
             severity: 'info',
@@ -224,7 +225,7 @@ export function lintProject(config: ProjectConfigV2): LintReport {
 
   // groupKinds 现在包含全部已声明组；移除边遍历时产生的误报。
   for (const group of groupKinds.keys()) missingGroups.delete(group);
-  for (const group of [...edges.keys()]) {
+  for (const group of edges.keys()) {
     if (!groupKinds.has(group)) edges.delete(group);
   }
 

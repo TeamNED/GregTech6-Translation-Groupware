@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
-
-import { lintProject } from '../src/config/lint';
 import { parseProjectJsonc } from '../src/config/jsonc';
+import { lintProject } from '../src/config/lint';
 
 const minimalProject = `{
   // 允许注释

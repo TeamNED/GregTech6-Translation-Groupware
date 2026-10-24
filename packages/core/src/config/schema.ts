@@ -1,5 +1,4 @@
 import { z } from 'zod';
-
 import type { ProjectConfigV2 } from '../types/config';
 import type { ConfigIssue } from '../types/issues';
 

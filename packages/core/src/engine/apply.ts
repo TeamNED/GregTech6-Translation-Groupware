@@ -64,7 +64,14 @@ export function generateFromEntries(
 
   for (const entry of sourceEntries) {
     const list = candidatesByValue.get(entry.value) ?? [];
-    if (new Set(list.map((candidate) => candidate.target)).size > 1) conflictKeys++;
+    // 只统计对当前 key 真正可用的候选（namespace 前缀过滤之后），
+    // 否则同一原文在不同 namespace 下的正常多译文会被误算成冲突。
+    const validTargets = new Set<string>();
+    for (const candidate of list) {
+      if (candidate.namespace && !entry.key.startsWith(candidate.namespace)) continue;
+      validTargets.add(candidate.target);
+    }
+    if (validTargets.size > 1) conflictKeys++;
     const selected = selectCandidate(compiled, entry.key, list);
     if (selected) {
       output.set(entry.key, selected.target);

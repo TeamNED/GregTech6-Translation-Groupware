@@ -43,7 +43,14 @@ function tokenizeAscii(value: string): string[] {
  * 这里的边界必须和模板字面量分词完全一致，否则 LIT 会对不上。
  */
 export function tokenize(value: string): string[] {
-  if (!/[^\x00-\x7f]/.test(value)) return tokenizeAscii(value);
+  let ascii = true;
+  for (let index = 0; index < value.length; index++) {
+    if (value.charCodeAt(index) > 0x7f) {
+      ascii = false;
+      break;
+    }
+  }
+  if (ascii) return tokenizeAscii(value);
 
   const result: string[] = [];
   TOKEN_RE.lastIndex = 0;

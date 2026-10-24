@@ -26,11 +26,7 @@ export function analyzeLangDocument(document: LangDocument): LangFileStats {
  * 比较两个 key→value 映射。
  * expected 通常是当前输出，actual 是新生成结果；samples 只保留前 N 条差异。
  */
-export function diffLangMaps(
-  expected: Map<string, string>,
-  actual: Map<string, string>,
-  sampleLimit = 20,
-): DiffStats {
+export function diffLangMaps(expected: Map<string, string>, actual: Map<string, string>, sampleLimit = 20): DiffStats {
   const samples: DiffSample[] = [];
   const pushSample = (sample: DiffSample) => {
     if (samples.length < sampleLimit) samples.push(sample);

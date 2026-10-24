@@ -1,5 +1,4 @@
 import { applyEdits, modify, parse, printParseErrorCode, type ParseError } from 'jsonc-parser';
-
 import type { ProjectConfigV2, TargetConfig } from '../types/config';
 import type { ConfigIssue } from '../types/issues';
 import { projectSchema, semanticConfigIssues, zodIssues } from './schema';

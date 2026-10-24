@@ -1,5 +1,5 @@
-import type { GeneratorModel, TemplatePart } from './model';
 import type { LexEntry, Lexicon, RuleMeta } from './lexicon';
+import type { GeneratorModel, TemplatePart } from './model';
 import { tokenize } from './tokenizer';
 
 export const MAX_TOKENS = 128;
@@ -151,8 +151,8 @@ export function compileProject(model: GeneratorModel, lexicon: Lexicon): Compile
     }
     if (max > MAX_TOKENS) max = MAX_TOKENS;
 
-    const remMin = new Array<number>(ops.length + 1);
-    const remMax = new Array<number>(ops.length + 1);
+    const remMin = Array.from({ length: ops.length + 1 }, () => 0);
+    const remMax = Array.from({ length: ops.length + 1 }, () => 0);
     remMin[ops.length] = 0;
     remMax[ops.length] = 0;
     for (let index = ops.length - 1; index >= 0; index--) {

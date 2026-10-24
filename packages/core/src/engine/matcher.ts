@@ -297,7 +297,7 @@ export class Matcher {
       const slotOccurrences = meta.slotOrder.length;
       if (stackPointer < slotOccurrences) return;
       const base = stackPointer - slotOccurrences;
-      const children: Array<MatchState | undefined> = new Array(meta.slotCount);
+      const children = Array.from({ length: meta.slotCount }, () => undefined as MatchState | undefined);
       for (let occurrence = 0; occurrence < slotOccurrences; occurrence++) {
         const slot = meta.slotOrder[occurrence]!;
         children[slot] = stack[base + occurrence];
@@ -383,7 +383,11 @@ export function dedupeCandidates(compiled: CompiledProject, candidates: Candidat
 }
 
 /** 选最终候选：先按 key 前缀过滤，再取 order 最大。 */
-export function selectCandidate(compiled: CompiledProject, key: string, candidates: Candidate[]): Candidate | undefined {
+export function selectCandidate(
+  compiled: CompiledProject,
+  key: string,
+  candidates: Candidate[],
+): Candidate | undefined {
   let best: Candidate | undefined;
   for (const candidate of candidates) {
     if (candidate.namespace && !key.startsWith(candidate.namespace)) continue;

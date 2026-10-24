@@ -1,7 +1,7 @@
-import type { ProjectConfigV2 } from './types/config';
-import { buildLexicon } from './engine/lexicon';
 import { compileProject, type CompiledProject } from './engine/compile';
+import { buildLexicon } from './engine/lexicon';
 import { buildModel } from './engine/model';
+import type { ProjectConfigV2 } from './types/config';
 
 export * from './types/config';
 export * from './types/issues';
