@@ -1,0 +1,4742 @@
+// GregTech6 翻译工程配置（schema v2）
+// 由 workplace/config.yml 导入；workplace/config.yml 保持只读，作为兼容性参考。
+{
+  "schemaVersion": 2,
+  "legacy": {
+    "version": 1,
+    "lang": "zh",
+    "sourceFile": "packages/legacy/workplace/config.yml"
+  },
+  "defaultTarget": "gt6-legacy",
+  "targets": [
+    {
+      "id": "gt6-legacy",
+      "label": "GT6 1.7.10 原版",
+      "format": "legacy-lang",
+      "workplace": "packages/legacy/workplace",
+      "source": "en/GregTech.lang",
+      "fallback": "zh/GregTech.fallback.lang",
+      "output": "zh/GregTech.lang",
+      "unknown": "zh/GregTech.unknown.lang",
+      "encoding": "utf-8",
+      "lineEnding": "crlf",
+      "notes": "当前只支持单 GT6 原版目标；workplace/config.yml 保持只读。"
+    }
+  ],
+  "generators": [
+    {
+      "group": "crate16Partial",
+      "namespace": "S:oredict.crateGt",
+      "rules": [
+        {
+          "s": "Partial {0}",
+          "t": "{0}",
+          "subs": [
+            "crate16"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate16",
+      "namespace": "S:oredict.crateGtDust",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}小板条箱",
+          "subs": [
+            "dust"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate16",
+      "namespace": "S:oredict.crateGtIngot",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}小板条箱",
+          "subs": [
+            "ingot"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate16",
+      "namespace": "S:oredict.crateGtPlate",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}小板条箱",
+          "subs": [
+            "plate"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate16",
+      "namespace": "S:oredict.crateGtRaw",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}小板条箱",
+          "subs": [
+            "ore"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate16",
+      "namespace": "S:oredict.crateGtGem",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}小板条箱",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate64",
+      "namespace": "S:oredict.crateGt64Dust",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}板条箱",
+          "subs": [
+            "dust"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate64",
+      "namespace": "S:oredict.crateGt64Ingot",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}板条箱",
+          "subs": [
+            "ingot"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate64",
+      "namespace": "S:oredict.crateGt64Plate",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}板条箱",
+          "subs": [
+            "plate"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate64",
+      "namespace": "S:oredict.crateGt64Raw",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}板条箱",
+          "subs": [
+            "ore"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "crate64",
+      "namespace": "S:oredict.crateGt64Gem",
+      "rules": [
+        {
+          "s": "Crate of {0}",
+          "t": "{0}板条箱",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "block",
+      "namespace": "S:oredict.blockDust",
+      "rules": [
+        {
+          "s": "Block of {0}",
+          "t": "{0}块",
+          "subs": [
+            "dust"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "block",
+      "namespace": "S:oredict.blockIngot",
+      "rules": [
+        {
+          "s": "Block of {0}",
+          "t": "{0}块",
+          "subs": [
+            "ingot"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "block",
+      "namespace": "S:oredict.blockPlate",
+      "rules": [
+        {
+          "s": "Block of {0}",
+          "t": "{0}块",
+          "subs": [
+            "plate"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "block",
+      "namespace": "S:oredict.blockRaw",
+      "rules": [
+        {
+          "s": "Block of {0}",
+          "t": "{0}块",
+          "subs": [
+            "ore"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "block",
+      "namespace": "S:oredict.blockGem",
+      "rules": [
+        {
+          "s": "Block of {0}",
+          "t": "{0}块",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "blockSolid",
+      "namespace": "S:oredict.blockSolid",
+      "rules": [
+        {
+          "s": "Block of solid {0}",
+          "t": "铸造{0}块",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "plateComplex",
+      "namespace": "S:oredict.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "plateType",
+            "plate"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "plate",
+      "namespace": "S:oredict.",
+      "dict": {
+        "Cast Glass Pane": "玻璃板",
+        "Glass Pane": "玻璃板",
+        "Plastic Sheet": "塑料板",
+        "Rubber Sheet": "橡胶片",
+        "PVC Sheet": "聚氯乙烯板",
+        "Teflon Sheet": "聚四氟乙烯板",
+        "Hard Plastic Sheet": "硬塑料板",
+        "Bakelite Sheet": "电木板",
+        "Fireleaf Plank": "炙热钢叶板"
+      },
+      "rules": [
+        {
+          "s": "{0} Plate",
+          "t": "{0}板",
+          "subs": [
+            "material"
+          ]
+        },
+        {
+          "s": "{0} Plank",
+          "t": "{0}板",
+          "subs": [
+            "wood"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "plateGem"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "plateGemTiny",
+      "namespace": "S:oredict.",
+      "rules": [
+        {
+          "s": "Tiny {0}",
+          "t": "小块{0}",
+          "subs": [
+            "plateGem"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "plateGem",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "rules": [
+        {
+          "s": "Crystalline {0} Plate",
+          "t": "结晶{0}板",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "plateType",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Double": "双重",
+        "Triple": "三重",
+        "Quadruple": "四重",
+        "Quintuple": "五重",
+        "Curved": "弯曲",
+        "Dense": "致密",
+        "Tiny": "小块"
+      }
+    },
+    {
+      "group": "ingot",
+      "namespace": "S:oredict.",
+      "dict": {
+        "Netherite Scrap": "远古残骸",
+        "Anthracite Brick": "无烟煤锭",
+        "Butter": "黄油锭",
+        "Charcoal Brick": "木炭锭",
+        "Cheese Bar": "奶酪条",
+        "Chocolate Bar": "巧克力条",
+        "Coal Brick": "煤锭",
+        "Coal Coke Brick": "焦煤锭",
+        "Lignite Coal Brick": "褐煤锭",
+        "Lignite Coke Brick": "焦化褐煤锭",
+        "Lonsdaleite Brick": "六方碳锭",
+        "Peat Brick": "泥炭锭",
+        "Bituminous Peat Brick": "沥青泥炭砖锭",
+        "Petroleum Coke Brick": "石油焦炭锭",
+        "Plastic Bar": "塑料锭",
+        "Prismane Brick": "棱柱烷锭",
+        "Rubber Bar": "橡胶锭",
+        "Salted Butter": "盐味黄油锭",
+        "Emerald Green Bar": "绿宝石锭",
+        "Steeleaf": "钢叶锭",
+        "Tofu Bar": "豆腐条",
+        "PVC Bar": "聚氯乙烯锭",
+        "Teflon Bar": "聚四氟乙烯锭",
+        "Hard Plastic Bar": "硬塑料锭",
+        "Bakelite Bar": "电木锭",
+        "Fireleaf": "炙热钢叶锭"
+      },
+      "rules": [
+        {
+          "s": "{0} Ingot",
+          "t": "{0}锭",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "ingotType",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Hot": "热",
+        "Double": "双重",
+        "Triple": "三重",
+        "Quadruple": "四重",
+        "Quintuple": "五重"
+      }
+    },
+    {
+      "group": "ingotComplex",
+      "namespace": "S:oredict.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "ingotType",
+            "ingot"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "dustComplex",
+      "namespace": "S:oredict.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "dustTypePrefix",
+            "dust"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "dust",
+      "namespace": "S:oredict.",
+      "dict": {
+        "Ground Almond": "碎杏仁",
+        "Ground Black Pepper": "黑胡椒末",
+        "Ground Cinnamon": "肉桂粉",
+        "Ground Hazelnut": "碎榛子",
+        "Ground Nutmeg": "肉豆蔻粉",
+        "Ground Peanut": "碎花生",
+        "Ground Pistachio": "碎开心果",
+        "Ground Potato": "土豆泥",
+        "Ground Vanilla": "香草粉",
+        "Abyssal Oatmeal": "深渊燕麦粉",
+        "Arcane Ashes": "奥术灰",
+        "Arcane Compound": "压缩奥术灰",
+        "Ashes": "灰烬",
+        "Asphalt": "沥青",
+        "Tree Bark": "树皮",
+        "Barley Flour": "大麦面粉",
+        "Bonemeal": "骨粉",
+        "Cornmeal": "玉米面粉",
+        "Dark Ashes": "黑色灰烬",
+        "Ectoplasm": "灵气粉",
+        "Cooked Fishmeal": "熟鱼肉",
+        "Cooked Meat": "熟肉",
+        "Cooked Mince Meat": "熟肉末",
+        "Fishmeal": "鱼肉",
+        "Raw Fishmeal": "生鱼肉",
+        "Raw Meat": "生肉",
+        "Mince Meat": "肉末",
+        "Rotten Fishmeal": "烂鱼肉",
+        "Rotten Meat": "腐肉",
+        "Rotten Mince Meat": "烂肉末",
+        "Gravel": "沙砾粉",
+        "Gunpowder": "火药",
+        "Crushed Ice": "碎冰",
+        "Iodine Salt": "碘盐",
+        "Mars Dust": "火星尘土",
+        "Mars Sand": "火星沙",
+        "Mars Turf": "火星草皮",
+        "Moon Dust": "月面尘土",
+        "Moon Turf": "月面草皮",
+        "Oatmeal": "燕麦粉",
+        "Palygorskite Clay Powder": "坡缕石粘土粉",
+        "Chad": "纸屑",
+        "Peat": "泥炭粉",
+        "Bituminous Peat": "沥青泥炭粉",
+        "Rice": "米粒",
+        "Rock Salt": "岩盐",
+        "Rye Flour": "黑麦面粉",
+        "Salt": "盐",
+        "Fine Soulsand": "细灵魂沙",
+        "Emerald Green": "绿色绿宝石",
+        "Silken Emerald Green": "绿色绿宝石粉",
+        "Magic Tallow": "魔法油脂",
+        "Tofu": "豆腐末",
+        "Volcanic Ashes": "火山灰",
+        "Wax": "蜡",
+        "Bees Wax": "蜂蜡",
+        "Magic Wax": "魔力蜂蜡",
+        "Paraffin Wax": "石蜡",
+        "Plant Wax": "植物蜡",
+        "Refractory Wax": "耐高温蜡",
+        "Soulful Wax": "灵魂蜜蜡",
+        "Amnesic Wax": "遗忘蜜蜡",
+        "Flour": "面粉",
+        "Red Sand": "红沙",
+        "Sand": "沙",
+        "Blaze Powder": "烈焰粉",
+        "Silken Tofu": "豆腐末",
+        "Flavourite": "焦屎石粉",
+        "End Sand": "末地沙",
+        "Air infused Powder": "风之粉末",
+        "Balance infused Powder": "平衡粉末",
+        "Dull Crystal Powder": "枯竭粉末",
+        "Earth infused Powder": "地之粉末",
+        "Entropy infused Powder": "混沌粉末",
+        "Fire infused Powder": "火之粉末",
+        "Magic infused Powder": "魔力粉末",
+        "Order infused Powder": "秩序粉末",
+        "Water infused Powder": "水之粉末",
+        "Magnetite": "磁铁矿粉",
+        "PVC Pulp": "聚氯乙烯粉末",
+        "Teflon Pulp": "聚四氟乙烯粉末",
+        "Hard Plastic Pulp": "硬塑料粉末",
+        "Bakelite Pulp": "电木粉末",
+        "Black End Sand": "黑色末地沙",
+        "White End Sand": "白色末地沙",
+        "Breeze Powder": "旋风粉",
+        "Fireleaf Pulp": "炙热钢叶粉末",
+        "Olivine": "橄榄石粉末"
+      },
+      "rules": [
+        {
+          "s": "{0} Dust",
+          "t": "{0}粉",
+          "subs": [
+            "material"
+          ]
+        },
+        {
+          "s": "{0} Powder",
+          "t": "{0}粉",
+          "subs": [
+            "materialPowder"
+          ]
+        },
+        {
+          "s": "{0} Pulp",
+          "t": "{0}锯末",
+          "subs": [
+            "wood"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "oreSandType"
+          ]
+        },
+        {
+          "s": "{0} Dye",
+          "t": "{0}染料粉",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "dustTypePrefix",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Impure Pile of": "含杂",
+        "Purified Pile of": "纯净",
+        "Small Pile of": "小堆",
+        "Tiny Pile of": "小撮",
+        "1/72nd of a Pile of": "1/72份"
+      }
+    },
+    {
+      "group": "materialProduct",
+      "namespace": "S:oredict.",
+      "dict": {
+        "Steeleaf Chip": "钢叶粒",
+        "Brittle Ceramic Scraps": "陶瓷废料",
+        "Glass Shards": "玻璃渣",
+        "PVC Chip": "聚氯乙烯粒",
+        "Teflon Chip": "聚四氟乙烯粒",
+        "Hard Plastic Chip": "硬塑料粒",
+        "Bakelite Chip": "电木粒",
+        "Thin PVC Sheet": "聚氯乙烯箔",
+        "Thin Teflon Sheet": "聚四氟乙烯箔",
+        "Thin Hard Plastic Sheet": "硬塑料箔",
+        "Thin Bakelite Sheet": "电木箔",
+        "Fireleaf Chip": "炙热钢叶粒",
+        "Fireleaf Leaf": "炙热钢叶花",
+        "Short Fireleaf Stick": "炙热钢叶螺栓"
+      },
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "material",
+            "materialProductType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "materialProductType",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Berry": "莓",
+        "Billet": "胚料",
+        "Blossom": "花",
+        "Bolt": "螺栓",
+        "Cart Wheels": "车轮",
+        "Chains": "锁链",
+        "Chain": "锁链",
+        "Chunk": "小块",
+        "Foil": "箔",
+        "Gear": "齿轮",
+        "Item Casing": "外壳",
+        "Link": "链环",
+        "Nugget": "粒",
+        "Rail": "导轨",
+        "Ring": "环",
+        "Rotor": "转子",
+        "Round": "垫片",
+        "Scrap": "废料",
+        "Pebbles": "碎石",
+        "Screw": "螺丝",
+        "Shuriken": "飞镖",
+        "Stick": "杆",
+        "Spring": "弹簧",
+        "Twig": "细枝",
+        "Wart": "疣"
+      }
+    },
+    {
+      "group": "materialProductWood",
+      "namespace": "S:oredict.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "wood",
+            "materialProductWoodType"
+          ]
+        },
+        {
+          "s": "Short {0} Stick",
+          "t": "{0}螺栓",
+          "subs": [
+            "wood"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "materialProductType",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Splinters": "废料"
+      }
+    },
+    {
+      "group": "tube",
+      "namespace": "S:oredict.chemtube",
+      "rules": [
+        {
+          "s": "Glass Tube containing {0}",
+          "t": "{0}试管",
+          "subs": [
+            "material"
+          ]
+        },
+        {
+          "s": "Glass Tube containing {0}",
+          "t": "{0}试管",
+          "subs": [
+            "elementUseless"
+          ]
+        },
+        {
+          "s": "Glass Tube containing {0}",
+          "t": "{0}试管",
+          "subs": [
+            "elementUselessAnti"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fiber",
+      "namespace": "S:oredict.plantGtFiber",
+      "rules": [
+        {
+          "s": "Raw {0} Fiber",
+          "t": "生{0}丝",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bullet",
+      "namespace": "S:oredict.bulletGt",
+      "rules": [
+        {
+          "s": "{0} {1} Bullet",
+          "t": "{0}{1}子弹",
+          "subs": [
+            "bulletType",
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bulletType",
+      "namespace": "S:oredict.bulletGt",
+      "completed": false,
+      "dict": {
+        "Small": "小号",
+        "Medium": "中号",
+        "Large": "大号"
+      }
+    },
+    {
+      "group": "gearSmall",
+      "namespace": "S:oredict.gearGtSmall",
+      "rules": [
+        {
+          "s": "Small {0}",
+          "t": "小型{0}",
+          "subs": [
+            "gear"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gear",
+      "namespace": "S:oredict.gearGt",
+      "rules": [
+        {
+          "s": "{0} Gear",
+          "t": "{0}齿轮",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "springSmall",
+      "namespace": "S:oredict.springSmall",
+      "rules": [
+        {
+          "s": "Small {0}",
+          "t": "小型{0}",
+          "subs": [
+            "spring"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "spring",
+      "namespace": "S:oredict.spring",
+      "rules": [
+        {
+          "s": "{0} Spring",
+          "t": "{0}弹簧",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "machineCasingComplex",
+      "namespace": "S:oredict.casingMachine",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "machineCasingType",
+            "machineCasing"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "machineCasing",
+      "namespace": "S:oredict.casingMachine",
+      "rules": [
+        {
+          "s": "{0} Machine Casing",
+          "t": "{0}机械外壳",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "machineCasingType",
+      "namespace": "S:oredict.casingMachine",
+      "completed": false,
+      "dict": {
+        "Dense": "致密",
+        "Robust": "加强",
+        "Reinforced": "高强度"
+      }
+    },
+    {
+      "group": "stickComplex",
+      "namespace": "S:oredict.stick",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "stickTypePrefix",
+            "stick"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stick",
+      "namespace": "S:oredict.stick",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "material",
+            "stickTypeSuffix"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stickTypePrefix",
+      "namespace": "S:oredict.stick",
+      "completed": false,
+      "dict": {
+        "Long": "长",
+        "Short": "短"
+      }
+    },
+    {
+      "group": "stickTypeSuffix",
+      "namespace": "S:oredict.stick",
+      "completed": false,
+      "dict": {
+        "Stick": "杆",
+        "Rod": "杆"
+      }
+    },
+    {
+      "group": "arrowLight",
+      "namespace": "S:oredict.arrowGtPlastic",
+      "rules": [
+        {
+          "s": "Light {0}",
+          "t": "轻质{0}",
+          "subs": [
+            "arrow"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "arrow",
+      "namespace": "S:oredict.arrowGt",
+      "rules": [
+        {
+          "s": "{0} Arrow",
+          "t": "{0}箭",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "toolHeadRaw",
+      "namespace": "S:oredict.toolHeadRaw",
+      "rules": [
+        {
+          "s": "Raw {0}",
+          "t": "{0}毛坯",
+          "subs": [
+            "toolHead"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "toolHead",
+      "namespace": "S:oredict.toolHead",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "material",
+            "toolHeadType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "toolHead",
+      "namespace": "S:oredict.toolHead",
+      "rules": [
+        {
+          "s": "{0} tipped Pickaxe Head",
+          "t": "表镶{0}镐头",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "toolHead",
+      "namespace": "S:oredict.toolHeadCrushHammer",
+      "rules": [
+        {
+          "s": "{0}Crush Hammer Head",
+          "t": "{0}碎石锤头",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "toolHeadType",
+      "namespace": "S:oredict.toolHead",
+      "completed": false,
+      "dict": {
+        "Arrow Head": "箭头",
+        "Axe Head": "斧头",
+        "Double Axe Head": "双刃斧头",
+        "Hammer Head": "锤头",
+        "Hoe Head": "锄头",
+        "Pickaxe Head": "镐头",
+        "Plow Head": "犁头",
+        "Sense Blade": "镰刀片",
+        "Shovel Head": "锹头",
+        "Spade Head": "铲头",
+        "Chisel Head": "凿子头",
+        "Construction Pickaxe Head": "建筑镐头",
+        "Sword Blade": "剑身",
+        "Buzzsaw Blade": "圆锯片",
+        "Drill Tip": "钻头",
+        "File Head": "锉刀头",
+        "Chainsaw Tip": "电锯头",
+        "Mace Head": "狼牙棒槌头",
+        "Mattock Head": "鹤嘴锄头",
+        "Universal Spade Head": "万用铲头",
+        "Saw Blade": "锯片",
+        "Screwdriver Tip": "螺丝刀头",
+        "Wrench Tip": "扳手头",
+        "Builder's Wand Cap": "建筑之杖帽"
+      }
+    },
+    {
+      "group": "oreCrushedTiny",
+      "namespace": "S:oredict.crushed",
+      "rules": [
+        {
+          "s": "Tiny {0}",
+          "t": "小撮{0}",
+          "subs": [
+            "oreCrushed"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "oreCrushed",
+      "namespace": "S:oredict.crushed",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "oreCrushedType",
+            "ore"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "oreCrushedType",
+      "namespace": "S:oredict.crushed",
+      "completed": false,
+      "dict": {
+        "Crushed": "粉碎",
+        "Ground": "磨碎",
+        "Refined": "离心",
+        "Purified": "纯净"
+      }
+    },
+    {
+      "group": "oreComplex",
+      "namespace": "S:oredict.ore",
+      "dict": {
+        "Soulsand": "灵魂沙"
+      },
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "oreTypePrefix",
+            "ore"
+          ]
+        },
+        {
+          "s": "{0} {1}",
+          "t": "{1}{0}",
+          "subs": [
+            "oreSandTypePrefix",
+            "ore"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "ore",
+      "namespace": "S:oredict.",
+      "dict": {
+        "Air infused Stone": "风之碎片矿石",
+        "Earth infused Stone": "地之碎片矿石",
+        "Entropy infused Stone": "混沌碎片矿石",
+        "Fire infused Stone": "火之碎片矿石",
+        "Order infused Stone": "秩序碎片矿石",
+        "Water infused Stone": "水之碎片矿石",
+        "Infused Air Crystals": "风之碎片矿石",
+        "Infused Earth Crystals": "地之碎片矿石",
+        "Infused Entropy Crystals": "混沌碎片矿石",
+        "Infused Fire Crystals": "火之碎片矿石",
+        "Infused Order Crystals": "秩序碎片矿石",
+        "Infused Water Crystals": "水之碎片矿石",
+        "Air Shards": "风之碎片矿石",
+        "Balance Shards": "平衡碎片矿石",
+        "Dull Shards": "枯竭碎片矿石",
+        "Earth Shards": "地之碎片矿石",
+        "Entropy Shards": "混沌碎片矿石",
+        "Fire Shards": "火之碎片矿石",
+        "Magic Shards": "魔力碎片矿石",
+        "Order Shards": "秩序碎片矿石",
+        "Water Shards": "水之碎片矿石",
+        "Magnetite": "磁铁矿",
+        "Recycled Ancient Debris": "已回收的远古残骸",
+        "Ancient Debris": "远古残骸",
+        "Mercury Mercury Ore": "水星汞矿石",
+        "Anti-Palladium": "反物质钯",
+        "Fossil": "化石",
+        "Bones": "骨头"
+      },
+      "rules": [
+        {
+          "s": "{0} Ore",
+          "t": "{0}矿石",
+          "subs": [
+            "material"
+          ]
+        },
+        {
+          "s": "Native {0} Ore",
+          "t": "原生{0}矿石",
+          "subs": [
+            "materialPositive"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "oreSandType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "oreTypePrefix",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "Andesite": "安山岩",
+        "Basalt": "玄武岩",
+        "Diorite": "闪长岩",
+        "Limestone": "石灰岩",
+        "Marble": "大理石",
+        "Nether": "下界",
+        "Netherrack": "下界",
+        "Endstone": "末地",
+        "End": "末地",
+        "Granite": {
+          "S:oredict.oreRedgranite": "红色花岗岩",
+          "S:oredict.oreBlackgranite": "黑色花岗岩",
+          "S:oredict.oreVanillagranite": "花岗岩",
+          "S:oredict.rockGtGranite": "花岗岩"
+        },
+        "Sandstone": "沙石",
+        "Small": "贫瘠",
+        "Mud": "淤泥",
+        "Space": "太空",
+        "Bedrock": "基岩",
+        "Moon": "月球",
+        "Mars": "火星",
+        "Blueschist": "蓝片岩",
+        "Kimberlite": "金伯利岩",
+        "Komatiite": "科马提岩",
+        "Quartzite": "石英岩",
+        "Schist": {
+          "S:oredict.oreBlueschist": "蓝片岩",
+          "S:oredict.oreGreenschist": "绿片岩"
+        },
+        "Stone": "石头",
+        "Prismarine": "海晶石",
+        "Abyssalnite": "深渊",
+        "Deadrock": "死岩",
+        "Betweenstone": "交错石",
+        "Pitstone": "麻纹石",
+        "Shale": "页岩",
+        "Slate": "板岩",
+        "Callisto": "木卫四",
+        "Ceres": "谷神星",
+        "Deimos": "火卫二",
+        "Eris": "阋神星",
+        "Europa": "木卫二",
+        "Ganymede": "木卫三",
+        "Iapetus": "土卫八",
+        "Io": "木卫一",
+        "Jupiter": "木星",
+        "Kepler22b": "开普勒-22b",
+        "Mercury": {
+          "S:oredict.oreMercury": "水星",
+          "S:gt.material.MercuryRock": "水星",
+          "S:oredict.arrowGtPlasticMercuryRock": "水星",
+          "S:oredict.arrowGtWoodMercuryRock": "水星",
+          "S:oredict.blockDustMercuryRock": "水星",
+          "S:oredict.blockPlateMercuryRock": "水星",
+          "S:oredict.boltMercuryRock": "水星",
+          "S:oredict.bulletGtLargeMercuryRock": "水星",
+          "S:oredict.bulletGtMediumMercuryRock": "水星",
+          "S:oredict.bulletGtSmallMercuryRock": "水星",
+          "S:oredict.casingSmallMercuryRock": "水星",
+          "S:oredict.chainMercuryRock": "水星",
+          "S:oredict.chemtubeMercuryRock": "水星",
+          "S:oredict.crateGt64DustMercuryRock": "水星",
+          "S:oredict.crateGt64PlateMercuryRock": "水星",
+          "S:oredict.crateGtDustMercuryRock": "水星",
+          "S:oredict.crateGtPlateMercuryRock": "水星",
+          "S:oredict.dustDiv72MercuryRock": "水星",
+          "S:oredict.dustMercuryRock": "水星",
+          "S:oredict.dustSmallMercuryRock": "水星",
+          "S:oredict.dustTinyMercuryRock": "水星",
+          "S:oredict.gearGtMercuryRock": "水星",
+          "S:oredict.gearGtSmallMercuryRock": "水星",
+          "S:oredict.linkMercuryRock": "水星",
+          "S:oredict.plantGtBerryMercuryRock": "水星",
+          "S:oredict.plantGtBlossomMercuryRock": "水星",
+          "S:oredict.plantGtFiberMercuryRock": "水星",
+          "S:oredict.plantGtTwigMercuryRock": "水星",
+          "S:oredict.plantGtWartMercuryRock": "水星",
+          "S:oredict.plateCurvedMercuryRock": "水星",
+          "S:oredict.plateMercuryRock": "水星",
+          "S:oredict.plateTinyMercuryRock": "水星",
+          "S:oredict.prefix.oreMercury": "水星",
+          "S:oredict.ringMercuryRock": "水星",
+          "S:oredict.rockGtMercuryRock": "水星",
+          "S:oredict.rotorMercuryRock": "水星",
+          "S:oredict.roundMercuryRock": "水星",
+          "S:oredict.scrapGtMercuryRock": "水星",
+          "S:oredict.screwMercuryRock": "水星",
+          "S:oredict.shurikenMercuryRock": "水星",
+          "S:oredict.stickLongMercuryRock": "水星",
+          "S:oredict.stickMercuryRock": "水星",
+          "S:oredict.toolHeadArrowMercuryRock": "水星",
+          "S:oredict.toolHeadAxeMercuryRock": "水星",
+          "S:oredict.toolHeadHammerMercuryRock": "水星",
+          "S:oredict.toolHeadHoeMercuryRock": "水星",
+          "S:oredict.toolHeadMattockMercuryRock": "水星",
+          "S:oredict.toolHeadPickaxeMercuryRock": "水星",
+          "S:oredict.toolHeadPlowMercuryRock": "水星",
+          "S:oredict.toolHeadRawArrowMercuryRock": "水星",
+          "S:oredict.toolHeadRawAxeMercuryRock": "水星",
+          "S:oredict.toolHeadRawHoeMercuryRock": "水星",
+          "S:oredict.toolHeadRawMattockMercuryRock": "水星",
+          "S:oredict.toolHeadRawPickaxeMercuryRock": "水星",
+          "S:oredict.toolHeadRawPlowMercuryRock": "水星",
+          "S:oredict.toolHeadRawSenseMercuryRock": "水星",
+          "S:oredict.toolHeadRawShovelMercuryRock": "水星",
+          "S:oredict.toolHeadRawSpadeMercuryRock": "水星",
+          "S:oredict.toolHeadRawSwordMercuryRock": "水星",
+          "S:oredict.toolHeadSenseMercuryRock": "水星",
+          "S:oredict.toolHeadShovelMercuryRock": "水星",
+          "S:oredict.toolHeadSpadeMercuryRock": "水星",
+          "S:oredict.toolHeadSwordMercuryRock": "水星"
+        },
+        "Neptune": "海王星",
+        "Oberon": "天卫四",
+        "Phobos": "火卫一",
+        "Pluto": "冥王星",
+        "Rhea": "土卫五",
+        "Saturn": "土星",
+        "Titan": "土卫六",
+        "Titania": "天卫三",
+        "Triton": "海卫一",
+        "Uranus": "天王星",
+        "Venus": "金星"
+      }
+    },
+    {
+      "group": "oredictPrefix",
+      "namespace": "S:oredict.prefix.ore",
+      "completed": true,
+      "rules": [
+        {
+          "s": "{0} Ores",
+          "t": "{0}矿石",
+          "subs": [
+            "oreTypePrefix"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "oreSandTypePrefix",
+      "namespace": "S:oredict.",
+      "completed": false,
+      "dict": {
+        "Gravel": "沙砾",
+        "Sand": {
+          "S:oredict.oreRedSand": "红矿沙",
+          "S:oredict.oreSand": "矿沙"
+        },
+        "Raw": "原矿",
+        "Strange Sand": "怪沙"
+      }
+    },
+    {
+      "group": "oreSandType",
+      "completed": false,
+      "dict": {
+        "Basaltic Mineral Sand": "玄武岩砂",
+        "Bentonite": "膨润土",
+        "Cassiterite": "锡石",
+        "Fullers Earth": "漂白土",
+        "FullersEarth": "漂白土",
+        "Garnet Sand": "石榴子石沙",
+        "Glauconite Sand": "海绿石沙",
+        "GlauconiteSand": "海绿石沙",
+        "Granitic Mineral Sand": "花岗岩类矿砂",
+        "Infused Air Stone": "风之碎片",
+        "Balance infused Stone": "平衡碎片",
+        "Dull Crystals": "枯竭碎片",
+        "Infused Earth Stone": "地之碎片",
+        "Infused Entropy Stone": "混沌碎片",
+        "Infused Fire Stone": "火之碎片",
+        "Infused Order Stone": "秩序碎片",
+        "Magic infused Stone": "魔力碎片",
+        "Infused Water Stone": "水之碎片",
+        "Kaolinite": "高岭石",
+        "Oil Sand": "油砂",
+        "Oilsands": "油砂",
+        "Oilshale": "含油页岩",
+        "Oil Shale": "含油页岩",
+        "Pitchblende": "沥青铀",
+        "Quartz Sand": "石英砂",
+        "Rare Earth": "稀土",
+        "Sluice Sand": "矿物杂质沙",
+        "Soulsand": "灵魂沙",
+        "Talc": "滑石",
+        "Vermiculite": "蛭石",
+        "Yellow Fluorite": "黄色氟石"
+      }
+    },
+    {
+      "group": "lens",
+      "namespace": "S:oredict.lens",
+      "rules": [
+        {
+          "s": "{0} Lens",
+          "t": "{0}透镜",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "boule",
+      "namespace": "S:oredict.bouleGt",
+      "rules": [
+        {
+          "s": "{0} Boule",
+          "t": "{0}晶体",
+          "subs": [
+            "gem"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gemComplex",
+      "namespace": "S:oredict.gem",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "gemType",
+            "gem"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gemType",
+      "namespace": "S:oredict.gem",
+      "completed": false,
+      "dict": {
+        "Chipped": "碎裂的",
+        "Exquisite": "精美的",
+        "Flawed": "有瑕疵的",
+        "Flawless": "无瑕的",
+        "Legendary": "传奇"
+      }
+    },
+    {
+      "group": "molten",
+      "namespace": "S:fluid.molten.",
+      "rules": [
+        {
+          "s": "Molten {0}",
+          "t": "熔融{0}",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "wireFine",
+      "namespace": "S:oredict.wireFine",
+      "rules": [
+        {
+          "s": "Fine {0} Wire",
+          "t": "精细{0}线缆",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "rockGt",
+      "namespace": "S:oredict.rockGt",
+      "dict": {
+        "Pumice Rock": "含浮石岩石",
+        "Bed Rock": "含基岩岩石",
+        "Castle Rock": "含城堡岩石",
+        "Crag Rock": "含峭壁岩岩石",
+        "Dead Rock": "含死岩岩石",
+        "Mazestone Rock": "含遗迹石头岩石",
+        "Mercury Rock": "含水星岩石",
+        "Sky Stone Rock": "含陨石岩石",
+        "Temple Rock": "含圣殿岩岩石"
+      },
+      "rules": [
+        {
+          "s": "{0} bearing Rock",
+          "t": "含{0}岩石",
+          "subs": [
+            "material"
+          ]
+        },
+        {
+          "s": "Native {0} bearing Rock",
+          "t": "含原生{0}矿石",
+          "subs": [
+            "materialPositive"
+          ]
+        },
+        {
+          "s": "{0} Rock",
+          "t": "含{0}岩石",
+          "subs": [
+            "oreTypePrefix"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bone",
+      "namespace": "S:oredict.ore",
+      "rules": [
+        {
+          "s": "{0} Fossil",
+          "t": "{0}化石",
+          "subs": [
+            "oreTypePrefix"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "materialGt",
+      "namespace": "S:gt.material.",
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fluidGt",
+      "namespace": "S:fluid.",
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gemGt",
+      "namespace": "S:oredict.gem",
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "gem"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "material",
+      "completed": false,
+      "dict": {
+        "Abyssalnite": "深渊",
+        "Adamantine": "血石",
+        "Adamantite": "精金",
+        "Alduorite": "神秘蓝金",
+        "Aluminium Alloy": "铝合金",
+        "Alumite": "耐酸铝",
+        "Amordrine": "魔力之石",
+        "Any": "任意",
+        "Aredrite": "希尔金",
+        "Astral Silver": "星银",
+        "Atlarus": "深金",
+        "Battery Alloy": "电池合金",
+        "Bedrockium": "基岩",
+        "Bismuth Bronze": "铋青铜",
+        "Blutonium": "蓝钚",
+        "Carmot": "闪耀金",
+        "Cast Iron": "铸铁",
+        "Cd-In-Ag-Alloy": "镉铟银合金",
+        "Celenegil": "幽冥毒结晶",
+        "Ceruclase": "暗影秘银",
+        "Chromium Dioxide": "二氧化铬",
+        "Conductive Iron": "导电铁",
+        "Coralium": "珊瑚",
+        "Cosmic Neutronium": "宇宙中子态素",
+        "Crystal Matrix": "水晶矩阵",
+        "Cyanite": "蓝晶石",
+        "Damascus Steel": "大马士革钢",
+        "Dark Thaumium": "黑暗神秘",
+        "Deep Iron": "深渊铁",
+        "Desichalkos": "虚空之魂石",
+        "Dreadium": "恐惧",
+        "Duralumin": "硬铝合金",
+        "Electrical Steel": "磁钢",
+        "Electrum Flux": "通量琥珀金",
+        "Elvorium": "魔灵",
+        "Endium": "末金",
+        "Energetic Alloy": "充能合金",
+        "Ethaxium": "伊桑斯",
+        "Eximite": "虚空石",
+        "Ferrite": "铁氧体",
+        "Force": "力量",
+        "Frozen Iron": "冰霜之铁",
+        "Refined Glowstone": "精致萤石",
+        "Inductive Alloy": "感应合金",
+        "Spring Steel": "弹簧钢",
+        "HSS-E": "高速钢-E",
+        "HSS-G": "高速钢-G",
+        "HSS-S": "高速钢-S",
+        "Haderoth": "幻铜",
+        "Hepatizon": "幽魂结晶",
+        "Ignatius": "伊格内修斯",
+        "Infuscolium": "精金",
+        "Infused Gold": "附魔金",
+        "Inolashite": "暗影秘银蓝金",
+        "Compressed Iron": "压缩铁",
+        "Magnetic Iron": "磁化铁",
+        "Kalendrite": "幽冥魂石",
+        "Kreknorite": "炽焰陨石",
+        "Lemurite": "利莫里亚",
+        "Ludicrite": "滑稽",
+        "Mauftrium": "始源魂灵",
+        "Meteoric Black Steel": "陨黑钢",
+        "Meteoric Blue Steel": "陨蓝钢",
+        "Meteoric Red Steel": "陨红钢",
+        "Meutoite": "龙之魂石",
+        "Midasium": "溶火金",
+        "Red Copper": "紫铜",
+        "Mithril": "秘银",
+        "Muspelheim Power": "炽热魔灵",
+        "Enriched Naquadah": "浓缩硅岩金属",
+        "Naquadria": "硅岩金属化合物",
+        "Magnetic Neodymium": "磁化钕",
+        "Netherite": "下界合金",
+        "Netherized Diamond": "下界钻石",
+        "Niflheim Power": "极寒魔灵",
+        "Niobium Nitride": "氮化铌",
+        "Refined Obsidian": "精致黑曜石",
+        "Obsidian Steel": "黑曜石钢",
+        "Orichalcum": "自然之石",
+        "Oriharukon": "山铜",
+        "Oureclase": "大地结晶",
+        "Peat Brick": "泥炭",
+        "Bituminous Peat Brick": "沥青泥炭砖",
+        "Pig Iron": "生铁",
+        "Plastic Bar": "塑料",
+        "Prometheum": "幻金",
+        "Pulsating Iron": "脉冲铁",
+        "Purple Alloy": "紫色合金",
+        "Red Alloy": "红色合金",
+        "Rubber Bar": "橡胶",
+        "Rubracium": "褐铜",
+        "Sanguinite": "狱炎石",
+        "Shadow Iron": "暗影铁",
+        "Shadow Steel": "暗影钢",
+        "Signalum": "信素",
+        "Soldering Alloy": "钎焊合金",
+        "Soularium": "魂金",
+        "Spectre Iron": "灵魂之铁",
+        "Magnetic Steel": "磁化钢",
+        "Sunnarium": "太阳合金",
+        "Tartarite": "溶火之石",
+        "Thaumium": "神秘",
+        "Titanium Aluminide": "钛铝合金",
+        "Sintered Tungsten": "结晶钨",
+        "Vanadium Magnetite": "钒磁铁",
+        "Vibramantium": "艾德曼振金",
+        "Vibranium Steel": "振金钢",
+        "Vibrant Alloy": "脉冲合金",
+        "Vulcanite": "熔岩结晶",
+        "Vyroxeres": "幽冥剧毒结晶",
+        "Wrought Iron": "锻铁",
+        "Yellorium": "黄铀",
+        "Red Phosphorus": "红磷",
+        "White Phosphorus": "白磷",
+        "Pink Schist": "粉色片岩",
+        "Gray Schist": "灰色片岩",
+        "Sand": "沙",
+        "Deepslate": "深板岩",
+        "Enriched Anti-Naquadah": "浓缩反物质硅岩金属",
+        "Alumina": "氧化铝",
+        "Gibbsite": "水铝矿",
+        "Alunite": "明矾石",
+        "Ambrosium": "神能晶",
+        "Aluminium Fluoride": "氟化铝",
+        "Ancient Debris": "远古残骸",
+        "Anthracite": "无烟煤",
+        "Apatite": "磷灰石",
+        "Aqua Middle": "水蓝元素宝石",
+        "Arsenopyrite": "砷黄铁",
+        "Chrysotile": "温石棉",
+        "Azurite": "石青",
+        "Barite": "重晶石",
+        "Bastnasite": "氟碳铈",
+        "Bauxite": "铝土",
+        "Biotite": "黑云母",
+        "Bischofite": "水氯镁石",
+        "Black Fluorite": "黑色氟石",
+        "Blaze Quartz": "烈焰石英",
+        "Bone": "骨",
+        "Borax": "硼砂",
+        "Bromargyrite": "溴银矿",
+        "Brown Limonite": "褐铁",
+        "Calcite": "方解石",
+        "Calcium Chloride": "氯化钙",
+        "Celestine": "天青石",
+        "Certus Quartz": "赛特斯石英",
+        "Chalcopyrite": "黄铜矿",
+        "Chalk": "白垩",
+        "Charcoal": "木炭",
+        "Charged Certus Quartz": "充能赛特斯石英",
+        "Chimerite": "精灵石",
+        "Chromite": "铬铁",
+        "Clay Brick": "粘土砖",
+        "Coal": "煤",
+        "Coal Coke": "焦煤",
+        "Cobaltite": "辉砷钴",
+        "Continuum": "命运",
+        "Sheldonite": "硫砷铂",
+        "Crimson Middle": "深红元素",
+        "Crude Oil": "原油",
+        "Cryolite": "冰晶石",
+        "Datolite": "硅钙硼石",
+        "Diatomite": "硅藻土",
+        "Diduranium Trioxide": "三氧化二钍瑞铌",
+        "Dolamide": "酰胺",
+        "Dolomite": "白云岩",
+        "Elemental Duranium": "钍瑞铌",
+        "Duranium Hexaastatide": "六砹化钍瑞铌",
+        "Duranium Hexabromide": "六溴化钍瑞铌",
+        "Duranium Hexachloride": "六氯化钍瑞铌",
+        "Duranium Hexafluoride": "六氟化钍瑞铌",
+        "Duranium Hexaiodide": "六碘化钍瑞铌",
+        "Elven Quartz": "精灵石英",
+        "Emery": "金刚砂",
+        "Unknown": "未知",
+        "Cyan Energium": "青色能量水晶",
+        "Red Energium": "能量水晶",
+        "Eudialyte": "异性石",
+        "Ferberite": "钨铁",
+        "Fluix": "福鲁伊克斯",
+        "Fluix Crystal": "福鲁伊克斯水晶",
+        "Fluorite": "氟石",
+        "Forcicium": "力量",
+        "Forcillium": "力量",
+        "Galena": "方铅",
+        "Garnet": "石榴子石",
+        "Garnierite": "硅镁镍",
+        "Glass": "玻璃",
+        "Glauconite": "海绿石",
+        "Granitic Mineral Sand": "花岗岩类矿砂",
+        "Graphite": "石墨",
+        "Green Fluorite": "绿色氟石",
+        "Green Middle": "翠绿元素宝石",
+        "Gypsum": "石膏",
+        "Hematite": "赤铁",
+        "Honey": "蜂蜜",
+        "Honeydew": "蜂蜜滴",
+        "Huebnerite": "钨锰",
+        "Iffesal": "伊夫萨尔",
+        "Ilmenite": "钛铁",
+        "Air infused": "风之碎片",
+        "Balance infused": "平衡碎片",
+        "Dull": "枯竭碎片",
+        "Earth infused": "地之碎片",
+        "Entropy infused": "混沌碎片",
+        "Fire infused": "火之碎片",
+        "Magic infused": "魔力碎片",
+        "Order infused": "秩序碎片",
+        "Water infused": "水之碎片",
+        "Infused Air": "风之碎片",
+        "Infused Earth": "地之碎片",
+        "Infused Entropy": "混沌碎片",
+        "Infused Fire": "火之碎片",
+        "Infused Order": "秩序碎片",
+        "Infused Water": "水之碎片",
+        "Air infused Powder": "风之粉末",
+        "Balance infused Powder": "平衡粉末",
+        "Dull Crystal Powder": "枯竭粉末",
+        "Earth infused Powder": "地之粉末",
+        "Entropy infused Powder": "混沌粉末",
+        "Fire infused Powder": "火之粉末",
+        "Magic infused Powder": "魔力粉末",
+        "Order infused Powder": "秩序粉末",
+        "Water infused Powder": "水之粉末",
+        "Iodine Salt": "碘盐",
+        "Kesterite": "锌黄锡",
+        "Kyanite": "蓝晶石",
+        "Lapis": "青金石",
+        "Lavender Quartz": "熏香石英",
+        "Lazurite": "天蓝青金石",
+        "Lepidolite": "锂云母",
+        "Licorice": "盐甘草糖",
+        "Lignite Coal": "褐煤",
+        "Lignite Coke": "焦化褐煤",
+        "Lithium Chloride": "氯化锂",
+        "Lonsdaleite": "六方碳",
+        "Magenta Fluorite": "品红氟石",
+        "Magnesite": "菱镁",
+        "Magnesium Chloride": "氯化镁",
+        "Magnetite": "磁铁",
+        "Malachite": "孔雀石",
+        "Mana Quartz": "魔力石英",
+        "Mica": "云母",
+        "Milky Quartz": "乳白色石英",
+        "Mirabilite": "芒硝",
+        "Molybdenite": "辉钼",
+        "Monazite": "独居石",
+        "Moonstone": "月亮石",
+        "Nether Quartz": "下界石英",
+        "Niter": "硝石",
+        "Nougat": "牛轧糖",
+        "Oil Sand": "油砂",
+        "Oil Shale": "含油页岩",
+        "Orange Fluorite": "橙色氟石",
+        "PEZ": "皮礼士糖",
+        "Pentlandite": "镍黄铁",
+        "Perlite": "珍珠岩",
+        "Petroleum Coke": "石油焦炭",
+        "Phosphate": "磷酸盐",
+        "Phosphorite": "磷灰石",
+        "Phosphorus": "磷酸钙",
+        "Pinalite": "氯钨铅",
+        "Pink Fluorite": "粉色氟石",
+        "Platinum Group Sludge": "铂族泥",
+        "Pollucite": "铯榴石",
+        "Powellite": "钼钙",
+        "Prismane": "棱柱烷",
+        "Dark Prismarine": "深色海晶石",
+        "Light Prismarine": "亮色海晶石",
+        "Dark Prismarine Crystal": "深色海晶石",
+        "Light Prismarine Crystal": "亮色海晶石",
+        "Pyrolusite": "软锰",
+        "Black Quartz": "黑色石英岩",
+        "Quartz Sand": "石英砂",
+        "Quartzite": "石英岩",
+        "Rare Earth": "稀土",
+        "Red Fluorite": "红色氟石",
+        "Red Quartz": "红色石英",
+        "Rock Salt": "岩盐",
+        "Russellite": "钨铋",
+        "Rutile": "金红石",
+        "Salt": "盐",
+        "Scabyst": "痂壳晶",
+        "Scheelite": "白钨",
+        "Silicon Dioxide": "二氧化硅",
+        "Silver Iodide": "碘化银",
+        "Slimy Bone": "粘骨",
+        "Smithsonite": "菱锌",
+        "Smokey Quartz": "烟熏石英",
+        "Sodalite": "方钠石",
+        "Sperrylite": "砷铂",
+        "Sphalerite": "闪锌",
+        "Spodumene": "锂辉",
+        "Stannite": "黄锡",
+        "Stibnite": "辉锑",
+        "Stolzite": "钨铅",
+        "Sunny Quartz": "金黄石英",
+        "Sunstone": "太阳石",
+        "Soapstone": "皂石",
+        "Tantalite": "钽铁",
+        "Tetrahedrite": "黝铜",
+        "Tritanium Dioxide": "二氧化三钛",
+        "Tritanium Hexaastatide": "六砹化三钛",
+        "Tritanium Hexabromide": "六溴化三钛",
+        "Tritanium Hexachloride": "六氯化三钛",
+        "Tritanium Hexafluoride": "六氟化三钛",
+        "Tritanium Hexaiodide": "六碘化三钛",
+        "Trona": "天然碱",
+        "Tungstate": "钨酸盐",
+        "Tungsten Trioxide": "三氧化钨",
+        "Uraninite": "晶质铀",
+        "Valonite": "英玫",
+        "Vanadium Pentoxide": "五氧化二钒",
+        "Vermiculite": "蛭石粉",
+        "Vinteum": "温特姆",
+        "White Fluorite": "白色氟石",
+        "Wolframite": "钨锰铁",
+        "Wollastonite": "硅灰石",
+        "Wulfenite": "钼铅",
+        "Yellorite": "黄铀",
+        "Yellow Limonite": "黄色褐铁",
+        "Zeolite": "沸石",
+        "Blue CY-11": "蓝色试剂Y-11",
+        "Green CY-11": "绿色试剂Y-11",
+        "Orange CY-11": "橙色试剂Y-11",
+        "Pink CY-11": "粉色试剂Y-11",
+        "Purple CY-11": "紫色试剂Y-11",
+        "Red CY-11": "红色试剂Y-11",
+        "White CY-11": "白色试剂Y-11",
+        "Yellow CY-11": "黄色试剂Y-11",
+        "Bedrock": "基岩",
+        "Blackstone": "黑石",
+        "Chert": "燧石",
+        "Concrete": "混凝土",
+        "Dacite": "英安岩",
+        "Dark Matter": "暗物质",
+        "Deadrock": "死岩",
+        "Eclogite": "榴辉岩",
+        "Endereye": "末影之眼",
+        "Enderpearl": "末影珍珠",
+        "Endstone": "末地石",
+        "Flint": "燧石",
+        "Frezarite": "冰霜陨石",
+        "Frezarite Crystal": "冰霜陨石",
+        "Gabbro": "辉长岩",
+        "Gneiss": "片麻岩",
+        "Gravel": "沙砾",
+        "Greywacke": "杂砂岩",
+        "Ice": "冰",
+        "Large Ice Cube": "冰",
+        "Magic": "魔法",
+        "Mars": "火星岩石",
+        "Mars Dust": "火星尘土",
+        "Mars Sand": "火星沙",
+        "Mars Turf": "火星草皮",
+        "Migmatite": "混合岩",
+        "Moon": "月面岩石",
+        "Moon Turf": "月面草皮",
+        "Netherrack": "地狱岩",
+        "Obsidian": "黑曜石",
+        "Pitstone": "麻纹石",
+        "Red Matter": "红物质",
+        "Red Meteor": "红色陨石",
+        "Rhyolite": "流纹岩",
+        "Redrock": "红岩",
+        "Shale": "页岩",
+        "Siltstone": "粉砂岩",
+        "Slate": "板岩",
+        "Space": "太空岩石",
+        "Stone": "石",
+        "Purified Vinteum": "纯净温特姆",
+        "Void": "煤晶",
+        "Void Quartz": "虚空石英",
+        "Asbestos": "石棉",
+        "Butter": "黄油",
+        "Salted Butter": "盐味黄油",
+        "Ferrous Chloride": "氯化亚铁",
+        "Cooked Fishmeal": "熟鱼肉",
+        "Cooked Meat": "熟肉",
+        "Cooked Mince Meat": "熟肉末",
+        "Fishmeal": "鱼肉",
+        "Raw Fishmeal": "生鱼肉",
+        "Raw Meat": "生肉",
+        "Mince Meat": "肉末",
+        "Rotten Fishmeal": "烂鱼肉",
+        "Rotten Meat": "腐肉",
+        "Rotten Mince Meat": "烂肉末",
+        "Lithium Chlorate": "氯酸锂",
+        "Lithium Perchlorate": "高氯酸锂",
+        "Magnesium Carbonate": "碳酸镁",
+        "Manganese Chloride": "氯化锰",
+        "Peat": "泥炭",
+        "Bituminous Peat": "沥青泥炭",
+        "Emerald Green": "绿色绿宝石",
+        "Tofu": "豆腐",
+        "Niobium Pentoxide": "五氧化二铌",
+        "Palygorskite Clay": "坡缕石粘土",
+        "Tantalum Pentoxide": "五氧化二钽",
+        "Coltan": "钶钽铁矿",
+        "Columbite": "铌铁矿",
+        "Ferric Oxyhydroxide": "氢氧化铁",
+        "Aluminium Hydroxide": "氢氧化铝",
+        "Blue Fluorite": "蓝色氟石",
+        "Blue Phosphorus": "蓝磷",
+        "Ferrovanadium": "钒磁铁",
+        "Pumice": "浮石",
+        "Aerotheum": "和谐之空气",
+        "Bluestone": "蓝石",
+        "Calcium Sulfate": "硫酸钙",
+        "Cobalt Hexahydrate": "六水合钴",
+        "Cryotheum": "凛冰",
+        "Dynamite": "锯末炸药",
+        "Ectoplasm": "灵气",
+        "Epidote": "绿帘石",
+        "Ferric Chloride": "氯化铁",
+        "Greenstone": "绿岩",
+        "Hydrated Coal": "水合煤",
+        "Hydrogen Borate": "硼酸氢盐",
+        "Lithium Hydroxide": "氢氧化锂",
+        "Lithium Oxide": "氧化锂",
+        "Methane Ice": "甲烷冰",
+        "Petrotheum": "构造之地岩",
+        "Porcelain": "瓷器",
+        "Potassium Aluminate": "偏铝酸钾",
+        "Potassium Bisulfate": "硫酸氢钾",
+        "Potassium Carbonate": "碳酸钾",
+        "Potassium Feldspar": "钾长石",
+        "Potassium Hydroxide": "氢氧化钾",
+        "Potassium Nitrate": "硝酸钾",
+        "Potassium Persulfate": "过硫酸钾",
+        "Potassium Pyrosulfate": "焦硫酸钾",
+        "Potassium Sulfate": "硫酸钾",
+        "Potassium Sulfide": "硫化钾",
+        "Potassium Sulfite": "亚硫酸钾",
+        "Pyrite": "黄铁",
+        "Pyrotheum": "炽焱",
+        "Sodium Aluminate": "偏铝酸钠",
+        "Sodium Bisulfate": "硫酸氢钠",
+        "Sodium Bisulphate": "硫酸氢钠",
+        "Sodium Carbonate": "碳酸钠",
+        "Sodium Hydroxide": "氢氧化钠",
+        "Sodium Nitrate": "硝酸钠",
+        "Sodium Peroxide": "过氧化钠",
+        "Sodium Persulfate": "过硫酸钠",
+        "Sodium Persulphate": "过硫酸钠",
+        "Sodium Pyrosulfate": "焦硫酸钠",
+        "Sodium Pyrosulphate": "焦硫酸钠",
+        "Sodium Sulfate": "硫酸钠",
+        "Sodium Sulfide": "硫化钠",
+        "Sodium Sulfite": "亚硫酸钠",
+        "Sodium Sulphate": "硫酸钠",
+        "Sodium Sulphide": "硫化钠",
+        "Sodium Sulphite": "亚硫酸钠",
+        "Tungstic Acid": "钨酸",
+        "Uranium Hexafluoride": "六氟化铀",
+        "Uranium Tetrafluoride": "四氟化铀",
+        "Uranium-235 Hexafluoride": "六氟化铀-235",
+        "Uranium-235 Tetrafluoride": "四氟化铀-235",
+        "Uranium-238 Hexafluoride": "六氟化铀-238",
+        "Uranium-238 Tetrafluoride": "四氟化铀-238",
+        "Compost": "堆肥",
+        "Raw Compost": "可堆肥材料",
+        "Chemical X": "试剂X",
+        "Chemical Y": "试剂Y",
+        "Chemical Y-1": "试剂Y-1",
+        "Chemical Y-10": "试剂Y-10",
+        "Chemical Y-2": "试剂Y-2",
+        "Chemical Y-3": "试剂Y-3",
+        "Chemical Y-4": "试剂Y-4",
+        "Chemical Y-5": "试剂Y-5",
+        "Chemical Y-6": "试剂Y-6",
+        "Chemical Y-7": "试剂Y-7",
+        "Chemical Y-8": "试剂Y-8",
+        "Chemical Y-9": "试剂Y-9",
+        "Chemical Z": "试剂Z",
+        "Netherite Scrap": "远古残骸废料",
+        "Abyssal Oat": "深渊燕麦",
+        "Dry": "干",
+        "SacredOak": "神圣橡树",
+        "Dark": "暗色",
+        "Sandstone": "沙石",
+        "Asphalt": "沥青",
+        "Air": "空气",
+        "Aqua Regia": "王水",
+        "Ammonia": "氨",
+        "Arcane Ashes": "奥术灰",
+        "Arcane Compound": "压缩奥术灰",
+        "Ashes": "灰烬",
+        "Bark": "树皮",
+        "Barley": "大麦",
+        "Bio Diesel": "生物柴油",
+        "Biomass": "生物质",
+        "Black Vitriol": "黑矾",
+        "Blue Vitriol": "五水合硫酸铜",
+        "Butane": "丁烷",
+        "Carbon Dioxide": "二氧化碳",
+        "Carbon Monoxide": "一氧化碳",
+        "Carbon Trioxide": "三氧化碳",
+        "Chloroauric Acid": "氯金酸",
+        "Chloroplatinic Acid": "氯铂酸",
+        "Corn": "玉米",
+        "Creosote": "杂酚油",
+        "Cyan Vitriol": "硫酸镍",
+        "Dark Ashes": "黑色灰烬",
+        "Diesel": "柴油",
+        "Disulfuric Acid": "焦硫酸",
+        "Ethanol": "乙醇",
+        "Ethylene": "乙烯",
+        "Fish Oil": "鱼油",
+        "Fresh Water": "淡水",
+        "Hot Frying Oil": "热食用油",
+        "Fuel Oil": "燃油",
+        "Glue": "胶水",
+        "Glycerol": "丙三醇",
+        "Glyceryl": "硝化甘油",
+        "Gravitonium": "重力金属",
+        "Gray Vitriol": "硫酸锰",
+        "Green Vitriol": "硫酸亚铁",
+        "Gunpowder": "火药",
+        "Hazelnut": "榛子",
+        "Heavy Water": "重水",
+        "Helium-Neon": "氦氖混合气体",
+        "Hemp Oil": "大麻籽油",
+        "Hexafluorosilicic Acid": "六氟硅酸",
+        "Holy Water": "圣水",
+        "Hydrochloric Acid": "盐酸",
+        "Hydrogen Fluoride": "氟化氢",
+        "Hydrogen Peroxide": "过氧化氢",
+        "Hydrosulfuric Acid": "硫化氢",
+        "Kerosine": "煤油",
+        "Latex": "胶乳",
+        "Lava": "岩浆",
+        "Lin Oil": "亚麻籽油",
+        "Lubricant": "润滑油",
+        "Mac-Guffium": "乌有岩",
+        "Martian Vitriol": "火星硫酸盐",
+        "Methane": "甲烷",
+        "Milk": "牛奶",
+        "Nitric Acid": "硝酸",
+        "Nitro Carbon": "氮化碳",
+        "Nitro-Fuel": "硝基燃油",
+        "Nitrogen Dioxide": "二氧化氮",
+        "Nitrogen Monoxide": "一氧化氮",
+        "Nut Oil": "坚果油",
+        "Nutmeg": "肉豆蔻",
+        "Oat": "燕麦",
+        "Oil": "油",
+        "Olive Oil": "橄榄油",
+        "Paper": "纸",
+        "Peanut": "花生",
+        "Black Pepper": "黑胡椒",
+        "Petrol": "汽油",
+        "Pink Vitriol": "硫酸镁",
+        "Potato": "土豆",
+        "Propane": "丙烷",
+        "Propylene": "丙烯",
+        "Red Sand": "红沙",
+        "Red Vitriol": "硫酸钴",
+        "Rice": "米",
+        "Rye": "黑麦面",
+        "Salt Water": "盐水",
+        "Saltwater": "盐水",
+        "SaltWater": "盐水",
+        "Sea Water": "海水",
+        "Seed Oil": "种子油",
+        "Semiheavy Water": "半重水",
+        "Stannic Chloride": "四氯化锡",
+        "Steam": "蒸汽",
+        "Sulfur Dioxide": "二氧化硫",
+        "Sulfur Trioxide": "三氧化硫",
+        "Sulfuric Acid": "硫酸",
+        "Sunflower Oil": "向日葵油",
+        "Magic Tallow": "魔法油脂",
+        "Titanium Tetrachloride": "四氯化钛",
+        "Tritiated Water": "超重水",
+        "UU-Amplifier": "UU增殖液",
+        "UU-Matter": "UU物质",
+        "Vitriol Of Clay": "硫酸铝",
+        "Volcanic Ashes": "火山灰",
+        "Water": "水",
+        "Dirty Water": "污水",
+        "WaterDistilled": "蒸馏水",
+        "Distilled Water": "蒸馏水",
+        "Whale Oil": "鲸油",
+        "Wheat": "小麦",
+        "White Vitriol": "硫酸锌",
+        "End Sand": "末地沙",
+        "Zephyrean Aerotheum": "和谐之空气",
+        "Gelid Cryotheum": "极寒之凛冰",
+        "Honey (Forestry, most other Mods)": "蜂蜜(林业)",
+        "Tectonic Petrotheum": "构造之地岩",
+        "Blazing Pyrotheum": "烈焰之炽焱",
+        "Clay Compound": "导管粘合胚料",
+        "CrudeSteel": "粗钢",
+        "Crystalline Alloy": "晶化合金",
+        "Crystalline Pink Slime": "晶化粉红史莱姆",
+        "End Steel": "末影钢",
+        "Energetic Silver": "充能银",
+        "HOPGraphite": "HOP石墨",
+        "Melodic Alloy": "旋律合金",
+        "Potassium Fluoride": "氟化钾",
+        "Potassium Heptafluorotantalate": "氟钽酸钾",
+        "Radium226": "镭226",
+        "Sodium Fluoride": "氟化钠",
+        "Stellar Alloy": "恒星合金",
+        "Vivid Alloy": "生动合金",
+        "Unstable": "不稳定金属",
+        "Tritium": "氚",
+        "Quicklime": "生石灰",
+        "Coal Gas": "煤气",
+        "Liquefacted Coal": "液态煤炭",
+        "Molotov Mixture": "易燃液体",
+        "Soda": {
+          "S:fluid.soda": "苏打水",
+          "S:gt": "碳酸氢钠",
+          "S:oredict": "碳酸氢钠"
+        },
+        "PVC": "聚氯乙烯",
+        "Sky Stone": "陨石",
+        "Teflon": "聚四氟乙烯",
+        "Templerock": "圣殿岩",
+        "Hard Plastic": "硬塑料",
+        "Bakelite": "电木",
+        "Castlerock": "城堡石头",
+        "Mazestone": "遗迹石头",
+        "Cragrock": "峭壁岩",
+        "Flamascus Steel": "炙热大马士革钢",
+        "Meteoflame Black Steel": "炙热陨黑钢",
+        "Meteoflame Blue Steel": "炙热陨蓝钢",
+        "Meteoflame Red Steel": "炙热陨红钢",
+        "Meteoflame Steel": "炙热陨钢",
+        "Black End Sand": "黑色末地沙",
+        "White End Sand": "白色末地沙",
+        "Salted Water": "盐水",
+        "AbyssalOats": "深渊燕麦",
+        "Apalachia": "附魔山脉",
+        "Arcanium": "秘金",
+        "Arlemite": "阿勒",
+        "Bloodgem": "血宝石",
+        "Eden": "伊甸",
+        "Mortum": "死域",
+        "Netheryte": "下界合金",
+        "PTFE": "聚四氟乙烯",
+        "Polycarbonate": "聚碳酸酯",
+        "Realmite": "现石",
+        "Rupee": "卢比",
+        "Saltedwater": "盐水",
+        "Skythern": "空境",
+        "Wildwood": "原始森林",
+        "Breeze": "旋风",
+        "Fireleaf": "炙热钢叶",
+        "Blue Amber": "多米尼加蓝琥珀",
+        "Magic Iron": "魔法铁",
+        "Ardaite": "阿尔达矿",
+        "Fettelite": "弗硫砷汞银矿",
+        "Mythril": "秘银",
+        "Sylvine": "钾盐"
+      },
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "gem"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "materialPositive"
+          ]
+        },
+        {
+          "s": "Anti-{0}",
+          "t": "反物质{0}",
+          "subs": [
+            "materialPositive"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "wood"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "materialPowder"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "stoneType"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "oreTypePrefix"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "oreSandType"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gem",
+      "completed": false,
+      "dict": {
+        "Alexandrite": "紫翠玉",
+        "Almandine": "铁铝榴石",
+        "Amazonite": "天河石",
+        "Amber": "琥珀",
+        "Amethyst": "紫水晶",
+        "Ender Amethyst": "末影紫晶",
+        "Andradite": "钙铁榴石",
+        "Aquamarine": "海蓝宝石",
+        "BalasRuby": "红宝石",
+        "Bixbite": "红绿柱石",
+        "Black Aventurine": "黑色东陵石",
+        "Black Eye": "黑色虎眼石",
+        "Blue Aventurine": "蓝色东陵石",
+        "Blue Jasper": "蓝色碧玉",
+        "Blue Topaz": "蓝色黄玉",
+        "Brown Aventurine": "褐色东陵石",
+        "Cat's Eye": "猫眼石",
+        "Cinnabar": "朱砂",
+        "Craponite": "焦屎石",
+        "Diamantine": "钻石水晶",
+        "Diamantine Crystal": "钻石水晶",
+        "Diamond": "钻石",
+        "Industrial Diamond": "工业钻石",
+        "Dilithium": "双锂",
+        "Dilithium Crystal": "双锂",
+        "Dioptase": "翠铜石",
+        "DominicanAmber": "多米尼加蓝琥珀",
+        "Dominican Amber": "多米尼加蓝琥珀",
+        "Dragon Eye": "龙眼石",
+        "Electrotine": "蓝石",
+        "Dragonstone": "龙石",
+        "Elven Dragonstone": "龙石",
+        "Emeradic": "绿宝石水晶",
+        "Emeradic Crystal": "绿宝石水晶",
+        "Emerald": "绿宝石",
+        "Empty": "空",
+        "Enori": "铁晶",
+        "Enori Crystal": "铁晶",
+        "Gloomstone": "阴郁荧石",
+        "Glowstone": "萤石",
+        "Ceres Glowstone": "谷神星萤石",
+        "Enceladus Glowstone": "土卫二萤石",
+        "Io Glowstone": "木卫一萤石",
+        "Pluto Glowstone": "冥王星萤石",
+        "Proteus Glowstone": "海卫八萤石",
+        "Goshenite": "透绿柱石",
+        "Green Aventurine": "绿色东陵石",
+        "Green Jasper": "绿色碧玉",
+        "Grossular": "钙铝榴石",
+        "Hawk's Eye": "鹰眼石",
+        "Heliodor": "金绿柱石",
+        "Black Hexorium": "黑色黑克斯",
+        "Blue Hexorium": "蓝色黑克斯",
+        "Green Hexorium": "绿色黑克斯",
+        "Red Hexorium": "红色黑克斯",
+        "White Hexorium": "白色黑克斯",
+        "Air Shard": "风之碎片",
+        "Balance Shard": "平衡碎片",
+        "Earth Shard": "地之碎片",
+        "Entropy Shard": "混沌碎片",
+        "Fire Shard": "火之碎片",
+        "Dull Shard": "枯竭碎片",
+        "Magic Shard": "魔力碎片",
+        "Order Shard": "秩序碎片",
+        "Water Shard": "水之碎片",
+        "Shard of Infused Air": "风之碎片",
+        "Shard of Infused Earth": "地之碎片",
+        "Shard of Infused Entropy": "混沌碎片",
+        "Shard of Infused Fire": "火之碎片",
+        "Shard of Infused Order": "秩序碎片",
+        "Shard of Infused Water": "水之碎片",
+        "Jade": "翡翠",
+        "Jasper": "碧玉",
+        "Mana Diamond": "魔力钻石",
+        "Maxixe": "马克西蓝色绿柱石",
+        "Morganite": "铯绿柱石",
+        "Nether Star": "下界之星",
+        "Nikolite": "蓝石",
+        "Ocean Jasper": "海蓝色碧玉",
+        "Olivine": "橄榄石",
+        "Black Onyx": "黑色缟玛瑙",
+        "Red Onyx": "红色缟玛瑙",
+        "Opal": "蛋白石",
+        "Orange Sapphire": "橙色蓝宝石",
+        "Palis": "青金石水晶",
+        "Palis Crystal": "青金石水晶",
+        "Pink Diamond": "粉钻",
+        "Purple Sapphire": "紫色蓝宝石",
+        "Pyrope": "镁铝榴石",
+        "Rainforest Jasper": "雨林碧玉",
+        "Realgar": "雄黄",
+        "Red Aventurine": "红色东陵石",
+        "Red Jasper": "红色碧玉",
+        "Redstone": "红石",
+        "Redstonia": "红石水晶",
+        "Redstonia Crystal": "红石水晶",
+        "Ruby": "红宝石",
+        "Sapphire": "蓝宝石",
+        "Spessartine": "锰铝榴石",
+        "Spinel": "尖晶石",
+        "Tanzanite": "坦桑石",
+        "Teslatite": "特斯拉金属",
+        "Tiger Eye": "虎眼石",
+        "Tiger Iron": "虎铁石",
+        "Topaz": "黄玉",
+        "Uvarovite": "钙铬榴石",
+        "Void Crystal": "煤晶",
+        "Yellow Aventurine": "黄色东陵石",
+        "Yellow Jasper": "黄色碧玉",
+        "Yellow Sapphire": "黄色蓝宝石",
+        "Zanite": "紫晶",
+        "Zircon": "锆石",
+        "Zirconium": "锆",
+        "Any": "任意",
+        "Blue Sapphire": "蓝宝石",
+        "Germanium": "锗",
+        "Green Sapphire": "绿色蓝宝石",
+        "Nikoline Alloy": "蓝石合金",
+        "Redstone Alloy": "红石合金",
+        "Silicon": "硅",
+        "Teslatine Alloy": "特斯拉合金",
+        "TeslatineAlloy": "特斯拉合金",
+        "Firestone": "火石",
+        "Glass Crystal": "玻璃",
+        "Gravitite": "重力晶",
+        "Ice Cubes": "碎冰块",
+        "Medium Ice Cube": "中型冰块",
+        "Iodine Salt": "碘盐",
+        "Rock Salt": "岩盐",
+        "Salt": "盐",
+        "Sugar": "糖",
+        "Sugar Cubes": "方糖",
+        "Sugilite": "杉石",
+        "Blue Diamond": "蓝色钻石",
+        "Green Diamond": "绿色钻石",
+        "Purple Diamond": "紫色钻石",
+        "Red Diamond": "红色钻石",
+        "Yellow Diamond": "黄色钻石",
+        "Golden Amber": "金琥珀",
+        "Peridot": "橄榄石",
+        "Sylvite": "钾石盐",
+        "Carminite": {
+          "S:": "砷铅铁",
+          "S:oredict.gem": "砷铅铁矿石"
+        }
+      }
+    },
+    {
+      "group": "materialPositive",
+      "completed": false,
+      "dict": {
+        "Actinium": "锕",
+        "Adamantium": "艾德曼合金",
+        "Aluminium": "铝",
+        "Americium": "镅",
+        "Americium-241": "镅-241",
+        "Americium-242": "镅-242",
+        "Americium-245": "镅-245",
+        "Antimony": "锑",
+        "Arsenic": "砷",
+        "Astatine": "砹",
+        "Barium": "钡",
+        "Berkelium": "锫",
+        "Beryllium": "铍",
+        "Beryllium-7": "铍-7",
+        "Beryllium-8": "铍-8",
+        "Bismuth": "铋",
+        "Bohrium": "𬭛",
+        "Boron": "硼",
+        "Boron-11": "硼-11",
+        "Cadmium": "镉",
+        "Caesium": "铯",
+        "Californium": "锎",
+        "Cerium": "铈",
+        "Chromium": "铬",
+        "Cobalt": "钴",
+        "Cobalt-60": "钴-60",
+        "Copernicium": "鎶",
+        "Copper": "铜",
+        "Curium": "锔",
+        "Darmstadtium": "鐽",
+        "Dubnium": "𬭊",
+        "Dysprosium": "镝",
+        "Einsteinium": "锿",
+        "Erbium": "铒",
+        "Europium": "铕",
+        "Farnsium": "钫",
+        "Fermium": "镄",
+        "Flerovium": "鈇",
+        "Flerovium-298": "鈇-298",
+        "Francium": "钫",
+        "Gadolinium": "钆",
+        "Gallium": "镓",
+        "Germanium": "锗",
+        "Gold": "金",
+        "Gold-198": "金-198",
+        "Hafnium": "铪",
+        "Hassium": "𬭶",
+        "Holmium": "钬",
+        "Indium": "铟",
+        "Iridium": "铱",
+        "Iron": "铁",
+        "Lantanium": "镧",
+        "Lantanum": "镧",
+        "Lanthanium": "镧",
+        "Lanthanum": "镧",
+        "Lawrencium": "铹",
+        "Lead": "铅",
+        "Lithium": "锂",
+        "Lithium-6": "锂-6",
+        "Livermorium": "鉝",
+        "Lutetium": "镥",
+        "Magnesium": "镁",
+        "Manganese": "锰",
+        "Meitnerium": "䥑",
+        "Mendelevium": "钔",
+        "Mercury": "汞",
+        "Molybdenum": "钼",
+        "Moscovium": "镆",
+        "Naquadah": "硅岩金属",
+        "Naquadria": "硅岩金属化合物",
+        "Neodymium": "钕",
+        "Neptunium": "镎",
+        "Nickel": "镍",
+        "Nihonium": "鉨",
+        "Niobium": "铌",
+        "Nobelium": "锘",
+        "Oganesson": "118号元素(Og)",
+        "'Osmium'": "锇",
+        "Osmium": "锇",
+        "Palladium": "钯",
+        "Platinum": "铂",
+        "Plutonium": "钚",
+        "Plutonium-238": "钚-238",
+        "Plutonium-239": "钚-239",
+        "Plutonium-240": "钚-240",
+        "Plutonium-241": "钚-241",
+        "Plutonium-243": "钚-243",
+        "Plutonium-244": "钚-244",
+        "Polonium": "钋",
+        "Potassium": "钾",
+        "Praseodymium": "镨",
+        "Promethium": "钷",
+        "Protactinium": "镤",
+        "Radium": "镭",
+        "Rhenium": "铼",
+        "Rhodium": "铑",
+        "Roentgenium": "錀",
+        "Rubidium": "铷",
+        "Ruthenium": "钌",
+        "Rutherfordium": "鑪",
+        "Samarium": "钐",
+        "Scandium": "钪",
+        "Seaborgium": "𬭳",
+        "Sodium": "钠",
+        "Silicon": "硅",
+        "Silver": "银",
+        "Strontium": "锶",
+        "Tantalum": "钽",
+        "Technetium": "锝",
+        "Tellurium": "碲",
+        "Terbium": "铽",
+        "Thallium": "铊",
+        "Thorium": "钍",
+        "Thorium-230": "钍-230",
+        "Thorium-232": "钍-232",
+        "Thulium": "铥",
+        "Tin": "锡",
+        "Tine": "锡",
+        "Titanium": "钛",
+        "Tungsten": "钨",
+        "Unbinilium": "120号元素(Ubn)",
+        "Ununennium": "119号元素(Uue)",
+        "Ununoctium": "118号元素(Og)",
+        "Ununpentium": "镆",
+        "Ununtrium": "鉨",
+        "Uranium": "铀",
+        "Uranium-233": "铀-233",
+        "Uranium-235": "铀-235",
+        "Uranium-238": "铀-238",
+        "Vanadium": "钒",
+        "Ytterbium": "镱",
+        "Yttrium": "钇",
+        "Zinc": "锌",
+        "Zirconium": "锆",
+        "Bromine": "溴",
+        "Calcium": "钙",
+        "Carbon": "碳",
+        "Carbon-13": "碳-13",
+        "Carbon-14": "碳-14",
+        "Chlorine": "氯",
+        "Fluorine": "氟",
+        "Iodine": "碘",
+        "Phosphor": "磷",
+        "Selenium": "硒",
+        "Sulfur": "硫",
+        "Vibranium": "振金"
+      }
+    },
+    {
+      "group": "wood",
+      "dict": {
+        "Alder": "桤木",
+        "Apple": {
+          "S:gt.multiitem.food": "苹果",
+          "S:qwertech.machines": "苹果树"
+        },
+        "Ash": "梣树",
+        "Beech": "山毛榉",
+        "Box": "黄杨木",
+        "Brazilwood": "巴西红木",
+        "Butternut": "灰核桃树",
+        "Cedar": "雪松木",
+        "Elder": "接骨木",
+        "Elm": "榆树",
+        "Eucalyptus": "桉树",
+        "Fig": "无花果树",
+        "Gingko": "银杏",
+        "Hawthorn": "山楂木",
+        "Hemlock": "铁杉",
+        "Hickory": "山核桃",
+        "Holly": "冬青",
+        "Hornbeam": "鹅耳枥",
+        "Iroko": "大绿柄桑木",
+        "Locust": "刺槐",
+        "Logwood": "墨水树",
+        "Maclura": "桑橙",
+        "Olive": "橄榄树",
+        "Pear": "梨树",
+        "Pink Ivory": "象牙粉红木",
+        "Purpleheart": "紫心檀木",
+        "Rowan": "花楸木",
+        "Rosewood": "蔷薇木",
+        "Sweetgum": "枫香木",
+        "Syzgium": "蒲桃木",
+        "Whitebeam": "白面子树",
+        "Yew": "红豆杉",
+        "Aspen": "白杨木",
+        "Douglas Fir": "花旗松",
+        "Sycamore": "悬铃木",
+        "White Cedar": "北美香柏木",
+        "White Elm": "榆树",
+        "Skyroot": "天根木",
+        "Darkwood": "黑树",
+        "Shimmerwood": "微光木",
+        "Peanut Wood": "花生木",
+        "Bamboo": "竹",
+        "Ethereal": "天域木",
+        "Hellbark": "地狱皮木",
+        "Jacaranda": "蓝花楹木",
+        "Mangrove": "红树",
+        "Sacred Oak": "神圣橡树",
+        "Towerwood": "塔木",
+        "Witchwood": "巫魂木",
+        "Bloodwood": "血木",
+        "Fusewood": "熔融木",
+        "Ghostwood": "幽魂木",
+        "Hopseed": "车桑子木",
+        "Silverbell": "银铃",
+        "Tiger": "核桃木",
+        "Thorntree": "荆棘树",
+        "Silver Pine": "银松",
+        "Quaking Aspen": "颤杨",
+        "Common Aspen": "欧洲山杨",
+        "White Poplar": "白杨",
+        "Boxleaf Azara": "小叶金柞",
+        "Southern Magnolia": "荷花玉兰",
+        "Sweetbay": "月桂",
+        "Marblewood": "编条相思木",
+        "Tamo Ash": "水曲柳",
+        "White Meranti": "白娑罗双",
+        "Compressed": "压缩木",
+        "Dead Wood": "枯木",
+        "Bleached Wood": "星光木",
+        "Frozen Wood": "冻木",
+        "Mossy Wood": "苔痕木",
+        "Rotten Wood": "腐木",
+        "Scorched Wood": "焦皮枯木",
+        "Tainted Wood": "腐化木",
+        "Varnished Wood": "漆包木",
+        "Wyvernwood": "飞龙木",
+        "Walnutwood": "核桃木",
+        "Warped Wood": "诡异木",
+        "Autumn Wood": "秋树木",
+        "Ashwood": "梣树木",
+        "Applewood": "苹果树木",
+        "Boxwood": "黄杨木",
+        "Butternutwood": "灰核桃树木",
+        "Cherrywood": "樱桃树木",
+        "Chestnutwood": "栗树木",
+        "Citruswood": "柑橘树木",
+        "Cocobolowood": "黄檀树木",
+        "Coconut": "椰子树木",
+        "Crimsonwood": "绯红木",
+        "Elderwood": "接骨木",
+        "Etherealwood": "天域树木",
+        "Figwood": "无花果树木",
+        "Foxfire": "狐火木",
+        "Giganteumwood": "巨杉树木",
+        "Goldwood": "金木",
+        "Junglewood": "丛林木",
+        "Limewood": "酸橙树木",
+        "Magicwood": "魔法树木",
+        "Ogrewood": "食人魔树木",
+        "Olivewood": "橄榄树木",
+        "Papayawood": "木瓜树木",
+        "Pearwood": "梨树木",
+        "Plumwood": "李子树木",
+        "Paduak": "紫檀木",
+        "Pine": "松树木",
+        "Weedwood": "杂草木",
+        "Dreamwood": "梦之木",
+        "Livingwood": "活木",
+        "Acacia": "金合欢木",
+        "Almond": "杏仁",
+        "Autumn": "秋树",
+        "Bald Cypress": "落羽松",
+        "Balsa": "巴尔杉",
+        "Baobab": "猴面包木",
+        "Birch": "白桦木",
+        "Blue Mahoe": "高红槿",
+        "Cherry": "樱木",
+        "Chestnut": "栗树木",
+        "Citrus": "柑橘树木",
+        "Cocobolo": "黄檀秋木",
+        "Compressed Wood": "压缩木",
+        "Cypress": "柏树",
+        "Dark Oak": "深色橡木",
+        "Ebony": "乌檀木",
+        "Fir": "冷杉木",
+        "Giganteum": "巨杉木",
+        "Greatwood": "宏伟之木",
+        "Greenheart": "绿樟木",
+        "Hazel": "榛树",
+        "Ipe": "重蚁木",
+        "Ironwood": "铁木",
+        "IronWood": "铁木",
+        "Japanese Maple": "日本枫木",
+        "Jungle": "丛林木",
+        "Kapok": "木棉木",
+        "Lime": "酸橙木",
+        "Mahoe": "高槿木",
+        "Mahogany": "桃心木",
+        "Maple": "枫树",
+        "Oak": "橡木",
+        "Padauk": "紫檀木",
+        "Palm": "棕榈木",
+        "Papaya": "木瓜木",
+        "Peach": "桃子",
+        "Petrified Wood": "石化木",
+        "Pistachio": "开心果",
+        "Plum": "李子木",
+        "Polished Wood": "抛光木",
+        "Poplar": "白杨木",
+        "Rainbow Eucalyptus": "彩虹桉",
+        "Rainbow Wood": "彩虹树",
+        "Rainforest Jasper": "雨林碧玉",
+        "Redwood": "红木",
+        "Rubber Wood": "橡胶木",
+        "Sakura": "樱花木",
+        "Sealed Wood": "防腐木",
+        "WoodSealed": "防腐木",
+        "Sequoia": "红杉",
+        "Silverwood": "银树",
+        "Spruce": "云杉木",
+        "Teak": "柚树",
+        "Treated": "防腐木",
+        "Treated Wood": "防腐木",
+        "Vanilla": "香草",
+        "Walnut": "胡桃木",
+        "Wenge": "崖豆木",
+        "Willow": "柳树",
+        "Wood": "木",
+        "Wooden": "木制",
+        "Zebrawood": "斑木",
+        "Larch": "落叶松",
+        "Cinnamon": "肉桂",
+        "Cinnawood": "肉桂木",
+        "Blue Spruce": "北美云杉",
+        "Marshmallow": "棉花糖",
+        "Rainbowood": "彩虹树",
+        "Plastic": "塑料",
+        "Rubber": "橡胶",
+        "Rubberwood": "橡胶树",
+        "Empty Crate": "空板条箱",
+        "Dead": "枯死的木",
+        "Rotten": "腐败的木",
+        "Mossy": "苔痕木",
+        "Frozen": "结冰的木",
+        "Ogre": "奥格",
+        "Wyvern": "双足飞龙",
+        "Liveroot": "活根",
+        "Steeleaf": "钢叶",
+        "Crate": "板条箱"
+      }
+    },
+    {
+      "group": "materialPowder",
+      "dict": {
+        "Netherite Scrap": "远古残骸废料",
+        "Blaze": "烈焰棒",
+        "Cheese": "奶酪",
+        "Chocolate": "巧克力",
+        "Chili": "辣椒",
+        "Cocoa": "可可",
+        "Coffee": "咖啡",
+        "C-Foam": "建筑泡沫",
+        "Curry": "咖喱",
+        "Indigo": "靛蓝",
+        "Infused Air Crystal": "风之碎片",
+        "Balance infused": "平衡碎片",
+        "Dull Crystal": "枯竭碎片",
+        "Infused Earth Crystal": "地之碎片",
+        "Infused Entropy Crystal": "混沌碎片",
+        "Infused Fire Crystal": "火之碎片",
+        "Infused Order Crystal": "秩序碎片",
+        "Magic infused": "魔力碎片",
+        "Infused Water Crystal": "水之碎片",
+        "Milk": "牛奶",
+        "Mint": "薄荷",
+        "Snow": "雪",
+        "Tea": "茶",
+        "Basalz": "岩石",
+        "Bentonite Clay": "膨润土粘土",
+        "Blitz": "狂风",
+        "Blizz": "暴雪",
+        "Dry Clay": "干粘土",
+        "Clay": "粘土",
+        "Brown Clay": "褐色粘土",
+        "Red Clay": "红色粘土",
+        "Kaolinite Clay": "高岭石粘土",
+        "Porcelain Clay": "瓷土"
+      }
+    },
+    {
+      "group": "stoneSlab",
+      "namespace": "S:gt.stone.",
+      "rules": [
+        {
+          "s": "{0} Slab",
+          "t": "{0}半砖",
+          "subs": [
+            "stoneGt"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stoneGt",
+      "namespace": "S:gt.stone.",
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "stoneType"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "stoneBrick"
+          ]
+        },
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "stoneBrickComplex"
+          ]
+        },
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "stoneType",
+            "stoneShapeType"
+          ]
+        },
+        {
+          "s": "Small {0} Tiles",
+          "t": "小型{0}方块",
+          "subs": [
+            "stoneType"
+          ]
+        },
+        {
+          "s": "Mossy {0} Cobblestone",
+          "t": "苔藓{0}圆石",
+          "subs": [
+            "stoneType"
+          ]
+        },
+        {
+          "s": "Chiseled {0}",
+          "t": "錾制{0}",
+          "subs": [
+            "stoneType"
+          ]
+        },
+        {
+          "s": "Smooth {0}",
+          "t": "平滑{0}",
+          "subs": [
+            "stoneType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stoneBrickComplex",
+      "namespace": "S:gt.stone.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "stoneBrickType",
+            "stoneBrick"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stoneBrick",
+      "namespace": "S:gt.stone.",
+      "rules": [
+        {
+          "s": "{0} Bricks",
+          "t": "{0}砖块",
+          "subs": [
+            "stoneType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "stoneBrickType",
+      "namespace": "S:gt.stone.",
+      "complete": false,
+      "dict": {
+        "Small": "小型",
+        "Cracked": "裂纹",
+        "Mossy": "苔藓",
+        "Reinforced": "钢筋",
+        "Redstoned": "红石化"
+      }
+    },
+    {
+      "group": "stoneShapeType",
+      "namespace": "S:gt.stone.",
+      "complete": false,
+      "dict": {
+        "Cobblestone": "圆石",
+        "Tiles": "方块",
+        "Windmill Tiles A": "风车纹砖块A",
+        "Windmill Tiles B": "风车纹砖块B",
+        "Square Bricks": "方砖"
+      }
+    },
+    {
+      "group": "stoneType",
+      "namespace": "S:",
+      "complete": false,
+      "dict": {
+        "Andesite": "安山岩",
+        "Basalt": "玄武岩",
+        "Blue Schist": "蓝片岩",
+        "Diorite": "闪长岩",
+        "Granite": "花岗岩",
+        "Black Granite": "黑色花岗岩",
+        "Red Granite": "红色花岗岩",
+        "Green Schist": "绿片岩",
+        "Kimberlite": "金伯利岩",
+        "Komatiite": "科马提岩",
+        "Limestone": "石灰岩",
+        "Marble": "大理石",
+        "Dark Prismarine": "深色海晶石",
+        "Light Prismarine": "亮色海晶石",
+        "Quartzite": "石英岩",
+        "Shale": "页岩",
+        "Slate": "板岩"
+      }
+    },
+    {
+      "group": "colorBlockSlab",
+      "namespace": "S:gt.block.",
+      "rules": [
+        {
+          "s": "{0} Slab",
+          "t": "{0}半砖",
+          "subs": [
+            "colorBlock"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "colorBlock",
+      "namespace": "S:gt.block.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "color",
+            "colorBlockType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "colorBlockType",
+      "namespace": "S:gt.block.",
+      "completed": false,
+      "dict": {
+        "Asphalt": "沥青",
+        "C-Foam": "泡沫",
+        "Fresh C-Foam": "湿泡沫",
+        "Concrete": "混凝土",
+        "Reinforced Concrete": "强化混凝土",
+        "Glass": "玻璃",
+        "Glow Glass": "荧光玻璃",
+        "Glowtus": "荧光睡莲"
+      }
+    },
+    {
+      "group": "randomtools",
+      "namespace": "S:gt.multiitem.randomtools.",
+      "rules": [
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "randomtoolsTypeA",
+            "color"
+          ]
+        },
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "color",
+            "randomtoolsTypeB"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "randomtoolsTypeA",
+      "namespace": "S:gt.multiitem.randomtools.",
+      "completed": false,
+      "dict": {
+        "Spray Paint": "颜料喷漆",
+        "C-Foam Spray": "建筑泡沫喷罐",
+        "Advanced C-Foam Spray": "加强建筑泡沫喷罐"
+      }
+    },
+    {
+      "group": "randomtoolsTypeB",
+      "namespace": "S:gt.multiitem.randomtools.",
+      "completed": false,
+      "dict": {
+        "Canvas": "帆布"
+      }
+    },
+    {
+      "group": "fluidColored",
+      "namespace": "S:fluid",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "color",
+            "fluidColoredType"
+          ]
+        },
+        {
+          "s": "Advanced {0} C-Foam",
+          "t": "高级{0}建筑泡沫",
+          "subs": [
+            "color"
+          ]
+        },
+        {
+          "s": "Chemical {0} Dye",
+          "t": "{0}化学染料",
+          "subs": [
+            "color"
+          ]
+        },
+        {
+          "s": "Water Mixed {0} Dye",
+          "t": "{0}水性染料",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fluidColoredType",
+      "namespace": "S:fluid",
+      "completed": false,
+      "dict": {
+        "C-Foam": "建筑泡沫",
+        "Flower Dye": "植物染料"
+      }
+    },
+    {
+      "group": "gtBehaviour",
+      "namespace": "S:gt.behaviour.",
+      "rules": [
+        {
+          "s": "Can place {0} C-Foam",
+          "t": "可以喷射{0}泡沫",
+          "subs": [
+            "color"
+          ]
+        },
+        {
+          "s": "Can Color things in {0}",
+          "t": "可以把东西染成{0}",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bottle",
+      "namespace": "S:gt.multiitem.bottles.",
+      "rules": [
+        {
+          "s": "Color: {0}",
+          "t": "颜色: {0}",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "string",
+      "namespace": "S:oredict.plantGtFiber",
+      "rules": [
+        {
+          "s": "{0} String",
+          "t": "{0}纤维",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "clay",
+      "namespace": "S:gt.block.diggable",
+      "rules": [
+        {
+          "s": "{0} Clay",
+          "t": "{0}粘土",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "colorGtMaterial",
+      "namespace": "S:gt.material",
+      "rules": [
+        {
+          "s": "{0}",
+          "t": "{0}",
+          "subs": [
+            "color"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "color",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "Black": "黑色",
+        "Blue": "蓝色",
+        "Brown": "褐色",
+        "Cyan": "青色",
+        "Gray": "灰色",
+        "Green": "绿色",
+        "Light Blue": "淡蓝色",
+        "Light Gray": "淡灰色",
+        "Lime": "黄绿色",
+        "Magenta": "品红",
+        "Orange": "橙色",
+        "Pink": "粉色",
+        "Purple": "紫色",
+        "Red": "红色",
+        "White": "白色",
+        "Yellow": "黄色"
+      }
+    },
+    {
+      "group": "can",
+      "namespace": "S:gt.multiitem.cans.",
+      "rules": [
+        {
+          "s": "{0} Food Can ({1})",
+          "t": "{0}食物罐头 ({1})",
+          "subs": [
+            "canSize",
+            "canType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "canSize",
+      "namespace": "S:gt.multiitem.cans.",
+      "completed": false,
+      "dict": {
+        "Tiny": "迷你",
+        "Small": "小",
+        "Tall": "高",
+        "Wide": "宽",
+        "Large": "大",
+        "Huge": "超大"
+      }
+    },
+    {
+      "group": "canType",
+      "namespace": "S:gt.multiitem.cans.",
+      "completed": false,
+      "dict": {
+        "Unknown": "未知",
+        "Rotten": "腐肉",
+        "Vegetables": "蔬菜",
+        "Fruits": "水果",
+        "Bread": "面包",
+        "Meat": "肉",
+        "Fish": "鱼",
+        "Chum": "基友肉",
+        "Cookies": "饼干"
+      }
+    },
+    {
+      "group": "woodenBlockFireProof",
+      "namespace": "S:gt.block.",
+      "rules": [
+        {
+          "s": "{0} (Fireproof)",
+          "t": "{0} (防火)",
+          "subs": [
+            "woodenBlock"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "woodenBlock",
+      "namespace": "S:gt.block.",
+      "dict": {
+        "Beam": "木梁",
+        "Leaves": "树叶",
+        "Log": "原木",
+        " Log": "原木",
+        "Planks": "木板",
+        "Slab": "木半砖",
+        "Unknown Sapling (coming soon)": "未知树苗",
+        "Empty Crate": "空板条箱",
+        "Crate": "板条箱木板"
+      },
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "wood",
+            "woodenBlockType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "woodenBlockType",
+      "namespace": "S:gt.block.",
+      "completed": false,
+      "dict": {
+        "Beam": "梁",
+        "Leaves": "叶",
+        "Log": "原木",
+        "Planks": "木板",
+        "Slab": "半砖",
+        "Sapling": "树苗"
+      }
+    },
+    {
+      "group": "bumblebeeWithStatus",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "rules": [
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "bumblebeeSpecies",
+            "bumblebeeStatusA"
+          ]
+        },
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "bumblebee",
+            "bumblebeeStatusB"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bumblebeeStatusA",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "completed": false,
+      "dict": {
+        "Dead": "死亡",
+        "Dead & Scanned": "死亡且已扫描"
+      }
+    },
+    {
+      "group": "bumblebeeStatusB",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "completed": false,
+      "dict": {
+        "Scanned": "已扫描"
+      }
+    },
+    {
+      "group": "bumblebee",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "rules": [
+        {
+          "s": "{0} Drone",
+          "t": "雄性{0}",
+          "subs": [
+            "bumblebeeSpecies"
+          ]
+        },
+        {
+          "s": "{0} Princess",
+          "t": "雌性{0}",
+          "subs": [
+            "bumblebeeSpecies"
+          ]
+        },
+        {
+          "s": "{0} Queen",
+          "t": "{0}蜂后",
+          "subs": [
+            "bumblebeeSpecies"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bumblebeeSpecies",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "dict": {
+        "Illuminumblebee": "光明大黄蜂",
+        "Bumbelvis": "基岩大黄蜂",
+        "Bumbleknight": "骑士大黄蜂",
+        "Bumblemonarch": "黑脉金斑大黄蜂",
+        "Bumbleshroom": "蘑菇大黄蜂",
+        "Dumblebee": "知识大黄蜂",
+        "Bumbleheimers": "痴呆大黄蜂",
+        "Bumble in Black": "黑色大黄蜂",
+        "Lt. Bumbleson": "中尉大黄蜂",
+        "Colonel Bumble O'Beeill": "上校大黄蜂",
+        "General Bumblemond": "将军大黄蜂",
+        "Bumbletrantor": "川陀大黄蜂",
+        "Mr. Bumblefreeze": "冷冻人大黄蜂",
+        "Bumbleaang": "安昂大黄蜂",
+        "Bumblegoth": "哥特大黄蜂",
+        "Antichristumblebee": "叛教大黄蜂",
+        "Jungle Bumblebee (T2)": "丛林大黄蜂(T2)",
+        "Jungle Bumblebee (T3)": "丛林大黄蜂(T3)",
+        "Jungle Bumblebee (T4)": "丛林大黄蜂(T4)",
+        "Sandy Bumblebee (T2)": "沙漠大黄蜂(T2)",
+        "Sandy Bumblebee (T3)": "沙漠大黄蜂(T3)",
+        "Sandy Bumblebee (T4)": "沙漠大黄蜂(T4)",
+        "Bumblezan": "泰山大黄蜂",
+        "Bumbobee": "巨鲲大黄蜂"
+      },
+      "rules": [
+        {
+          "s": "Bumble {0}",
+          "t": "{0}大黄蜂",
+          "subs": [
+            "bumblebeeSpeciesType"
+          ]
+        },
+        {
+          "s": "{0} Bumble",
+          "t": "{0}大黄蜂",
+          "subs": [
+            "bumblebeeSpeciesType"
+          ]
+        },
+        {
+          "s": "{0} Bumblebee",
+          "t": "{0}大黄蜂",
+          "subs": [
+            "bumblebeeSpeciesType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bumblebeeSpeciesType",
+      "namespace": "S:gt.multiitem.bumblebee",
+      "dict": {
+        "Wild": "野生",
+        "Captive": "魅惑",
+        "Surfing": "冲浪",
+        "Creative": "创造",
+        "Builder": "建筑",
+        "Masonic": "粘土",
+        "Industrial": "工业",
+        "Overseer": "监工",
+        "Tycoon": "大亨",
+        "Monopolistic": "垄断",
+        "Colonial": "殖民",
+        "Royal": "皇室",
+        "Private": "列兵",
+        "Pyro": "纵火",
+        "Cryo": "低温",
+        "Aero": "大气",
+        "Tera": "大地",
+        "Occult": "神秘",
+        "Satanic": "撒旦",
+        "Forgetful": "健忘",
+        "Amnesic": "失忆",
+        "Diving": "潜水",
+        "Subnautic": "深海",
+        "Common": "寻常",
+        "Apprentice": "学徒",
+        "Blazing": "烈焰",
+        "Flaming": "火焰",
+        "Blizzful": "暴雪",
+        "Freezing": "冷冻",
+        "Blitzing": "闪击",
+        "Storming": "暴雨",
+        "Basalzed": "玄武岩",
+        "Quakeing": "震动",
+        "Earth Bound": "地球冒险",
+        "Magician": "魔法",
+        "Wizard": "巫术",
+        "Cultivated": "田野",
+        "Nether": "下界",
+        "Hellish": "地狱",
+        "Impish": "小鬼",
+        "Demonic": "恶魔",
+        "End": "末地",
+        "Void": "虚空",
+        "Alienated": "厌世",
+        "Nihilistic": "虚无",
+        "Stoned": "石化",
+        "Rocking": "岩化",
+        "Hard Rock": "硬岩",
+        "Bedrockium": "基岩",
+        "Jungle": "丛林",
+        "Frosty": "冰霜",
+        "North Pole": "北极",
+        "Elf": "精灵",
+        "Claus": "圣诞",
+        "Toad": "蟾蜍",
+        "Bro": "兄弟",
+        "Peach": "桃子",
+        "Sandy": "沙漠",
+        "Swimming": "游泳"
+      }
+    },
+    {
+      "group": "entityMaterial",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "Tin": "锡",
+        "Lead": "铅",
+        "HSLA-Steel": "HSLA钢",
+        "Constantan": "康铜",
+        "Copper": "铜",
+        "Annealed Copper": "退火铜",
+        "Efrine": "绿晶",
+        "Kanthal": "铁铬铝合金",
+        "Silver": "银",
+        "Gold": "金",
+        "Electrum": "琥珀金",
+        "Blue Alloy": "蓝石合金",
+        "Electrotine Alloy": "蓝石合金",
+        "Nichrome": "镍铬合金",
+        "Steel": "钢",
+        "Aluminium": "铝",
+        "Tungstensteel": "钨钢",
+        "Tungsten": "钨",
+        "Netherite": "下界合金",
+        "Osmium": "锇",
+        "Platinum": "铂",
+        "Osmiridium": "铱锇合金",
+        "Carborundum": "碳化硅",
+        "Iridium": "铱",
+        "Naquadah": "硅岩金属",
+        "Vanadium-Gallium": "钒镓合金",
+        "Yttrium-Barium-Cuprate": "钇钡铜氧合金",
+        "Graphene": "石墨烯",
+        "Superconductor": "超导体",
+        "Void Metal": "虚空金属",
+        "Desh": "戴斯",
+        "Refined Desh": "精制戴斯",
+        "Thaumium": "神秘锭",
+        "Stainless Steel": "不锈钢",
+        "Titanium": "钛",
+        "Chromium": "铬",
+        "Bismuth": "铋",
+        "Tungstencarbide": "碳化钨",
+        "Tungsten Carbide": "碳化钨",
+        "Galvanized Steel": "镀锌钢",
+        "Gilded Iron": "镀金铁",
+        "Cobalt": "钴",
+        "Nickel": "镍",
+        "Germanium": "锗",
+        "Meteoric Steel": "陨钢",
+        "Knightmetal": "骑士金属",
+        "Duranium Alloy": "钍瑞铌合金",
+        "Tritanium Alloy": "钛金",
+        "Adamantium": "艾德曼合金",
+        "Bedrock-HSLA-Alloy": "基岩合金",
+        "Draconium": "龙",
+        "Awakened Draconium": "觉醒龙",
+        "'Osmium'": "锇",
+        "Ardite": "阿迪特",
+        "Manyullyn": "玛玉灵",
+        "Lumium": "流明",
+        "Manasteel": "魔力钢",
+        "Elven Elementium": "源质钢",
+        "Terrasteel": "泰拉钢",
+        "Meteorite": "陨石",
+        "Syrmorite": "赛摩铜",
+        "Octine": "炽炎铁",
+        "Ultimet": "哈氏合金",
+        "Tin Alloy": "锡合金",
+        "Infinity": "无尽",
+        "Invar": "殷钢",
+        "Brass": "黄铜",
+        "Bronze": "青铜",
+        "Manganese": "锰",
+        "Antimony": "锑",
+        "Molybdenum": "钼",
+        "Tungsten Alloy": "钨合金",
+        "Cobalt Brass": "钴黄铜",
+        "Black Bronze": "黑青铜",
+        "Aluminium Brass": "铝黄铜",
+        "Sterling Silver": "纯银",
+        "Rose Gold": "玫瑰金",
+        "Angmallen": "神圣之金",
+        "Magnalium": "镁铝合金",
+        "Enderium": "末影",
+        "Vibranium Silver": "银振金合金",
+        "Wood": "木",
+        "Treated Wood": "防腐木",
+        "Plastic": "塑料",
+        "Ironwood": "铁木",
+        "Carbon": "碳",
+        "Rubber": "橡胶",
+        "Gaia": "盖亚",
+        "Gaia Spirit": "盖亚之魂",
+        "Tantalum Hafnium Carbide": "碳化钽铪",
+        "Vanadiumsteel": "钒钢",
+        "Titanium-Gold": "钛金",
+        "Fiery Steel": "炙热钢",
+        "Black Steel": "黑钢",
+        "Blue Steel": "蓝钢",
+        "Red Steel": "红钢",
+        "Stone": "石头",
+        "Blackstone": "黑石",
+        "Black Granite": "黑色花岗岩",
+        "Red Granite": "红色花岗岩",
+        "Basalt": "玄武岩",
+        "Nether Brick": "地狱砖",
+        "Ceramic": "陶瓷",
+        "Umberstone": "棕石",
+        "Livingrock": "活石",
+        "Holystone": "圣石",
+        "Betweenstone": "交错石",
+        "Quartz": "石英",
+        "Dark Iron": "玄铁",
+        "Meteoric Iron": "陨铁",
+        "Niobium": "铌",
+        "Tantalum": "钽",
+        "Vanadium": "钒",
+        "Steeleaf": "钢叶",
+        "Elemental Tritanium": "三钛",
+        "Trinitanium": "特林钛合金",
+        "Trinium": "特林金属",
+        "Wax": "蜡",
+        "Bees Wax": "蜂蜡",
+        "Magic Wax": "魔力蜂蜡",
+        "Paraffin Wax": "石蜡",
+        "Plant Wax": "植物蜡",
+        "Refractory Wax": "耐高温蜡",
+        "Soulful Wax": "灵魂蜜蜡",
+        "Amnesic Wax": "遗忘蜜蜡",
+        "Stainless": "不锈钢",
+        "Trinaquadalloy": "碳化特林-钍瑞铌合金",
+        "Iritanium": "钛铱合金",
+        "Wooden": "木制",
+        "Niobium Titanium": "铌钛合金",
+        "Niobium-Titanium": "铌钛合金",
+        "Enderium Base": "末影粗胚",
+        "Vibranium": "振金",
+        "Vibramantium": "艾德曼振金",
+        "Workers Alloy": "工人合金",
+        "Elementium": "源质钢",
+        "Hydrogen": "氢气",
+        "Helium-3": "氦-3",
+        "Bismuth Bronze": "铋青铜",
+        "Arsenic Bronze": "砷青铜",
+        "Arsenic Copper": "砷铜",
+        "Palladium": "钯",
+        "Empty": "空"
+      }
+    },
+    {
+      "group": "wire",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1} {2}",
+          "t": "{0} {2}{1}线缆",
+          "subs": [
+            "wireSize",
+            "entityMaterial",
+            "wireType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "wireType",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Wire": "未绝缘",
+        "Cable": "已绝缘"
+      }
+    },
+    {
+      "group": "wireSize",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "1x": "1x",
+        "2x": "2x",
+        "3x": "3x",
+        "4x": "4x",
+        "5x": "5x",
+        "6x": "6x",
+        "7x": "7x",
+        "8x": "8x",
+        "9x": "9x",
+        "10x": "10x",
+        "11x": "11x",
+        "12x": "12x",
+        "13x": "13x",
+        "14x": "14x",
+        "15x": "15x",
+        "16x": "16x"
+      }
+    },
+    {
+      "group": "entityProduct",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "entityMaterial",
+            "entityProductTypeA"
+          ]
+        },
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "entityProductTypeB",
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "{0} {1}",
+          "t": "{1} ({0})",
+          "subs": [
+            "entityMaterial",
+            "entityProductTypeC"
+          ]
+        },
+        {
+          "s": "{0} ({1}, {2})",
+          "t": "{0} ({1}, {2})",
+          "subs": [
+            "entityProductTypeD",
+            "physicalState",
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "entityProductTypeE",
+            "energyTier"
+          ]
+        },
+        {
+          "s": "Scanner (Visuals, {0})",
+          "t": "扫描仪 ({0})",
+          "subs": [
+            "energyTier"
+          ]
+        },
+        {
+          "s": "Custom {0} Gearbox",
+          "t": "{0}可调变速箱",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "Key Locked {0} Safe",
+          "t": "带锁的{0}保险箱",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "Mechanical {0} Safe",
+          "t": "{0}个人机械保险箱",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "Large {0} Coil",
+          "t": "大型{0}线圈",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "Large {0} Crucible",
+          "t": "大型{0}坩埚",
+          "subs": [
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "entityProductTypeA",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Chest": "箱子",
+        "reinforced wooden Chest": "强化木箱",
+        "Scaffold": "脚手架",
+        "Hopper": "料斗",
+        "Queue Hopper": "队列料斗",
+        "Anvil": "砧",
+        "Drum": "储罐",
+        "Measuring Pot": "量杯",
+        "Barometer Gas Cylinder": "制计压瓶",
+        "Nozzle": "喷嘴",
+        "Tap": "龙头",
+        "Funnel": "漏斗",
+        "Cap Nozzle": "有盖喷嘴",
+        "Transformer Gearbox": "变速箱",
+        "Boiler Main Barometer": "锅炉气压计核心",
+        "Steam Turbine Main Housing": "蒸汽涡轮机核心",
+        "Dynamo Main Housing": "发电机核心",
+        "Gas Turbine Main Housing": "燃气涡轮机核心"
+      }
+    },
+    {
+      "group": "entityProductTypeB",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Smelting Crucible": "熔炼坩埚",
+        "Mold": "模具",
+        "Steam Boiler Tank": "蒸汽锅炉",
+        "Strong Steam Boiler Tank": "强化蒸汽锅炉",
+        "Steam Engine": "蒸汽引擎",
+        "Strong Steam Engine": "强化蒸汽引擎",
+        "Automatic Hammer": "自动锻造锤",
+        "Steam Turbine": "蒸汽涡轮机",
+        "Rotational Pump": "旋转泵",
+        "Crucible Faucet": "坩埚浇铸口",
+        "Basin": "浇铸盆",
+        "Crucible Crossing": "坩埚浇铸道",
+        "Oven": "熔炉",
+        "Shredder": "研磨机",
+        "Crusher": "破碎机",
+        "Lathe": "车床",
+        "Sifter": "筛选机",
+        "Buzzsaw": "圆锯",
+        "Squeezer": "榨汁机",
+        "Centrifuge": "离心机",
+        "Compressor": "压缩机",
+        "Rolling Mill": "辊压机",
+        "Roll Bender": "辊弯机",
+        "Roll Former": "辊压成型机",
+        "Cluster Mill": "多辊式轧机",
+        "Wiremill": "线缆轧制机",
+        "Roasting Oven": "焙烧炉",
+        "Mixer": "搅拌机",
+        "Distillery": "蒸馏室",
+        "Low Heat Extruder": "压模器",
+        "Extruder": "压模器",
+        "Loom": "织布机",
+        "Polarizer": "电磁偏振器",
+        "Press": "压力成型机",
+        "Smelter": "液化炉",
+        "Crystallisation Crucible": "结晶器",
+        "Sluice": "洗矿厂",
+        "Magnetic Separator": "磁选机",
+        "Dryer": "干燥器",
+        "Laminator": "过胶机",
+        "Catalytic Cracker": "催化裂解器",
+        "Steam Cracker": "蒸汽裂解器",
+        "Sanding Machine": "砂轮",
+        "Burner Mixer": "燃烧反应室",
+        "Debarker": "剥皮器",
+        "Compartment Drawer": "四联抽屉",
+        "Advanced Crafting Table": "高级工作台",
+        "Charging Crafting Table": "充能工作台",
+        "Mass Storage": "量子存储器",
+        "Logistics Mass Storage": "物流量子存储器",
+        "Bookshelf": "书架",
+        "Locker": "衣橱",
+        "Charging Locker": "充能衣橱",
+        "Fluidized Bed Burning Box": "流化床燃烧室",
+        "Dense Fluidized Bed Burning Box": "致密流化床燃烧室",
+        "Heat Exchanger": "热交换器",
+        "Diesel Engine": "燃油引擎",
+        "Dense Heat Exchanger": "致密热交换器",
+        "Capsule-Cell-Container": "单元式流体容器",
+        "Flux Heater": "红石通量加热器",
+        "Flux Engine": "红石通量引擎",
+        "Flux Motor": "红石通量旋转动能引擎",
+        "Flux Magnet": "红石通量磁场产生器",
+        "Flux Laser": "红石通量镭射器",
+        "Flux Dynamo": "红石通量发电机",
+        "Thermofluxic Cooler": "红石通量半导体制冷器",
+        "Aneutronic Fusion Power Cell": "无中子聚变电池",
+        "Power Cell": "燃料电池",
+        "Bottlecrate": "瓶筐",
+        "Pressure Washer": "水压清洗机"
+      }
+    },
+    {
+      "group": "entityProductTypeC",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Rotation Engine": "旋转动能引擎"
+      }
+    },
+    {
+      "group": "entityProductTypeD",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Burning Box": "燃烧室",
+        "Dense Burning Box": "致密燃烧室"
+      }
+    },
+    {
+      "group": "entityProductTypeE",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Electric Heater": "电力加热器",
+        "Electric Engine": "电动引擎",
+        "Electric Motor": "电动机",
+        "Electromagnet": "电磁铁",
+        "Transformer": "变压器",
+        "Long Distance Transformer": "远距传输用高压变压器",
+        "Buildcraft Assembly Laser": "BC镭射器",
+        "Battery Box": "电池盒",
+        "Large Battery Box": "大型电池盒",
+        "Electric CO2 Laser": "CO2激光器",
+        "Electric Dynamo": "发电机",
+        "Quantum Energizer": "量子充能器",
+        "Crystal Charger": "晶体充能器",
+        "Large Crystal Charger": "大型晶体充能器",
+        "Laser Absorber": "激光接收器",
+        "Thermoelectric Cooler": "半导体制冷器",
+        "Red Energium": "能量水晶",
+        "Cyan Energium": "青能水晶",
+        "Lead-Acid Battery": "铅酸电池",
+        "Nickel-Cadmium Battery": "镍镉电池",
+        "Lithium-Cobalt Battery": "钴酸锂电池",
+        "Lithium-Manganese Battery": "锂锰电池",
+        "Alkaline Battery": "碱性电池",
+        "Red Energium Crystal": "能量水晶",
+        "Cyan Energium Crystal": "青能水晶",
+        "Automatic Igniter": "自动点火器",
+        "Zero-Point-Module": "零点模块",
+        "Electrolyzer": "电解器",
+        "Canning Machine": "灌装机",
+        "Injector": "流体灌装机",
+        "Printer": "打印机",
+        "Laser Engraver": "激光刻蚀机",
+        "Laser Welder": "激光焊接器",
+        "Autocrafter": "自动工作台",
+        "Electric Mixer": "电动搅拌机",
+        "Electric Loom": "电力织布机",
+        "Electric Sifter": "电动筛矿机",
+        "Slicer": "切片器",
+        "Matter Fabricator": "物质制造器",
+        "Matter Replicator": "物质复制器",
+        "Nanoscale Fabricator": "纳米制造机",
+        "Lightning Processor": "闪电处理器",
+        "Plantalyzer": "植物分析仪",
+        "Bumblelyzer": "膜翅目昆虫分析仪",
+        "Freezer": "冷冻机",
+        "Cryo Mixer": "低温搅拌机",
+        "Boxinator": "装箱机",
+        "Unboxinator": "拆箱机",
+        "Molecular Scanner": "分子扫描仪",
+        "Long Distance Transformer Endpoint": "远距离变压器终端"
+      }
+    },
+    {
+      "group": "physicalState",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "Solid": "固体",
+        "Liquid": "液体",
+        "Gas": "气体"
+      }
+    },
+    {
+      "group": "itemEnergized",
+      "namespace": "S:gt.multiitem.",
+      "rules": [
+        {
+          "s": "{0} ({1})",
+          "t": "{0} ({1})",
+          "subs": [
+            "itemEnergizedType",
+            "energyTier"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "itemEnergizedType",
+      "namespace": "S:gt.multiitem.",
+      "completed": false,
+      "dict": {
+        "Compact Electric Motor": "微型电机",
+        "Compact Electric Pump": "电动泵",
+        "Compact Electric Conveyor": "输送机模块",
+        "Compact Electric Piston": "电动活塞",
+        "Compact Robot Arm": "机械臂",
+        "Compact Force Field Emitter": "力场发生器",
+        "Compact Signal Emitter": "信号发射器",
+        "Compact Sensor": "传感器"
+      }
+    },
+    {
+      "group": "blockEnergized",
+      "namespace": "S:gt.block.longdistwire",
+      "rules": [
+        {
+          "s": "Long Distance Electric Wire ({0})",
+          "t": "远距输电用高压电缆 ({0})",
+          "subs": [
+            "energyTier"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "energyTier",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "ULV": "ULV",
+        "LV": "LV",
+        "MV": "MV",
+        "HV": "HV",
+        "EV": "EV",
+        "IV": "IV",
+        "LuV": "LuV",
+        "ZPM": "ZPM",
+        "UV": "UV",
+        "PUV1": "PUV1",
+        "ULV-LV": "ULV-LV",
+        "LV-MV": "LV-MV",
+        "MV-HV": "MV-HV",
+        "HV-EV": "HV-EV",
+        "EV-IV": "EV-IV",
+        "IV-LuV": "IV-LuV",
+        "LuV-ZPM": "LuV-ZPM",
+        "ZPM-UV": "ZPM-UV",
+        "UV-PUV1": "UV-PUV1",
+        "T0": "T0",
+        "T1": "T1",
+        "T2": "T2",
+        "T3": "T3",
+        "T4": "T4",
+        "T5": "T5",
+        "T6": "T6",
+        "T7": "T7",
+        "T8": "T8",
+        "T9": "T9"
+      }
+    },
+    {
+      "group": "fuelRodDepleted",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "Depleted {0}",
+          "t": "枯竭{0}",
+          "subs": [
+            "fuelRod"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fuelRod",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} Fuel Rod",
+          "t": "{0}燃料棒",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fuelRodBreeder",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} Breeder Rod",
+          "t": "{0}增殖棒",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "fuelRodEnriched",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} Enriched Rod",
+          "t": "{0}浓缩燃料棒",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "rail",
+      "namespace": "S:gt.block.rail.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "entityMaterial",
+            "railType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "railType",
+      "namespace": "S:gt.block.rail.",
+      "completed": false,
+      "dict": {
+        "Track": "轨道",
+        "Booster Track": "加速轨道",
+        "Detector Track": "探测轨道"
+      }
+    },
+    {
+      "group": "valve",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1} Tank Main Valve",
+          "t": "{0}{1}储罐主阀门",
+          "subs": [
+            "valveType",
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "valveType",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Small": "小型",
+        "Small Dense": "小型致密",
+        "Large": "大型",
+        "Large Dense": "大型致密"
+      }
+    },
+    {
+      "group": "axle",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1} Axle",
+          "t": "{0}{1}轴",
+          "subs": [
+            "axleType",
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "axleType",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Small": "小型",
+        "Medium": "中型",
+        "Large": "大型",
+        "Huge": "巨型"
+      }
+    },
+    {
+      "group": "wallDense",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "Dense {0}",
+          "t": "致密{0}",
+          "subs": [
+            "wall"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "wall",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} Wall",
+          "t": "{0}壁板",
+          "subs": [
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "bars",
+      "namespace": "S:gt.block.bars.",
+      "rules": [
+        {
+          "s": "{0} Bars",
+          "t": "{0}栏杆",
+          "subs": [
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "spike",
+      "namespace": "S:gt.block.spikes.",
+      "rules": [
+        {
+          "s": "{0} Wall Spike",
+          "t": "{0}制壁刺",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "{0} Block Spike",
+          "t": "{0}制尖刺方块",
+          "subs": [
+            "entityMaterial"
+          ]
+        },
+        {
+          "s": "Falling {0} Spike Block",
+          "t": "坠落的{0}制尖刺方块",
+          "subs": [
+            "entityMaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "pipeRestrictive",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "Restrictive {0}",
+          "t": "限制{0}",
+          "subs": [
+            "pipeComplex"
+          ]
+        },
+        {
+          "s": "Restrictive {0}",
+          "t": "限制{0}",
+          "subs": [
+            "pipe"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "pipeComplex",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "pipeTypePrefix",
+            "pipe"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "pipe",
+      "namespace": "S:gt.multitileentity.",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "entityMaterial",
+            "pipeTypeSuffix"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "pipeTypePrefix",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Tiny": "微型",
+        "Small": "小型",
+        "Large": "大型",
+        "Huge": "巨型",
+        "Quadruple": "四合一",
+        "Nonuple": "九合一"
+      }
+    },
+    {
+      "group": "pipeTypeSuffix",
+      "namespace": "S:gt.multitileentity.",
+      "completed": false,
+      "dict": {
+        "Fluid Pipe": "流体管道",
+        "Item Pipe": "物流管道"
+      }
+    },
+    {
+      "group": "mold",
+      "namespace": "S:gt.",
+      "rules": [
+        {
+          "s": "Clay {0} Mold",
+          "t": "粘土模具 ({0})",
+          "subs": [
+            "shape"
+          ]
+        },
+        {
+          "s": "Clay {0}",
+          "t": "粘土{0}",
+          "subs": [
+            "shape"
+          ]
+        },
+        {
+          "s": "Extruder Shape ({0})",
+          "t": "模具 ({0})",
+          "subs": [
+            "shape"
+          ]
+        },
+        {
+          "s": "Low Heat Extruder Shape ({0})",
+          "t": "低热容压模模具 ({0})",
+          "subs": [
+            "shape"
+          ]
+        },
+        {
+          "s": "Extruder Shape for making {0}s",
+          "t": "用来制造{0}的压模模具",
+          "subs": [
+            "shape"
+          ]
+        },
+        {
+          "s": "Extruder Shape for making {0}s",
+          "t": "用来制造{0}的压模模具",
+          "subs": [
+            "shapeAlias"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "shapeAlias",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "long Rod": "长杆",
+        "tiny Pipe": "微型管道",
+        "small Pipe": "小型管道",
+        "Pipe": "管道",
+        "large Pipe": "大型管道",
+        "full Block Pipe": "巨型管道",
+        "small Gear": "小型齿轮"
+      }
+    },
+    {
+      "group": "shape",
+      "namespace": "S:",
+      "completed": false,
+      "dict": {
+        "Plate": "板",
+        "Long Rod": "长杆",
+        "Bolt": "螺栓",
+        "Ring": "环",
+        "Cell": "槽",
+        "Ingot": "锭",
+        "Wire": "线缆",
+        "Casing": "外壳",
+        "Tiny Pipe": "微型管道",
+        "Small Pipe": "小型管道",
+        "Normal Pipe": "管道",
+        "Large Pipe": "大型管道",
+        "Huge Pipe": "巨型管道",
+        "Block": "方块",
+        "Sword Blade": "剑身",
+        "Pickaxe Head": "镐头",
+        "Shovel Head": "锹头",
+        "Axe Head": "斧头",
+        "Hoe Head": "锄头",
+        "Hammer Head": "锤头",
+        "File Head": "锉刀刀头",
+        "Spade": "铲",
+        "Universal Spade": "万用铲",
+        "Saw Blade": "锯刃",
+        "Sword": "剑",
+        "Pickaxe": "镐",
+        "Shovel": "锹",
+        "Axe": "斧",
+        "Double Axe": "双刃斧",
+        "Hoe": "锄",
+        "Hammer": "锤",
+        "File": "锉刀",
+        "Saw": "锯",
+        "Gear": "齿轮",
+        "Bottle": "瓶子",
+        "Curved Plate": "弯曲板",
+        "Small Gear": "小型齿轮",
+        "Rod": "杆",
+        "Capsule-Cell-Container": "单元式流体容器",
+        "Foil": "箔",
+        "Tiny Plate": "小块板",
+        "Chunk": "小块",
+        "Item Casing": "外壳",
+        "Builder's Wand": "建筑之杖",
+        "Chisel": "凿子",
+        "Arrow": "箭",
+        "Screwdriver": "螺丝刀",
+        "Tap": "龙头",
+        "Funnel": "漏斗",
+        "Crucible": "坩埚",
+        "Basin": "浇铸盆",
+        "Mold": "模具",
+        "Faucet": "浇铸口",
+        "Crossing": "浇铸道",
+        "Juicer": "榨汁机",
+        "Bowl": "碗",
+        "Plow": "犁",
+        "Sense": "镰刀",
+        "Nugget": "粒",
+        "Billet": "胚料",
+        "Fine Wire": "精细线缆"
+      }
+    },
+    {
+      "group": "gtwwBulletSG",
+      "namespace": "S:oredict.gtweaponsBulletSG",
+      "rules": [
+        {
+          "s": "{0} Blunderbuss shot",
+          "t": "{0}霰弹枪子弹",
+          "subs": [
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gtwwMagazine",
+      "namespace": "S:oredict.gtweaponsMagazine",
+      "rules": [
+        {
+          "s": "{0} {1} Bullet Magazine",
+          "t": "{0}{1}子弹弹匣",
+          "subs": [
+            "gtwwMagazineType",
+            "material"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "gtwwMagazineType",
+      "namespace": "S:oredict.gtweaponsMagazine",
+      "dict": {
+        "High Caliber": "大号",
+        "Medium Caliber": "中号",
+        "Low Caliber": "小号"
+      }
+    },
+    {
+      "group": "elementUselessAnti",
+      "namespace": "S:",
+      "rules": [
+        {
+          "s": "Anti-{0}",
+          "t": "反物质{0}",
+          "subs": [
+            "elementUseless"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "elementUseless",
+      "namespace": "S:",
+      "dict": {
+        "Palladium": "钯",
+        "Bibibium": "222号元素(Bbb)",
+        "Bibiennium": "229号元素(Bbe)",
+        "Bibihexium": "226号元素(Bbh)",
+        "Bibinilium": "220号元素(Bbn)",
+        "Bibioctium": "228号元素(Bbo)",
+        "Bibipentium": "225号元素(Bbp)",
+        "Bibiquadium": "224号元素(Bbq)",
+        "Bibiseptium": "227号元素(Bbs)",
+        "Bibitrium": "223号元素(Bbt)",
+        "Bibiunium": "221号元素(Bbu)",
+        "Biennbium": "292号元素(Beb)",
+        "Biennennium": "299号元素(Bee)",
+        "Biennhexium": "296号元素(Beh)",
+        "Biennilium": "290号元素(Ben)",
+        "Biennnilium": "290号元素(Ben)",
+        "Biennoctium": "298号元素(Beo)",
+        "Biennpentium": "295号元素(Bep)",
+        "Biennquadium": "294号元素(Beq)",
+        "Biennseptium": "297号元素(Bes)",
+        "Bienntrium": "293号元素(Bet)",
+        "Biennunium": "291号元素(Beu)",
+        "Bihexbium": "262号元素(Bhb)",
+        "Bihexennium": "269号元素(Bhe)",
+        "Bihexhexium": "266号元素(Bhh)",
+        "Bihexnilium": "260号元素(Bhn)",
+        "Bihexoctium": "268号元素(Bho)",
+        "Bihexpentium": "265号元素(Bhp)",
+        "Bihexquadium": "264号元素(Bhq)",
+        "Bihexseptium": "267号元素(Bhs)",
+        "Bihextrium": "263号元素(Bht)",
+        "Bihexunium": "261号元素(Bhu)",
+        "Binilbium": "202号元素(Bnb)",
+        "Binilennium": "209号元素(Bne)",
+        "Binilhexium": "206号元素(Bnh)",
+        "Binilnilium": "200号元素(Bnn)",
+        "Biniloctium": "208号元素(Bno)",
+        "Binilpentium": "205号元素(Bnp)",
+        "Binilquadium": "204号元素(Bnq)",
+        "Binilseptium": "207号元素(Bns)",
+        "Biniltrium": "203号元素(Bnt)",
+        "Binilunium": "201号元素(Bnu)",
+        "Bioctbium": "282号元素(Bob)",
+        "Bioctennium": "289号元素(Boe)",
+        "Biocthexium": "286号元素(Boh)",
+        "Bioctnilium": "280号元素(Bon)",
+        "Bioctoctium": "288号元素(Boo)",
+        "Bioctpentium": "285号元素(Bop)",
+        "Bioctquadium": "284号元素(Boq)",
+        "Bioctseptium": "287号元素(Bos)",
+        "Biocttrium": "283号元素(Bot)",
+        "Bioctunium": "281号元素(Bou)",
+        "Bipentbium": "252号元素(Bpb)",
+        "Bipentennium": "259号元素(Bpe)",
+        "Bipenthexium": "256号元素(Bph)",
+        "Bipentnilium": "250号元素(Bpn)",
+        "Bipentoctium": "258号元素(Bpo)",
+        "Bipentpentium": "255号元素(Bpp)",
+        "Bipentquadium": "254号元素(Bpq)",
+        "Bipentseptium": "257号元素(Bps)",
+        "Bipenttrium": "253号元素(Bpt)",
+        "Bipentunium": "251号元素(Bpu)",
+        "Biquadbium": "242号元素(Bqb)",
+        "Biquadennium": "249号元素(Bqe)",
+        "Biquadhexium": "246号元素(Bqh)",
+        "Biquadnilium": "240号元素(Bqn)",
+        "Biquadoctium": "248号元素(Bqo)",
+        "Biquadpentium": "245号元素(Bqp)",
+        "Biquadquadium": "244号元素(Bqq)",
+        "Biquadseptium": "247号元素(Bqs)",
+        "Biquadtrium": "243号元素(Bqt)",
+        "Biquadunium": "241号元素(Bqu)",
+        "Biseptbium": "272号元素(Bsb)",
+        "Biseptennium": "279号元素(Bse)",
+        "Bisepthexium": "276号元素(Bsh)",
+        "Biseptnilium": "270号元素(Bsn)",
+        "Biseptoctium": "278号元素(Bso)",
+        "Biseptpentium": "275号元素(Bsp)",
+        "Biseptquadium": "274号元素(Bsq)",
+        "Biseptseptium": "277号元素(Bss)",
+        "Bisepttrium": "273号元素(Bst)",
+        "Biseptunium": "271号元素(Bsu)",
+        "Bitribium": "232号元素(Btb)",
+        "Bitriennium": "239号元素(Bte)",
+        "Bitrihexium": "236号元素(Bth)",
+        "Bitrinilium": "230号元素(Btn)",
+        "Bitrioctium": "238号元素(Bto)",
+        "Bitripentium": "235号元素(Btp)",
+        "Bitriquadium": "234号元素(Btq)",
+        "Bitriseptium": "237号元素(Bts)",
+        "Bitritrium": "233号元素(Btt)",
+        "Bitriunium": "231号元素(Btu)",
+        "Biunbium": "212号元素(Bub)",
+        "Biunennium": "219号元素(Bue)",
+        "Biunhexium": "216号元素(Buh)",
+        "Biunnilium": "210号元素(Bun)",
+        "Biunoctium": "218号元素(Buo)",
+        "Biunpentium": "215号元素(Bup)",
+        "Biunquadium": "214号元素(Buq)",
+        "Biunseptium": "217号元素(Bus)",
+        "Biuntrium": "213号元素(But)",
+        "Biununium": "211号元素(Buu)",
+        "Tribibium": "322号元素(Tbb)",
+        "Tribiennium": "329号元素(Tbe)",
+        "Tribihexium": "326号元素(Tbh)",
+        "Tribinilium": "320号元素(Tbn)",
+        "Tribioctium": "328号元素(Tbo)",
+        "Tribipentium": "325号元素(Tbp)",
+        "Tribiquadium": "324号元素(Tbq)",
+        "Tribiseptium": "327号元素(Tbs)",
+        "Tribitrium": "323号元素(Tbt)",
+        "Tribiunium": "321号元素(Tbu)",
+        "Triennbium": "392号元素(Teb)",
+        "Triennennium": "399号元素(Tee)",
+        "Triennhexium": "396号元素(Teh)",
+        "Triennilium": "390号元素(Ten)",
+        "Triennnilium": "390号元素(Ten)",
+        "Triennoctium": "398号元素(Teo)",
+        "Triennpentium": "395号元素(Tep)",
+        "Triennquadium": "394号元素(Teq)",
+        "Triennseptium": "397号元素(Tes)",
+        "Trienntrium": "393号元素(Tet)",
+        "Triennunium": "391号元素(Teu)",
+        "Trihexbium": "362号元素(Thb)",
+        "Trihexennium": "369号元素(The)",
+        "Trihexhexium": "366号元素(Thh)",
+        "Trihexnilium": "360号元素(Thn)",
+        "Trihexoctium": "368号元素(Tho)",
+        "Trihexpentium": "365号元素(Thp)",
+        "Trihexquadium": "364号元素(Thq)",
+        "Trihexseptium": "367号元素(Ths)",
+        "Trihextrium": "363号元素(Tht)",
+        "Trihexunium": "361号元素(Thu)",
+        "Trinilbium": "302号元素(Tnb)",
+        "Trinilennium": "309号元素(Tne)",
+        "Trinilhexium": "306号元素(Tnh)",
+        "Trinilnilium": "300号元素(Tnn)",
+        "Triniloctium": "308号元素(Tno)",
+        "Trinilpentium": "305号元素(Tnp)",
+        "Trinilquadium": "304号元素(Tnq)",
+        "Trinilseptium": "307号元素(Tns)",
+        "Triniltrium": "303号元素(Tnt)",
+        "Trinilunium": "301号元素(Tnu)",
+        "Trioctbium": "382号元素(Tob)",
+        "Trioctennium": "389号元素(Toe)",
+        "Triocthexium": "386号元素(Toh)",
+        "Trioctnilium": "380号元素(Ton)",
+        "Trioctoctium": "388号元素(Too)",
+        "Trioctpentium": "385号元素(Top)",
+        "Trioctquadium": "384号元素(Toq)",
+        "Trioctseptium": "387号元素(Tos)",
+        "Triocttrium": "383号元素(Tot)",
+        "Trioctunium": "381号元素(Tou)",
+        "Tripentbium": "352号元素(Tpb)",
+        "Tripentennium": "359号元素(Tpe)",
+        "Tripenthexium": "356号元素(Tph)",
+        "Tripentnilium": "350号元素(Tpn)",
+        "Tripentoctium": "358号元素(Tpo)",
+        "Tripentpentium": "355号元素(Tpp)",
+        "Tripentquadium": "354号元素(Tpq)",
+        "Tripentseptium": "357号元素(Tps)",
+        "Tripenttrium": "353号元素(Tpt)",
+        "Tripentunium": "351号元素(Tpu)",
+        "Triquadbium": "342号元素(Tqb)",
+        "Triquadennium": "349号元素(Tqe)",
+        "Triquadhexium": "346号元素(Tqh)",
+        "Triquadnilium": "340号元素(Tqn)",
+        "Triquadoctium": "348号元素(Tqo)",
+        "Triquadpentium": "345号元素(Tqp)",
+        "Triquadquadium": "344号元素(Tqq)",
+        "Triquadseptium": "347号元素(Tqs)",
+        "Triquadtrium": "343号元素(Tqt)",
+        "Triquadunium": "341号元素(Tqu)",
+        "Triseptbium": "372号元素(Tsb)",
+        "Triseptennium": "379号元素(Tse)",
+        "Trisepthexium": "376号元素(Tsh)",
+        "Triseptnilium": "370号元素(Tsn)",
+        "Triseptoctium": "378号元素(Tso)",
+        "Triseptpentium": "375号元素(Tsp)",
+        "Triseptquadium": "374号元素(Tsq)",
+        "Triseptseptium": "377号元素(Tss)",
+        "Trisepttrium": "373号元素(Tst)",
+        "Triseptunium": "371号元素(Tsu)",
+        "Tritribium": "332号元素(Ttb)",
+        "Tritriennium": "339号元素(Tte)",
+        "Tritrihexium": "336号元素(Tth)",
+        "Tritrinilium": "330号元素(Ttn)",
+        "Tritrioctium": "338号元素(Tto)",
+        "Tritripentium": "335号元素(Ttp)",
+        "Tritriquadium": "334号元素(Ttq)",
+        "Tritriseptium": "337号元素(Tts)",
+        "Tritritrium": "333号元素(Ttt)",
+        "Tritriunium": "331号元素(Ttu)",
+        "Triunbium": "312号元素(Tub)",
+        "Triunennium": "319号元素(Tue)",
+        "Triunhexium": "316号元素(Tuh)",
+        "Triunnilium": "310号元素(Tun)",
+        "Triunoctium": "318号元素(Tuo)",
+        "Triunpentium": "315号元素(Tup)",
+        "Triunquadium": "314号元素(Tuq)",
+        "Triunseptium": "317号元素(Tus)",
+        "Triuntrium": "313号元素(Tut)",
+        "Triununium": "311号元素(Tuu)",
+        "Unbibium": "122号元素(Ubb)",
+        "Unbiennium": "129号元素(Ube)",
+        "Unbihexium": "126号元素(Ubx)",
+        "Unbinilium": "120号元素(Ubn)",
+        "Unbioctium": "128号元素(Ubo)",
+        "Unbipentium": "125号元素(Ubp)",
+        "Unbiquadium": "124号元素(Ubq)",
+        "Unbiseptium": "127号元素(Ubs)",
+        "Unbitrium": "123号元素(Ubt)",
+        "Unbiunium": "121号元素(Ubu)",
+        "Unennbium": "192号元素(Ueb)",
+        "Unennennium": "199号元素(Uee)",
+        "Unennhexium": "196号元素(Ueh)",
+        "Unennilium": "190号元素(Uen)",
+        "Unennnilium": "190号元素(Uen)",
+        "Unennoctium": "198号元素(Ueo)",
+        "Unennpentium": "195号元素(Uep)",
+        "Unennquadium": "194号元素(Ueq)",
+        "Unennseptium": "197号元素(Ues)",
+        "Unenntrium": "193号元素(Uet)",
+        "Unennunium": "191号元素(Ueu)",
+        "Unhexbium": "162号元素(Uhb)",
+        "Unhexennium": "169号元素(Uhe)",
+        "Unhexhexium": "166号元素(Uhh)",
+        "Unhexnilium": "160号元素(Uhn)",
+        "Unhexoctium": "168号元素(Uho)",
+        "Unhexpentium": "165号元素(Uhp)",
+        "Unhexquadium": "164号元素(Uhq)",
+        "Unhexseptium": "167号元素(Uhs)",
+        "Unhextrium": "163号元素(Uht)",
+        "Unhexunium": "161号元素(Uhu)",
+        "Unoctbium": "182号元素(Uob)",
+        "Unoctennium": "189号元素(Uoe)",
+        "Unocthexium": "186号元素(Uoh)",
+        "Unoctnilium": "180号元素(Uon)",
+        "Unoctoctium": "188号元素(Uoo)",
+        "Unoctpentium": "185号元素(Uop)",
+        "Unoctquadium": "184号元素(Uoq)",
+        "Unoctseptium": "187号元素(Uos)",
+        "Unocttrium": "183号元素(Uot)",
+        "Unoctunium": "181号元素(Uou)",
+        "Unpentbium": "152号元素(Upb)",
+        "Unpentennium": "159号元素(Upe)",
+        "Unpenthexium": "156号元素(Uph)",
+        "Unpentnilium": "150号元素(Upn)",
+        "Unpentoctium": "158号元素(Upo)",
+        "Unpentpentium": "155号元素(Upp)",
+        "Unpentquadium": "154号元素(Upq)",
+        "Unpentseptium": "157号元素(Ups)",
+        "Unpenttrium": "153号元素(Upt)",
+        "Unpentunium": "151号元素(Upu)",
+        "Unquadbium": "142号元素(Uqb)",
+        "Unquadennium": "149号元素(Uqe)",
+        "Unquadhexium": "146号元素(Uqh)",
+        "Unquadnilium": "140号元素(Uqn)",
+        "Unquadoctium": "148号元素(Uqo)",
+        "Unquadpentium": "145号元素(Uqp)",
+        "Unquadquadium": "144号元素(Uqq)",
+        "Unquadseptium": "147号元素(Uqs)",
+        "Unquadtrium": "143号元素(Uqt)",
+        "Unquadunium": "141号元素(Uqu)",
+        "Unseptbium": "172号元素(Usb)",
+        "Unseptennium": "179号元素(Use)",
+        "Unsepthexium": "176号元素(Ush)",
+        "Unseptnilium": "170号元素(Usn)",
+        "Unseptoctium": "178号元素(Uso)",
+        "Unseptpentium": "175号元素(Usp)",
+        "Unseptquadium": "174号元素(Usq)",
+        "Unseptseptium": "177号元素(Uss)",
+        "Unsepttrium": "173号元素(Ust)",
+        "Unseptunium": "171号元素(Usu)",
+        "Untribium": "132号元素(Utb)",
+        "Untriennium": "139号元素(Ute)",
+        "Untrihexium": "136号元素(Uth)",
+        "Untrinilium": "130号元素(Utn)",
+        "Untrioctium": "138号元素(Uto)",
+        "Untripentium": "135号元素(Utp)",
+        "Untriquadium": "134号元素(Utq)",
+        "Untriseptium": "137号元素(Uts)",
+        "Untritrium": "133号元素(Utt)",
+        "Untriunium": "131号元素(Utu)",
+        "Ununennium": "119号元素(Uue)",
+        "Ununoctium": "118号元素(Og)",
+        "Ununseptium": "117号元素(Ts)"
+      }
+    },
+    {
+      "group": "qt_machineSmooth",
+      "namespace": "S:qwertech.machines",
+      "extensions": "qt",
+      "rules": [
+        {
+          "s": "Smooth {0}",
+          "t": "光滑{0}",
+          "subs": [
+            "qt_machine"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "qt_machine",
+      "namespace": "S:qwertech.machines",
+      "extensions": "qt",
+      "rules": [
+        {
+          "s": "{0} {1}",
+          "t": "{0}{1}",
+          "subs": [
+            "material",
+            "qt_machineType"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "qt_machineType",
+      "namespace": "S:qwertech.machines",
+      "completed": false,
+      "extensions": "qt",
+      "dict": {
+        "Crafting Table": "合成站",
+        "Counterdrawers": "抽屉柜",
+        "Chest": "箱子",
+        "Nesting Box": "木巢箱",
+        "Crafting Anvil": "合成砧",
+        "Upgrade Desk": "升级台",
+        "Countertop": "操作台",
+        "Compost Bin": "堆肥桶",
+        "Cobblestone Countertop": "圆石操作台"
+      }
+    },
+    {
+      "group": "fallback",
+      "namespace": "S:",
+      "dict": {
+        "Bottled Water Dye": "罐装水性染料",
+        "Bottled Flower Dye": "罐装植物染料",
+        "Bottled Chemical Dye": "罐装化学染料",
+        "Wooden Panel": "木制覆盖板",
+        "Asphalt Panel": "沥青覆盖板",
+        "Concrete Panel": "混凝土覆盖板",
+        "C-Foam Panel": "建筑泡沫覆盖板",
+        "Put in Furnace to harden": "放在熔炉里硬化",
+        "Put in Furnace to harden it": "放在熔炉里硬化",
+        "Needs to be soldered properly": "需要焊接",
+        "Any Sub-Block of this one": "任何该方块的子方块",
+        "Any Sub-Item of this one": "所有此物品的子物品",
+        "Wooden Bookshelf": "木制书架",
+        "Wooden Bucket": "木桶",
+        "Wooden Bottlecrate": "木制瓶筐",
+        "Used": "已使用过",
+        "Full": "未使用过",
+        "Book": "书",
+        "Large Book": "大书",
+        "You need to recharge it": "你需要为其充电",
+        "Ancient Debris": {
+          "S:": "远古残骸",
+          "S:oredict.ore": "远古残骸矿石"
+        },
+        "Processed Unknown Ore": "处理过的未知矿石",
+        "Non-Functional-Tool for Crafting only": "该工具只能用于合成"
+      }
+    }
+  ]
+}

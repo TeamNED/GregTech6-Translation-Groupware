@@ -1,0 +1,32 @@
+{
+  "name": "@gt6tg/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "本地 WebSocket RPC 服务：项目读写、配置校验、IO 检查、生成、单条测试。只绑定 127.0.0.1。",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@gt6tg/core": "workspace:*",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/ws": "^8.18.1",
+    "oxfmt": "~0.74.0",
+    "oxlint": "~1.89.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@gt6tg/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "本地自测 Web 控制台（Vue 3 + Naive UI）。通过 WebSocket RPC 调用 server，不直接依赖算法实现。",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "naive-ui": "^2.45.3",
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@gt6tg/core": "workspace:*",
+    "@types/node": "^24.19.2",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "oxfmt": "~0.74.0",
+    "oxlint": "~1.89.0",
+    "typescript": "~5.9.3",
+    "vite": "~7.3.7",
+    "vue-tsc": "^3.3.13"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

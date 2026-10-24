@@ -1,0 +1,23 @@
+{
+  "plugins": ["eslint", "typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "es2022": true,
+    "node": true,
+    "browser": true
+  },
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/.rush/**",
+    "**/common/temp/**",
+    "**/common/autoinstallers/**",
+    "**/*.d.ts"
+  ],
+  "rules": {
+    "no-constant-condition": "off",
+    "typescript/no-explicit-any": "warn"
+  }
+}

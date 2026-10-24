@@ -1,0 +1,28 @@
+{
+  "printWidth": 120,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "ignore",
+  "vueIndentScriptAndStyle": true,
+  "endOfLine": "lf",
+  "sortPackageJson": false,
+  "sortImports": {
+    "groups": ["builtin", "external", ["internal", "subpath"], ["parent", "sibling", "index"], "style", "unknown"],
+    "internalPattern": ["@/", "#"],
+    "newlinesBetween": false
+  },
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/.rush/**",
+    "**/common/temp/**",
+    "**/common/scripts/**",
+    "common/config/rush/repo-state.json",
+    "**/CHANGELOG.json",
+    "**/CHANGELOG.md"
+  ]
+}

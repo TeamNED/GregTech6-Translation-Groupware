@@ -1,6 +1,4 @@
 .vscode/*
-workplace/*/GregTech.lang
-workplace/*/GregTech.unknown.lang
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++
@@ -121,3 +119,22 @@ bin/*
 test/test_runner
 
 # End of https://github.com/kigster/cmake-project-template/master/.gitignore
+
+
+# Rush / pnpm / Node monorepo
+node_modules/
+common/temp/
+common/install-run/
+packages/*/node_modules/
+packages/*/dist/
+packages/*/.rush/
+**/*.tsbuildinfo
+*.log
+.cache/
+project.jsonc.bak-*
+
+
+# monorepo 下的 legacy 生成物与 CMake 构建目录
+packages/legacy/workplace/zh/GregTech.lang
+packages/legacy/workplace/zh/GregTech.unknown.lang
+packages/legacy/build/

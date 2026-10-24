@@ -1,0 +1,31 @@
+/**
+ * GregTech6 翻译工程 Rush monorepo 配置。
+ * 结构参考 @bitburner/viteburner：Rush + pnpm workspaces。
+ */
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.181.0",
+  "pnpmVersion": "10.34.7",
+  "nodeSupportedVersionRange": ">=24.0.0",
+  "projectFolderMinDepth": 2,
+  "projectFolderMaxDepth": 2,
+  "ensureConsistentVersions": true,
+  "projects": [
+    {
+      "packageName": "@gt6tg/legacy",
+      "projectFolder": "packages/legacy"
+    },
+    {
+      "packageName": "@gt6tg/core",
+      "projectFolder": "packages/core"
+    },
+    {
+      "packageName": "@gt6tg/server",
+      "projectFolder": "packages/server"
+    },
+    {
+      "packageName": "@gt6tg/web",
+      "projectFolder": "packages/web"
+    }
+  ]
+}
