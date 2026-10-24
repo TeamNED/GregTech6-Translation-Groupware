@@ -1,0 +1,12 @@
+{
+  "name": "gt6tg-translation-monorepo",
+  "private": true,
+  "type": "module",
+  "description": "GregTech6 翻译工程的 Rush monorepo：legacy golden 基线、core 算法、server 本地 RPC、web 控制台。",
+  "scripts": {
+    "dev": "node scripts/dev.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

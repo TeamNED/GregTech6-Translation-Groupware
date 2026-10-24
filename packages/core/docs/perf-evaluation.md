@@ -1,5 +1,8 @@
 # 算法性能评估（2026-10-23）
 
+> **monorepo 路径说明：** 原 `src/`、`workplace/` 已移动到 `packages/legacy/`；本文历史段落中的 `workplace/...` 均指 `packages/legacy/workplace/...`。
+
+
 目标：在**同一语言实现**（Node.js 24.21.0）下，对比六种算法，验证“新算法必须比现有正向物化方案更快”这一 blocker。前三种（forward / stream / token）是最初的基线；第 7–9 节追加 strict-token、grammar、flat-token 和编译型 pattern 引擎。
 
 - A `forward`：忠实复刻现有 C++ 算法——先展开所有 completed 生成器的笛卡尔积，存入 `Map<原文, 条目[]>`，最后逐 key 查表。

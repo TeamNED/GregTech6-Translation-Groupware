@@ -1,5 +1,8 @@
 # GregTech6 翻译工具迁移方案
 
+> **monorepo 路径说明：** 原 `src/`、`workplace/` 已移动到 `packages/legacy/`；本文历史段落中的 `workplace/...` 均指 `packages/legacy/workplace/...`。
+
+
 日期：2026-10-23
 范围：`src/` 中的 C++ 替换器、`workplace/config.yml` 规则体系、`workplace/*/*.lang` 语言文件，以及向 Node.js 前端 / GT6W JSON / 多 addon 多目标迁移。
 

@@ -1,5 +1,8 @@
 # 翻译算法实现说明
 
+> **monorepo 路径说明：** 原 `src/`、`workplace/` 已移动到 `packages/legacy/`；本文历史段落中的 `workplace/...` 均指 `packages/legacy/workplace/...`。
+
+
 本文说明仓库中已实现并基准测试过的六种算法：
 
 1. `forward`：现有 C++ 算法的忠实复刻——先物化全部组合，再逐 key 查表。

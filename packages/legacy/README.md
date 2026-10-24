@@ -1,5 +1,8 @@
 # GregTech6-Translation-Groupware
 
+> **monorepo 说明：** 本包现在位于 `packages/legacy`；README 中的相对路径和命令请在本目录下执行。
+
+
 Next-stage translation works of Gregtech6-Chinese-Translation
 
 ## Compile

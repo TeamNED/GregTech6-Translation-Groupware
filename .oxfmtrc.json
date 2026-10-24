@@ -20,6 +20,8 @@
     "**/node_modules/**",
     "**/.rush/**",
     "**/common/temp/**",
+    "**/project.jsonc",
+    "**/*.md",
     "**/common/scripts/**",
     "common/config/rush/repo-state.json",
     "**/CHANGELOG.json",
