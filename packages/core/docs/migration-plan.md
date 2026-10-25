@@ -239,7 +239,7 @@ base 项目配置  <  target 覆盖  <  addon 覆盖（按 priority）  <  本�
 工作项：
 
 1. 固化 golden fixtures：当前 `zh/GregTech.lang`、`GregTech.unknown.lang`，以及每个前缀的抽样。
-2. 建立 parity harness：同一输入下新实现输出与 golden 逐字节/规范化对比。
+2. 建立 parity harness：同一输入下新实现只生成到 `packages/core/dist/<targetId>/`，**不写 `packages/legacy`、不产生 `.bak`**；回读 dist 后与 golden 做 key→value 对比，unknown 做双向集合差，并校验 writer 往返。
 3. 基准脚本：Release C++、Debug C++、Node（后续）统一测量墙钟、峰值 RSS、输出 hash。
 4. 规则图 lint 的第一版（Python/TS 均可）：缺失组、环、空组、未引用组、`completed` 分布、笛卡尔积上界。
 5. 修复 `materialProductWoodType` 缺失（或显式标记为已知忽略），并导出 122 条冲突清单。
@@ -475,7 +475,7 @@ base 项目配置  <  target 覆盖  <  addon 覆盖（按 priority）  <  本�
 
 - 单元：解析器、模板、命名空间合并、last-wins、JSON 转义。
 - 属性测试：随机生成 group/rule，正反向引擎输出一致。
-- Parity：golden 逐字节；unknown/conflict/coverage 集合一致。
+- Parity：与 golden 逐 key 比较（含缺失 key）；unknown/conflict/coverage 集合一致。迁移期 core 的产物只落 `packages/core/dist`，legacy 目录保持只读。
 - e2e：Web 核心路径（加载 → 编辑 → 校验 → 生成 → diff → 保存）。
 - CI：Node 单测 + parity + 基准回归阈值（超过基线 20% 失败）。
 

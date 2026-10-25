@@ -12,7 +12,7 @@ export const DEFAULT_LEGACY_TARGET: TargetConfig = {
   unknown: 'zh/GregTech.unknown.lang',
   encoding: 'utf-8',
   lineEnding: 'crlf',
-  notes: '当前只支持单 GT6 原版目标；workplace/config.yml 保持只读。',
+  notes: '当前只支持单 GT6 原版目标；workplace/config.yml 与 output/unknown 均为 legacy golden，迁移期只读。',
 };
 
 export interface ImportLegacyOptions {

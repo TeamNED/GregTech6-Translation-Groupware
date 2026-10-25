@@ -13,6 +13,7 @@ export * from './types/timing';
 export { parseProjectJsonc, getTarget, updateTargetJsonc, stringifyProjectConfig } from './config/jsonc';
 export { lintProject } from './config/lint';
 export { convertLegacyYamlToProject, DEFAULT_LEGACY_TARGET } from './config/legacyYaml';
+export { DEFAULT_DIST_ROOT, distPathsForTarget, type DistPathSet } from './config/dist';
 
 export { tokenize, tokenizeAscii } from './engine/tokenizer';
 export {
@@ -49,6 +50,14 @@ export {
   type PatternAttempt,
 } from './engine/matcher';
 export { generateFromEntries, buildFallbackMap, type GenerationResult, type GenerationStats } from './engine/apply';
+export {
+  compareToGolden,
+  hashOutput,
+  type ParityInput,
+  type ParityReport,
+  type ParityUnknownSample,
+  type ParityValueSample,
+} from './engine/parity';
 export { testEntry } from './engine/entryTest';
 export { parseLegacyLang, writeLegacyLang } from './engine/legacyLang';
 export { analyzeLangDocument, diffLangMaps } from './engine/stats';

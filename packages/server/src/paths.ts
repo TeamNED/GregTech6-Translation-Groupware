@@ -4,6 +4,10 @@ import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 /** 仓库根目录：packages/server/src -> packages/server -> packages -> root。 */
 export const repoRoot = resolve(import.meta.dirname, '../../..');
 export const projectFilePath = resolve(repoRoot, 'packages/core/project.jsonc');
+/** legacy 目录只允许 legacy 自身（C++ 工具）写入。 */
+export const legacyRoot = resolve(repoRoot, 'packages/legacy');
+/** 迁移期 core 的生成物只能写到这里。 */
+export const artifactRoot = resolve(repoRoot, 'packages/core/dist');
 
 /** 把仓库相对路径解析成绝对路径，并禁止越界。 */
 export function resolveInsideRepo(path: string): string {
@@ -17,6 +21,33 @@ export function resolveInsideRepo(path: string): string {
 
 export function repoRelative(absolute: string): string {
   return relative(repoRoot, absolute).replaceAll('\\', '/');
+}
+
+function isInside(parent: string, child: string): boolean {
+  const rel = relative(parent, child);
+  return rel === '' || (rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel));
+}
+
+/**
+ * 迁移期的硬性写入边界：
+ * - legacy 文件只能由 legacy 内置工具修改，core/server 一律拒绝；
+ * - core 的产物只能落在 packages/core/dist。
+ */
+export function assertArtifactWritable(path: string): void {
+  const absolute = resolve(path);
+  if (isInside(legacyRoot, absolute)) {
+    throw new Error(`迁移期禁止写入 legacy：${repoRelative(absolute)}；legacy 文件只能由 legacy 内置工具修改`);
+  }
+  if (!isInside(artifactRoot, absolute)) {
+    throw new Error(`生成物只能写入 packages/core/dist：${repoRelative(absolute)}`);
+  }
+}
+
+/** 写生成物：不生成 `.bak`，dist 可以随时重建。 */
+export async function writeArtifact(path: string, content: string): Promise<void> {
+  assertArtifactWritable(path);
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, content, 'utf8');
 }
 
 export async function readTextIfExists(path: string): Promise<string | null> {

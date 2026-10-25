@@ -31,29 +31,43 @@ import { compileConfig, parseProjectJsonc } from '@gt6tg/core';
 
 在 Rush/pnpm workspace 中，`packages/server` 和 `packages/web` 通过 workspace 依赖引用 core。server 用 `tsx` 运行，web 只做 type-only import（API DTO），所以浏览器包不会把算法打进 UI。
 
-### 1.2 真实语料 parity
+### 1.2 迁移期 parity 与 dist 产物
 
 ```bash
 cd packages/core
+
+# 只生成，不比较
+npx tsx scripts/generate.ts
+
+# 生成 -> 回读产物 -> 与 legacy golden 逐 key 对比
 npx tsx scripts/check-parity.ts
 ```
 
-脚本会读取：
+两个脚本遵循同一条边界：**`packages/legacy` 只读**，只有 legacy 自己的 C++ 工具能修改它；core 的产物写到 `packages/core/dist/<targetId>/`，且**不生成 `.bak`**。写盘前会做路径守卫，任何 legacy 路径都会被拒绝。
 
-- `packages/core/project.jsonc`
-- `packages/legacy/workplace/en/GregTech.lang`
-- `packages/legacy/workplace/zh/GregTech.fallback.lang`
-- `packages/legacy/workplace/zh/GregTech.lang`（golden）
-- `packages/legacy/workplace/zh/GregTech.unknown.lang`
+读取的文件（路径来自 `project.jsonc` 的 target）：
 
-输出编译耗时、生成耗时、pattern 统计、`mismatch`、`unknownMismatch`、hash。当前基线必须是：
+- `source` / `fallback`：生成输入；
+- `output` / `unknown`：legacy golden，只读，作为对比基准。
+
+对比口径（`compareToGolden`）：
+
+- 主输出遍历 golden 的每个 key，缺 key 或值不同都算 `mismatch`；
+- `unknown` 做双向集合比较，只比 key；
+- `hash` 是 dist 产物 Map 的 sha256 前 16 位；
+- 额外的 `roundTrip` 把内存结果与回读的 dist 产物逐 key 比较，暴露 writer 的转义/顺序问题。
+
+当前基线必须是：
 
 ```
 mismatch = 0
 unknownMismatch = 0
 unknown = 774
 hash = db41064a4b4c34dd
+roundTrip.ok = true
 ```
+
+任一条件不满足，脚本以退出码 1 结束。当前真实语料上，两份 dist 文件与 legacy golden 的 md5 相同。
 
 ### 1.3 本地性能记录与前后对比
 
@@ -111,6 +125,7 @@ node scripts/dev.mjs
 
 - 不读文件：调用方把 JSONC/YAML/`.lang` 文本传进来，或把解析后的词条数组传进来。
 - 不解析相对路径：`TargetConfig` 里的路径由 server 解析和做越界校验。
+- 不写 legacy：迁移期只有 legacy 自身的 C++ 工具能改 `packages/legacy`；core 的脚本只写 `packages/core/dist`。
 - 不启动服务：RPC 实现在 `packages/server`，core 只声明 `ServerMethodMap` 类型。
 - 不处理 GT6W JSON：当前只实现 `legacy-lang` 目标。
 
@@ -122,11 +137,13 @@ node scripts/dev.mjs
 packages/core/
 ├── project.jsonc                 # JSONC v2 工程配置
 ├── docs/                         # 算法/性能/迁移文档
+├── dist/                         # core 生成物（按 target id 分目录，不入库）
 ├── .perf/                        # 本地性能记录（每次运行一个 JSON，不入库）
 ├── scripts/
-│   ├── check-parity.ts           # 真实语料 parity
+│   ├── generate.ts               # 只生成 dist，不比较
+│   ├── check-parity.ts           # 生成 dist -> 回读 -> 与 golden 对比
 │   ├── check-perf.ts             # 性能记录与前后对比
-│   └── lib.ts                    # check-perf 使用的语料/统计工具
+│   └── lib.ts                    # 语料加载、dist 写入、统计工具
 ├── test/                         # vitest 单测
 └── src/
     ├── index.ts                  # 公共 API 汇总
@@ -140,6 +157,7 @@ packages/core/
     │   ├── schema.ts             # zod schema
     │   ├── jsonc.ts              # JSONC 解析/目标修改
     │   ├── lint.ts               # 语义 lint
+    │   ├── dist.ts               # dist 路径推导
     │   └── legacyYaml.ts         # config.yml -> v2
     └── engine/
         ├── tokenizer.ts          # 严格分词
@@ -148,6 +166,7 @@ packages/core/
         ├── compile.ts            # LIT/LEX/REDUCE、namespace trie
         ├── matcher.ts            # 模式执行、候选、trace
         ├── apply.ts              # 生成、去重、fallback、unknown
+        ├── parity.ts             # 与 legacy golden 的逐 key 对比
         ├── entryTest.ts          # 单条测试
         ├── legacyLang.ts         # .lang 读写
         ├── timing.ts             # 分阶段计时（只做观测）
@@ -335,8 +354,8 @@ core 只保存路径字符串，**不解析、不校验越界**。`packages/serv
 | `TargetPatch` | 目标字段补丁（不能改 `id`/`format`/`encoding`） |
 | `FileInfo` | 文件是否存在、大小、行数、key 数、空值、重复、`¶`/`=`、换行符 |
 | `DiffStats` / `DiffSample` | 两个 key→value 映射的差异统计和样例 |
-| `IoCheckReport` | IO 检查结果：四个文件信息、生成摘要、`timings`、diff、notes |
-| `GenerateResult` | 生成结果：统计、hash、`timings`、diff、写入路径/备份 |
+| `IoCheckReport` | IO 检查结果：四个文件信息（含只读的 legacy golden）、生成摘要、`parity`、`timings`、diff、notes |
+| `GenerateResult` | 生成结果：统计、hash、`timings`、diff、写入的 dist 路径 |
 | `OperationTiming` | server 端到端计时：`readMs` / `compileMs` / `generateMs` / `diffMs` / `writeMs`，并带 core 的 `compile`/`generate` 分阶段报告 |
 | `EntryTestRequest` / `EntryTestResult` | 单条测试请求/结果 |
 | `ServerMethodMap` | RPC 方法签名表，server 实现、web 只 type-import |
@@ -614,7 +633,22 @@ languagefile {
 
 顺序由调用方决定；`generate` 按源文件顺序写。CRLF 是默认值。
 
-### 6.6 统计与 diff
+### 6.6 统计与 parity
+
+#### `compareToGolden(golden, generated, expectedUnknown, sampleLimit = 10): ParityReport`
+
+迁移期 parity 的唯一实现；脚本和 server 共用它，避免两套口径。
+
+- `mismatch` / `samples`：遍历 golden 的 key，缺 key 或值不同都计入；
+- `unknownMismatch` / `unknownSamples`：unknown 双向集合差，只比 key；
+- `hash`：`hashOutput(generated.output)` 的 sha256 前 16 位；
+- `ok`：`mismatch === 0 && unknownMismatch === 0`。
+
+`generated` 只要求 `{ output: Map<string,string>, unknown: Set<string> }`，所以既可以直接传 `GenerationResult`，也可以传回读的 dist 产物。
+
+#### `hashOutput(output): string`
+
+按 Map 顺序拼接 `key\0value\n` 后取 sha256 前 16 位。它是输出映射的指纹，不是文件哈希。
 
 #### `analyzeLangDocument(document): LangFileStats`
 
@@ -648,14 +682,17 @@ languagefile {
 
 ## 7. 调用示例
 
-### 7.1 完整生成（不写文件）
+### 7.1 完整生成（写 dist，不碰 legacy）
 
 ```ts
-import { readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 
 import {
   compileConfig,
+  distPathsForTarget,
   generateFromEntries,
+  getTarget,
   parseLegacyLang,
   parseProjectJsonc,
   writeLegacyLang,
@@ -665,27 +702,29 @@ const raw = readFileSync('packages/core/project.jsonc', 'utf8');
 const parsed = parseProjectJsonc(raw);
 if (!parsed.config) throw new Error(JSON.stringify(parsed.issues));
 
-const compiled = compileConfig(parsed.config);
-const source = parseLegacyLang(readFileSync('packages/legacy/workplace/en/GregTech.lang', 'utf8'));
-const fallback = parseLegacyLang(
-  readFileSync('packages/legacy/workplace/zh/GregTech.fallback.lang', 'utf8'),
-);
+const target = getTarget(parsed.config);
+const workplace = resolve('packages/legacy/workplace');
+const source = parseLegacyLang(readFileSync(resolve(workplace, target.source), 'utf8'));
+const fallback = parseLegacyLang(readFileSync(resolve(workplace, target.fallback), 'utf8'));
 
-const result = generateFromEntries(compiled, source.entries, fallback.entries);
+const result = generateFromEntries(compileConfig(parsed.config), source.entries, fallback.entries);
 
+const dist = distPathsForTarget(target); // packages/core/dist/gt6-legacy/...
 const outputEntries = source.entries.map((entry) => ({
   ...entry,
   value: result.output.get(entry.key) ?? entry.value,
 }));
 const unknownEntries = source.entries.filter((entry) => result.unknown.has(entry.key));
 
-const outputText = writeLegacyLang(outputEntries, 'crlf');
-const unknownText = writeLegacyLang(unknownEntries, 'crlf');
+mkdirAndWrite(dist.output, writeLegacyLang(outputEntries, target.lineEnding));
+mkdirAndWrite(dist.unknown, writeLegacyLang(unknownEntries, target.lineEnding));
 
-console.log(result.stats, result.output.size, outputText.length, unknownText.length);
+function mkdirAndWrite(path: string, content: string): void {  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, content, 'utf8');
+}
 ```
 
-写盘、备份和路径校验由 `packages/server/src/io.ts` 负责，core 不接触文件。
+迁移期的写盘约定：只写 `packages/core/dist`，不修改 `packages/legacy`，也不生成 `.bak`。server 用 `writeArtifact` 做同样的路径守卫；脚本侧的等价实现见 `scripts/lib.ts` 的 `writeDistArtifacts`。
 
 ### 7.2 单条测试 + trace
 
@@ -827,7 +866,8 @@ pattern 匹配前会依次检查：
 - `compileConfig`/`buildModel`/`buildLexicon`/`compileProject` 在配置结构不可编译时抛错（例如 pattern 展开超限）。
 - `generateFromEntries` 假设 `CompiledProject` 已成功编译；不会检查源/fallback 文件是否存在。
 - `testEntry` 假设 `value` 已由调用方解析；server 负责“key → 英文值”的查找。
-- `writeLegacyLang` 只生成字符串，不写文件。
+- `writeLegacyLang` 只生成字符串，不写文件；写盘由调用方负责。
+- 迁移期写盘只允许落在 `packages/core/dist`：`server` 的 `writeArtifact` 和脚本的 `writeDistArtifacts` 都会在写前拒绝 legacy 路径；生成物不产生 `.bak`。
 
 ---
 

@@ -1,10 +1,12 @@
-import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import {
   analyzeLangDocument,
   buildFallbackMap,
+  compareToGolden,
   diffLangMaps,
+  distPathsForTarget,
   generateFromEntries,
+  hashOutput,
   parseLegacyLang,
   testEntry as coreTestEntry,
   writeLegacyLang,
@@ -16,7 +18,7 @@ import {
   type OperationTiming,
   type TargetConfig,
 } from '@gt6tg/core';
-import { readTextIfExists, repoRelative, resolveInsideRepo, writeWithBackup } from './paths';
+import { readTextIfExists, repoRelative, resolveInsideRepo, writeArtifact } from './paths';
 import { ProjectStore } from './projectStore';
 
 export interface ResolvedTarget {
@@ -24,8 +26,15 @@ export interface ResolvedTarget {
   workplace: string;
   source: string;
   fallback: string;
-  output: string;
-  unknown: string;
+  /** legacy golden：迁移期只读，作为 parity 基准。 */
+  golden: string;
+  goldenUnknown: string;
+  /** core 自己的产物路径（可写）。 */
+  dist: {
+    root: string;
+    output: string;
+    unknown: string;
+  };
 }
 
 interface ReadLangResult {
@@ -37,11 +46,20 @@ interface ReadLangResult {
 export function resolveTarget(store: ProjectStore, targetId?: string): ResolvedTarget {
   const target = store.target(targetId);
   const workplace = resolveInsideRepo(target.workplace);
-  const source = resolveInsideRepo(join(workplace, target.source));
-  const fallback = resolveInsideRepo(join(workplace, target.fallback));
-  const output = resolveInsideRepo(join(workplace, target.output));
-  const unknown = resolveInsideRepo(join(workplace, target.unknown));
-  return { target, workplace, source, fallback, output, unknown };
+  const dist = distPathsForTarget(target);
+  return {
+    target,
+    workplace,
+    source: resolveInsideRepo(join(workplace, target.source)),
+    fallback: resolveInsideRepo(join(workplace, target.fallback)),
+    golden: resolveInsideRepo(join(workplace, target.output)),
+    goldenUnknown: resolveInsideRepo(join(workplace, target.unknown)),
+    dist: {
+      root: resolveInsideRepo(dist.root),
+      output: resolveInsideRepo(dist.output),
+      unknown: resolveInsideRepo(dist.unknown),
+    },
+  };
 }
 
 function emptyDocument(): LangDocument {
@@ -94,29 +112,26 @@ async function readLang(path: string): Promise<ReadLangResult> {
   };
 }
 
-function hashOutput(output: Map<string, string>): string {
-  const hash = createHash('sha256');
-  for (const [key, value] of output) hash.update(key).update('\u0000').update(value).update('\n');
-  return hash.digest('hex').slice(0, 16);
-}
-
 function buildNotes(
   store: ProjectStore,
   source: ReadLangResult,
   fallback: ReadLangResult,
-  output: ReadLangResult,
-  unknown: ReadLangResult,
+  golden: ReadLangResult,
+  goldenUnknown: ReadLangResult,
+  dist: ResolvedTarget['dist'],
 ): string[] {
   const notes: string[] = [];
   if (!source.info.exists) notes.push('源文件不存在，无法生成');
   if (!fallback.info.exists) notes.push('fallback 不存在，将只依赖生成器');
-  if (!output.info.exists) notes.push('当前输出不存在，diff 将显示全部为新增');
-  if (!unknown.info.exists) notes.push('当前 unknown 不存在');
+  if (!golden.info.exists) notes.push('legacy golden 不存在，parity 会把全部 golden key 视为缺失');
+  if (!goldenUnknown.info.exists) notes.push('legacy unknown 不存在，parity 会把所有 unknown 视为多余');
   if (source.document.duplicates.length) notes.push(`源文件有 ${source.document.duplicates.length} 个重复 key`);
   if (fallback.document.duplicates.length)
     notes.push(`fallback 有 ${fallback.document.duplicates.length} 个重复 key（首次获胜）`);
-  if (output.document.duplicates.length) notes.push(`输出有 ${output.document.duplicates.length} 个重复 key`);
-  if (unknown.document.duplicates.length) notes.push(`unknown 有 ${unknown.document.duplicates.length} 个重复 key`);
+  if (golden.document.duplicates.length) notes.push(`legacy golden 有 ${golden.document.duplicates.length} 个重复 key`);
+  if (goldenUnknown.document.duplicates.length)
+    notes.push(`legacy unknown 有 ${goldenUnknown.document.duplicates.length} 个重复 key`);
+  notes.push(`迁移期 legacy 只读；生成物写入 ${repoRelative(dist.output)}（不生成 .bak）`);
   const errors = store.current().issues.filter((issue) => issue.severity === 'error');
   if (errors.length) notes.push(`配置有 ${errors.length} 个 error，生成结果可能不可用`);
   return notes;
@@ -127,11 +142,11 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
   const paths = resolveTarget(store, targetId);
 
   const readStarted = performance.now();
-  const [source, fallback, output, unknown] = await Promise.all([
+  const [source, fallback, golden, goldenUnknown] = await Promise.all([
     readLang(paths.source),
     readLang(paths.fallback),
-    readLang(paths.output),
-    readLang(paths.unknown),
+    readLang(paths.golden),
+    readLang(paths.goldenUnknown),
   ]);
   const readMs = performance.now() - readStarted;
 
@@ -144,11 +159,12 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
   const generateMs = performance.now() - generateStarted;
 
   const diffStarted = performance.now();
-  const diffVsCurrent = diffLangMaps(output.document.map, generated.output);
+  const diffVsCurrent = diffLangMaps(golden.document.map, generated.output);
+  const parity = compareToGolden(golden.document, generated, goldenUnknown.document);
   const diffMs = performance.now() - diffStarted;
 
   const hash = hashOutput(generated.output);
-  const notes = buildNotes(store, source, fallback, output, unknown);
+  const notes = buildNotes(store, source, fallback, golden, goldenUnknown, paths.dist);
 
   const timings: OperationTiming = {
     totalMs: performance.now() - totalStarted,
@@ -163,10 +179,11 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
   return {
     targetId: paths.target.id,
     workplace: repoRelative(paths.workplace),
+    distRoot: repoRelative(paths.dist.root),
     source: source.info,
     fallback: fallback.info,
-    output: output.info,
-    unknown: unknown.info,
+    output: golden.info,
+    unknown: goldenUnknown.info,
     generated: {
       keys: generated.output.size,
       unknownKeys: generated.unknown.size,
@@ -176,6 +193,7 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
       hash,
       timings: generated.timings,
     },
+    parity,
     timings,
     diffVsCurrent,
     notes,
@@ -192,10 +210,10 @@ export async function generate(
   const paths = resolveTarget(store, targetId);
 
   const readStarted = performance.now();
-  const [source, fallback, output] = await Promise.all([
+  const [source, fallback, golden] = await Promise.all([
     readLang(paths.source),
     readLang(paths.fallback),
-    readLang(paths.output),
+    readLang(paths.golden),
   ]);
   const readMs = performance.now() - readStarted;
   if (!source.info.exists) throw new Error(`源文件不存在：${source.info.path}`);
@@ -209,7 +227,7 @@ export async function generate(
   const generateMs = performance.now() - generateStarted;
 
   const diffStarted = performance.now();
-  const diffVsCurrent = diffLangMaps(output.document.map, generated.output);
+  const diffVsCurrent = diffLangMaps(golden.document.map, generated.output);
   const diffMs = performance.now() - diffStarted;
 
   const hash = hashOutput(generated.output);
@@ -225,17 +243,12 @@ export async function generate(
     const unknownEntries = source.document.entries
       .filter((entry) => generated.unknown.has(entry.key))
       .map((entry) => ({ ...entry }));
-    const outputPath = paths.output;
-    const unknownPath = paths.unknown;
-    const backupPaths: string[] = [];
-    const outputBackup = await writeWithBackup(outputPath, writeLegacyLang(outputEntries, paths.target.lineEnding));
-    if (outputBackup) backupPaths.push(outputBackup);
-    const unknownBackup = await writeWithBackup(unknownPath, writeLegacyLang(unknownEntries, paths.target.lineEnding));
-    if (unknownBackup) backupPaths.push(unknownBackup);
+    await writeArtifact(paths.dist.output, writeLegacyLang(outputEntries, paths.target.lineEnding));
+    await writeArtifact(paths.dist.unknown, writeLegacyLang(unknownEntries, paths.target.lineEnding));
     written = {
-      outputPath: repoRelative(outputPath),
-      unknownPath: repoRelative(unknownPath),
-      backupPaths: backupPaths.map(repoRelative),
+      distRoot: repoRelative(paths.dist.root),
+      outputPath: repoRelative(paths.dist.output),
+      unknownPath: repoRelative(paths.dist.unknown),
     };
     writeMs = performance.now() - writeStarted;
   }

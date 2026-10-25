@@ -1,5 +1,6 @@
 /** WebSocket RPC 与 Web 控制台共用的 DTO。 */
 
+import type { ParityReport } from '../engine/parity';
 import type { ProjectConfigV2, LineEnding, TargetConfig } from './config';
 import type { ConfigIssue, ProjectStats } from './issues';
 import type { DetectedLineEnding } from './lang';
@@ -75,8 +76,11 @@ export interface OperationTiming {
 export interface IoCheckReport {
   targetId: string;
   workplace: string;
+  /** core 生成物的目录（仓库相对路径）；legacy 只读。 */
+  distRoot: string;
   source: FileInfo;
   fallback: FileInfo;
+  /** legacy golden，只读；迁移期作为 parity 基准。 */
   output: FileInfo;
   unknown: FileInfo;
   generated: {
@@ -88,6 +92,8 @@ export interface IoCheckReport {
     hash: string;
     timings?: TimingReport;
   };
+  /** 与 legacy golden 的逐 key parity 结果。 */
+  parity: ParityReport;
   timings: OperationTiming;
   diffVsCurrent: DiffStats;
   notes: string[];
@@ -106,9 +112,10 @@ export interface GenerateResult {
   hash: string;
   diffVsCurrent: DiffStats;
   written?: {
+    /** 写入的 dist 目录（仓库相对路径）。 */
+    distRoot: string;
     outputPath: string;
     unknownPath: string;
-    backupPaths: string[];
   };
   /** 仅测试/调试时返回。 */
   output?: Record<string, string>;

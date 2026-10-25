@@ -1,6 +1,8 @@
 # GregTech6-Translation-Groupware
 
 > **monorepo 说明：** 本包现在位于 `packages/legacy`；README 中的相对路径和命令请在本目录下执行。
+>
+> 迁移期 `packages/legacy` 是只读基线，**只有本包的 C++ 工具可以写这里**（默认写 `workplace/zh/GregTech.lang` 和 `GregTech.unknown.lang`）。`core`/`server` 的生成物写到 `packages/core/dist/<targetId>/`，并以此为 parity 的对比对象。
 
 
 Next-stage translation works of Gregtech6-Chinese-Translation
