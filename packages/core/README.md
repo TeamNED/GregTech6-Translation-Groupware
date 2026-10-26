@@ -1,212 +1,55 @@
 # `@gt6tg/core`
 
-GregTech6 翻译工具链的算法与配置核心。它只做四类事情：
+GregTech6 翻译工具链的**纯算法与配置核心**。它只做：
 
 1. 解析/校验/编辑 JSONC v2 工程配置；
 2. 把旧版 `.lang` 文本解析成词条，或把词条写回旧版 `.lang`；
-3. 把配置编译成 `LIT`/`LEX`/`REDUCE` 模式，并匹配输入值、生成候选；
-4. 提供 lint、统计、diff 和单条目 trace。
+3. 把配置编译成 `LIT` / `LEX` / `REDUCE` 模式，匹配输入值并生成候选；
+4. 提供 lint、统计、diff、parity 比较原语、Hook 和单条目 trace。
 
-它**不**负责文件系统、HTTP/WebSocket、Vue 或 Naive UI。文件读写和本地 RPC 在 `packages/server`，浏览器控制台在 `packages/web`。
+它**不**负责文件系统、HTTP/WebSocket、Vue/Naive UI、RPC 传输、CLI 或 hash 实现。当前分层：
 
-- 配置唯一事实来源：`packages/core/project.jsonc`
-- 设计/性能/迁移文档：`packages/core/docs/`
-- 公共入口：`packages/core/src/index.ts`
-- 包本身是 source-only（`main`/`types` 指向 `src/index.ts`），由 `tsx`/Vite/测试运行器直接消费；`npm run build` 实际是 `tsc --noEmit`。
+```
+core (纯算法/配置/Hook/领域类型)
+  ↑
+runtime (EngineHost、任务调度、编译缓存、传输无关协议、HashProvider 注入)
+  ↑
+node (CLI、dev server、worker_threads、fs)     web (Vue UI、Worker)
+```
+
+- 公共入口：`packages/core/src/index.ts`（全量 `export *` barrel）。
+- 包是 source-only：`main`/`types` 指向 `src/index.ts`，由 `tsx`/Vite/测试直接消费；`npm run build` 是 `tsc --noEmit`。
+- 默认配置和生成物不在 core：见 `packages/node/project.jsonc`、`packages/node/dist/`。
+- 算法设计细节见 [docs/algorithms.md](docs/algorithms.md)；迁移背景见 [docs/migration-plan.md](docs/migration-plan.md)。
 
 ---
 
-## 1. 运行方式
-
-### 1.1 作为库
-
-```bash
-cd packages/core
-npx tsx your-script.ts
-```
+## 1. 使用方式
 
 ```ts
-import { compileConfig, parseProjectJsonc } from '@gt6tg/core';
+import {
+  compileConfig,
+  generateFromEntries,
+  parseLegacyLang,
+  parseProjectJsonc,
+  type ProjectConfigV2,
+} from '@gt6tg/core';
+
+const parsed = parseProjectJsonc(rawConfig);
+if (!parsed.config) throw new Error('配置无效');
+const compiled = compileConfig(parsed.config);
+const source = parseLegacyLang(sourceText);
+const fallback = parseLegacyLang(fallbackText);
+const result = generateFromEntries(compiled, source.entries, fallback.entries);
 ```
 
-在 Rush/pnpm workspace 中，`packages/server` 和 `packages/web` 通过 workspace 依赖引用 core。server 用 `tsx` 运行，web 只做 type-only import（API DTO），所以浏览器包不会把算法打进 UI。
-
-### 1.2 迁移期 parity 与 dist 产物
-
-```bash
-cd packages/core
-
-# 只生成，不比较
-npx tsx scripts/generate.ts
-
-# 生成 -> 回读产物 -> 与 legacy golden 逐 key 对比
-npx tsx scripts/check-parity.ts
-```
-
-两个脚本遵循同一条边界：**`packages/legacy` 只读**，只有 legacy 自己的 C++ 工具能修改它；core 的产物写到 `packages/core/dist/<targetId>/`，且**不生成 `.bak`**。写盘前会做路径守卫，任何 legacy 路径都会被拒绝。
-
-读取的文件（路径来自 `project.jsonc` 的 target）：
-
-- `source` / `fallback`：生成输入；
-- `output` / `unknown`：legacy golden，只读，作为对比基准。
-
-对比口径（`compareToGolden`）：
-
-- 主输出遍历 golden 的每个 key，缺 key 或值不同都算 `mismatch`；
-- `unknown` 做双向集合比较，只比 key；
-- `hash` 是 dist 产物 Map 的 sha256 前 16 位；
-- 额外的 `roundTrip` 把内存结果与回读的 dist 产物逐 key 比较，暴露 writer 的转义/顺序问题。
-
-当前基线必须是：
-
-```
-mismatch = 0
-unknownMismatch = 0
-unknown = 774
-hash = db41064a4b4c34dd
-roundTrip.ok = true
-```
-
-任一条件不满足，脚本以退出码 1 结束。当前真实语料上，两份 dist 文件与 legacy golden 的 md5 相同。
-
-### 1.3 本地性能记录与前后对比
-
-计时结果**不进入 git**。每次运行都会在 `packages/core/.perf/`（已在 `.gitignore` 中）下写一个独立 JSON：
-
-```bash
-cd packages/core
-
-# 修改前
-npx tsx scripts/check-perf.ts --label=before
-
-# ... 修改代码 ...
-
-# 修改后
-npx tsx scripts/check-perf.ts --label=after
-
-# 对比最近两次记录；也可以显式传两个文件
-npx tsx scripts/check-perf.ts --compare
-npx tsx scripts/check-perf.ts --compare=.perf/xxx.json,.perf/yyy.json
-```
-
-每份记录包含：
-
-- `compile` / `generate` / `total` 的中位数、各阶段中位数（`match`、`dedupe`、`apply` 等）和原始样本；
-- 对象计数：pattern 数、lexEntries、source/output/unknown key 数、候选桶数与候选条目数等；
-- 内存快照（heap、RSS、maxRSS）、机器信息、git HEAD/branch/dirty、运行参数。
-
-`--compare` 默认取 `.perf/` 下最新的两份记录，逐项打印变化百分比和计数差；默认只报告，不判定失败。加 `--strict` 后，generate/total 超过 fail 阈值（默认 30%，可用 `GT6TG_PERF_FAIL` 调整）才返回退出码 1。测量本身默认 1 次预热 + 3 次测量，可用 `--runs=5` 提高稳定性。
-
-> 当前工作流以 legacy 产出的 `zh/GregTech.lang` 为权威；迁移阶段只需要 parity 保证输出不变，后续阶段由规则和门禁约束，因此这里不再记录/校验产物 hash。
-
-### 1.4 单测、类型、lint、格式
-
-```bash
-cd packages/core
-npx vitest run
-npx tsc --noEmit
-npx oxlint
-npx oxfmt --check
-
-# 类型 + 单测，一条命令即可作为提交前检查
-npm run verify
-```
-
-### 1.5 通过本地控制台间接运行
-
-```bash
-# 仓库根目录
-node scripts/dev.mjs
-```
-
-它会同时启动 `packages/server`（WebSocket RPC，127.0.0.1:5175）和 `packages/web`（Vite，127.0.0.1:5173）。core 的编译/匹配/生成都在 server 进程里执行。
-
-### 1.6 core 不做什么
-
-- 不读文件：调用方把 JSONC/YAML/`.lang` 文本传进来，或把解析后的词条数组传进来。
-- 不解析相对路径：`TargetConfig` 里的路径由 server 解析和做越界校验。
-- 不写 legacy：迁移期只有 legacy 自身的 C++ 工具能改 `packages/legacy`；core 的脚本只写 `packages/core/dist`。
-- 不启动服务：RPC 实现在 `packages/server`，core 只声明 `ServerMethodMap` 类型。
-- 不处理 GT6W JSON：当前只实现 `legacy-lang` 目标。
+浏览器/Node 的完整运行链路由 `@gt6tg/runtime` 的 `EngineHost` 提供；core 本身不读写文件、不启动 Worker。
 
 ---
 
-## 2. 目录与分层
+## 2. 配置模型
 
-```
-packages/core/
-├── project.jsonc                 # JSONC v2 工程配置
-├── docs/                         # 算法/性能/迁移文档
-├── dist/                         # core 生成物（按 target id 分目录，不入库）
-├── .perf/                        # 本地性能记录（每次运行一个 JSON，不入库）
-├── scripts/
-│   ├── generate.ts               # 只生成 dist，不比较
-│   ├── check-parity.ts           # 生成 dist -> 回读 -> 与 golden 对比
-│   ├── check-perf.ts             # 性能记录与前后对比
-│   └── lib.ts                    # 语料加载、dist 写入、统计工具
-├── test/                         # vitest 单测
-└── src/
-    ├── index.ts                  # 公共 API 汇总
-    ├── types/
-    │   ├── config.ts             # 配置模型
-    │   ├── issues.ts             # 诊断/统计
-    │   ├── lang.ts               # 旧版 .lang 文档
-    │   ├── timing.ts             # 计时报告类型
-    │   └── api.ts                # RPC/控制台 DTO
-    ├── config/
-    │   ├── schema.ts             # zod schema
-    │   ├── jsonc.ts              # JSONC 解析/目标修改
-    │   ├── lint.ts               # 语义 lint
-    │   ├── dist.ts               # dist 路径推导
-    │   └── legacyYaml.ts         # config.yml -> v2
-    └── engine/
-        ├── tokenizer.ts          # 严格分词
-        ├── model.ts              # generator/group 图、大小、顺序
-        ├── lexicon.ts            # 词法条目、affix 特化、token trie
-        ├── compile.ts            # LIT/LEX/REDUCE、namespace trie
-        ├── matcher.ts            # 模式执行、候选、trace
-        ├── apply.ts              # 生成、去重、fallback、unknown
-        ├── parity.ts             # 与 legacy golden 的逐 key 对比
-        ├── entryTest.ts          # 单条测试
-        ├── legacyLang.ts         # .lang 读写
-        ├── timing.ts             # 分阶段计时（只做观测）
-        └── stats.ts              # 统计/diff
-```
-
-| 层 | 文件 | 职责 |
-| --- | --- | --- |
-| 类型层 | `src/types/*` | 纯类型/常量；不依赖引擎实现 |
-| 配置层 | `src/config/*` | 解析、schema、lint、JSONC 编辑、YAML 导入 |
-| 引擎层 | `src/engine/*` | 分词、编译、匹配、生成、trace |
-| 入口层 | `src/index.ts` | 统一导出；提供 `compileConfig` 一站式编译 |
-
----
-
-## 3. 数据流
-
-```
-ProjectConfigV2
-   │ buildModel
-   ▼
-GeneratorModel（gens / groupIndex / groupSize / resolveGroup / 顺序比较）
-   │ buildLexicon
-   ▼
-Lexicon（dict + affix 词条、token trie、RuleMeta）
-   │ compileProject
-   ▼
-CompiledProject（groupPatterns / topPatterns / namespaceRoot）
-   │ new Matcher(...) 或 generateFromEntries(...)
-   ▼
-Candidate[] ──dedupeCandidates──► selectCandidate ──► output / fallback / unknown
-```
-
-单条测试在同样的编译结果上运行，只是额外收集 `TraceStep`。
-
----
-
-## 4. 配置模型
-
-### 4.1 `ProjectConfigV2`
+`ProjectConfigV2`（`src/types/config.ts`）：
 
 ```ts
 interface ProjectConfigV2 {
@@ -218,672 +61,147 @@ interface ProjectConfigV2 {
 }
 ```
 
-- `defaultTarget` 必须存在于 `targets`。
-- `generators` 的顺序很重要：最终候选按 `(generator, rule, combo)` 取最后命中。
-- `legacy` 只用于追溯，不参与算法。
+- `TargetConfig`：`id/label/format/workplace/source/fallback/output/unknown/encoding/lineEnding/notes`；目前 `format` 只支持 `legacy-lang`。
+- `GeneratorConfig`：`group`、`namespace`、`completed`、`dict`、`rules`；一个块可以同时包含 dict 和 rules。
+- `RuleDefinition`：`{ s, t, subs }`。
 
-### 4.2 `GeneratorConfig`
+配置 API：
 
-```ts
-interface GeneratorConfig {
-  group?: string;
-  namespace?: string;
-  cached?: boolean;
-  completed?: boolean;   // 默认 true
-  complete?: boolean;    // 旧配置笔误；C++ 不读，core 也不使用
-  extensions?: string;   // 旧配置笔误；C++ 只读 extension（单数），core 不使用
-  dict?: Record<string, string | Record<string, string>>;
-  rules?: RuleDefinition[];
-}
-```
+| API | 作用 |
+| --- | --- |
+| `parseProjectJsonc(raw)` | 解析 JSONC + schema + 语义问题；不抛错，返回 `config: null` 或 issues |
+| `lintProject(config)` | 语义 lint + `ProjectStats`（generator 数、组、规则模板、槽位、dict 条目、缺失组、环） |
+| `getTarget(config, targetId?)` | 按 id 或 defaultTarget 取 target |
+| `updateTargetJsonc(raw, targetId, patch)` | 用 `jsonc-parser.modify` 只改 target，保留注释；返回新 raw + issues |
+| `stringifyProjectConfig(config)` | 序列化 JSONC v2 文本（会丢失原注释） |
 
-- **一个块可以同时有 `dict` 和 `rules`**。当前配置有 10 个这样的块；`buildModel` 会按对象键顺序同时生成 dict generator 和 rule generator。
-- `completed: false` 的 generator 可以作为子组使用，但不会直接产生顶层候选。
-- `cached` 当前不参与匹配；它保留给未来的生成缓存。
-- 嵌套 dict：
-
-  ```jsonc
-  "Carminite": {
-    "S:": "砷铅铁",
-    "S:oredict.gem": "砷铅铁矿石"
-  }
-  ```
-
-  会展开成多个 dict generator，分别使用内部 namespace。
-- `RuleDefinition`：
-
-  ```ts
-  interface RuleDefinition {
-    s: string;        // "Crate of {0}"
-    t: string;        // "{0}板条箱"
-    subs: string[];   // ["dust"]
-  }
-  ```
-
-  `{n}` 对应 `subs[n]`。槽位可以出现在 `s` 和 `t` 中，检查见 `lintProject`。
-
-### 4.3 `TargetConfig` 与路径
-
-```ts
-interface TargetConfig {
-  id: string;
-  label: string;
-  format: 'legacy-lang';
-  workplace: string; // 相对仓库根目录
-  source: string;    // 相对 workplace
-  fallback: string;
-  output: string;
-  unknown: string;
-  encoding: 'utf-8';
-  lineEnding: 'crlf' | 'lf';
-  notes?: string;
-}
-```
-
-core 只保存路径字符串，**不解析、不校验越界**。`packages/server/src/paths.ts` 负责 `resolveInsideRepo` 和文件读写。
-
-### 4.4 命名空间与顺序
-
-- `combineNamespaces(a, b)`：一方是另一方前缀时取较长者，否则返回 `null`，整条组合作废。
-- 候选排序：`isBetterOrder(a, b)` 按 `generator > rule > combo` 比较；同一原文有多个候选时最后命中者获胜。
-- fallback 的重复 key 必须**首次获胜**，用 `buildFallbackMap` 构建，不能直接 `Map.set` 后写覆盖。
+legacy `config.yml` 导入在 `packages/node`，不在 core；core 不依赖 `yaml`。
 
 ---
 
-## 5. 主要类型
+## 3. 引擎数据流
 
-### 5.1 配置与诊断
-
-| 类型 | 作用 | 关键字段 |
-| --- | --- | --- |
-| `ProjectConfigV2` | JSONC v2 根配置 | `schemaVersion`, `defaultTarget`, `targets`, `generators` |
-| `TargetConfig` | 单目标文件布局 | `workplace`, `source`, `fallback`, `output`, `unknown`, `lineEnding` |
-| `GeneratorConfig` | 一个 generator 块 | `group`, `namespace`, `completed`, `dict`, `rules` |
-| `RuleDefinition` | 规则模板 | `s`, `t`, `subs` |
-| `ConfigIssue` | lint/解析诊断 | `severity`, `code`, `message`, `path`, `line`, `column` |
-| `ProjectStats` | 配置规模统计 | generator/group/rule/slot/dict/completed/mixed/missing/cycles |
-| `LintReport` | lint 结果 | `issues`, `stats` |
-
-`lintProject` 的常见 code：
-
-- `group.missing`、`group.cycle`
-- `rule.slot-out-of-range`、`rule.unused-sub`、`rule.adjacent-slots`
-- `rule.affix`（词内拼接，编译期特化）
-- `rule.empty-source`、`rule.empty-sub`
-- `dict.empty-key`、`dict.empty-value`
-- `legacy.complete-key`、`legacy.extensions-key`（旧键被忽略）
-
-### 5.2 旧版 `.lang`
-
-| 类型 | 作用 | 关键字段 |
-| --- | --- | --- |
-| `LangEntry` | 一条词条 | `key`, `value`, `line` |
-| `LangDuplicate` | 重复 key | `key`, `value`, `line`, `previousValue`, `previousLine` |
-| `LangDocument` | 解析后的文件 | `entries`, `map`, `duplicates`, `lineEnding`, `issues` |
-| `LangFileStats` | 统计 | `keys`, `uniqueKeys`, `emptyValues`, `duplicateKeys`, `valuesWithParagraph`, `valuesWithEquals`, `lineEnding` |
-
-`LangDocument.map` 是后写覆盖，用于按 key 查源文/输出；fallback 的首次获胜语义由 `buildFallbackMap` 单独实现。
-
-### 5.3 引擎内部类型
-
-| 类型 | 作用 |
-| --- | --- |
-| `EngineGenerator` | 规范化后的 generator：`id`, `group`, `namespace`, `completed`, `kind`, `payload` |
-| `GeneratorModel` | generator 数组、组索引、`groupSize`、`resolveGroup`、`combineNs`、`betterOrder`、`compileTemplate` |
-| `ResolvedEntry` | `resolveGroup` 的具体结果：`s`, `t`, `ns`, `gen`, `ri`, `combo`, `idx` |
-| `LexEntry` | 词法表条目：`terms`, `target`, `namespace`, `generatorId`, `rule`, `combo`, `index`, `groupId` |
-| `RuleMeta` | 规则编译元数据：`srcParts`, `tgtParts`, `subs`, `subSizes`, `slotOrder`, `slotCount`, `base`, `count` |
-| `Lexicon` | 词法表：`byFirst`, `last`, `trie`, `groupRuleMetas`, `ruleMetaByKey` |
-| `PatternOp` | `{kind:'lit'}` / `{kind:'lex'}` / `{kind:'reduce'}` |
-| `CompiledPattern` | `ops`, `min`, `max`, `first`, `last`, `required`, `rem` |
-| `NamespaceNode` | namespace trie 节点：`children`, `patterns`, `candidates`, `firstIndex` |
-| `CompiledProject` | `model`, `lexicon`, `groupPatterns`, `topPatterns`, `namespaceRoot`, `stats` |
-| `Candidate` | 运行时候选：`target`, `namespace`, `idx`, `generatorId`, `rule`, `combo` |
-| `CandidateView` | 前端候选视图：`target`, `namespace`, `generator`, `generatorId`, `rule`, `combo` |
-| `GenerationResult` | `output: Map<string,string>`, `unknown: Set<string>`, `stats`, `candidatesByValue` |
-| `EntryTestResult` | 单条测试结果：`tokens`, `selected`, `candidates`, `fallback`, `unknown`, `steps`, `issues` |
-| `TraceStep` | 单步 trace：`stage`, `message`, `data` |
-| `TimingReport` | 计时报告：`label`, `totalMs`, `phases[{name,ms}]` |
-
-### 5.4 RPC / 控制台 DTO
-
-| 类型 | 作用 |
-| --- | --- |
-| `ProjectSnapshot` | 当前 raw、解析后的 config、issues、stats、targets、activeTargetId |
-| `SaveProjectResult` | 保存结果：`savedAt`, `backupPath` |
-| `TargetPatch` | 目标字段补丁（不能改 `id`/`format`/`encoding`） |
-| `FileInfo` | 文件是否存在、大小、行数、key 数、空值、重复、`¶`/`=`、换行符 |
-| `DiffStats` / `DiffSample` | 两个 key→value 映射的差异统计和样例 |
-| `IoCheckReport` | IO 检查结果：四个文件信息（含只读的 legacy golden）、生成摘要、`parity`、`timings`、diff、notes |
-| `GenerateResult` | 生成结果：统计、hash、`timings`、diff、写入的 dist 路径 |
-| `OperationTiming` | server 端到端计时：`readMs` / `compileMs` / `generateMs` / `diffMs` / `writeMs`，并带 core 的 `compile`/`generate` 分阶段报告 |
-| `EntryTestRequest` / `EntryTestResult` | 单条测试请求/结果 |
-| `ServerMethodMap` | RPC 方法签名表，server 实现、web 只 type-import |
-
-`ServerMethodMap` 的方法：
-
-| 方法 | 参数 | 返回 |
-| --- | --- | --- |
-| `getProject` | `[]` | `ProjectSnapshot` |
-| `validateProject` | `[raw]` | `ProjectSnapshot` |
-| `saveProject` | `[raw]` | `SaveProjectResult` |
-| `updateTarget` | `[raw, targetId, patch]` | `ProjectSnapshot` |
-| `checkIo` | `[targetId]` | `IoCheckReport` |
-| `generate` | `[targetId, write, includeOutput?]` | `GenerateResult` |
-| `testEntry` | `[targetId, key, value?]` | `EntryTestResult` |
-| `importLegacyConfig` | `[]` | `ProjectSnapshot` |
-
-类型工具：
-
-```ts
-type P = ServerParams<'testEntry'>; // [targetId: string, key: string, value?: string]
-type R = ServerResult<'testEntry'>; // EntryTestResult
+```
+config
+  → buildModel           generator/group/namespace/规则图
+  → buildLexicon         词法条目、affix、token trie
+  → compileProject       展开为 LIT / LEX / REDUCE 模式 + namespace trie
+  → Matcher.match        输入 key/value → 候选
+  → generateFromEntries  按原文值聚合、去重、fallback、unknown、统计
 ```
 
-core 只声明这些类型；实现位于 `packages/server/src/handlers.ts`。
+- `compileConfig(config)`：一次完成 model + lexicon + compile，并写入 `timings`。
+- 匹配器有 token/namespace 缓存；一个 `Matcher` 可复用一个输入文件，但不要并发共享。
+- 生成结果包括 `output`、`unknown`、`stats`、`candidatesByValue`、`timings`。浏览器/Node 宿主通常不保留 `candidatesByValue`，只在调试时读取。
+- 单条目 `testEntry` 返回 tokens、候选、最终选择、fallback、unknown 和 LIT/LEX/REDUCE/EMIT trace。
 
 ---
 
-## 6. API 参考
+## 4. 公共 API
 
-以下签名省略了部分泛型细节，以源码 `src/index.ts` 为准。
-
-### 6.1 配置解析与编辑
-
-#### `parseProjectJsonc(raw: string): { config: ProjectConfigV2 | null; issues: ConfigIssue[] }`
-
-解析允许注释和尾逗号的 JSONC；语法错误会带 1-based 行列号，schema 错误带 `path`。
-
-```ts
-const parsed = parseProjectJsonc(raw);
-if (!parsed.config) {
-  console.error(parsed.issues);
-  throw new Error('配置无效');
-}
-```
-
-#### `lintProject(config: ProjectConfigV2): LintReport`
-
-语义 lint：缺失组、环、槽位越界/未使用、相邻占位符、affix、空 dict key/value、旧键 `complete`/`extensions` 等。返回 `issues` 和 `stats`。
-
-#### `getTarget(config, targetId?): TargetConfig`
-
-`targetId` 省略时使用 `config.defaultTarget`；找不到会抛错。
-
-#### `updateTargetJsonc(raw, targetId, patch): { raw: string; issues: ConfigIssue[] }`
-
-用 `jsonc-parser.modify` 只改目标对象，保留文件里的注释和其他内容。返回的新 `raw` 仍需重新解析/lint 后再写盘。`patch` 不接受 `id`/`format`/`encoding`。
-
-```ts
-const updated = updateTargetJsonc(raw, 'gt6-legacy', { lineEnding: 'lf' });
-if (updated.issues.some((issue) => issue.severity === 'error')) {
-  // 不写盘
-} else {
-  await writeFile('packages/core/project.jsonc', updated.raw);
-}
-```
-
-#### `stringifyProjectConfig(config): string`
-
-重新序列化整份配置（会丢失原注释）。主要用于 legacy YAML 导入或新建配置。
-
-#### `convertLegacyYamlToProject(yamlText, options?): ProjectConfigV2`
-
-把旧 `config.yml` 文本转成 v2 配置。默认 target 是 `DEFAULT_LEGACY_TARGET`，`sourceFile` 默认 `packages/legacy/workplace/config.yml`。不会自动写盘。
-
-```ts
-const config = convertLegacyYamlToProject(yamlText);
-const raw = stringifyProjectConfig(config);
-```
-
-### 6.2 编译
-
-#### `compileConfig(config): CompiledProject`
-
-一站式编译，等价于：
-
-```ts
-const model = buildModel(config);
-const lexicon = buildLexicon(model);
-const compiled = compileProject(model, lexicon);
-```
-
-`compileConfig` 约 30 ms（当前配置）；一次编译后可以多次 `generateFromEntries` 或 `testEntry`。
-
-返回的 `CompiledProject.timings` 记录 `model` / `lexicon` / `groups` / `topPatterns` / `namespaces` / `candidateSets` 各阶段耗时，形式为 `TimingReport`。直接调用 `compileProject(model, lexicon, timer?)` 时只有传入 `timer` 才会有分阶段记录。
-
-#### `buildModel(config): GeneratorModel`
-
-把 JSONC generator 块展开成内部 generator 数组，并构建组索引、组大小、`resolveGroup` 和排序函数。
-
-常用方法：
-
-```ts
-model.groupSize('dust');          // 近似结果数，用于 combo
-model.resolveGroup('material');   // 物化条目（affix 特化用）
-model.combineNs('S:', 'S:oredict.');
-model.betterOrder(a, b);
-model.compileTemplate('Crate of {0}');
-```
-
-`resolveGroup` 会物化子组结果；只应在需要具体条目时调用（例如 affix 特化），不要用它做常规匹配。
-
-#### `buildLexicon(model): Lexicon`
-
-构建 dict 词条、affix 特化词条、token trie、`RuleMeta`。
-
-- `hasGroupEntries(gid)`：组是否有词法条目（dict 或 affix）
-- `hasGeneratorEntries(gid, genId)`：某个 generator 是否有 affix 词条
-- `firstTokens(gid, allowedGen?)`：首 token 集合
-
-#### `compileProject(model, lexicon): CompiledProject`
-
-把所有组和规则展开成 `LIT`/`LEX`/`REDUCE` 模式，构建 namespace trie。可能抛出 pattern 展开上限错误（当前配置远低于上限）。
-
-`CompiledProject.stats` 包含：
-
-```ts
-{ topPatterns, allPatterns, maxGroupPatterns, lexEntries }
-```
-
-#### `MAX_TOKENS`
-
-`128`。输入值 token 数超过它时跳过匹配。
-
-#### `patternLabel(compiled, pattern): string`
-
-把模式格式化为 `LIT(Crate) | LEX(wood) | REDUCE(material:3) ...`，用于日志/trace。
-
-#### `groupLexEntries(lexicon, groupId): LexEntry[]`
-
-取出某组的全部词法条目，用于调试/统计。
-
-### 6.3 匹配与生成
-
-#### `class Matcher`
-
-```ts
-const matcher = new Matcher(compiled);
-const result = matcher.match(key, value, {
-  trace: [],        // 可选：收集 TraceStep
-  attempts: [],     // 可选：记录被尝试的 pattern
-  maxSteps: 400,
-});
-```
-
-返回：
-
-```ts
-{
-  tokens: string[];
-  candidates: Candidate[];
-  patternsTried: number;
-}
-```
-
-`Matcher` 内部缓存 token 和上一次 namespace 节点；可以复用于多个 key，但不要跨线程共享同一个实例。
-
-公开方法：
-
-- `tokenize(value)`：带缓存的严格分词
-- `namespaceNode(key)`：沿 namespace trie 找最深节点
-- `match(key, value, options?)`：执行匹配
-
-#### `candidateViews(compiled, candidates): CandidateView[]`
-
-把内部 `Candidate` 转成前端展示用视图（补上组名）。
-
-#### `dedupeCandidates(compiled, candidates): Candidate[]`
-
-按 `(namespace, target)` 去重，保留 `(gen,ri,combo)` 更大的候选。
-
-#### `selectCandidate(compiled, key, candidates): Candidate | undefined`
-
-先按 `key.startsWith(namespace)` 过滤，再取 order 最大者。没有合法候选返回 `undefined`。
-
-#### `generateFromEntries(compiled, sourceEntries, fallbackEntries): GenerationResult`
-
-对完整输入生成输出。内部会：
-
-1. 对每个源条目调用 `Matcher.match`；
-2. 按原文值聚合候选；
-3. 去重、按 key namespace 过滤、取最后命中；
-4. 没有候选时使用 fallback；再没有则保留英文并记入 `unknown`。
-
-返回：
-
-```ts
-{
-  output: Map<string, string>;
-  unknown: Set<string>;
-  stats: {
-    sourceKeys, outputKeys, unknownKeys,
-    sameAsEnglish, conflictKeys, matchedKeys
-  };
-  candidatesByValue: Map<string, Candidate[]>;
-  timings: TimingReport; // match / dedupe / apply
-}
-```
-
-注意：`generateFromEntries` 每次都新建一个 `Matcher`；如果你要连续生成多次，编译结果可以复用，但每次生成会重新建匹配器。
-
-#### `buildFallbackMap(entries): Map<string, string>`
-
-按首次出现构建 fallback 表，对齐 C++ 的 `std::map::insert` 首次获胜语义。
-
-### 6.4 单条测试与 trace
-
-#### `testEntry(compiled, key, value, fallbackMap, issues?): EntryTestResult`
-
-```ts
-const result = testEntry(compiled, key, value, buildFallbackMap(fallback.entries));
-```
-
-返回：
-
-- `tokens`：严格分词结果
-- `selected`：最终候选（`CandidateView`）
-- `candidates`：去重后的全部候选
-- `fallback`：fallback 值（如果命中）
-- `unknown`：既没有候选也没有 fallback
-- `steps`：`TraceStep[]`，包含 `tokenize`/`namespace`/`pattern`/`lit`/`lex`/`reduce`/`emit`/`reject`/`select`/`fallback`
-- `issues`：调用方传入的配置诊断
-
-core 返回的 `targetId` 是空字符串；server 会在返回前填入实际 target。
-
-`TraceStep`：
-
-```ts
-interface TraceStep {
-  stage: TraceStage;
-  message: string;
-  data?: Record<string, unknown>;
-}
-```
-
-trace 最多 400 步；单条测试的 pattern 尝试最多记录 120 个（`PatternAttempt`）。
-
-### 6.5 旧版 `.lang`
-
-#### `parseLegacyLang(text): LangDocument`
-
-- 从包含 `languagefile` 的行开始；
-- 每个含 `=` 的行按第一个 `=` 切分，key 去掉前导空格；
-- 遇到含 `}` 的行结束；
-- 保留 `S:` 前缀、值中的 `=` 和 `¶`；
-- `line` 为 1-based 原始行号；
-- `duplicates` 记录重复 key 的当前/上一次位置；
-- `map` 是后写覆盖。
-
-#### `writeLegacyLang(entries, lineEnding = 'crlf'): string`
-
-输出与 C++ `LangFile` 对齐的头：
-
-```
-# Configuration file
-enablelangfile {
-    B:UseThisFileAsLanguageFile=true
-}
-
-languagefile {
-    key=value
-}
-
-```
-
-顺序由调用方决定；`generate` 按源文件顺序写。CRLF 是默认值。
-
-### 6.6 统计与 parity
-
-#### `compareToGolden(golden, generated, expectedUnknown, sampleLimit = 10): ParityReport`
-
-迁移期 parity 的唯一实现；脚本和 server 共用它，避免两套口径。
-
-- `mismatch` / `samples`：遍历 golden 的 key，缺 key 或值不同都计入；
-- `unknownMismatch` / `unknownSamples`：unknown 双向集合差，只比 key；
-- `hash`：`hashOutput(generated.output)` 的 sha256 前 16 位；
-- `ok`：`mismatch === 0 && unknownMismatch === 0`。
-
-`generated` 只要求 `{ output: Map<string,string>, unknown: Set<string> }`，所以既可以直接传 `GenerationResult`，也可以传回读的 dist 产物。
-
-#### `hashOutput(output): string`
-
-按 Map 顺序拼接 `key\0value\n` 后取 sha256 前 16 位。它是输出映射的指纹，不是文件哈希。
-
-#### `analyzeLangDocument(document): LangFileStats`
-
-统计 key 数、唯一 key、空值、重复 key、含 `¶`、含 `=`、换行符。`lines` 字段当前等于词条数（历史命名），物理行数由 server 的 `FileInfo.lines` 单独计算。
-
-#### `diffLangMaps(expected, actual, sampleLimit = 20): DiffStats`
-
-比较两个 `Map<string,string>`：
-
-- `same`：expected 中存在且值相同
-- `changed`：expected 中存在但值不同
-- `removed`：expected 有、actual 没有
-- `added`：actual 有、expected 没有
-- `samples`：前 N 条差异
-
-### 6.7 工具函数
+### 4.1 编译
 
 | API | 说明 |
 | --- | --- |
-| `tokenize(value)` | 严格分词；ASCII 走手写快路径 |
-| `tokenizeAscii(value)` | 仅 ASCII 的手写分词 |
-| `compileTemplate('Crate of {0}')` | 拆成 `['Crate of ', 0]` |
-| `combineNamespaces(a, b)` | 前缀兼容则取较长者，否则 `null` |
-| `isBetterOrder(a, b)` | `(gen,ri,combo)` 三元组比较 |
-| `generatorLabel(model, genId)` | 调试标签 |
-| `ruleLabel(model, genId, ruleIndex)` | 调试标签 |
-| `patternLabel(compiled, pattern)` | `LIT/LEX/REDUCE` 可读串 |
-| `groupLexEntries(lexicon, gid)` | 某组全部词法条目 |
+| `compileConfig(config)` | model + lexicon + compile 的组合入口 |
+| `buildModel(config)` | 构建 generator/group 模型 |
+| `buildLexicon(model)` | 构建词法表和 trie |
+| `compileProject(model, lexicon, timer?)` | 展开模式并构建 namespace trie |
+| `patternLabel(compiled, pattern)` | 调试用模式文本 |
+| `MAX_TOKENS` | 单条值最大 token 数（128） |
 
----
+### 4.2 匹配与生成
 
-## 7. 调用示例
+| API | 说明 |
+| --- | --- |
+| `Matcher` | 输入驱动的 pattern 匹配器 |
+| `generateFromEntries(compiled, source, fallback)` | 全量生成 |
+| `buildFallbackMap(entries)` | fallback 首次获胜 |
+| `dedupeCandidates(compiled, candidates)` | 候选去重 |
+| `selectCandidate(compiled, key, candidates)` | namespace 过滤 + 顺序选择 |
+| `candidateViews(compiled, candidates)` | 前端可读候选视图 |
+| `testEntry(compiled, key, value, fallbackMap, issues?)` | 单条测试 + trace |
 
-### 7.1 完整生成（写 dist，不碰 legacy）
+### 4.3 `.lang` 与统计
+
+| API | 说明 |
+| --- | --- |
+| `parseLegacyLang(text)` | 按 C++ `LangFile` 语义解析；保留 `S:` 前缀、`¶`、值内 `=` |
+| `writeLegacyLang(entries, lineEnding?)` | 写回 legacy `.lang` 文本 |
+| `analyzeLangDocument(document)` | key/唯一 key/空值/重复/特殊字符/换行统计 |
+| `diffLangMaps(expected, actual, sampleLimit?)` | 逐 key diff + 样本 |
+
+### 4.4 parity
+
+`compareToGolden(golden, generated, expectedUnknown, sampleLimit?)`：
+
+- 主输出遍历 golden 的 key，缺失或值不同都算 `mismatch`；
+- unknown 做双向集合比较，只比 key；
+- 返回 counts + samples；**hash 不在 core**，由 runtime 的 `HashProvider` 计算（Node 用 `node:crypto`，浏览器用 Web Crypto）。
+
+当前真实语料基线：
+
+```
+mismatch = 0
+unknownMismatch = 0
+unknown = 774
+hash = db41064a4b4c34dd
+roundTrip.ok = true
+```
+
+### 4.5 Hook
 
 ```ts
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-
-import {
-  compileConfig,
-  distPathsForTarget,
-  generateFromEntries,
-  getTarget,
-  parseLegacyLang,
-  parseProjectJsonc,
-  writeLegacyLang,
-} from '@gt6tg/core';
-
-const raw = readFileSync('packages/core/project.jsonc', 'utf8');
-const parsed = parseProjectJsonc(raw);
-if (!parsed.config) throw new Error(JSON.stringify(parsed.issues));
-
-const target = getTarget(parsed.config);
-const workplace = resolve('packages/legacy/workplace');
-const source = parseLegacyLang(readFileSync(resolve(workplace, target.source), 'utf8'));
-const fallback = parseLegacyLang(readFileSync(resolve(workplace, target.fallback), 'utf8'));
-
-const result = generateFromEntries(compileConfig(parsed.config), source.entries, fallback.entries);
-
-const dist = distPathsForTarget(target); // packages/core/dist/gt6-legacy/...
-const outputEntries = source.entries.map((entry) => ({
-  ...entry,
-  value: result.output.get(entry.key) ?? entry.value,
-}));
-const unknownEntries = source.entries.filter((entry) => result.unknown.has(entry.key));
-
-mkdirAndWrite(dist.output, writeLegacyLang(outputEntries, target.lineEnding));
-mkdirAndWrite(dist.unknown, writeLegacyLang(unknownEntries, target.lineEnding));
-
-function mkdirAndWrite(path: string, content: string): void {  mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, content, 'utf8');
+interface CoreHookEvents {
+  'config:parsed': { issues: ConfigIssue[] };
+  'compile:started': { generatorBlocks: number; sourceKeys?: number };
+  'compile:finished': { stats: CompileStats; timings: TimingReport; cached: boolean };
+  'entry:tested': { key: string; targetId?: string; unknown: boolean };
 }
+type CoreHooks = { [K in keyof CoreHookEvents]?: (payload: CoreHookEvents[K]) => void };
 ```
 
-迁移期的写盘约定：只写 `packages/core/dist`，不修改 `packages/legacy`，也不生成 `.bak`。server 用 `writeArtifact` 做同样的路径守卫；脚本侧的等价实现见 `scripts/lib.ts` 的 `writeDistArtifacts`。
+`emitHook(hooks, name, payload)` 同步、可选、吞异常；Hook 只观测，不改变运行结果。runtime 在其上扩展 job 事件。
 
-### 7.2 单条测试 + trace
+### 4.6 计时
 
-```ts
-import {
-  buildFallbackMap,
-  compileConfig,
-  parseLegacyLang,
-  testEntry,
-} from '@gt6tg/core';
+`Timer` / `createTimer(label)` 记录分阶段 `TimingReport`。核心引擎的 `compileConfig` 和 `generateFromEntries` 会写入 timings；跨运行比较由 `packages/node` 的 CLI perf 负责，不在 core 测试里做性能断言。
 
-const compiled = compileConfig(parsed.config);
-const fallback = parseLegacyLang(fallbackText);
+### 4.7 类型
 
-const result = testEntry(
-  compiled,
-  'S:oredict.crateGt64DustRainforestJasper',
-  'Crate of Rainforest Jasper Dust',
-  buildFallbackMap(fallback.entries),
-);
+`src/types/index.ts` 统一导出：
 
-console.log(result.selected?.target); // 雨林碧玉粉板条箱
-for (const step of result.steps) {
-  console.log(step.stage, step.message, step.data);
-}
-```
-
-### 7.3 检查配置
-
-```ts
-import { lintProject, parseProjectJsonc } from '@gt6tg/core';
-
-const parsed = parseProjectJsonc(raw);
-if (parsed.config) {
-  const lint = lintProject(parsed.config);
-  console.log(lint.stats);
-  for (const issue of lint.issues) {
-    console.log(issue.severity, issue.code, issue.message, issue.path);
-  }
-}
-```
-
-### 7.4 修改 target（保留注释）
-
-```ts
-import { writeFile } from 'node:fs/promises';
-
-import { updateTargetJsonc } from '@gt6tg/core';
-
-const { raw: nextRaw, issues } = updateTargetJsonc(raw, 'gt6-legacy', {
-  output: 'zh/GregTech.lang',
-  lineEnding: 'crlf',
-});
-
-if (!issues.some((issue) => issue.severity === 'error')) {
-  // 交给 server 的 writeWithBackup
-}
-```
-
-### 7.5 server 侧调用
-
-```ts
-import {
-  compileConfig,
-  generateFromEntries,
-  parseLegacyLang,
-  parseProjectJsonc,
-  writeLegacyLang,
-} from '@gt6tg/core';
-```
-
-server 负责：
-
-- 读取 `packages/core/project.jsonc` 和 target 文件；
-- `resolveInsideRepo` 路径校验；
-- 保存前 `writeWithBackup`；
-- 把 core 的 `Map`/`Set` 序列化成 RPC DTO。
-
-### 7.6 web 侧只使用类型
-
-```ts
-import type {
-  EntryTestResult,
-  IoCheckReport,
-  ProjectSnapshot,
-  ServerMethodMap,
-} from '@gt6tg/core';
-
-// 实际调用：
-// ws.send({ id, method: 'testEntry', params: [targetId, key, value] })
-```
-
-web 不 import core 的运行时函数；算法不会进入浏览器包。
+- `config.ts`：`ProjectConfigV2`、`TargetConfig`、`GeneratorConfig`、`RuleDefinition`
+- `issues.ts`：`ConfigIssue`、`ProjectStats`、`LintReport`
+- `lang.ts`：`LangEntry`、`LangDocument`、`LangFileStats`
+- `parity.ts`：`ParityInput`、`ParityReport`、样本类型
+- `timing.ts`：`PhaseTiming`、`TimingReport`
+- `api.ts`：控制台/RPC 共用 DTO（`IoCheckReport`、`GenerateResult`、`EntryTestResult`、`MemorySnapshot` 等）
 
 ---
 
-## 8. 语义与保证
+## 5. 测试、类型与格式
 
-1. **严格分词**：单词（允许内部撇号）+ 标点；空白不作为 token。`Anti-Actinium` → `[Anti, -, Actinium]`。
-2. **方向**：从输入 token 出发匹配 `LIT`/`LEX`，不展开 completed-only 笛卡尔积。
-3. **affix 特化**：`{0}Crush Hammer Head`、`{0}s` 在编译期展开成具体词条；运行时不需要拆分 token。
-4. **候选顺序**：`(generator, rule, combo)` 三元组，最后命中获胜；不能编码成单个 float。
-5. **namespace**：`combineNs` 只接受前缀兼容，最终候选还要通过 `key.startsWith(namespace)`。
-6. **fallback**：首次获胜；`buildFallbackMap` 已实现。
-7. **未知**：没有候选且没有 fallback 时保留英文并写入 `unknown`。
-8. **确定性**：相同配置/输入/顺序产生相同输出；hash 可复现。
-9. **纯函数/类**：core 不依赖全局状态；`Matcher` 的缓存是实例级。
+```bash
+cd packages/core
+npx vitest run        # 只验证正确性
+npx tsc --noEmit
+npx oxlint
+npx oxfmt --check
+npm run verify        # tsc + vitest
+```
 
-### 过滤器
-
-pattern 匹配前会依次检查：
-
-- 首 token 索引（namespace 节点内）
-- `min`/`max` token 数
-- `last` token
-- `required` 字面量顺序子序列
-- `LEX` 内部的 `remMin`/`remMax` 剩余长度约束
-
-这些过滤器只做剪枝，不改变语义；真正的词法匹配由 token trie 完成。
+core 测试不跑真实文件系统、Worker、perf 或 git；`test/exports.test.ts` 会检查公共导出面，防止重新引入已移出的 Node-only 能力。
 
 ---
 
-## 9. 性能与并发
+## 6. 性能参考
 
-- 当前真实配置：编译约 30 ms；完整 125,676 key 生成约 1.8–2.6 s（Node 24，取决于机器/GC）。
-- `compileConfig` 只做一次；重复单条测试复用 `CompiledProject`。
-- `generateFromEntries` 每次新建 `Matcher`，适合一次完整生成；如果需要多次生成，编译结果可复用，匹配器不必跨次共享。
-- `Matcher` 含可变缓存（token/namespace），不要并发共享同一个实例；为每个 worker/请求创建独立实例。
-- `generateFromEntries` 的 `candidatesByValue` 会保留候选；如果只需要统计，可在调用后丢弃引用，避免长期占用。
-- 每次调用都会返回 `timings`（几个 `performance.now()` 调用，开销可忽略）。需要跨运行比较时用 `scripts/check-perf.ts`，不要只看单次交互里的 `durationMs`。
-- 当前真实语料的耗时主要落在 `generate.match`；`compile` 只占几十毫秒。速度异常时先看 `timings.generate.phases`。
+真实单 GT6 语料（Node 24）：
 
----
+- `compileConfig`：约 20–30 ms；
+- 完整 125,676 key 生成：约 1.5–2.3 s（取决于运行环境/Worker）；
+- 峰值对象计数：patterns 993/2866，lexEntries 4,139，candidate buckets 109,271 / items 114,270；
+- Node 进程内存量级约 200–270 MB heap、420–570 MB RSS。
 
-## 10. 错误处理
-
-- `parseProjectJsonc` 不抛错：返回 `config: null` 和 `issues`。
-- `lintProject` 不抛错：返回问题列表。
-- `compileConfig`/`buildModel`/`buildLexicon`/`compileProject` 在配置结构不可编译时抛错（例如 pattern 展开超限）。
-- `generateFromEntries` 假设 `CompiledProject` 已成功编译；不会检查源/fallback 文件是否存在。
-- `testEntry` 假设 `value` 已由调用方解析；server 负责“key → 英文值”的查找。
-- `writeLegacyLang` 只生成字符串，不写文件；写盘由调用方负责。
-- 迁移期写盘只允许落在 `packages/core/dist`：`server` 的 `writeArtifact` 和脚本的 `writeDistArtifacts` 都会在写前拒绝 legacy 路径；生成物不产生 `.bak`。
-
----
-
-## 11. 当前边界
-
-- 只实现 `legacy-lang` target；GT6W JSON 是后续 target。
-- 书本/散文没有专门处理；它们会走普通匹配，未命中则进入 unknown。
-- `complete`/`extensions` 这两个旧键会被忽略（与 C++ 行为一致）；lint 会给出 info。
-- `conflictKeys` 统计的是“对当前 key 通过 namespace 过滤后仍有多个不同译文”的 key 数；与早期文档的 122 口径可能不同。
-- 词法 trie 目前是一级 token trie + 每节点 entries；如果规则图继续增长，可以再做共享前缀/子自动机。
-
----
-
-## 12. 相关文档
-
-- [算法实现说明](docs/algorithms.md)：forward/stream/token/grammar/flat-token/pattern 的对比、编译细节、实测数据。
-- [性能评估](docs/perf-evaluation.md)：基准方法、各引擎数字、优化结论。
-- [迁移方案](docs/migration-plan.md)：阶段计划、目标架构、风险。
-- [仓库 README](../../README.md)：Rush 工作区、server/web 启动方式。
+浏览器/Node 的 Worker、编译缓存、任务取消和性能记录分别在 `packages/runtime`、`packages/node`、`packages/web` 中实现。

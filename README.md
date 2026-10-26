@@ -12,7 +12,7 @@
 | `packages/node` | Node 适配：CLI 门禁、dev WebSocket/HTTP、worker_threads、文件系统、配置与产物 | `packages/node/src/index.ts`, `packages/node/project.jsonc` |
 | `packages/web` | Vue 3 + Naive UI 统一控制台；开发用 WebSocket，生产构建用浏览器 Worker | `packages/web/src/App.vue`, `packages/web/src/worker/main.ts` |
 
-`core`/`runtime` 不依赖 Vue/Naive UI/Node 文件系统；`web` 通过 `CoreClient` 协议调用后端，不直接依赖算法实现。Node 侧算法在 worker_threads 中执行，浏览器侧在 Dedicated Worker 中执行；主线程只处理 UI/WS/HTTP 与文件。配置的唯一事实来源是 `packages/node/project.jsonc`。
+`core`/`runtime` 不依赖 Vue/Naive UI/Node 文件系统。Node 侧算法在 worker_threads、浏览器侧在 Dedicated Worker 中执行；web 主线程负责 UI 与轻量报告解析/diff，开发模式通过 `RpcClient` 调 node，生产模式通过 Worker 调 runtime。配置的唯一事实来源是 `packages/node/project.jsonc`。
 
 迁移期有一条硬边界：**`packages/legacy` 只能由 legacy 自身（C++ 工具）修改**。`node`/`core`/`runtime` 不会写入 legacy，也不会生成 `.bak`；Node 的生成物统一写到 `packages/node/dist/<targetId>/`。`packages/legacy/workplace` 下的英文源、fallback、`zh/GregTech.lang` 和 `zh/GregTech.unknown.lang` 都按只读输入使用，后两者作为 parity 的 golden。
 

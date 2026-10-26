@@ -24,7 +24,7 @@ Node server 只在开发环境存在。**不提供生产版 Node web 服务**。
 浏览器生产形态是一个**纯静态 web REPL**：
 
 - 没有 Node 后端，静态文件即可运行。
-- 算法运行在 Dedicated Web Worker 中，主线程只负责 UI。
+- 算法运行在 Dedicated Web Worker 中，主线程负责 UI 与轻量结果解析/diff。
 - 只保证当前单 GT6 语料：源文件约 7.66 MB、golden 约 7.38 MB、配置约 136 KB。
 - 状态仅存在内存：刷新即丢失，不做 IndexedDB/OPFS 持久化。
 - 构建时内置一份只读默认 `project.jsonc`；用户可以在内存中编辑并导出 JSONC。
@@ -129,7 +129,7 @@ Vue UI（主线程）
 Dedicated Web Worker
   ├── runtime EngineHost（编译缓存、JobRunner）
   ├── core（算法/配置）
-  └── VirtualWorkspace（source/fallback/golden/unknown 内存文件）
+  └── VirtualWorkspace（实现为 BrowserBackend.virtualFiles）
 ```
 
 关键点：
@@ -143,7 +143,7 @@ Dedicated Web Worker
 
 `web` 同一套 UI，通过 `CoreClient` 选择传输：
 
-- **开发**：`VITE_CORE_MODE=ws`，连接 Node dev server；支持保存仓库配置、HTTP 文件上传/下载。
+- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker；支持保存仓库配置、HTTP 文件上传/下载。
 - **生产**：默认 `worker`，纯静态；配置只读默认值/内存编辑/JSONC 导出；File API。
 
 UI 必须显式显示当前模式及能力差异（例如“保存到仓库”只在 dev 可用）。
@@ -189,7 +189,7 @@ type CoreEvent =
 | 传输 | 场景 | 机制 |
 | --- | --- | --- |
 | `DirectTransport` | runtime 单测、纯函数调用 | 直接调用 handler |
-| `WorkerTransport` | 浏览器生产 / Node worker_threads | `postMessage` / `MessagePort` |
+| `WorkerTransport`（`BrowserWorkerTransport` / `WorkerThreadTransport`） | 浏览器生产 / Node worker_threads | `postMessage` / `MessagePort` |
 | `WebSocketTransport` | Node dev web | WS 请求/响应 + 通知 |
 | HTTP | Node dev web 大文件 | multipart 上传、流式下载 |
 
@@ -258,16 +258,16 @@ cache: Map<compileId, { compiled, stats, lastUsed }>
 
 ### 6.1 浏览器 Worker
 
-- Vite 构建 `new Worker(new URL('./worker/index.ts', import.meta.url), { type: 'module' })`。
-- Worker 入口创建 `WorkerTransport`，调用 `serveRuntime(transport, { hash: webCryptoHash, clock: performance })`。
-- 主线程 `WorkerTransport` 与 UI 的 `CoreClient` 对接。
+- Vite 构建 `new Worker(new URL('../worker/main.ts', import.meta.url), { type: 'module' })`。
+- Worker 入口创建 `BrowserWorkerTransport`，调用 `createRuntimeDispatcher(host, emit)`。
+- 主线程 `BrowserWorkerTransport` + `DirectClient` 与 UI 对接。
 - Worker 生命周期跨多次运行；停止/重跑才 terminate。
 
 ### 6.2 Node worker_threads
 
 - Node dev server 和 CLI 都通过 `worker_threads` 运行算法。
-- worker 入口用 esbuild 打包成 JS（`bin/core-worker.mjs` 或 `dist/worker.mjs`），避免 Node 直接加载 TS worker。
-- 主线程通过 `WorkerTransport`（基于 `parentPort`/`MessagePort`）发送请求、接收事件。
+- worker 入口用 esbuild 打包成 `.build/worker.cjs`，避免 Node 直接加载 TS worker。
+- 主线程通过 `WorkerThreadTransport`（基于 `parentPort`/`MessagePort`）发送请求、接收事件。
 - dev server 的 HTTP/WS 主线程只做桥接和文件处理。
 - CLI 主线程负责 argv、文件读写、门禁判定；算法在 worker 中执行。
 
@@ -284,8 +284,8 @@ cache: Map<compileId, { compiled, stats, lastUsed }>
 ### 6.4 Node CLI 分发
 
 - `packages/node` 用 esbuild（或等价 bundler）输出：
-  - `bin/gt6tg.mjs`：CLI 入口，`package.json` 的 `bin` 指向它。
-  - `bin/core-worker.mjs`：worker_threads 入口。
+  - `.build/worker.cjs`：worker_threads 入口。
+  - `.build/worker.cjs`：worker_threads 入口。
 - 开发时可以直接 `tsx src/cli/main.ts`，但 worker 仍用打包产物，避免 TS loader 不确定性。
 - `rush build` 包含类型检查与 bundle；`bin`/产物目录加入 `.gitignore`（如需分发再发布）。
 
@@ -318,12 +318,12 @@ packages/node/
   - 写成功后通知 runtime 使用新配置；旧 job 若在运行则先终止（单活动任务）。
 - 浏览器只导出 JSONC，不写仓库。
 
-### 7.3 浏览器 VirtualWorkspace
+### 7.3 浏览器 VirtualWorkspace（实现为 BrowserBackend.virtualFiles）
 
 浏览器没有真实路径，使用角色映射：
 
 ```
-VirtualWorkspace {
+VirtualWorkspace（BrowserBackend.virtualFiles） {
   configText: string
   source?: TextFile
   fallback?: TextFile
@@ -435,9 +435,9 @@ gt6tg gate        # lint + parity + hash + perf
 
 ### 10.4 分发
 
-- esbuild 打包 CLI + worker。
-- `package.json` 的 `bin.gt6tg` 指向 `bin/gt6tg.mjs`。
-- `bin/core-worker.mjs` 与 CLI 同目录，通过 `import.meta.url` 定位。
+- 当前 CLI 通过 `tsx` 运行；如需独立分发，可用 esbuild 打包 CLI + worker（后续增强）。
+- 若启用独立分发，再添加 `bin.gt6tg`（当前未启用）。
+- 当前 CLI 通过 `tsx src/cli/main.ts` 运行；worker 从 `.build/worker.cjs` 加载。
 - 不发布到 npm；仅本地/CI 使用。
 
 ---
@@ -457,9 +457,9 @@ gt6tg gate        # lint + parity + hash + perf
 
 ### 11.2 传输选择
 
-- 开发：`WebSocketTransport` + `fetch`/HTTP 文件。
-- 生产：`WorkerTransport` + File API。
-- `CoreClient` 对上暴露统一方法；组件不直接依赖 WebSocket/Worker。
+- 开发：`RpcClient`（WS）+ `fetch`/HTTP 文件。
+- 生产：`BrowserWorkerTransport` + File API。
+- `ConsoleBackend` 对上暴露统一方法；组件不直接依赖 WebSocket/Worker。
 
 ### 11.3 生产构建
 
@@ -566,7 +566,7 @@ packages/web/src/
 
 ### 阶段 6：浏览器化
 
-- web Worker 入口、WorkerTransport、VirtualWorkspace、内置默认配置、File API。
+- web Worker 入口、BrowserWorkerTransport、VirtualWorkspace、内置默认配置、File API。
 - 统一面板控制台：生产 Worker；开发 WS + Node dev server。
 - 实现历史（默认 3、上限 10）、golden 对比、run-to-run 对比、时间/空间指标、单活动任务、终止即丢弃。
 - `vite build` 必须通过，且 Worker bundle 无 Node 依赖。
@@ -621,4 +621,4 @@ packages/web/src/
    - `node` 仅 Node；
    - `web` 仅浏览器；
    - 无 `core → runtime/node/web`、`runtime → node/web`、`web → node` 的运行时依赖。
-8. 文档中的路径、命令、包名与实际仓库一致；旧 `packages/core/scripts` 与 `packages/server` 不再存在。
+8. 文档中的路径、命令、包名与实际仓库一致；旧 `packages/core/scripts` 与 `packages/server` 在 git 中不再存在（本地空目录可能被外部 dev 进程占用）。

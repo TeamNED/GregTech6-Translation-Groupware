@@ -24,6 +24,13 @@ export default defineConfig({
   },
   build: {
     // Naive UI 全量组件会让 main chunk 超过默认 500 kB；本地自测工具不追求拆包。
-    chunkSizeWarningLimit: 800,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // zod v4 的注释位置会触发 Rollup 的 INVALID_ANNOTATION；不影响产物。
+        if (warning.code === 'INVALID_ANNOTATION') return;
+        warn(warning);
+      },
+    },
   },
 });

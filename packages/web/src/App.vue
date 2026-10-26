@@ -63,6 +63,7 @@
               >
                 {{ state.progress }}
               </n-tag>
+              <n-tag v-if="state.busy > 0 && !state.progress" size="small" type="warning">处理中…</n-tag>
               <n-button size="small" :disabled="state.status !== 'open'" @click="refresh">刷新</n-button>
               <n-button v-if="state.busy > 0 && state.mode === 'repl'" size="small" type="error" @click="cancel">
                 停止
