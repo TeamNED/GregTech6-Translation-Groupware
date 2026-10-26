@@ -79,8 +79,8 @@
       </div>
 
       <n-alert type="info" class="section">
-        当前只支持单 GT6 原版目标。workplace/config.yml 与 output/unknown 都是 legacy golden，迁移期只读； core
-        的生成物写入 packages/core/dist/&lt;targetId&gt;/。这里只修改 project.jsonc 里的 target 字段。
+        当前只支持单 GT6 原版目标。workplace/config.yml 与 output/unknown 都是 legacy golden，迁移期只读；Node
+        的生成物写入 packages/node/dist/&lt;targetId&gt;/。这里只修改 project.jsonc 里的 target 字段。
       </n-alert>
 
       <n-form label-placement="top" class="target-form">

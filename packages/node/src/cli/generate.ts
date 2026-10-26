@@ -1,5 +1,5 @@
-import { compileConfig, generateFromEntries } from '../src/index';
-import { hashOutput } from './hash';
+import { compileConfig, generateFromEntries } from '@gt6tg/core';
+import { hashOutput } from '../hash';
 import { loadProjectData, repoRelative, writeDistArtifacts } from './lib';
 
 const started = performance.now();
@@ -33,7 +33,7 @@ console.log(
         output: repoRelative(dist.output),
         unknown: repoRelative(dist.unknown),
       },
-      note: '只写入 packages/core/dist，不修改 legacy，也不生成 .bak。',
+      note: '只写入 packages/node/dist，不修改 legacy，也不生成 .bak。',
     },
     null,
     2,

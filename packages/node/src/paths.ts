@@ -1,13 +1,13 @@
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 
-/** 仓库根目录：packages/server/src -> packages/server -> packages -> root。 */
+/** 仓库根目录：packages/node/src -> packages/node -> packages -> root。 */
 export const repoRoot = resolve(import.meta.dirname, '../../..');
-export const projectFilePath = resolve(repoRoot, 'packages/core/project.jsonc');
+export const projectFilePath = resolve(repoRoot, 'packages/node/project.jsonc');
 /** legacy 目录只允许 legacy 自身（C++ 工具）写入。 */
 export const legacyRoot = resolve(repoRoot, 'packages/legacy');
-/** 迁移期 core 的生成物只能写到这里。 */
-export const artifactRoot = resolve(repoRoot, 'packages/core/dist');
+/** Node 生成物只能写到这里。 */
+export const artifactRoot = resolve(repoRoot, 'packages/node/dist');
 
 /** 把仓库相对路径解析成绝对路径，并禁止越界。 */
 export function resolveInsideRepo(path: string): string {
@@ -30,8 +30,8 @@ function isInside(parent: string, child: string): boolean {
 
 /**
  * 迁移期的硬性写入边界：
- * - legacy 文件只能由 legacy 内置工具修改，core/server 一律拒绝；
- * - core 的产物只能落在 packages/core/dist。
+ * - legacy 文件只能由 legacy 内置工具修改，node 一律拒绝；
+ * - Node 的产物只能落在 packages/node/dist。
  */
 export function assertArtifactWritable(path: string): void {
   const absolute = resolve(path);
@@ -39,7 +39,7 @@ export function assertArtifactWritable(path: string): void {
     throw new Error(`迁移期禁止写入 legacy：${repoRelative(absolute)}；legacy 文件只能由 legacy 内置工具修改`);
   }
   if (!isInside(artifactRoot, absolute)) {
-    throw new Error(`生成物只能写入 packages/core/dist：${repoRelative(absolute)}`);
+    throw new Error(`生成物只能写入 packages/node/dist：${repoRelative(absolute)}`);
   }
 }
 

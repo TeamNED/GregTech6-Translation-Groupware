@@ -1,10 +1,9 @@
 import type { TargetConfig } from '@gt6tg/core';
 
 /**
- * 迁移期暂用 packages/core/dist；阶段 4 会切到 packages/node/dist。
- * 这里只做仓库相对路径推导，不接触文件系统。
+ * Node 生成物的默认根目录；只做仓库相对路径推导，不接触文件系统。
  */
-export const DEFAULT_DIST_ROOT = 'packages/core/dist';
+export const DEFAULT_DIST_ROOT = 'packages/node/dist';
 
 export interface DistPathSet {
   /** 该 target 的 dist 目录，仓库相对路径。 */

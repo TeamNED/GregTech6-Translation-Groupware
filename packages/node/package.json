@@ -1,8 +1,8 @@
 {
-  "name": "@gt6tg/server",
+  "name": "@gt6tg/node",
   "version": "0.1.0",
   "private": true,
-  "description": "本地 WebSocket RPC 服务：项目读写、配置校验、IO 检查、生成、单条测试。只绑定 127.0.0.1。",
+  "description": "Node 适配层：本地 WebSocket RPC 开发服务、CLI 门禁、文件系统与生成物。只绑定 127.0.0.1。",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
@@ -10,6 +10,12 @@
     "typecheck": "tsc --noEmit",
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
+    "generate": "tsx src/cli/generate.ts",
+    "lint:config": "tsx src/cli/lint.ts",
+    "parity": "tsx src/cli/check-parity.ts",
+    "hash": "tsx src/cli/hash.ts",
+    "perf": "tsx src/cli/check-perf.ts",
+    "perf:compare": "tsx src/cli/check-perf.ts --compare",
     "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check"

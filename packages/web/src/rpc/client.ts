@@ -14,7 +14,7 @@ interface RpcResponse {
 /**
  * 浏览器端 JSON-RPC over WebSocket。
  *
- * 服务端是 packages/server，只绑定 127.0.0.1；断线后自动重连，
+ * 服务端是 packages/node 的 dev server，只绑定 127.0.0.1；断线后自动重连，
  * 但不会自动重放请求，避免重复写文件。
  */
 export class RpcClient {

@@ -1,6 +1,6 @@
 // GregTech6 翻译工程配置（schema v2）
 // 由 workplace/config.yml 导入；workplace/config.yml 保持只读，作为兼容性参考。
-// 迁移期：output/unknown 是 legacy golden（只读），core 的生成物写入 packages/core/dist/<targetId>/。
+// 迁移期：output/unknown 是 legacy golden（只读），Node 的生成物写入 packages/node/dist/<targetId>/。
 {
   "schemaVersion": 2,
   "legacy": {
@@ -21,7 +21,7 @@
       "unknown": "zh/GregTech.unknown.lang",
       "encoding": "utf-8",
       "lineEnding": "crlf",
-      "notes": "当前只支持单 GT6 原版目标；workplace/config.yml 与 output/unknown 均为 legacy golden，迁移期只读；core 生成物写入 packages/core/dist/gt6-legacy/。"
+      "notes": "当前只支持单 GT6 原版目标；workplace/config.yml 与 output/unknown 均为 legacy golden，迁移期只读；Node 生成物写入 packages/node/dist/gt6-legacy/。"
     }
   ],
   "generators": [

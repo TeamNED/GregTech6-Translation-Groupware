@@ -2,7 +2,7 @@
   "name": "@gt6tg/web",
   "version": "0.1.0",
   "private": true,
-  "description": "本地自测 Web 控制台（Vue 3 + Naive UI）。通过 WebSocket RPC 调用 server，不直接依赖算法实现。",
+  "description": "统一 Web 控制台（Vue 3 + Naive UI）。当前通过 WebSocket 调用 @gt6tg/node，不直接依赖算法实现。",
   "type": "module",
   "scripts": {
     "dev": "vite",

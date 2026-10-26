@@ -90,7 +90,7 @@
     if (!targetId.value) return;
     dialog.warning({
       title: '生成并写入 dist',
-      content: '只写入 packages/core/dist/<targetId>/，不修改 legacy，也不会生成 .bak。确定继续？',
+      content: '只写入 packages/node/dist/<targetId>/，不修改 legacy，也不会生成 .bak。确定继续？',
       positiveText: '生成并写入',
       negativeText: '取消',
       onPositiveClick: async () => {
@@ -121,7 +121,7 @@
 
     <n-alert v-if="!report" type="info" class="section">
       检查会读取源文件、fallback 和 legacy golden，跑一次 dry-run 生成，并按迁移期 parity 口径逐 key 对比；写入只落到
-      packages/core/dist。
+      packages/node/dist。
     </n-alert>
 
     <template v-if="report">

@@ -3,11 +3,11 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const serverCli = resolve(root, 'packages/server/node_modules/tsx/dist/cli.mjs');
+const nodeCli = resolve(root, 'packages/node/node_modules/tsx/dist/cli.mjs');
 const viteCli = resolve(root, 'packages/web/node_modules/vite/bin/vite.js');
 
 for (const [label, path] of [
-  ['tsx（server）', serverCli],
+  ['tsx（node）', nodeCli],
   ['vite（web）', viteCli],
 ]) {
   if (!existsSync(path)) {
@@ -45,5 +45,5 @@ function start(name, cwd, args) {
 process.on('SIGINT', () => shutdown(0));
 process.on('SIGTERM', () => shutdown(0));
 
-start('server（WebSocket RPC :5175）', 'packages/server', [serverCli, 'watch', 'src/index.ts']);
+start('node（WebSocket RPC :5175）', 'packages/node', [nodeCli, 'watch', 'src/index.ts']);
 start('web（Vite :5173）', 'packages/web', [viteCli, '--host', '127.0.0.1']);

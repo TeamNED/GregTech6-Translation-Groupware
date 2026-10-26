@@ -24,8 +24,8 @@
       "projectFolder": "packages/runtime"
     },
     {
-      "packageName": "@gt6tg/server",
-      "projectFolder": "packages/server"
+      "packageName": "@gt6tg/node",
+      "projectFolder": "packages/node"
     },
     {
       "packageName": "@gt6tg/web",

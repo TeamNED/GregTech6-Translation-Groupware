@@ -9,18 +9,18 @@ import {
   type LangDocument,
   type ProjectConfigV2,
   type TargetConfig,
-} from '../src/index';
-import { DEFAULT_DIST_ROOT, distPathsForTarget, type DistPathSet } from './dist';
+} from '@gt6tg/core';
+import { DEFAULT_DIST_ROOT, distPathsForTarget, type DistPathSet } from '@gt6tg/runtime';
 
-export const repoRoot = resolve(import.meta.dirname, '../../..');
+export const repoRoot = resolve(import.meta.dirname, '../../../..');
 /** 本地性能记录目录；已加入 .gitignore，每次运行写一个独立 JSON。 */
-export const perfRunsDir = resolve(import.meta.dirname, '../.perf');
+export const perfRunsDir = resolve(import.meta.dirname, '../../.perf');
 /** legacy 目录只允许 legacy 自身写入。 */
 const legacyRoot = resolve(repoRoot, 'packages/legacy');
-/** 迁移期 core 产物只能写到这里。 */
+/** Node 生成物只能写到这里。 */
 const distRoot = resolve(repoRoot, DEFAULT_DIST_ROOT);
 
-const projectPath = resolve(import.meta.dirname, '../project.jsonc');
+const projectPath = resolve(import.meta.dirname, '../../project.jsonc');
 
 export interface Corpus {
   config: ProjectConfigV2;
@@ -88,7 +88,7 @@ function isInside(parent: string, path: string): boolean {
   return rel === '' || (rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel));
 }
 
-/** 写盘前的硬性边界：只允许 core/dist，绝不碰 legacy。 */
+/** 写盘前的硬性边界：只允许 node/dist，绝不碰 legacy。 */
 function assertDistPath(path: string): void {
   if (isInside(legacyRoot, path)) {
     throw new Error(`迁移期禁止写入 legacy：${repoRelative(path)}`);
@@ -102,7 +102,7 @@ function assertDistPath(path: string): void {
  * 把生成结果写成 dist 产物。
  *
  * 与 legacy 的 C++ 工具不同，这里不生成 `.bak`：dist 可以随时重建，
- * 而 golden 必须保持不被 core 修改。
+ * 而 golden 必须保持不被 Node 工具修改。
  */
 export function writeDistArtifacts(
   data: ProjectData,

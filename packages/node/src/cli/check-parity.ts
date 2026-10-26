@@ -2,13 +2,13 @@
  * 迁移期 parity：先生成 core 自己的 dist，再回读产物与 legacy golden 逐 key 对比。
  *
  * - legacy 目录只读：本脚本不会写入 `packages/legacy`；
- * - 产物写到 `packages/core/dist/<targetId>/`，不生成 `.bak`；
+ * - 产物写到 `packages/node/dist/<targetId>/`，不生成 `.bak`；
  * - 对比口径见 `compareToGolden`：主输出遍历 golden、unknown 双向集合差；
  * - mismatch / unknownMismatch / 回读差异任一不为 0 时以退出码 1 结束。
  */
 import { readFileSync } from 'node:fs';
-import { compareToGolden, compileConfig, diffLangMaps, generateFromEntries, parseLegacyLang } from '../src/index';
-import { hashOutput } from './hash';
+import { compareToGolden, compileConfig, diffLangMaps, generateFromEntries, parseLegacyLang } from '@gt6tg/core';
+import { hashOutput } from '../hash';
 import { loadProjectData, repoRelative, writeDistArtifacts } from './lib';
 
 const started = performance.now();

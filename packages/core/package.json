@@ -16,11 +16,7 @@
     "test": "vitest run",
     "lint": "oxlint",
     "format": "oxfmt",
-    "format:check": "oxfmt --check",
-    "generate": "tsx scripts/generate.ts",
-    "parity": "tsx scripts/check-parity.ts",
-    "perf": "tsx scripts/check-perf.ts",
-    "perf:compare": "tsx scripts/check-perf.ts --compare"
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
     "jsonc-parser": "^3.3.1",
@@ -30,7 +26,6 @@
     "@types/node": "^24.19.2",
     "oxfmt": "~0.74.0",
     "oxlint": "~1.89.0",
-    "tsx": "^4.23.15",
     "typescript": "~5.9.3",
     "vitest": "~5.0.5"
   },

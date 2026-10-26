@@ -1,15 +1,15 @@
 /**
  * 本地性能记录与前后对比。
  *
- * 每次运行都会在 `packages/core/.perf/` 下写一个独立 JSON（该目录不入库），
+ * 每次运行都会在 `packages/node/.perf/` 下写一个独立 JSON（该目录不入库），
  * 记录真实语料上的分阶段耗时、对象计数、内存和 git 修订信息。
  *
  * 用法：
- *   npx tsx scripts/check-perf.ts --label=before
+ *   npx tsx src/cli/check-perf.ts --label=before
  *   ... 修改代码 ...
- *   npx tsx scripts/check-perf.ts --label=after
- *   npx tsx scripts/check-perf.ts --compare                 # 对比最近两次
- *   npx tsx scripts/check-perf.ts --compare=a.json,b.json   # 显式指定两个文件
+ *   npx tsx src/cli/check-perf.ts --label=after
+ *   npx tsx src/cli/check-perf.ts --compare                 # 对比最近两次
+ *   npx tsx src/cli/check-perf.ts --compare=a.json,b.json   # 显式指定两个文件
  *
  * 默认只报告差异，不判定失败；`--strict` 时超过 fail 阈值才返回退出码 1。
  * 阈值可用 GT6TG_PERF_WARN（默认 1.15）、GT6TG_PERF_FAIL（默认 1.30）调整。
@@ -18,7 +18,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { isAbsolute, join, resolve } from 'node:path';
-import { compileConfig, generateFromEntries, type PhaseTiming, type TimingReport } from '../src/index';
+import { compileConfig, generateFromEntries, type PhaseTiming, type TimingReport } from '@gt6tg/core';
 import { loadCorpus, median, perfRunsDir, repoRoot, round } from './lib';
 
 interface PerfRun {
