@@ -46,6 +46,13 @@ export interface FileInfo {
   lineEnding: DetectedLineEnding;
 }
 
+export interface MemorySnapshot {
+  available: boolean;
+  source: string;
+  heapUsed?: number;
+  rss?: number;
+}
+
 export interface DiffSample {
   key: string;
   expected: string | null;
@@ -91,6 +98,8 @@ export interface IoCheckReport {
     durationMs: number;
     hash: string;
     timings?: TimingReport;
+    /** 平台支持时上报；浏览器/Node 使用各自的 best-effort 实现。 */
+    memory?: MemorySnapshot;
   };
   /** 与 legacy golden 的逐 key parity 结果。 */
   parity: ParityReport;

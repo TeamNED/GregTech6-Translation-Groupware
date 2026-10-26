@@ -1,6 +1,7 @@
 export * from './artifacts.ts';
 export * from './clock.ts';
 export * from './compile-cache.ts';
+export * from './dispatcher.ts';
 export * from './hash.ts';
 export * from './hooks.ts';
 export * from './host.ts';

@@ -10,9 +10,9 @@
 | `packages/core` | 纯算法、JSONC v2 配置 schema/解析/lint、Hook、共用领域类型 | `packages/core/src/index.ts` |
 | `packages/runtime` | EngineHost、任务调度、编译缓存、传输无关协议 | `packages/runtime/src/index.ts` |
 | `packages/node` | Node 适配：CLI 门禁、dev WebSocket/HTTP、worker_threads、文件系统、配置与产物 | `packages/node/src/index.ts`, `packages/node/project.jsonc` |
-| `packages/web` | Vue 3 + Naive UI 统一控制台；当前 dev 通过 WebSocket 调用 node | `packages/web/src/App.vue` |
+| `packages/web` | Vue 3 + Naive UI 统一控制台；开发用 WebSocket，生产构建用浏览器 Worker | `packages/web/src/App.vue`, `packages/web/src/worker/main.ts` |
 
-`core`/`runtime` 不依赖 Vue/Naive UI/Node 文件系统；`web` 通过 `CoreClient` 协议调用后端，不直接依赖算法实现。Node 侧算法在 worker_threads 中执行，主线程只处理 WS/HTTP 与文件。配置的唯一事实来源是 `packages/node/project.jsonc`。
+`core`/`runtime` 不依赖 Vue/Naive UI/Node 文件系统；`web` 通过 `CoreClient` 协议调用后端，不直接依赖算法实现。Node 侧算法在 worker_threads 中执行，浏览器侧在 Dedicated Worker 中执行；主线程只处理 UI/WS/HTTP 与文件。配置的唯一事实来源是 `packages/node/project.jsonc`。
 
 迁移期有一条硬边界：**`packages/legacy` 只能由 legacy 自身（C++ 工具）修改**。`node`/`core`/`runtime` 不会写入 legacy，也不会生成 `.bak`；Node 的生成物统一写到 `packages/node/dist/<targetId>/`。`packages/legacy/workplace` 下的英文源、fallback、`zh/GregTech.lang` 和 `zh/GregTech.unknown.lang` 都按只读输入使用，后两者作为 parity 的 golden。
 
@@ -44,6 +44,21 @@ node scripts/dev.mjs
 ```bash
 GT6TG_RPC_PORT=5185 GT6TG_HTTP_PORT=5186 VITE_RPC_URL=ws://127.0.0.1:5185/__gt6tg_rpc node scripts/dev.mjs
 ```
+
+## 浏览器 REPL（生产构建）
+
+纯静态构建，不需要 Node：
+
+```bash
+cd packages/web
+npx vite build
+# 将 dist/ 交给任意静态文件服务器
+```
+
+- 默认使用浏览器 Worker，算法不阻塞 UI；开发时可用 `?mode=repl` 强制测试 Worker 模式。
+- 构建期内置 `packages/node/project.jsonc` 的只读副本；配置只存在内存，刷新即恢复默认，可导出 JSONC。
+- 在“文件 / 历史”页上传源/fallback/golden/unknown，运行后下载目标/unknown；默认保留最近 3 次成功运行，可做 golden 对比和 run-to-run 对比。
+- 停止任务 = 终止 Worker；下一次运行重新创建 Worker 并重新编译（约 16–35 ms）。
 
 ## 控制台功能
 

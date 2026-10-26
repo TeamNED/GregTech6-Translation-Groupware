@@ -8,6 +8,7 @@ import {
   type ConfigIssue,
   type EntryTestResult,
   type LangEntry,
+  type MemorySnapshot,
   type TimingReport,
 } from '@gt6tg/core';
 import type { Clock } from './clock';
@@ -26,6 +27,7 @@ export interface EngineHostOptions {
   maxCompiles?: number;
   nextJobId?: () => string;
   hooks?: RuntimeHooks;
+  memory?: () => MemorySnapshot;
 }
 
 export interface CompileResult {
@@ -58,6 +60,7 @@ export interface TestEntryOptions {
 export interface MetricsSnapshot {
   compileCacheSize: number;
   compileIds: string[];
+  memory?: MemorySnapshot;
 }
 
 export class RuntimeError extends Error {
@@ -81,6 +84,7 @@ export class EngineHost {
   private readonly clock: Clock;
   private readonly nextJobId: () => string;
   private readonly hooks: RuntimeHooks | undefined;
+  private readonly memory: (() => MemorySnapshot) | undefined;
   private jobCounter = 0;
 
   constructor(options: EngineHostOptions) {
@@ -89,6 +93,7 @@ export class EngineHost {
     this.cache = new CompileCache(options.maxCompiles ?? 2);
     this.nextJobId = options.nextJobId ?? (() => `job-${++this.jobCounter}`);
     this.hooks = options.hooks;
+    this.memory = options.memory;
   }
 
   compile(configText: string): CompileResult {
@@ -229,6 +234,7 @@ export class EngineHost {
     return {
       compileCacheSize: this.cache.size,
       compileIds: this.cache.ids(),
+      memory: this.memory?.(),
     };
   }
 }

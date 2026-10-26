@@ -17,7 +17,7 @@
   import { computed, ref } from 'vue';
   import { useConsole } from '../composables/useConsole';
 
-  const { state, call } = useConsole();
+  const { state, call, download, cancel } = useConsole();
   const message = useMessage();
   const dialog = useDialog();
 
@@ -61,6 +61,13 @@
     { title: '新生成', key: 'actual' },
   ];
 
+  const memoryLabel = computed(() => {
+    const memory = report.value?.generated.memory;
+    if (!memory) return 'n/a';
+    if (!memory.available) return '不可用';
+    return `${((memory.heapUsed ?? 0) / 1024 / 1024).toFixed(1)} MB`;
+  });
+
   function formatBytes(size: number): string {
     if (size < 1024) return `${size} B`;
     if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
@@ -75,11 +82,13 @@
 
   async function check(): Promise<void> {
     if (!targetId.value) return;
+    const cancelVersion = state.cancelVersion;
     checking.value = true;
     try {
       report.value = await call('checkIo', targetId.value);
       message.success('检查完成');
     } catch (error) {
+      if (state.cancelVersion !== cancelVersion) return;
       message.error(error instanceof Error ? error.message : String(error));
     } finally {
       checking.value = false;
@@ -88,12 +97,17 @@
 
   function writeOutput(): void {
     if (!targetId.value) return;
+    if (!state.capabilities.writeDist) {
+      void generateOnly();
+      return;
+    }
     dialog.warning({
       title: '生成并写入 dist',
       content: '只写入 packages/node/dist/<targetId>/，不修改 legacy，也不会生成 .bak。确定继续？',
       positiveText: '生成并写入',
       negativeText: '取消',
       onPositiveClick: async () => {
+        const cancelVersion = state.cancelVersion;
         writing.value = true;
         try {
           const result = await call('generate', targetId.value, true);
@@ -101,6 +115,7 @@
           message.success(`已写入 ${path}，hash=${result.hash}，耗时 ${result.durationMs} ms`);
           await check();
         } catch (error) {
+          if (state.cancelVersion !== cancelVersion) return;
           message.error(error instanceof Error ? error.message : String(error));
         } finally {
           writing.value = false;
@@ -108,20 +123,68 @@
       },
     });
   }
+
+  async function generateOnly(): Promise<void> {
+    if (!targetId.value) return;
+    const cancelVersion = state.cancelVersion;
+    writing.value = true;
+    try {
+      const result = await call('generate', targetId.value, false);
+      message.success(`已生成（内存），hash=${result.hash}，耗时 ${result.durationMs} ms`);
+      await check();
+    } catch (error) {
+      if (state.cancelVersion !== cancelVersion) return;
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      writing.value = false;
+    }
+  }
+
+  function stop(): void {
+    cancel();
+    checking.value = false;
+    writing.value = false;
+    message.warning('已终止当前运行');
+  }
+
+  function downloadKind(kind: 'output' | 'unknown'): void {
+    try {
+      download(kind);
+      message.success('已开始下载');
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    }
+  }
 </script>
 
 <template>
   <div class="page">
     <div class="toolbar">
-      <n-button type="primary" :disabled="!canUse || checking" @click="check">检查输入 / 输出</n-button>
-      <n-button type="warning" :disabled="!canUse || writing" @click="writeOutput">生成并写入 dist</n-button>
+      <n-button type="primary" :disabled="!canUse || checking || writing" @click="check">检查输入 / 输出</n-button>
+      <n-button type="warning" :disabled="!canUse || writing || checking" @click="writeOutput">
+        {{ state.capabilities.writeDist ? '生成并写入 dist' : '生成（内存）' }}
+      </n-button>
+      <n-button v-if="(checking || writing) && state.mode === 'repl'" type="error" size="small" @click="stop">
+        停止
+      </n-button>
+      <n-button v-if="state.capabilities.download" size="small" :disabled="!report" @click="downloadKind('output')">
+        下载目标文件
+      </n-button>
+      <n-button v-if="state.capabilities.download" size="small" :disabled="!report" @click="downloadKind('unknown')">
+        下载 unknown
+      </n-button>
       <n-tag v-if="targetId" size="small">{{ targetId }}</n-tag>
       <span v-if="checking" class="muted">正在生成并比对…</span>
     </div>
 
     <n-alert v-if="!report" type="info" class="section">
-      检查会读取源文件、fallback 和 legacy golden，跑一次 dry-run 生成，并按迁移期 parity 口径逐 key 对比；写入只落到
-      packages/node/dist。
+      <template v-if="state.capabilities.writeDist">
+        检查会读取源文件、fallback 和 legacy golden，跑一次 dry-run 生成，并按迁移期 parity 口径逐 key 对比；写入只落到
+        packages/node/dist。
+      </template>
+      <template v-else>
+        检查会使用“文件 / 历史”中上传的源文件、fallback 和 golden；生成结果只保存在内存，可在这里下载。
+      </template>
     </n-alert>
 
     <template v-if="report">
@@ -162,6 +225,7 @@
         <n-statistic label="候选冲突 key" :value="report.generated.conflictKeys" />
         <n-statistic label="耗时" :value="`${report.generated.durationMs} ms`" />
         <n-statistic label="hash" :value="report.generated.hash" />
+        <n-statistic label="内存（best-effort）" :value="memoryLabel" />
       </div>
 
       <div class="section-title">legacy parity</div>

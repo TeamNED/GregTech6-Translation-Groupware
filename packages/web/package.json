@@ -2,7 +2,7 @@
   "name": "@gt6tg/web",
   "version": "0.1.0",
   "private": true,
-  "description": "统一 Web 控制台（Vue 3 + Naive UI）。当前通过 WebSocket 调用 @gt6tg/node，不直接依赖算法实现。",
+  "description": "统一 Web 控制台（Vue 3 + Naive UI）。开发用 WebSocket 调用 @gt6tg/node，生产构建用浏览器 Worker。",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,11 +13,12 @@
     "format:check": "oxfmt --check"
   },
   "dependencies": {
+    "@gt6tg/core": "workspace:*",
+    "@gt6tg/runtime": "workspace:*",
     "naive-ui": "^2.45.3",
     "vue": "^3.5.44"
   },
   "devDependencies": {
-    "@gt6tg/core": "workspace:*",
     "@types/node": "^24.19.2",
     "@vitejs/plugin-vue": "^6.0.10",
     "oxfmt": "~0.74.0",

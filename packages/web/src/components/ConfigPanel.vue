@@ -72,7 +72,9 @@
         message.error(`未保存：仍有 ${errors} 个 error`);
         return;
       }
-      message.success(result.backupPath ? `已保存，备份：${result.backupPath}` : '已保存');
+      if (result.backupPath) message.success(`已保存，备份：${result.backupPath}`);
+      else if (state.mode === 'repl') message.success('已保存到内存（刷新即丢失）');
+      else message.success('已保存');
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
     }
@@ -104,7 +106,9 @@
       <n-button type="primary" :disabled="!canUse" @click="validate">校验</n-button>
       <n-button type="primary" :disabled="!canUse || !dirty" @click="save">保存</n-button>
       <n-button :disabled="!canUse" @click="raw = state.project?.raw ?? ''">放弃修改</n-button>
-      <n-button :disabled="!canUse" @click="importLegacy">从 config.yml 导入</n-button>
+      <n-button :disabled="!canUse || !state.capabilities.importLegacy" @click="importLegacy">
+        从 config.yml 导入
+      </n-button>
       <n-tag v-if="dirty" type="warning" size="small">未保存</n-tag>
       <n-tag v-if="errorCount" type="error" size="small">{{ errorCount }} error</n-tag>
       <n-tag v-if="warningCount" type="warning" size="small">{{ warningCount }} warning</n-tag>
@@ -112,7 +116,15 @@
     </div>
 
     <n-alert v-if="!state.project" type="warning" class="section">
-      尚未加载配置。请确认 RPC 服务已启动，并等待左侧状态变为“已连接”。
+      {{
+        state.mode === 'repl'
+          ? '正在初始化浏览器 Worker…'
+          : '尚未加载配置。请确认 RPC 服务已启动，并等待左侧状态变为“已连接”。'
+      }}
+    </n-alert>
+
+    <n-alert v-if="state.mode === 'repl'" type="info" class="section">
+      浏览器 REPL：配置只存在内存，刷新即恢复内置默认配置；修改后可用“文件 / 历史”页导出 JSONC。
     </n-alert>
 
     <div v-if="stats" class="stat-grid section">

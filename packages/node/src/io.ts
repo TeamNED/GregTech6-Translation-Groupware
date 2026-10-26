@@ -169,6 +169,7 @@ export async function checkIo(store: ProjectStore, engine: NodeEngineClient, tar
   const diffMs = performance.now() - diffStarted;
 
   const notes = buildNotes(store, source, fallback, golden, goldenUnknown, paths.dist);
+  const metrics = await engine.metrics();
 
   const timings: OperationTiming = {
     totalMs: performance.now() - totalStarted,
@@ -196,6 +197,7 @@ export async function checkIo(store: ProjectStore, engine: NodeEngineClient, tar
       durationMs: Math.round(run.summary.timings.totalMs),
       hash: run.summary.hash,
       timings: run.summary.timings,
+      memory: metrics.memory,
     },
     parity,
     timings,

@@ -9,7 +9,6 @@
     NLayoutContent,
     NLayoutHeader,
     NMessageProvider,
-    NSpin,
     NTabPane,
     NTabs,
     NTag,
@@ -21,9 +20,10 @@
   import EntryPanel from './components/EntryPanel.vue';
   import IoPanel from './components/IoPanel.vue';
   import TargetPanel from './components/TargetPanel.vue';
+  import WorkspacePanel from './components/WorkspacePanel.vue';
   import { useConsole } from './composables/useConsole';
 
-  const { state, refresh, rpcUrl } = useConsole();
+  const { state, refresh, cancel, rpcUrl } = useConsole();
   const activeTab = ref('config');
 
   const statusLabel = computed(() => {
@@ -52,7 +52,21 @@
             </div>
             <div class="header-actions">
               <n-tag :type="statusType" size="small">{{ statusLabel }}</n-tag>
+              <n-tag size="small" :type="state.mode === 'repl' ? 'info' : 'default'">
+                {{ state.mode === 'repl' ? 'REPL' : 'DEV' }}
+              </n-tag>
+              <n-tag
+                v-if="state.progress"
+                size="small"
+                type="warning"
+                style="min-width: 150px; justify-content: center"
+              >
+                {{ state.progress }}
+              </n-tag>
               <n-button size="small" :disabled="state.status !== 'open'" @click="refresh">刷新</n-button>
+              <n-button v-if="state.busy > 0 && state.mode === 'repl'" size="small" type="error" @click="cancel">
+                停止
+              </n-button>
             </div>
           </n-layout-header>
 
@@ -61,22 +75,23 @@
               {{ state.error }}
             </n-alert>
 
-            <n-spin :show="state.busy > 0">
-              <n-tabs v-model:value="activeTab" type="line" animated>
-                <n-tab-pane name="config" tab="配置">
-                  <ConfigPanel />
-                </n-tab-pane>
-                <n-tab-pane name="target" tab="目标配置">
-                  <TargetPanel />
-                </n-tab-pane>
-                <n-tab-pane name="io" tab="输入 / 输出检查">
-                  <IoPanel />
-                </n-tab-pane>
-                <n-tab-pane name="entry" tab="单条目测试">
-                  <EntryPanel />
-                </n-tab-pane>
-              </n-tabs>
-            </n-spin>
+            <n-tabs v-model:value="activeTab" type="line" animated>
+              <n-tab-pane name="config" tab="配置">
+                <ConfigPanel />
+              </n-tab-pane>
+              <n-tab-pane name="target" tab="目标配置">
+                <TargetPanel />
+              </n-tab-pane>
+              <n-tab-pane name="io" tab="输入 / 输出检查">
+                <IoPanel />
+              </n-tab-pane>
+              <n-tab-pane name="entry" tab="单条目测试">
+                <EntryPanel />
+              </n-tab-pane>
+              <n-tab-pane name="workspace" tab="文件 / 历史">
+                <WorkspacePanel />
+              </n-tab-pane>
+            </n-tabs>
           </n-layout-content>
         </n-layout>
       </n-dialog-provider>

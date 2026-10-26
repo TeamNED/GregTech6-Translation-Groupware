@@ -4,6 +4,7 @@ import type {
   EntryTestResult,
   LintReport,
   ProjectConfigV2,
+  TargetPatch,
   TimingReport,
 } from '@gt6tg/core';
 import type { CompileResult, MetricsSnapshot } from './host';
@@ -86,6 +87,10 @@ export interface CompareResult {
 export interface CoreMethodMap {
   'config.parse': { params: { text: string }; result: ConfigParseResult };
   'config.lint': { params: { text: string }; result: LintReport };
+  'config.updateTarget': {
+    params: { raw: string; targetId: string; patch: TargetPatch };
+    result: { raw: string; issues: ConfigIssue[] };
+  };
   'engine.compile': { params: { text: string }; result: CompileResult };
   'job.start': { params: JobStartParams; result: JobStartResult };
   'job.status': { params: { jobId: string }; result: JobStatus };

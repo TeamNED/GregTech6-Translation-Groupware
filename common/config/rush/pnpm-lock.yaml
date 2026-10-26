@@ -98,6 +98,12 @@ importers:
 
   ../../packages/web:
     dependencies:
+      '@gt6tg/core':
+        specifier: workspace:*
+        version: link:../core
+      '@gt6tg/runtime':
+        specifier: workspace:*
+        version: link:../runtime
       naive-ui:
         specifier: ^2.45.3
         version: 2.45.3(vue@3.5.44(typescript@5.9.3))
@@ -105,9 +111,6 @@ importers:
         specifier: ^3.5.44
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
-      '@gt6tg/core':
-        specifier: workspace:*
-        version: link:../core
       '@types/node':
         specifier: ^24.19.2
         version: 24.19.2

@@ -58,6 +58,7 @@
       state.project = snapshot;
       const errors = snapshot.issues.filter((issue) => issue.severity === 'error').length;
       if (errors > 0) message.error(`目标已更新但配置仍有 ${errors} 个 error，未写入`);
+      else if (state.mode === 'repl') message.success('目标配置已更新（内存）');
       else message.success('目标配置已保存');
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
@@ -79,8 +80,13 @@
       </div>
 
       <n-alert type="info" class="section">
-        当前只支持单 GT6 原版目标。workplace/config.yml 与 output/unknown 都是 legacy golden，迁移期只读；Node
-        的生成物写入 packages/node/dist/&lt;targetId&gt;/。这里只修改 project.jsonc 里的 target 字段。
+        <template v-if="state.capabilities.writeDist">
+          当前只支持单 GT6 原版目标。workplace/config.yml 与 output/unknown 都是 legacy golden，迁移期只读；Node
+          的生成物写入 packages/node/dist/&lt;targetId&gt;/。这里只修改 project.jsonc 里的 target 字段。
+        </template>
+        <template v-else>
+          浏览器 REPL：这里只修改内存中的 target 字段；源/fallback/golden 文件由“文件 / 历史”页上传决定。
+        </template>
       </n-alert>
 
       <n-form label-placement="top" class="target-form">
