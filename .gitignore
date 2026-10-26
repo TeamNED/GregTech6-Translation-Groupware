@@ -110,6 +110,7 @@ include/divisible/*
 ## Local 
 
 .idea/*.xml
+.zcode/
 
 build/**/*
 
