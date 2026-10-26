@@ -7,7 +7,7 @@
 | `dev` | WebSocket → `@gt6tg/node` dev server | 本地开发；可读写仓库配置、读取仓库语料 |
 | `repl` | 浏览器 Dedicated Worker | 生产静态 REPL；配置/文件仅在内存 |
 
-选择：开发默认 `dev`，生产构建默认 `repl`；开发时可用 `?mode=repl` 强制 Worker。
+选择：开发默认 `dev`，生产构建默认 `repl`；开发时可用 `?mode=repl` 强制 Worker，`?mode=dev` 强制 WS。
 
 ```bash
 cd packages/web

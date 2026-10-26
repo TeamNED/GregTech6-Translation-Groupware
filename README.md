@@ -55,7 +55,7 @@ npx vite build
 # 将 dist/ 交给任意静态文件服务器
 ```
 
-- 默认使用浏览器 Worker，算法不阻塞 UI；开发时可用 `?mode=repl` 强制测试 Worker 模式。
+- 默认使用浏览器 Worker，算法不阻塞 UI；开发时默认 WS，可用 `?mode=repl` 强制 Worker、`?mode=dev` 强制 WS。
 - 构建期内置 `packages/node/project.jsonc` 的只读副本；配置只存在内存，刷新即恢复默认，可导出 JSONC。
 - 在“文件 / 历史”页上传源/fallback/golden/unknown，运行后下载目标/unknown；默认保留最近 3 次成功运行，可做 golden 对比和 run-to-run 对比。
 - 停止任务 = 终止 Worker；下一次运行重新创建 Worker 并重新编译（约 16–35 ms）。

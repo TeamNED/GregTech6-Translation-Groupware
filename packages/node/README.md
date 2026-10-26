@@ -53,6 +53,7 @@ src/
   http.ts         HTTP 文件通道
   engine-client.ts  worker_threads 客户端
   projectStore.ts 配置状态、校验、保存/备份/legacy YAML 导入
+  config/         legacyYaml.ts（config.yml -> v2）
   io.ts           checkIo/generate/testEntry（调用 worker，不跑算法）
   paths.ts        仓库路径/写入守卫/原子写
   hash.ts         node:crypto HashProvider + 同步 hash

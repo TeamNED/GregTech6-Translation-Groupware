@@ -143,7 +143,7 @@ Dedicated Web Worker
 
 `web` 同一套 UI，通过 `CoreClient` 选择传输：
 
-- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker；支持保存仓库配置、HTTP 文件上传/下载。
+- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker，`?mode=dev` 可强制 WS；支持保存仓库配置、HTTP 文件上传/下载。
 - **生产**：默认 `worker`，纯静态；配置只读默认值/内存编辑/JSONC 导出；File API。
 
 UI 必须显式显示当前模式及能力差异（例如“保存到仓库”只在 dev 可用）。
@@ -190,7 +190,7 @@ type CoreEvent =
 | --- | --- | --- |
 | `DirectTransport` | runtime 单测、纯函数调用 | 直接调用 handler |
 | `WorkerTransport`（`BrowserWorkerTransport` / `WorkerThreadTransport`） | 浏览器生产 / Node worker_threads | `postMessage` / `MessagePort` |
-| `WebSocketTransport` | Node dev web | WS 请求/响应 + 通知 |
+| `RpcClient`（历史 WebSocket 客户端） | Node dev web | WS 请求/响应；runtime 通知未接入 |
 | HTTP | Node dev web 大文件 | multipart 上传、流式下载 |
 
 ### 4.4 大文件
@@ -283,11 +283,10 @@ cache: Map<compileId, { compiled, stats, lastUsed }>
 
 ### 6.4 Node CLI 分发
 
-- `packages/node` 用 esbuild（或等价 bundler）输出：
+- `packages/node` 用 esbuild 打包 worker：
   - `.build/worker.cjs`：worker_threads 入口。
-  - `.build/worker.cjs`：worker_threads 入口。
-- 开发时可以直接 `tsx src/cli/main.ts`，但 worker 仍用打包产物，避免 TS loader 不确定性。
-- `rush build` 包含类型检查与 bundle；`bin`/产物目录加入 `.gitignore`（如需分发再发布）。
+- 当前 CLI 通过 `tsx src/cli/main.ts` 运行，worker 始终使用打包产物，避免 TS loader 不确定性。
+- `rush build` 包含类型检查与 worker bundle；`.build` / `.perf` / `dist` 均加入 `.gitignore`。独立 CLI JS 分发为后续增强。
 
 ---
 
