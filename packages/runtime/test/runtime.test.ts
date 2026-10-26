@@ -130,6 +130,7 @@ describe('EngineHost', () => {
         entry('S:Fallback', 'Fallback'),
       ],
       fallbackEntries: [entry('S:Fallback', '回退')],
+      chunkSize: 2,
       onProgress: (item) => progress.push(item),
     });
 

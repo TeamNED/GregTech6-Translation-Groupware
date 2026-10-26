@@ -1,3 +1,5 @@
+import type { RpcNotification } from '@gt6tg/core';
+
 export type ConnectionStatus = 'connecting' | 'open' | 'closed';
 
 interface PendingCall {
@@ -5,10 +7,14 @@ interface PendingCall {
   reject: (reason: Error) => void;
 }
 
-interface RpcResponse {
-  id: number;
+interface IncomingMessage {
+  id?: number;
   result?: unknown;
   error?: { code: string; message: string; details?: unknown };
+  type?: string;
+  task?: string;
+  message?: string;
+  data?: Record<string, unknown>;
 }
 
 /**
@@ -27,6 +33,7 @@ export class RpcClient {
   constructor(
     private readonly url: string,
     private readonly onStatus: (status: ConnectionStatus) => void,
+    private readonly onNotification?: (notification: RpcNotification) => void,
   ) {}
 
   connect(): void {
@@ -63,17 +70,23 @@ export class RpcClient {
   }
 
   private handleMessage(data: string): void {
-    let response: RpcResponse;
+    let message: IncomingMessage;
     try {
-      response = JSON.parse(data) as RpcResponse;
+      message = JSON.parse(data) as IncomingMessage;
     } catch {
       return;
     }
-    const pending = this.pending.get(response.id);
+    if (typeof message.id !== 'number') {
+      if (message.type === 'progress') {
+        this.onNotification?.(message as RpcNotification);
+      }
+      return;
+    }
+    const pending = this.pending.get(message.id);
     if (!pending) return;
-    this.pending.delete(response.id);
-    if (response.error) pending.reject(new Error(response.error.message));
-    else pending.resolve(response.result);
+    this.pending.delete(message.id);
+    if (message.error) pending.reject(new Error(message.error.message));
+    else pending.resolve(message.result);
   }
 
   private rejectAll(error: Error): void {

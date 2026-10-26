@@ -1,4 +1,4 @@
-import type { ServerMethodName, ServerParams, ServerResult } from '@gt6tg/core';
+import type { RpcNotification, ServerMethodName, ServerParams, ServerResult } from '@gt6tg/core';
 import type { CompareResult } from '@gt6tg/runtime';
 import { RpcClient, type ConnectionStatus } from '../rpc/client';
 import { downloadText } from './download';
@@ -19,9 +19,14 @@ export class DevBackend implements ConsoleBackend {
 
   private readonly client: RpcClient;
   private statusListener: ((status: ConnectionStatus) => void) | undefined;
+  private readonly progressListeners = new Set<(progress: ProgressInfo) => void>();
 
   constructor(url: string) {
-    this.client = new RpcClient(url, (status) => this.statusListener?.(status));
+    this.client = new RpcClient(
+      url,
+      (status) => this.statusListener?.(status),
+      (notification) => this.handleNotification(notification),
+    );
   }
 
   connect(onStatus: (status: ConnectionStatus) => void): void {
@@ -77,7 +82,17 @@ export class DevBackend implements ConsoleBackend {
     // WebSocket 模式下没有可终止的 Worker；请求由 node 侧队列处理。
   }
 
-  onProgress(_listener: (progress: ProgressInfo) => void): () => void {
-    return () => undefined;
+  onProgress(listener: (progress: ProgressInfo) => void): () => void {
+    this.progressListeners.add(listener);
+    return () => this.progressListeners.delete(listener);
+  }
+
+  private handleNotification(notification: RpcNotification): void {
+    if (notification.type !== 'progress') return;
+    const data = notification.data ?? {};
+    const phase = typeof data.phase === 'string' ? data.phase : 'progress';
+    const processed = typeof data.processed === 'number' ? data.processed : 0;
+    const total = typeof data.total === 'number' ? data.total : 0;
+    for (const listener of this.progressListeners) listener({ phase, processed, total });
   }
 }

@@ -43,6 +43,7 @@ export interface RunOptions {
   fallbackEntries?: readonly LangEntry[];
   scope?: JobScope;
   includeCandidates?: boolean;
+  chunkSize?: number;
   jobId?: string;
   onProgress?: (progress: JobProgress) => void;
 }
@@ -190,6 +191,7 @@ export class EngineHost {
         fallbackEntries: options.fallbackEntries,
         scope: options.scope,
         includeCandidates: options.includeCandidates,
+        chunkSize: options.chunkSize,
         hash: this.hash,
         clock: this.clock,
         onProgress: (progress) => {
