@@ -12,9 +12,9 @@ import {
   compileConfig,
   diffLangMaps,
   generateFromEntries,
-  hashOutput,
   parseLegacyLang,
 } from '../src/index';
+import { hashOutput } from './hash';
 import { loadProjectData, repoRelative, writeDistArtifacts } from './lib';
 
 const started = performance.now();

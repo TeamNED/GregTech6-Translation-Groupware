@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { distPathsForTarget } from '../src/config/dist';
 import { parseLegacyLang } from '../src/engine/legacyLang';
-import { compareToGolden, hashOutput } from '../src/engine/parity';
+import { compareToGolden } from '../src/engine/parity';
 import type { TargetConfig } from '../src/types/config';
 
 const golden = parseLegacyLang(`# Configuration file
@@ -68,24 +68,6 @@ describe('parity', () => {
     expect(report.unknownMismatch).toBe(2);
     expect(report.unknownSamples).toContainEqual({ key: 'S:c', expected: true });
     expect(report.unknownSamples).toContainEqual({ key: 'S:extra', expected: false });
-  });
-
-  it('hashes output deterministically', () => {
-    const first = hashOutput(
-      new Map([
-        ['S:a', '甲'],
-        ['S:b', '乙'],
-      ]),
-    );
-    const second = hashOutput(
-      new Map([
-        ['S:a', '甲'],
-        ['S:b', '乙'],
-      ]),
-    );
-
-    expect(first).toHaveLength(16);
-    expect(first).toBe(second);
   });
 });
 

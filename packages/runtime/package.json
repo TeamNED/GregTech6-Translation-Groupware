@@ -1,0 +1,33 @@
+{
+  "name": "@gt6tg/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "同构运行时：EngineHost、任务调度、编译缓存、传输无关协议。不依赖 Node/DOM。",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "verify": "tsc --noEmit && vitest run",
+    "test": "vitest run",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@gt6tg/core": "workspace:*"
+  },
+  "devDependencies": {
+    "oxfmt": "~0.74.0",
+    "oxlint": "~1.89.0",
+    "typescript": "~5.9.3",
+    "vitest": "~5.0.5"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

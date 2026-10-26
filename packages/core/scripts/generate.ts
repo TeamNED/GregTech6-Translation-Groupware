@@ -1,4 +1,5 @@
-import { compileConfig, generateFromEntries, hashOutput } from '../src/index';
+import { compileConfig, generateFromEntries } from '../src/index';
+import { hashOutput } from './hash';
 import { loadProjectData, repoRelative, writeDistArtifacts } from './lib';
 
 const started = performance.now();

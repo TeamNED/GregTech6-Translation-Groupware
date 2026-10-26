@@ -20,6 +20,10 @@
       "projectFolder": "packages/core"
     },
     {
+      "packageName": "@gt6tg/runtime",
+      "projectFolder": "packages/runtime"
+    },
+    {
       "packageName": "@gt6tg/server",
       "projectFolder": "packages/server"
     },

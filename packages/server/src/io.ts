@@ -6,7 +6,6 @@ import {
   diffLangMaps,
   distPathsForTarget,
   generateFromEntries,
-  hashOutput,
   parseLegacyLang,
   testEntry as coreTestEntry,
   writeLegacyLang,
@@ -18,6 +17,7 @@ import {
   type OperationTiming,
   type TargetConfig,
 } from '@gt6tg/core';
+import { hashOutput } from './hash';
 import { readTextIfExists, repoRelative, resolveInsideRepo, writeArtifact } from './paths';
 import { ProjectStore } from './projectStore';
 

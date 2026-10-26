@@ -52,7 +52,6 @@ export {
 export { generateFromEntries, buildFallbackMap, type GenerationResult, type GenerationStats } from './engine/apply';
 export {
   compareToGolden,
-  hashOutput,
   type ParityInput,
   type ParityReport,
   type ParityUnknownSample,

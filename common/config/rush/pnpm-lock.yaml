@@ -43,6 +43,25 @@ importers:
 
   ../../packages/legacy: {}
 
+  ../../packages/runtime:
+    dependencies:
+      '@gt6tg/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      oxfmt:
+        specifier: ~0.74.0
+        version: 0.74.0
+      oxlint:
+        specifier: ~1.89.0
+        version: 1.89.0
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ~5.0.5
+        version: 5.0.5(@types/node@24.19.2)(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15)(yaml@2.9.1))
+
   ../../packages/server:
     dependencies:
       '@gt6tg/core':
