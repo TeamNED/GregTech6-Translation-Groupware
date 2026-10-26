@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -19,6 +19,16 @@ for (const [label, path] of [
 
 const children = [];
 let shuttingDown = false;
+
+const workerBuild = spawnSync(
+  process.execPath,
+  [resolve(root, 'packages/node/scripts/build-worker.mjs')],
+  { cwd: root, stdio: 'inherit' },
+);
+if (workerBuild.status !== 0) {
+  console.error('[dev] worker bundle 构建失败');
+  process.exit(workerBuild.status ?? 1);
+}
 
 function shutdown(code = 0) {
   if (shuttingDown) return;

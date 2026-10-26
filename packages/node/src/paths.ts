@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 
 /** 仓库根目录：packages/node/src -> packages/node -> packages -> root。 */
@@ -70,10 +70,14 @@ export async function pathExists(path: string): Promise<boolean> {
 }
 
 function backupSuffix(): string {
-  return new Date().toISOString().replaceAll(':', '-').replace(/\..+$/, '');
+  // 保留毫秒，避免同一秒内两次保存互相覆盖备份。
+  return new Date().toISOString().replaceAll(':', '-').replaceAll('.', '-');
 }
 
-/** 写文件前保留一份同目录备份；返回备份路径。 */
+/**
+ * 写文件前保留一份同目录备份，再用临时文件 + rename 原子替换。
+ * 返回备份路径；备份本身在目标文件已存在时创建。
+ */
 export async function writeWithBackup(path: string, content: string): Promise<string | undefined> {
   await mkdir(dirname(path), { recursive: true });
   let backupPath: string | undefined;
@@ -81,6 +85,14 @@ export async function writeWithBackup(path: string, content: string): Promise<st
     backupPath = `${path}.bak-${backupSuffix()}`;
     await copyFile(path, backupPath);
   }
-  await writeFile(path, content, 'utf8');
+
+  const tempPath = `${path}.tmp-${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  try {
+    await writeFile(tempPath, content, 'utf8');
+    await rename(tempPath, path);
+  } catch (error) {
+    await unlink(tempPath).catch(() => undefined);
+    throw error;
+  }
   return backupPath;
 }

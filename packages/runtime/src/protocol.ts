@@ -6,7 +6,7 @@ import type {
   ProjectConfigV2,
   TimingReport,
 } from '@gt6tg/core';
-import type { CompileResult, MetricsSnapshot, TestEntryOptions } from './host';
+import type { CompileResult, MetricsSnapshot } from './host';
 import type { JobProgress } from './job';
 import type { RunSummary } from './run-summary';
 
@@ -17,12 +17,30 @@ export interface ConfigParseResult {
 
 export interface JobStartParams {
   compileId: string;
+  sourceText: string;
+  fallbackText?: string;
+  lineEnding: 'crlf' | 'lf';
   scope: 'all' | 'keys';
   keys?: string[];
+  includeArtifacts?: boolean;
 }
 
 export interface JobStartResult {
   jobId: string;
+  summary: RunSummary;
+  outputText: string;
+  unknownText: string;
+  unknownKeys: string[];
+}
+
+export interface TestEntryParams {
+  compileId: string;
+  targetId?: string;
+  key: string;
+  value?: string;
+  sourceText?: string;
+  fallbackText?: string;
+  issues?: ConfigIssue[];
 }
 
 export interface JobStatus {
@@ -72,7 +90,7 @@ export interface CoreMethodMap {
   'job.start': { params: JobStartParams; result: JobStartResult };
   'job.status': { params: { jobId: string }; result: JobStatus };
   'job.export': { params: JobExportParams; result: JobExportResult };
-  'entry.test': { params: TestEntryOptions; result: EntryTestResult };
+  'entry.test': { params: TestEntryParams; result: EntryTestResult };
   'result.compare': { params: CompareParams; result: CompareResult };
   'metrics.snapshot': { params: Record<string, never>; result: MetricsSnapshot };
 }

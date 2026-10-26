@@ -1,3 +1,4 @@
+export * from './artifacts.ts';
 export * from './clock.ts';
 export * from './compile-cache.ts';
 export * from './hash.ts';

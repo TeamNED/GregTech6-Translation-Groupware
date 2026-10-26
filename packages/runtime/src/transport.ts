@@ -71,7 +71,7 @@ export class DirectClient implements CoreClient {
   private readonly unsubscribe: () => void;
   private closed = false;
 
-  constructor(private readonly transport: DirectTransport) {
+  constructor(private readonly transport: CoreTransport) {
     this.unsubscribe = transport.onMessage((message) => this.receive(message));
   }
 

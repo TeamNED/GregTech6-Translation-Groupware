@@ -1,129 +1,123 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import {
   getTarget,
   parseLegacyLang,
   parseProjectJsonc,
-  writeLegacyLang,
-  type GenerationResult,
   type LangDocument,
   type ProjectConfigV2,
   type TargetConfig,
 } from '@gt6tg/core';
-import { DEFAULT_DIST_ROOT, distPathsForTarget, type DistPathSet } from '@gt6tg/runtime';
+import { distPathsForTarget, type ArtifactTexts, type DistPathSet } from '@gt6tg/runtime';
+import { assertArtifactWritable, projectFilePath, repoRelative, repoRoot, resolveInsideRepo } from '../paths';
 
-export const repoRoot = resolve(import.meta.dirname, '../../../..');
+export { repoRelative, repoRoot };
+
 /** 本地性能记录目录；已加入 .gitignore，每次运行写一个独立 JSON。 */
-export const perfRunsDir = resolve(import.meta.dirname, '../../.perf');
-/** legacy 目录只允许 legacy 自身写入。 */
-const legacyRoot = resolve(repoRoot, 'packages/legacy');
-/** Node 生成物只能写到这里。 */
-const distRoot = resolve(repoRoot, DEFAULT_DIST_ROOT);
+export const perfRunsDir = resolve(repoRoot, 'packages/node/.perf');
 
-const projectPath = resolve(import.meta.dirname, '../../project.jsonc');
+export interface LangFile {
+  path: string;
+  text: string;
+  document: LangDocument;
+}
 
 export interface Corpus {
+  configText: string;
   config: ProjectConfigV2;
+  target: TargetConfig;
+  sourcePath: string;
+  sourceText: string;
   source: LangDocument;
+  fallbackPath: string;
+  fallbackText: string;
   fallback: LangDocument;
 }
 
 export interface ProjectData extends Corpus {
-  target: TargetConfig;
-  dist: DistPathSet;
+  goldenPath: string;
+  goldenText: string;
   golden: LangDocument;
+  goldenUnknownPath: string;
+  goldenUnknownText: string;
   goldenUnknown: LangDocument;
+  dist: DistPathSet;
 }
 
-function loadConfig(): ProjectConfigV2 {
-  const parsed = parseProjectJsonc(readFileSync(projectPath, 'utf8'));
+export function loadProjectConfig(): { configText: string; config: ProjectConfigV2 } {
+  const configText = readFileSync(projectFilePath, 'utf8');
+  const parsed = parseProjectJsonc(configText);
   if (!parsed.config) {
     throw new Error(`project.jsonc 校验失败：${JSON.stringify(parsed.issues)}`);
   }
-  return parsed.config;
+  return { configText, config: parsed.config };
 }
 
-function workplaceOf(target: TargetConfig): string {
-  return resolve(repoRoot, target.workplace);
+function loadLangFile(path: string): LangFile {
+  const text = readFileSync(path, 'utf8');
+  return { path, text, document: parseLegacyLang(text) };
 }
 
-function loadLang(root: string, path: string): LangDocument {
-  return parseLegacyLang(readFileSync(resolve(root, path), 'utf8'));
+function languagePath(root: string, relative: string): string {
+  return resolveInsideRepo(join(root, relative));
 }
 
 /** 只加载生成所需的输入；性能脚本用它，避免多解析 golden。 */
 export function loadCorpus(): Corpus {
-  const config = loadConfig();
+  const { configText, config } = loadProjectConfig();
   const target = getTarget(config);
-  const workplace = workplaceOf(target);
+  const workplace = resolveInsideRepo(target.workplace);
+  const sourcePath = languagePath(workplace, target.source);
+  const fallbackPath = languagePath(workplace, target.fallback);
+  const source = loadLangFile(sourcePath);
+  const fallback = loadLangFile(fallbackPath);
   return {
+    configText,
     config,
-    source: loadLang(workplace, target.source),
-    fallback: loadLang(workplace, target.fallback),
+    target,
+    sourcePath,
+    sourceText: source.text,
+    source: source.document,
+    fallbackPath,
+    fallbackText: fallback.text,
+    fallback: fallback.document,
   };
 }
 
 /** 生成 + 对比所需的完整输入，包括只读的 legacy golden。 */
 export function loadProjectData(): ProjectData {
-  const config = loadConfig();
-  const target = getTarget(config);
-  const workplace = workplaceOf(target);
+  const corpus = loadCorpus();
+  const target = corpus.target;
+  const workplace = resolveInsideRepo(target.workplace);
+  const goldenPath = languagePath(workplace, target.output);
+  const goldenUnknownPath = languagePath(workplace, target.unknown);
+  const golden = loadLangFile(goldenPath);
+  const goldenUnknown = loadLangFile(goldenUnknownPath);
   return {
-    config,
-    target,
-    source: loadLang(workplace, target.source),
-    fallback: loadLang(workplace, target.fallback),
-    golden: loadLang(workplace, target.output),
-    goldenUnknown: loadLang(workplace, target.unknown),
+    ...corpus,
+    goldenPath,
+    goldenText: golden.text,
+    golden: golden.document,
+    goldenUnknownPath,
+    goldenUnknownText: goldenUnknown.text,
+    goldenUnknown: goldenUnknown.document,
     dist: distPathsForTarget(target),
   };
 }
 
-export function repoRelative(path: string): string {
-  return relative(repoRoot, path).replaceAll('\\', '/');
-}
-
-function isInside(parent: string, path: string): boolean {
-  const rel = relative(parent, path);
-  return rel === '' || (rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel));
-}
-
-/** 写盘前的硬性边界：只允许 node/dist，绝不碰 legacy。 */
-function assertDistPath(path: string): void {
-  if (isInside(legacyRoot, path)) {
-    throw new Error(`迁移期禁止写入 legacy：${repoRelative(path)}`);
-  }
-  if (!isInside(distRoot, path)) {
-    throw new Error(`生成物只能写入 ${DEFAULT_DIST_ROOT}：${repoRelative(path)}`);
-  }
-}
-
-/**
- * 把生成结果写成 dist 产物。
- *
- * 与 legacy 的 C++ 工具不同，这里不生成 `.bak`：dist 可以随时重建，
- * 而 golden 必须保持不被 Node 工具修改。
- */
-export function writeDistArtifacts(
+/** 把 worker 返回的文本写成 dist 产物；不生成 `.bak`。 */
+export function writeArtifactTexts(
   data: ProjectData,
-  generated: GenerationResult,
+  artifacts: ArtifactTexts,
 ): { root: string; output: string; unknown: string } {
-  const outputEntries = data.source.entries.map((entry) => ({
-    ...entry,
-    value: generated.output.get(entry.key) ?? entry.value,
-  }));
-  const unknownEntries = data.source.entries
-    .filter((entry) => generated.unknown.has(entry.key))
-    .map((entry) => ({ ...entry }));
-
   const outputPath = resolve(repoRoot, data.dist.output);
   const unknownPath = resolve(repoRoot, data.dist.unknown);
-  assertDistPath(outputPath);
-  assertDistPath(unknownPath);
+  assertArtifactWritable(outputPath);
+  assertArtifactWritable(unknownPath);
 
   mkdirSync(dirname(outputPath), { recursive: true });
-  writeFileSync(outputPath, writeLegacyLang(outputEntries, data.target.lineEnding), 'utf8');
-  writeFileSync(unknownPath, writeLegacyLang(unknownEntries, data.target.lineEnding), 'utf8');
+  writeFileSync(outputPath, artifacts.output, 'utf8');
+  writeFileSync(unknownPath, artifacts.unknown, 'utf8');
 
   return {
     root: resolve(repoRoot, data.dist.root),

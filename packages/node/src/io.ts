@@ -1,13 +1,9 @@
 import { join } from 'node:path';
 import {
   analyzeLangDocument,
-  buildFallbackMap,
   compareToGolden,
   diffLangMaps,
-  generateFromEntries,
   parseLegacyLang,
-  testEntry as coreTestEntry,
-  writeLegacyLang,
   type EntryTestResult,
   type FileInfo,
   type GenerateResult,
@@ -17,7 +13,7 @@ import {
   type TargetConfig,
 } from '@gt6tg/core';
 import { distPathsForTarget } from '@gt6tg/runtime';
-import { hashOutput } from './hash';
+import { NodeEngineClient } from './engine-client';
 import { readTextIfExists, repoRelative, resolveInsideRepo, writeArtifact } from './paths';
 import { ProjectStore } from './projectStore';
 
@@ -29,7 +25,7 @@ export interface ResolvedTarget {
   /** legacy golden：迁移期只读，作为 parity 基准。 */
   golden: string;
   goldenUnknown: string;
-  /** core 自己的产物路径（可写）。 */
+  /** Node 自己的产物路径（可写）。 */
   dist: {
     root: string;
     output: string;
@@ -137,7 +133,7 @@ function buildNotes(
   return notes;
 }
 
-export async function checkIo(store: ProjectStore, targetId: string): Promise<IoCheckReport> {
+export async function checkIo(store: ProjectStore, engine: NodeEngineClient, targetId: string): Promise<IoCheckReport> {
   const totalStarted = performance.now();
   const paths = resolveTarget(store, targetId);
 
@@ -151,19 +147,27 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
   const readMs = performance.now() - readStarted;
 
   const compileStarted = performance.now();
-  const compiled = store.getCompiled();
+  const compiled = await engine.compile(store.current().raw);
   const compileMs = performance.now() - compileStarted;
 
   const generateStarted = performance.now();
-  const generated = generateFromEntries(compiled, source.document.entries, fallback.document.entries);
+  const run = await engine.run({
+    compileId: compiled.compileId,
+    sourceText: source.text ?? '',
+    fallbackText: fallback.text ?? undefined,
+    lineEnding: paths.target.lineEnding,
+    scope: 'all',
+  });
   const generateMs = performance.now() - generateStarted;
 
   const diffStarted = performance.now();
-  const diffVsCurrent = diffLangMaps(golden.document.map, generated.output);
-  const parity = compareToGolden(golden.document, generated, goldenUnknown.document);
+  const generatedOutput = parseLegacyLang(run.outputText);
+  const generatedUnknown = new Set(run.unknownKeys);
+  const artifact = { output: generatedOutput.map, unknown: generatedUnknown };
+  const diffVsCurrent = diffLangMaps(golden.document.map, generatedOutput.map);
+  const parity = compareToGolden(golden.document, artifact, goldenUnknown.document);
   const diffMs = performance.now() - diffStarted;
 
-  const hash = hashOutput(generated.output);
   const notes = buildNotes(store, source, fallback, golden, goldenUnknown, paths.dist);
 
   const timings: OperationTiming = {
@@ -173,7 +177,7 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
     generateMs,
     diffMs,
     compile: compiled.timings,
-    generate: generated.timings,
+    generate: run.summary.timings,
   };
 
   return {
@@ -185,13 +189,13 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
     output: golden.info,
     unknown: goldenUnknown.info,
     generated: {
-      keys: generated.output.size,
-      unknownKeys: generated.unknown.size,
-      sameAsEnglish: generated.stats.sameAsEnglish,
-      conflictKeys: generated.stats.conflictKeys,
-      durationMs: Math.round(generateMs),
-      hash,
-      timings: generated.timings,
+      keys: run.summary.stats.outputKeys,
+      unknownKeys: run.summary.stats.unknownKeys,
+      sameAsEnglish: run.summary.stats.sameAsEnglish,
+      conflictKeys: run.summary.stats.conflictKeys,
+      durationMs: Math.round(run.summary.timings.totalMs),
+      hash: run.summary.hash,
+      timings: run.summary.timings,
     },
     parity,
     timings,
@@ -202,6 +206,7 @@ export async function checkIo(store: ProjectStore, targetId: string): Promise<Io
 
 export async function generate(
   store: ProjectStore,
+  engine: NodeEngineClient,
   targetId: string,
   write: boolean,
   includeOutput = false,
@@ -219,32 +224,30 @@ export async function generate(
   if (!source.info.exists) throw new Error(`源文件不存在：${source.info.path}`);
 
   const compileStarted = performance.now();
-  const compiled = store.getCompiled();
+  const compiled = await engine.compile(store.current().raw);
   const compileMs = performance.now() - compileStarted;
 
   const generateStarted = performance.now();
-  const generated = generateFromEntries(compiled, source.document.entries, fallback.document.entries);
+  const run = await engine.run({
+    compileId: compiled.compileId,
+    sourceText: source.text ?? '',
+    fallbackText: fallback.text ?? undefined,
+    lineEnding: paths.target.lineEnding,
+    scope: 'all',
+  });
   const generateMs = performance.now() - generateStarted;
 
+  const generatedOutput = parseLegacyLang(run.outputText);
   const diffStarted = performance.now();
-  const diffVsCurrent = diffLangMaps(golden.document.map, generated.output);
+  const diffVsCurrent = diffLangMaps(golden.document.map, generatedOutput.map);
   const diffMs = performance.now() - diffStarted;
-
-  const hash = hashOutput(generated.output);
 
   let written: GenerateResult['written'];
   let writeMs = 0;
   if (write) {
     const writeStarted = performance.now();
-    const outputEntries = source.document.entries.map((entry) => ({
-      ...entry,
-      value: generated.output.get(entry.key) ?? entry.value,
-    }));
-    const unknownEntries = source.document.entries
-      .filter((entry) => generated.unknown.has(entry.key))
-      .map((entry) => ({ ...entry }));
-    await writeArtifact(paths.dist.output, writeLegacyLang(outputEntries, paths.target.lineEnding));
-    await writeArtifact(paths.dist.unknown, writeLegacyLang(unknownEntries, paths.target.lineEnding));
+    await writeArtifact(paths.dist.output, run.outputText);
+    await writeArtifact(paths.dist.unknown, run.unknownText);
     written = {
       distRoot: repoRelative(paths.dist.root),
       outputPath: repoRelative(paths.dist.output),
@@ -261,27 +264,28 @@ export async function generate(
     diffMs,
     writeMs,
     compile: compiled.timings,
-    generate: generated.timings,
+    generate: run.summary.timings,
   };
 
+  const generatedUnknown = new Set(run.unknownKeys);
   return {
     targetId: paths.target.id,
     dryRun: !write,
-    durationMs: Math.round(generateMs),
+    durationMs: Math.round(run.summary.timings.totalMs),
     timings,
-    sourceKeys: source.document.entries.length,
-    outputKeys: generated.output.size,
-    unknownKeys: generated.unknown.size,
-    sameAsEnglish: generated.stats.sameAsEnglish,
-    conflictKeys: generated.stats.conflictKeys,
-    hash,
+    sourceKeys: run.summary.stats.sourceKeys,
+    outputKeys: run.summary.stats.outputKeys,
+    unknownKeys: run.summary.stats.unknownKeys,
+    sameAsEnglish: run.summary.stats.sameAsEnglish,
+    conflictKeys: run.summary.stats.conflictKeys,
+    hash: run.summary.hash,
     diffVsCurrent,
     written,
-    output: includeOutput ? Object.fromEntries(generated.output) : undefined,
+    output: includeOutput ? Object.fromEntries(generatedOutput.map) : undefined,
     unknown: includeOutput
       ? Object.fromEntries(
           source.document.entries
-            .filter((entry) => generated.unknown.has(entry.key))
+            .filter((entry) => generatedUnknown.has(entry.key))
             .map((entry) => [entry.key, entry.value]),
         )
       : undefined,
@@ -290,18 +294,21 @@ export async function generate(
 
 export async function runEntryTest(
   store: ProjectStore,
+  engine: NodeEngineClient,
   targetId: string,
   key: string,
   value?: string,
 ): Promise<EntryTestResult> {
   const paths = resolveTarget(store, targetId);
   const [source, fallback] = await Promise.all([readLang(paths.source), readLang(paths.fallback)]);
-  const resolvedValue = value ?? source.document.map.get(key);
-  if (resolvedValue === undefined) throw new Error(`找不到 key 的英文值：${key}`);
-
-  const compiled = store.getCompiled();
-  const fallbackMap = buildFallbackMap(fallback.document.entries);
-  const result = coreTestEntry(compiled, key, resolvedValue, fallbackMap, store.current().issues);
-  result.targetId = paths.target.id;
-  return result;
+  const compiled = await engine.compile(store.current().raw);
+  return engine.testEntry({
+    compileId: compiled.compileId,
+    targetId: paths.target.id,
+    key,
+    value,
+    sourceText: source.text ?? undefined,
+    fallbackText: fallback.text ?? undefined,
+    issues: store.current().issues,
+  });
 }

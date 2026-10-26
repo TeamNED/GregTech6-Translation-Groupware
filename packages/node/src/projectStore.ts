@@ -1,12 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import {
-  compileConfig,
   getTarget,
   lintProject,
   parseProjectJsonc,
   stringifyProjectConfig,
   updateTargetJsonc,
-  type CompiledProject,
   type ProjectConfigV2,
   type ProjectSnapshot,
   type SaveProjectResult,
@@ -40,10 +38,9 @@ interface SnapshotInternal extends ProjectSnapshot {
  *
  * - `validate` 只构建快照，不写盘；
  * - `save` 只有在没有 error 级问题时才写盘，并保留备份；
- * - 编译结果按 raw 文本缓存，保存/更新目标后失效。
+ * - 编译由 worker 侧的 runtime 负责，本类只维护配置状态。
  */
 export class ProjectStore {
-  private raw = '';
   private snapshot: SnapshotInternal = {
     raw: '',
     config: null,
@@ -52,8 +49,6 @@ export class ProjectStore {
     targets: [],
     activeTargetId: '',
   };
-  private compiled: CompiledProject | null = null;
-  private compiledRaw = '';
 
   async load(): Promise<void> {
     const raw = await readTextIfExists(projectFilePath);
@@ -109,16 +104,6 @@ export class ProjectStore {
     return this.snapshot;
   }
 
-  getCompiled(): CompiledProject {
-    const config = this.snapshot.config;
-    if (!config) throw new Error('配置未通过校验，无法编译');
-    if (this.compiled && this.compiledRaw === this.raw) return this.compiled;
-
-    this.compiled = compileConfig(config);
-    this.compiledRaw = this.raw;
-    return this.compiled;
-  }
-
   target(targetId?: string): TargetConfig {
     const config = this.snapshot.config;
     if (!config) throw new Error('配置未通过校验');
@@ -154,9 +139,6 @@ export class ProjectStore {
   }
 
   private refresh(raw: string): void {
-    this.raw = raw;
     this.snapshot = this.buildSnapshot(raw);
-    this.compiled = null;
-    this.compiledRaw = '';
   }
 }

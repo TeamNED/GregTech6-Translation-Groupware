@@ -45,6 +45,9 @@ importers:
       '@gt6tg/runtime':
         specifier: workspace:*
         version: link:../runtime
+      jsonc-parser:
+        specifier: ^3.3.1
+        version: 3.3.1
       ws:
         specifier: ^8.18.3
         version: 8.22.0
@@ -58,6 +61,9 @@ importers:
       '@types/ws':
         specifier: ^8.18.1
         version: 8.18.2
+      esbuild:
+        specifier: ^0.28.2
+        version: 0.28.2
       oxfmt:
         specifier: ~0.74.0
         version: 0.74.0

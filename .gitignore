@@ -134,6 +134,7 @@ packages/*/.rush/
 .cache/
 # 本地性能记录（每轮测试一个 JSON，不入库）
 packages/node/.perf/
+packages/node/.build/
 project.jsonc.bak-*
 
 

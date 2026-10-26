@@ -1,24 +1,16 @@
 /**
  * 本地性能记录与前后对比。
  *
- * 每次运行都会在 `packages/node/.perf/` 下写一个独立 JSON（该目录不入库），
- * 记录真实语料上的分阶段耗时、对象计数、内存和 git 修订信息。
- *
- * 用法：
- *   npx tsx src/cli/check-perf.ts --label=before
- *   ... 修改代码 ...
- *   npx tsx src/cli/check-perf.ts --label=after
- *   npx tsx src/cli/check-perf.ts --compare                 # 对比最近两次
- *   npx tsx src/cli/check-perf.ts --compare=a.json,b.json   # 显式指定两个文件
- *
- * 默认只报告差异，不判定失败；`--strict` 时超过 fail 阈值才返回退出码 1。
- * 阈值可用 GT6TG_PERF_WARN（默认 1.15）、GT6TG_PERF_FAIL（默认 1.30）调整。
+ * 测量通过 worker_threads 执行；记录写到 packages/node/.perf/（不入库）。
+ * 默认只报告差异，`--strict` 时超过 fail 阈值才返回退出码 1。
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { isAbsolute, join, resolve } from 'node:path';
-import { compileConfig, generateFromEntries, type PhaseTiming, type TimingReport } from '@gt6tg/core';
+import type { PhaseTiming, TimingReport } from '@gt6tg/core';
+import type { JobStartResult } from '@gt6tg/runtime';
+import { NodeEngineClient } from '../engine-client';
 import { loadCorpus, median, perfRunsDir, repoRoot, round } from './lib';
 
 interface PerfRun {
@@ -78,127 +70,130 @@ interface PerfRun {
   };
 }
 
-const args = process.argv.slice(2);
-const warnRatio = Number(process.env.GT6TG_PERF_WARN ?? '1.15');
-const failRatio = Number(process.env.GT6TG_PERF_FAIL ?? '1.30');
-if (!(warnRatio > 0) || !(failRatio > warnRatio)) {
-  throw new Error(`阈值无效：warn=${warnRatio} fail=${failRatio}`);
+export async function runPerf(args: string[]): Promise<number> {
+  const warnRatio = Number(process.env.GT6TG_PERF_WARN ?? '1.15');
+  const failRatio = Number(process.env.GT6TG_PERF_FAIL ?? '1.30');
+  if (!(warnRatio > 0) || !(failRatio > warnRatio)) {
+    throw new Error(`阈值无效：warn=${warnRatio} fail=${failRatio}`);
+  }
+
+  if (args.includes('--compare') || args.some((arg) => arg.startsWith('--compare='))) {
+    return runCompare(args, warnRatio, failRatio);
+  }
+  return runMeasurement(args);
 }
 
-if (args.includes('--compare') || args.some((arg) => arg.startsWith('--compare='))) {
-  runCompare();
-} else {
-  runMeasurement();
-}
-
-function runMeasurement(): void {
-  const runs = Math.max(1, Math.round(numberArg('runs', 3)));
-  const warmup = Math.max(0, Math.round(numberArg('warmup', 1, true)));
-  const label = stringArg('label') ?? 'run';
+async function runMeasurement(args: string[]): Promise<number> {
+  const runs = Math.max(1, Math.round(numberArg(args, 'runs', 3)));
+  const warmup = Math.max(0, Math.round(numberArg(args, 'warmup', 1, true)));
+  const label = stringArg(args, 'label') ?? 'run';
 
   const cpuModel = cpus()[0]?.model.replace(/\s+/g, ' ').trim() ?? 'unknown';
   const cores = cpus().length;
   const machineId = `${process.platform}-${process.arch}-${cores}c-${cpuModel}`;
 
   const corpus = loadCorpus();
-  const compileSamples: number[] = [];
-  const generateSamples: number[] = [];
-  const totalSamples: number[] = [];
-  const compilePhaseSamples = new Map<string, number[]>();
-  const generatePhaseSamples = new Map<string, number[]>();
+  const client = new NodeEngineClient();
+  try {
+    const compiled = await client.compile(corpus.configText);
+    const compileMs = compiled.timings.totalMs;
+    const compilePhaseSamples = new Map<string, number[]>();
+    collectPhases(compilePhaseSamples, compiled.timings);
 
-  let lastCompiled: ReturnType<typeof compileConfig> | null = null;
-  let lastResult: ReturnType<typeof generateFromEntries> | null = null;
+    const compileSamples: number[] = [compileMs];
+    const generateSamples: number[] = [];
+    const totalSamples: number[] = [];
+    const generatePhaseSamples = new Map<string, number[]>();
+    let lastRun: JobStartResult | null = null;
 
-  for (let index = 0; index < warmup + runs; index++) {
-    const totalStarted = performance.now();
-    const compiled = compileConfig(corpus.config);
-    const compileMs = performance.now() - totalStarted;
-    const generateStarted = performance.now();
-    const result = generateFromEntries(compiled, corpus.source.entries, corpus.fallback.entries);
-    const generateMs = performance.now() - generateStarted;
-    const totalMs = performance.now() - totalStarted;
-
-    if (index >= warmup) {
-      compileSamples.push(compileMs);
-      generateSamples.push(generateMs);
-      totalSamples.push(totalMs);
-      collectPhases(compilePhaseSamples, compiled.timings);
-      collectPhases(generatePhaseSamples, result.timings);
-      lastCompiled = compiled;
-      lastResult = result;
+    for (let index = 0; index < warmup + runs; index++) {
+      const run = await client.run({
+        compileId: compiled.compileId,
+        sourceText: corpus.sourceText,
+        fallbackText: corpus.fallbackText,
+        lineEnding: corpus.target.lineEnding,
+        scope: 'all',
+        includeArtifacts: false,
+      });
+      if (index >= warmup) {
+        const generateMs = run.summary.timings.totalMs;
+        generateSamples.push(generateMs);
+        totalSamples.push(compileMs + generateMs);
+        collectPhases(generatePhaseSamples, run.summary.timings);
+        lastRun = run;
+      }
     }
-  }
 
-  if (!lastCompiled || !lastResult) throw new Error('没有可用的测量结果');
+    if (!lastRun) throw new Error('没有可用的测量结果');
 
-  let candidateItems = 0;
-  for (const list of lastResult.candidatesByValue.values()) candidateItems += list.length;
-  const usage = process.memoryUsage();
-
-  const run: PerfRun = {
-    version: 1,
-    label,
-    createdAt: new Date().toISOString(),
-    machine: {
-      id: machineId,
-      label: `${process.platform}-${process.arch} ${cores}c ${cpuModel}`,
-      platform: process.platform,
-      arch: process.arch,
-      cores,
-      cpu: cpuModel,
-      node: process.version,
-    },
-    revision: readRevision(),
-    options: { runs, warmup },
-    timings: {
-      compileMs: round(median(compileSamples)),
-      generateMs: round(median(generateSamples)),
-      totalMs: round(median(totalSamples)),
-      compilePhases: medianPhases(compilePhaseSamples),
-      generatePhases: medianPhases(generatePhaseSamples),
-      samples: {
-        compileMs: compileSamples.map((value) => round(value)),
-        generateMs: generateSamples.map((value) => round(value)),
-        totalMs: totalSamples.map((value) => round(value)),
+    const usage = process.memoryUsage();
+    const run: PerfRun = {
+      version: 1,
+      label,
+      createdAt: new Date().toISOString(),
+      machine: {
+        id: machineId,
+        label: `${process.platform}-${process.arch} ${cores}c ${cpuModel}`,
+        platform: process.platform,
+        arch: process.arch,
+        cores,
+        cpu: cpuModel,
+        node: process.version,
       },
-    },
-    counts: {
-      patterns: { ...lastCompiled.stats },
-      sourceKeys: lastResult.stats.sourceKeys,
-      outputKeys: lastResult.stats.outputKeys,
-      unknownKeys: lastResult.stats.unknownKeys,
-      sameAsEnglish: lastResult.stats.sameAsEnglish,
-      conflictKeys: lastResult.stats.conflictKeys,
-      matchedKeys: lastResult.stats.matchedKeys,
-      candidateBuckets: lastResult.candidatesByValue.size,
-      candidateItems,
-    },
-    memory: {
-      heapUsed: usage.heapUsed,
-      rss: usage.rss,
-      maxRssKb: process.resourceUsage().maxRSS,
-    },
-  };
+      revision: readRevision(),
+      options: { runs, warmup },
+      timings: {
+        compileMs: round(median(compileSamples)),
+        generateMs: round(median(generateSamples)),
+        totalMs: round(median(totalSamples)),
+        compilePhases: medianPhases(compilePhaseSamples),
+        generatePhases: medianPhases(generatePhaseSamples),
+        samples: {
+          compileMs: compileSamples.map((value) => round(value)),
+          generateMs: generateSamples.map((value) => round(value)),
+          totalMs: totalSamples.map((value) => round(value)),
+        },
+      },
+      counts: {
+        patterns: { ...compiled.stats },
+        sourceKeys: lastRun.summary.stats.sourceKeys,
+        outputKeys: lastRun.summary.stats.outputKeys,
+        unknownKeys: lastRun.summary.stats.unknownKeys,
+        sameAsEnglish: lastRun.summary.stats.sameAsEnglish,
+        conflictKeys: lastRun.summary.stats.conflictKeys,
+        matchedKeys: lastRun.summary.stats.matchedKeys,
+        candidateBuckets: lastRun.summary.candidateBuckets,
+        candidateItems: lastRun.summary.candidateItems,
+      },
+      memory: {
+        heapUsed: usage.heapUsed,
+        rss: usage.rss,
+        maxRssKb: process.resourceUsage().maxRSS,
+      },
+    };
 
-  const filePath = writeRun(run);
-  if (args.includes('--json')) {
-    console.log(JSON.stringify(run, null, 2));
-  } else {
-    console.log(`[perf] 已记录：${filePath}`);
-    console.log(
-      `[perf] compile ${run.timings.compileMs} ms / generate ${run.timings.generateMs} ms / total ${run.timings.totalMs} ms`,
-    );
-    console.log(
-      `[perf] keys=${run.counts.sourceKeys} output=${run.counts.outputKeys} unknown=${run.counts.unknownKeys} ` +
-        `patterns=${run.counts.patterns.topPatterns}/${run.counts.patterns.allPatterns} buckets=${run.counts.candidateBuckets}`,
-    );
-    console.log('[perf] 修改前后各跑一次，再用 `--compare` 对比最近两次记录。');
+    const filePath = writeRun(run);
+    if (args.includes('--json')) {
+      console.log(JSON.stringify(run, null, 2));
+    } else {
+      console.log(`[perf] 已记录：${filePath}`);
+      console.log(
+        `[perf] compile ${run.timings.compileMs} ms / generate ${run.timings.generateMs} ms / total ${run.timings.totalMs} ms`,
+      );
+      console.log(
+        `[perf] keys=${run.counts.sourceKeys} output=${run.counts.outputKeys} unknown=${run.counts.unknownKeys} ` +
+          `patterns=${run.counts.patterns.topPatterns}/${run.counts.patterns.allPatterns} buckets=${run.counts.candidateBuckets}`,
+      );
+      console.log('[perf] 修改前后各跑一次，再用 `--compare` 对比最近两次记录。');
+    }
+    return 0;
+  } finally {
+    client.close();
   }
 }
 
-function runCompare(): void {
-  const explicit = parseComparePaths();
+function runCompare(args: string[], warnRatio: number, failRatio: number): number {
+  const explicit = parseComparePaths(args);
   let files: string[];
   let before: PerfRun;
   let after: PerfRun;
@@ -206,13 +201,13 @@ function runCompare(): void {
     files = explicit.length ? explicit.map(resolveRunPath) : latestRunFiles(2);
     if (files.length < 2) {
       console.error('[perf] 至少需要两份记录才能对比；先运行 `--label=before` 和 `--label=after`。');
-      process.exit(1);
+      return 1;
     }
     before = readRun(files[0]!);
     after = readRun(files[1]!);
   } catch (error) {
     console.error(`[perf] ${(error as Error).message}`);
-    process.exit(1);
+    return 1;
   }
 
   console.log(`[perf] 对比：${files[0]}`);
@@ -249,11 +244,12 @@ function runCompare(): void {
   } else if (worst > failRatio) {
     console.log('');
     console.log(`[perf] 最差 ${percent(worst)}，超过 fail 阈值 ${percent(failRatio)}。`);
-    if (args.includes('--strict')) process.exit(1);
+    if (args.includes('--strict')) return 1;
   } else if (worst > warnRatio) {
     console.log('');
     console.log(`[perf] 最差 ${percent(worst)}，超过 warn 阈值 ${percent(warnRatio)}。`);
   }
+  return 0;
 }
 
 function printTimingRow(label: string, before: number, after: number): void {
@@ -315,7 +311,6 @@ function medianPhases(samples: Map<string, number[]>): PhaseTiming[] {
 
 function writeRun(run: PerfRun): string {
   mkdirSync(perfRunsDir, { recursive: true });
-  // 保留毫秒，避免同一秒内同 label 的两次运行互相覆盖。
   const stamp = run.createdAt.replace(/[-:.]/g, '');
   const safeLabel = run.label.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'run';
   const filePath = join(perfRunsDir, `${stamp}-${safeLabel}-${run.revision.head.slice(0, 7)}.json`);
@@ -335,7 +330,7 @@ function latestRunFiles(count: number): string[] {
   }
 }
 
-function parseComparePaths(): string[] {
+function parseComparePaths(args: string[]): string[] {
   const inline = args.find((arg) => arg.startsWith('--compare='));
   if (inline) {
     return inline
@@ -453,7 +448,7 @@ function gitOutput(gitArgs: string[]): string | null {
   }
 }
 
-function numberArg(name: string, fallback: number, allowZero = false): number {
+function numberArg(args: string[], name: string, fallback: number, allowZero = false): number {
   const prefix = `--${name}=`;
   const value = args.find((arg) => arg.startsWith(prefix));
   if (!value) return fallback;
@@ -464,7 +459,7 @@ function numberArg(name: string, fallback: number, allowZero = false): number {
   return parsed;
 }
 
-function stringArg(name: string): string | undefined {
+function stringArg(args: string[], name: string): string | undefined {
   const prefix = `--${name}=`;
   return args.find((arg) => arg.startsWith(prefix))?.slice(prefix.length);
 }
