@@ -65,21 +65,10 @@ export interface GeneratorConfig {
   rules?: RuleDefinition[];
 }
 
-export type DictGeneratorConfig = GeneratorConfig & { dict: Record<string, string | Record<string, string>> };
-export type RuleGeneratorConfig = GeneratorConfig & { rules: RuleDefinition[] };
-
 export interface ProjectConfigV2 {
   schemaVersion: SchemaVersion;
   legacy?: LegacyMeta;
   defaultTarget: string;
   targets: TargetConfig[];
   generators: GeneratorConfig[];
-}
-
-export function isDictGenerator(generator: GeneratorConfig): generator is DictGeneratorConfig {
-  return 'dict' in generator;
-}
-
-export function isRuleGenerator(generator: GeneratorConfig): generator is RuleGeneratorConfig {
-  return 'rules' in generator;
 }

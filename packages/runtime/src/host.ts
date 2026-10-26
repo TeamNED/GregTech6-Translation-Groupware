@@ -16,6 +16,7 @@ import type { CompileCacheEntry } from './compile-cache';
 import { CompileCache, compileIdForConfig } from './compile-cache';
 import type { HashProvider } from './hash';
 import { hashOutput } from './hash';
+import { emitRuntimeHook, type RuntimeHooks } from './hooks';
 import { JobRunner, type JobProgress, type JobScope } from './job';
 import type { RunResult } from './run-summary';
 
@@ -24,6 +25,7 @@ export interface EngineHostOptions {
   clock?: Clock;
   maxCompiles?: number;
   nextJobId?: () => string;
+  hooks?: RuntimeHooks;
 }
 
 export interface CompileResult {
@@ -78,6 +80,7 @@ export class EngineHost {
   private readonly hash: HashProvider;
   private readonly clock: Clock;
   private readonly nextJobId: () => string;
+  private readonly hooks: RuntimeHooks | undefined;
   private jobCounter = 0;
 
   constructor(options: EngineHostOptions) {
@@ -85,12 +88,18 @@ export class EngineHost {
     this.clock = options.clock ?? systemClock;
     this.cache = new CompileCache(options.maxCompiles ?? 2);
     this.nextJobId = options.nextJobId ?? (() => `job-${++this.jobCounter}`);
+    this.hooks = options.hooks;
   }
 
   compile(configText: string): CompileResult {
     const compileId = compileIdForConfig(configText);
     const cached = this.cache.get(compileId, this.clock.now());
     if (cached) {
+      emitRuntimeHook(this.hooks, 'compile:finished', {
+        stats: cached.stats,
+        timings: cached.timings,
+        cached: true,
+      });
       return {
         compileId,
         stats: cached.stats,
@@ -100,10 +109,14 @@ export class EngineHost {
     }
 
     const parsed = parseProjectJsonc(configText);
+    emitRuntimeHook(this.hooks, 'config:parsed', { issues: parsed.issues });
     if (!parsed.config) {
       throw new RuntimeError('config-invalid', '配置校验失败', parsed.issues);
     }
 
+    emitRuntimeHook(this.hooks, 'compile:started', {
+      generatorBlocks: parsed.config.generators.length,
+    });
     const compiled = compileConfig(parsed.config);
     const timings = compiled.timings ?? {
       label: 'compile',
@@ -118,6 +131,12 @@ export class EngineHost {
       lastUsed: this.clock.now(),
     };
     this.cache.set(entry);
+
+    emitRuntimeHook(this.hooks, 'compile:finished', {
+      stats: compiled.stats,
+      timings,
+      cached: false,
+    });
 
     return {
       compileId,
@@ -146,24 +165,47 @@ export class EngineHost {
   async run(options: RunOptions): Promise<RunResult> {
     const compiled = this.getCompiled(options.compileId);
     const runner = new JobRunner();
-    return runner.run({
-      jobId: options.jobId ?? this.nextJobId(),
+    const jobId = options.jobId ?? this.nextJobId();
+    const scope = options.scope?.kind ?? 'all';
+    const total = options.scope?.kind === 'keys' ? options.scope.keys.length : options.sourceEntries.length;
+
+    emitRuntimeHook(this.hooks, 'job:started', {
+      jobId,
       compileId: options.compileId,
-      compiled,
-      sourceEntries: options.sourceEntries,
-      fallbackEntries: options.fallbackEntries,
-      scope: options.scope,
-      includeCandidates: options.includeCandidates,
-      hash: this.hash,
-      clock: this.clock,
-      onProgress: options.onProgress,
+      scope,
+      total,
     });
+
+    try {
+      const result = await runner.run({
+        jobId,
+        compileId: options.compileId,
+        compiled,
+        sourceEntries: options.sourceEntries,
+        fallbackEntries: options.fallbackEntries,
+        scope: options.scope,
+        includeCandidates: options.includeCandidates,
+        hash: this.hash,
+        clock: this.clock,
+        onProgress: (progress) => {
+          emitRuntimeHook(this.hooks, 'job:progress', progress);
+          options.onProgress?.(progress);
+        },
+      });
+      emitRuntimeHook(this.hooks, 'job:finished', { jobId, summary: result.summary });
+      return result;
+    } catch (error) {
+      emitRuntimeHook(this.hooks, 'job:failed', {
+        jobId,
+        message: error instanceof Error ? error.message : String(error),
+      });
+      throw error;
+    }
   }
 
   testEntry(options: TestEntryOptions): EntryTestResult {
     const compiled = this.getCompiled(options.compileId);
-    const value =
-      options.value ?? options.sourceEntries?.find((entry) => entry.key === options.key)?.value;
+    const value = options.value ?? options.sourceEntries?.find((entry) => entry.key === options.key)?.value;
     if (value === undefined) {
       throw new RuntimeError('entry-value-missing', `找不到 key 的英文值：${options.key}`);
     }
@@ -171,6 +213,11 @@ export class EngineHost {
     const fallbackMap = buildFallbackMap([...(options.fallbackEntries ?? [])]);
     const result = coreTestEntry(compiled, options.key, value, fallbackMap, options.issues ?? []);
     if (options.targetId) result.targetId = options.targetId;
+    emitRuntimeHook(this.hooks, 'entry:tested', {
+      key: options.key,
+      targetId: result.targetId || undefined,
+      unknown: result.unknown,
+    });
     return result;
   }
 

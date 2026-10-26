@@ -1,5 +1,5 @@
 import type { TimingReport } from '../types/timing';
-import type { LexEntry, Lexicon, RuleMeta } from './lexicon';
+import type { Lexicon, RuleMeta } from './lexicon';
 import type { GeneratorModel, TemplatePart } from './model';
 import type { Timer } from './timing';
 import { tokenize } from './tokenizer';
@@ -378,11 +378,4 @@ export function patternLabel(compiled: CompiledProject, pattern: CompiledPattern
       return `REDUCE(${compiled.model.gens[op.meta.generatorId]?.group ?? '?'}:${op.meta.rule})`;
     })
     .join(' | ');
-}
-
-/** 给 trace/调试用：返回某个组的所有词条。 */
-export function groupLexEntries(lexicon: Lexicon, groupId: number): LexEntry[] {
-  const result: LexEntry[] = [];
-  for (const entries of lexicon.byFirst.get(groupId)?.values() ?? []) result.push(...entries);
-  return result;
 }

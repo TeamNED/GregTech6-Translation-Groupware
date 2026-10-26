@@ -1,18 +1,16 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import {
-  DEFAULT_DIST_ROOT,
-  distPathsForTarget,
   getTarget,
   parseLegacyLang,
   parseProjectJsonc,
   writeLegacyLang,
-  type DistPathSet,
   type GenerationResult,
   type LangDocument,
   type ProjectConfigV2,
   type TargetConfig,
 } from '../src/index';
+import { DEFAULT_DIST_ROOT, distPathsForTarget, type DistPathSet } from './dist';
 
 export const repoRoot = resolve(import.meta.dirname, '../../..');
 /** 本地性能记录目录；已加入 .gitignore，每次运行写一个独立 JSON。 */

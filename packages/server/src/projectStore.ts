@@ -1,8 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import {
   compileConfig,
-  convertLegacyYamlToProject,
-  DEFAULT_LEGACY_TARGET,
   getTarget,
   lintProject,
   parseProjectJsonc,
@@ -16,6 +14,7 @@ import {
   type TargetPatch,
   type ProjectStats,
 } from '@gt6tg/core';
+import { convertLegacyYamlToProject, DEFAULT_LEGACY_TARGET } from './config/legacyYaml';
 import { projectFilePath, readTextIfExists, resolveInsideRepo, writeWithBackup } from './paths';
 
 const EMPTY_STATS: ProjectStats = {

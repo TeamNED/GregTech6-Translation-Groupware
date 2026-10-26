@@ -1,9 +1,9 @@
 /** WebSocket RPC 与 Web 控制台共用的 DTO。 */
 
-import type { ParityReport } from '../engine/parity';
 import type { ProjectConfigV2, LineEnding, TargetConfig } from './config';
 import type { ConfigIssue, ProjectStats } from './issues';
 import type { DetectedLineEnding } from './lang';
+import type { ParityReport } from './parity';
 import type { TimingReport } from './timing';
 
 export interface ProjectSnapshot {
@@ -147,12 +147,6 @@ export interface TraceStep {
   stage: TraceStage;
   message: string;
   data?: Record<string, unknown>;
-}
-
-export interface EntryTestRequest {
-  targetId: string;
-  key: string;
-  value?: string;
 }
 
 export interface EntryTestResult {

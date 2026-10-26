@@ -11,10 +11,7 @@ import type {
   CoreTransport,
 } from './protocol';
 
-export type DirectRequestHandler = (
-  method: string,
-  params: unknown,
-) => Promise<unknown> | unknown;
+export type DirectRequestHandler = (method: string, params: unknown) => Promise<unknown> | unknown;
 
 /** 同进程直连传输，主要用于单测和未来的 CLI 进程内调用。 */
 export class DirectTransport implements CoreTransport {
@@ -78,10 +75,7 @@ export class DirectClient implements CoreClient {
     this.unsubscribe = transport.onMessage((message) => this.receive(message));
   }
 
-  request<M extends CoreMethodName>(
-    method: M,
-    params: CoreParams<M>,
-  ): Promise<CoreResult<M>> {
+  request<M extends CoreMethodName>(method: M, params: CoreParams<M>): Promise<CoreResult<M>> {
     if (this.closed) {
       return Promise.reject(new CoreClientError('client-closed', '传输已关闭'));
     }
@@ -121,9 +115,7 @@ export class DirectClient implements CoreClient {
     if (!pending) return;
     this.pending.delete(message.id);
     if (message.error) {
-      pending.reject(
-        new CoreClientError(message.error.code, message.error.message, message.error.details),
-      );
+      pending.reject(new CoreClientError(message.error.code, message.error.message, message.error.details));
     } else {
       pending.resolve(message.result);
     }

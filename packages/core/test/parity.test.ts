@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { distPathsForTarget } from '../src/config/dist';
 import { parseLegacyLang } from '../src/engine/legacyLang';
 import { compareToGolden } from '../src/engine/parity';
-import type { TargetConfig } from '../src/types/config';
 
 const golden = parseLegacyLang(`# Configuration file
 languagefile {
@@ -68,35 +66,5 @@ describe('parity', () => {
     expect(report.unknownMismatch).toBe(2);
     expect(report.unknownSamples).toContainEqual({ key: 'S:c', expected: true });
     expect(report.unknownSamples).toContainEqual({ key: 'S:extra', expected: false });
-  });
-});
-
-describe('dist paths', () => {
-  const target: TargetConfig = {
-    id: 'gt6-legacy',
-    label: 'GT6',
-    format: 'legacy-lang',
-    workplace: 'packages/legacy/workplace',
-    source: 'en/GregTech.lang',
-    fallback: 'zh/GregTech.fallback.lang',
-    output: 'zh/GregTech.lang',
-    unknown: 'zh/GregTech.unknown.lang',
-    encoding: 'utf-8',
-    lineEnding: 'crlf',
-  };
-
-  it('writes under core/dist by target id', () => {
-    const paths = distPathsForTarget(target);
-
-    expect(paths.root).toBe('packages/core/dist/gt6-legacy');
-    expect(paths.output).toBe('packages/core/dist/gt6-legacy/GregTech.lang');
-    expect(paths.unknown).toBe('packages/core/dist/gt6-legacy/GregTech.unknown.lang');
-  });
-
-  it('never points into the legacy workplace', () => {
-    const paths = distPathsForTarget(target);
-
-    expect(paths.output.startsWith('packages/legacy/')).toBe(false);
-    expect(paths.unknown.startsWith('packages/legacy/')).toBe(false);
   });
 });

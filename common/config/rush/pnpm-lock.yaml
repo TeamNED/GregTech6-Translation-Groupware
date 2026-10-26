@@ -15,9 +15,6 @@ importers:
       jsonc-parser:
         specifier: ^3.3.1
         version: 3.3.1
-      yaml:
-        specifier: ^2.9.1
-        version: 2.9.1
       zod:
         specifier: ^4.6.7
         version: 4.6.7
@@ -67,9 +64,15 @@ importers:
       '@gt6tg/core':
         specifier: workspace:*
         version: link:../core
+      '@gt6tg/runtime':
+        specifier: workspace:*
+        version: link:../runtime
       ws:
         specifier: ^8.18.3
         version: 8.22.0
+      yaml:
+        specifier: ^2.9.1
+        version: 2.9.1
     devDependencies:
       '@types/node':
         specifier: ^24.19.2

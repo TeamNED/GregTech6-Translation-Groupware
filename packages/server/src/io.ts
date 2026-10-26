@@ -4,7 +4,6 @@ import {
   buildFallbackMap,
   compareToGolden,
   diffLangMaps,
-  distPathsForTarget,
   generateFromEntries,
   parseLegacyLang,
   testEntry as coreTestEntry,
@@ -17,6 +16,7 @@ import {
   type OperationTiming,
   type TargetConfig,
 } from '@gt6tg/core';
+import { distPathsForTarget } from '@gt6tg/runtime';
 import { hashOutput } from './hash';
 import { readTextIfExists, repoRelative, resolveInsideRepo, writeArtifact } from './paths';
 import { ProjectStore } from './projectStore';

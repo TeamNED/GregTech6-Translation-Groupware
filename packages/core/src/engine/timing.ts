@@ -6,8 +6,6 @@
  */
 import type { PhaseTiming, TimingReport } from '../types/timing';
 
-export type { PhaseTiming, TimingReport } from '../types/timing';
-
 function clock(): number {
   return globalThis.performance?.now() ?? Date.now();
 }
@@ -51,16 +49,4 @@ export class Timer {
 
 export function createTimer(label: string): Timer {
   return new Timer(label);
-}
-
-/** 把毫秒数四舍五入到指定小数位，便于日志/JSON 展示。 */
-export function roundMs(ms: number, digits = 1): number {
-  const factor = 10 ** digits;
-  return Math.round(ms * factor) / factor;
-}
-
-/** 把一份计时报告压成单行文本，例如 `generate 612.4ms (match 480.1, apply 90.2)`。 */
-export function formatTiming(report: TimingReport): string {
-  const phases = report.phases.map((phase) => `${phase.name} ${roundMs(phase.ms)}`).join(', ');
-  return `${report.label} ${roundMs(report.totalMs)}ms${phases ? ` (${phases})` : ''}`;
 }

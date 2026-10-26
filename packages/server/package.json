@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@gt6tg/core": "workspace:*",
-    "ws": "^8.18.3"
+    "@gt6tg/runtime": "workspace:*",
+    "ws": "^8.18.3",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

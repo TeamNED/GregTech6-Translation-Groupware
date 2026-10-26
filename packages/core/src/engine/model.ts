@@ -1,5 +1,4 @@
-import type { GeneratorConfig, ProjectConfigV2, RuleDefinition } from '../types/config';
-import { tokenize } from './tokenizer';
+import type { ProjectConfigV2, RuleDefinition } from '../types/config';
 
 export interface GeneratorBase {
   id: number;
@@ -242,20 +241,3 @@ export function buildModel(config: ProjectConfigV2): GeneratorModel {
     compileTemplate,
   };
 }
-
-/** 供 trace/UI 展示：取 generator 的组名和规则源模板。 */
-export function generatorLabel(model: GeneratorModel, generatorId: number): string {
-  const generator = model.gens[generatorId];
-  if (!generator) return `<generator ${generatorId}>`;
-  return `${generator.group || '<空>'} (${generator.kind})`;
-}
-
-export function ruleLabel(model: GeneratorModel, generatorId: number, ruleIndex: number): string {
-  const generator = model.gens[generatorId];
-  if (!generator) return `#${generatorId}`;
-  const rule = generator.kind === 'rule' ? generator.payload[ruleIndex] : undefined;
-  return rule ? `${generator.group || '<空>'}:${ruleIndex} ${rule.s}` : `${generator.group || '<空>'}:${ruleIndex}`;
-}
-
-export type { GeneratorConfig, RuleDefinition };
-export { tokenize };

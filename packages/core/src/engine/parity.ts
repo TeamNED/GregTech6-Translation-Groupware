@@ -1,32 +1,5 @@
 import type { LangDocument } from '../types/lang';
-
-/** 迁移期 parity 需要的最小生成结果；内存结果和回读的 dist 产物都满足它。 */
-export interface ParityInput {
-  output: Map<string, string>;
-  unknown: Set<string>;
-}
-
-export interface ParityValueSample {
-  key: string;
-  expected: string | null;
-  actual: string | null;
-}
-
-export interface ParityUnknownSample {
-  key: string;
-  /** true 表示期望未知但实际已翻译；false 表示期望已翻译但实际未知。 */
-  expected: boolean;
-}
-
-export interface ParityReport {
-  goldenKeys: number;
-  mismatch: number;
-  samples: ParityValueSample[];
-  expectedUnknownKeys: number;
-  unknownMismatch: number;
-  unknownSamples: ParityUnknownSample[];
-  ok: boolean;
-}
+import type { ParityInput, ParityReport, ParityUnknownSample, ParityValueSample } from '../types/parity';
 
 /**
  * 把生成结果与 legacy golden 逐 key 比较。
@@ -34,7 +7,7 @@ export interface ParityReport {
  * 口径与迁移期脚本一致：
  * - 主输出只遍历 golden 的 key，缺失也算不一致；
  * - unknown 做双向集合比较，只比 key 不比 value；
- * - 不比较换行、文件头或字节级格式；hash 是输出 Map 的指纹，不是文件哈希。
+ * - 不比较换行、文件头或字节级格式；输出指纹由 runtime 的 HashProvider 负责。
  */
 export function compareToGolden(
   golden: LangDocument,

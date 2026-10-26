@@ -7,13 +7,7 @@
  * - mismatch / unknownMismatch / 回读差异任一不为 0 时以退出码 1 结束。
  */
 import { readFileSync } from 'node:fs';
-import {
-  compareToGolden,
-  compileConfig,
-  diffLangMaps,
-  generateFromEntries,
-  parseLegacyLang,
-} from '../src/index';
+import { compareToGolden, compileConfig, diffLangMaps, generateFromEntries, parseLegacyLang } from '../src/index';
 import { hashOutput } from './hash';
 import { loadProjectData, repoRelative, writeDistArtifacts } from './lib';
 

@@ -1,5 +1,5 @@
+import type { GeneratorConfig, ProjectConfigV2, TargetConfig } from '@gt6tg/core';
 import { parse } from 'yaml';
-import type { GeneratorConfig, ProjectConfigV2, TargetConfig } from '../types/config';
 
 export const DEFAULT_LEGACY_TARGET: TargetConfig = {
   id: 'gt6-legacy',

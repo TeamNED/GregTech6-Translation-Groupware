@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import type { LangEntry } from '@gt6tg/core';
+import { describe, expect, it } from 'vitest';
 import {
   CompileCache,
   DirectClient,
@@ -154,10 +154,7 @@ describe('EngineHost', () => {
 
     const result = await host.run({
       compileId,
-      sourceEntries: [
-        entry('S:Iron Dust', 'Iron Dust'),
-        entry('S:Unknown', 'Unknown'),
-      ],
+      sourceEntries: [entry('S:Iron Dust', 'Iron Dust'), entry('S:Unknown', 'Unknown')],
       scope: { kind: 'keys', keys: ['S:Iron Dust'] },
     });
 
@@ -196,12 +193,51 @@ describe('EngineHost', () => {
     expect(host.metrics().compileCacheSize).toBe(0);
   });
 
+  it('emits lifecycle hooks and swallows hook errors', async () => {
+    const events: string[] = [];
+    const host = new EngineHost({
+      hash: fakeHash,
+      clock: fakeClock(),
+      hooks: {
+        'compile:started': () => events.push('compile:started'),
+        'compile:finished': () => events.push('compile:finished'),
+        'job:started': () => events.push('job:started'),
+        'job:progress': () => events.push('job:progress'),
+        'job:finished': () => events.push('job:finished'),
+      },
+    });
+
+    const { compileId } = host.compile(configText);
+    await host.run({
+      compileId,
+      sourceEntries: [entry('S:Iron Dust', 'Iron Dust')],
+    });
+
+    expect(events[0]).toBe('compile:started');
+    expect(events).toContain('compile:finished');
+    expect(events).toContain('job:started');
+    expect(events).toContain('job:progress');
+    expect(events.at(-1)).toBe('job:finished');
+
+    const throwingHost = new EngineHost({
+      hash: fakeHash,
+      clock: fakeClock(),
+      hooks: {
+        'compile:started': () => {
+          throw new Error('hook failed');
+        },
+      },
+    });
+
+    expect(() => throwingHost.compile(configText)).not.toThrow();
+  });
+
   it('throws for an unknown compileId', async () => {
     const host = createHost();
 
-    await expect(
-      host.run({ compileId: 'missing', sourceEntries: [entry('S:a', 'a')] }),
-    ).rejects.toThrowError(/找不到编译结果/);
+    await expect(host.run({ compileId: 'missing', sourceEntries: [entry('S:a', 'a')] })).rejects.toThrowError(
+      /找不到编译结果/,
+    );
   });
 });
 

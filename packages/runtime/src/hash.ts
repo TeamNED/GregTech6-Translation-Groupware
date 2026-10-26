@@ -12,10 +12,7 @@ export interface HashProvider {
 }
 
 /** 与 legacy 脚本一致：按 Map 顺序拼接 key\0value\n，取 sha256 前 16 位。 */
-export async function hashOutput(
-  hash: HashProvider,
-  output: ReadonlyMap<string, string>,
-): Promise<string> {
+export async function hashOutput(hash: HashProvider, output: ReadonlyMap<string, string>): Promise<string> {
   const hex = await hash.sha256Hex(canonicalParts(output));
   return hex.slice(0, 16);
 }

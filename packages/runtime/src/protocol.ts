@@ -119,10 +119,7 @@ export interface CoreTransport {
 }
 
 export interface CoreClient {
-  request<M extends CoreMethodName>(
-    method: M,
-    params: CoreParams<M>,
-  ): Promise<CoreResult<M>>;
+  request<M extends CoreMethodName>(method: M, params: CoreParams<M>): Promise<CoreResult<M>>;
   onEvent(listener: (event: CoreEvent) => void): () => void;
   close?(): void;
 }

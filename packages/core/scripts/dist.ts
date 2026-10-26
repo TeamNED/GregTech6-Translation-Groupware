@@ -1,10 +1,9 @@
-import type { TargetConfig } from '../types/config';
+import type { TargetConfig } from '../src/types/config';
 
-/** 迁移期 core 的产物根目录；legacy 目录只读。 */
+/** 迁移期脚本的本地路径推导；阶段 4 会改用 @gt6tg/runtime。 */
 export const DEFAULT_DIST_ROOT = 'packages/core/dist';
 
 export interface DistPathSet {
-  /** 该 target 的 dist 目录，仓库相对路径。 */
   root: string;
   output: string;
   unknown: string;
@@ -15,10 +14,6 @@ function basename(path: string): string {
   return parts[parts.length - 1] ?? path;
 }
 
-/**
- * 每个 target 生成到独立目录，文件名沿用 legacy 的命名。
- * 返回仓库相对路径，由调用方解析成绝对路径后写盘。
- */
 export function distPathsForTarget(target: TargetConfig, root = DEFAULT_DIST_ROOT): DistPathSet {
   const dir = `${root}/${target.id}`;
   return {
