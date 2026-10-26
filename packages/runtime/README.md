@@ -6,7 +6,7 @@
 
 - `EngineHost`：`compile`、`run`、`testEntry`、`metrics`；持有编译缓存。
 - `CompileCache`：按配置文本生成 `compileId`，默认保留当前 + 上一个版本。
-- `JobRunner`：单活动任务、scope（all/keys）、进度、摘要。
+- `JobRunner`：分块执行（默认 4096 条/块）、scope（all/keys）、进度、摘要；单活动任务由 `createRuntimeDispatcher` 守卫。
 - `createRuntimeDispatcher`：环境无关的协议分发器（config/engine/job/entry/compare/metrics）。
 - `CoreTransport` / `DirectClient`：Worker（浏览器/worker_threads）共用的请求/响应/事件协议；Node dev WS 仍使用旧的 `RpcClient`。
 - `HashProvider` / `Clock` / `MemorySnapshot`：由宿主注入，runtime 不直接依赖 Node/DOM。

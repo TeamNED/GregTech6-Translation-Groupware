@@ -41,8 +41,8 @@ Node server 只在开发环境存在。**不提供生产版 Node web 服务**。
 | 任意开始/停止 | 是（进程内 worker） | 是（终止 worker） | 是（终止 worker） |
 | 时间指标 | 是 | 是 | 是 |
 | 空间指标 | Node 进程内存 | worker/进程内存 | 尽力而为 |
-| 上传源语言文件 | 读取仓库/参数路径 | HTTP 上传 | File API |
-| 下载目标语言文件 | 写 dist | HTTP 下载 | Blob 下载 |
+| 上传源语言文件 | 读取仓库/参数路径 | 读取仓库文件（HTTP 通道已提供，UI 上传未启用） | File API |
+| 下载目标语言文件 | 写 dist | 写 dist（HTTP 下载通道已提供） | Blob 下载 |
 | 查看/修改配置 | 只读 | 读写仓库配置 | 内存编辑 + 导出 |
 | 对比 golden | 是 | 是 | 是（上传 golden） |
 | 对比两次运行 | 文本/记录 | 是 | 是（最近 N 次） |
@@ -143,7 +143,7 @@ Dedicated Web Worker
 
 `web` 同一套 UI，通过 `CoreClient` 选择传输：
 
-- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker，`?mode=dev` 可强制 WS；支持保存仓库配置、HTTP 文件上传/下载。
+- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker，`?mode=dev` 可强制 WS；支持保存仓库配置，HTTP 文件通道已提供但当前 UI 主要读取仓库文件。
 - **生产**：默认 `worker`，纯静态；配置只读默认值/内存编辑/JSONC 导出；File API。
 
 UI 必须显式显示当前模式及能力差异（例如“保存到仓库”只在 dev 可用）。
@@ -190,7 +190,7 @@ type CoreEvent =
 | --- | --- | --- |
 | `DirectTransport` | runtime 单测、纯函数调用 | 直接调用 handler |
 | `WorkerTransport`（`BrowserWorkerTransport` / `WorkerThreadTransport`） | 浏览器生产 / Node worker_threads | `postMessage` / `MessagePort` |
-| `RpcClient`（历史 WebSocket 客户端） | Node dev web | WS 请求/响应；runtime 通知未接入 |
+| `RpcClient`（历史 WebSocket 客户端） | Node dev web | WS 请求/响应 + progress 通知（已接入） |
 | HTTP | Node dev web 大文件 | multipart 上传、流式下载 |
 
 ### 4.4 大文件
@@ -419,7 +419,7 @@ gt6tg gate        # lint + parity + hash + perf
 
 - `lint`：配置 JSONC/schema/lint；有 error 退出码 1。
 - `parity`：读取配置/source/fallback/golden/unknown；编译、生成、写 dist、回读、逐 key 对比、unknown 双向、roundtrip；失败退出码 1。
-- `hash`：输出 sha256 前 16 位；默认校验两次运行 hash 一致（确定性），可选 `--expect-hash`。
+- `hash`：输出 sha256 前 16 位；确定性/期望值比较由 gate 或 CI 额外执行（当前未内置 `--expect-hash`）。
 - `perf`：测量 compile/generate/total、阶段、计数、内存；写 `packages/node/.perf/*.json`；默认报告，`--strict` 超阈值失败（默认 warn 15% / fail 30%）。
 - `gate`：按顺序跑全部检查；任一失败即失败。
 
@@ -474,41 +474,48 @@ gt6tg gate        # lint + parity + hash + perf
 ```
 packages/core/src/
   index.ts
-  types/{index,config,issues,lang,timing,parity,domain}.ts
-  config/{index,schema,jsonc,lint}.ts
+  compile-config.ts
+  types/{index,api,config,issues,lang,parity,timing}.ts
+  config/{index,jsonc,lint,schema}.ts
   hooks/{index,types,emitter}.ts
   engine/{index,tokenizer,model,lexicon,compile,matcher,apply,entryTest,legacyLang,stats,parity,timing}.ts
 
 packages/runtime/src/
   index.ts
   host.ts                 # EngineHost
-  job.ts                  # JobRunner
+  job.ts                  # 分块 JobRunner
   compile-cache.ts
   protocol.ts             # 请求/响应/事件/CoreClient/CoreTransport
-  transport.ts            # DirectTransport
+  transport.ts            # DirectTransport/DirectClient
+  dispatcher.ts           # createRuntimeDispatcher
+  artifacts.ts            # buildArtifactTexts
   hash.ts                 # HashProvider 接口
+  hooks.ts                # runtime 事件
   clock.ts                # Clock 接口
   run-summary.ts
-  paths.ts                 # distPathsForTarget 等纯路径推导
-  index.ts
+  paths.ts                # distPathsForTarget 等纯路径推导
 
 packages/node/src/
-  index.ts
-  cli/{index,main,args,output}.ts
-  cli/commands/{index,lint,parity,hash,perf,gate}.ts
-  server/{index,http,ws,handlers,notifications}.ts
-  worker/{index,main}.ts  # worker_threads 入口
-  fs/{paths,workspace,artifacts,config-write}.ts
-  config/{defaults,legacyYaml}.ts
-  gate/{parity,hash,perf}.ts
-  perf/{measure,record,compare,report}.ts
+  index.ts                # dev server / 组合根
+  rpc.ts                  # WS framing/队列
+  handlers.ts             # RPC 方法表
+  http.ts                 # HTTP 文件通道
+  engine-client.ts        # worker_threads 客户端
+  projectStore.ts         # 配置状态/保存/备份
+  io.ts                   # checkIo/generate/testEntry
+  paths.ts                # 路径守卫/原子写
+  hash.ts / memory.ts
+  cli/{main,commands,perf,lib}.ts
+  worker/{main,transport}.ts
+  config/legacyYaml.ts
 
 packages/web/src/
   main.ts
   App.vue
-  client/{index,core-client,worker-transport,ws-transport,http-files}.ts
-  worker/{index,main}.ts
-  workspace/{virtual-workspace,file-roles}.ts
+  default-config.ts       # packages/node/project.jsonc?raw
+  backend/{index,types,dev,browser,browser-client,hash,memory,report,download}.ts
+  worker/main.ts
+  rpc/client.ts
   composables/useConsole.ts
   components/*.vue
 ```

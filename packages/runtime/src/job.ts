@@ -54,8 +54,7 @@ export class JobRunner {
     const scope = input.scope ?? { kind: 'all' };
     const entries = selectEntries(input.sourceEntries, scope);
     const total = entries.length;
-    const requestedKeys =
-      scope.kind === 'keys' ? scope.keys.length : input.sourceEntries.length;
+    const requestedKeys = scope.kind === 'keys' ? scope.keys.length : input.sourceEntries.length;
     const chunkSize = Math.max(1, Math.trunc(input.chunkSize ?? DEFAULT_CHUNK_SIZE));
 
     emit(input, 'prepare', 0, total);
