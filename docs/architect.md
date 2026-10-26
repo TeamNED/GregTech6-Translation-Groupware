@@ -156,7 +156,7 @@ UI 必须显式显示当前模式及能力差异（例如“保存到仓库”�
 
 - 传输无关：协议不依赖 HTTP/WS/Worker 任一实现。
 - 请求/响应 + 通知：请求有 `id`，通知无 `id`。
-- 大对象不跨边界：编译结果留在宿主；只传 `compileId`、摘要、样本、Blob。
+- 编译结果不跨边界；只传 `compileId`、摘要、样本。当前 `job.start` 在 `includeArtifacts !== false` 时返回 output/unknown 文本供 CLI 落盘/web 下载；后续可改为 `job.export` 流式导出。
 - 取消是宿主行为：终止 Worker，不进入 runtime 的优雅取消状态机。
 
 ### 4.2 消息形态
@@ -243,7 +243,7 @@ cache: Map<compileId, { compiled, stats, lastUsed }>
 - 按 2k–5k 条分块处理，每块后让出事件循环，检查是否被宿主终止/是否发送进度。
 - 输出：
   - `RunSummary`：source/output/unknown 数、sameAsEnglish、conflictKeys、matchedKeys、候选桶/条目数、timings、hash。
-  - 完整 output/unknown 文本暂存在 runtime；`job.export` 按需返回/生成 Blob。
+  - 完整 output/unknown 文本暂存在 runtime；`job.start` 当前随响应返回（由 `includeArtifacts` 控制），`job.export` 保留按需读取；大规模语料可改为纯流式 Blob/分块导出。
 - 默认不保留 `candidatesByValue`；仅在调试 `includeCandidates` 时保留。当前真实语料候选桶 109,271、条目 114,270，保留会显著增加浏览器内存。
 - 停止 = 宿主 terminate Worker；runtime 不需要实现 pause/resume/cancel 状态机。
 
