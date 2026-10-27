@@ -8,6 +8,8 @@ export const projectFilePath = resolve(repoRoot, 'packages/node/project.jsonc');
 export const legacyRoot = resolve(repoRoot, 'packages/legacy');
 /** Node 生成物只能写到这里。 */
 export const artifactRoot = resolve(repoRoot, 'packages/node/dist');
+/** web 构建产物；由 node 的 dev 任务构建并托管。 */
+export const webDistRoot = resolve(repoRoot, 'packages/web/dist');
 
 /** 把仓库相对路径解析成绝对路径，并禁止越界。 */
 export function resolveInsideRepo(path: string): string {

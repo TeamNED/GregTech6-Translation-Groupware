@@ -9,8 +9,8 @@
 | `packages/legacy` | 原 C++ 替换器、`config.yml`、英文源、fallback、golden 输出 | `packages/legacy/src`, `packages/legacy/workplace` |
 | `packages/core` | 纯算法、JSONC v2 配置 schema/解析/lint、Hook、共用领域类型 | `packages/core/src/index.ts` |
 | `packages/runtime` | EngineHost、任务调度、编译缓存、传输无关协议 | `packages/runtime/src/index.ts` |
-| `packages/node` | Node 适配：CLI 门禁、dev WebSocket/HTTP、worker_threads、文件系统、配置与产物 | `packages/node/src/index.ts`, `packages/node/project.jsonc` |
-| `packages/web` | Vue 3 + Naive UI 统一控制台；开发用 WebSocket，生产构建用浏览器 Worker | `packages/web/src/App.vue`, `packages/web/src/worker/main.ts` |
+| `packages/node` | Node 适配：CLI 门禁、托管 web 构建产物的 HTTP/WS dev 服务、worker_threads、文件系统、配置与产物 | `packages/node/src/index.ts`, `packages/node/project.jsonc` |
+| `packages/web` | Vue 3 + Naive UI 统一控制台；node 托管构建用 WebSocket，纯静态构建用浏览器 Worker | `packages/web/src/App.vue`, `packages/web/src/worker/main.ts` |
 
 `core`/`runtime` 不依赖 Vue/Naive UI/Node 文件系统。Node 侧算法在 worker_threads、浏览器侧在 Dedicated Worker 中执行；web 主线程负责 UI 与轻量报告解析/diff，开发模式通过 `RpcClient` 调 node，生产模式通过 Worker 调 runtime。配置的唯一事实来源是 `packages/node/project.jsonc`。
 
@@ -31,18 +31,17 @@ node common/scripts/install-run-rush.js update
 ## 启动本地开发控制台
 
 ```bash
-node scripts/dev.mjs
+npm run dev
 ```
 
-然后打开 <http://127.0.0.1:5173>。它会同时启动：
+根目录的 `dev` 调用 `packages/node` 的 dev 任务：先用 node 模式构建 `packages/web/dist`，再构建 node worker，最后启动 node 服务。打开 <http://127.0.0.1:5176/>。
 
-- `node`：`ws://127.0.0.1:5175/__gt6tg_rpc`（只绑定 localhost），以及 `http://127.0.0.1:5176/health` 文件通道
-- `web`：Vite dev server
+页面、`/api/files` 文件通道和 `ws://127.0.0.1:5176/__gt6tg_rpc` 由同一个 HTTP 服务提供，只绑定 localhost；构建后的页面通过同源地址连接控制通道。修改 web 源码后需要重启 dev 任务重新构建；只调试 web 时可另开 `cd packages/web && npx vite`（默认连接 `ws://127.0.0.1:5176/__gt6tg_rpc`）。
 
-如果端口冲突，可通过环境变量调整 RPC/HTTP 端口，并让 web 使用同一个地址：
+端口冲突时用 `GT6TG_PORT` 调整，页面与 RPC 会一起换端口：
 
 ```bash
-GT6TG_RPC_PORT=5185 GT6TG_HTTP_PORT=5186 VITE_RPC_URL=ws://127.0.0.1:5185/__gt6tg_rpc node scripts/dev.mjs
+GT6TG_PORT=5186 npm run dev
 ```
 
 ## 浏览器 REPL（生产构建）
@@ -51,11 +50,12 @@ GT6TG_RPC_PORT=5185 GT6TG_HTTP_PORT=5186 VITE_RPC_URL=ws://127.0.0.1:5185/__gt6t
 
 ```bash
 cd packages/web
-npx vite build
+npm run build
 # 将 dist/ 交给任意静态文件服务器
 ```
 
-- 默认使用浏览器 Worker，算法不阻塞 UI；开发时默认 WS，可用 `?mode=repl` 强制 Worker、`?mode=dev` 强制 WS。
+- 默认使用浏览器 Worker，算法不阻塞 UI；可用 `?mode=dev` 强制 WS（配合本地 node 服务）、`?mode=repl` 强制 Worker。
+- 由 node 托管时使用 `npm run build:node`（`vite build --mode node`），构建产物默认走同源 WebSocket；node dev 任务会自动执行这一步。
 - 构建期内置 `packages/node/project.jsonc` 的只读副本；配置只存在内存，刷新即恢复默认，可导出 JSONC。
 - 在“文件 / 历史”页上传源/fallback/golden/unknown，运行后下载目标/unknown；默认保留最近 3 次成功运行，可做 golden 对比和 run-to-run 对比。
 - 停止任务 = 终止 Worker；下一次运行重新创建 Worker 并重新编译（约 16–35 ms）。

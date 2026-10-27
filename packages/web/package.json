@@ -2,11 +2,12 @@
   "name": "@gt6tg/web",
   "version": "0.1.0",
   "private": true,
-  "description": "统一 Web 控制台（Vue 3 + Naive UI）。开发用 WebSocket 调用 @gt6tg/node，生产构建用浏览器 Worker。",
+  "description": "统一 Web 控制台（Vue 3 + Naive UI）。node 托管构建用 WebSocket 调用 @gt6tg/node，纯静态构建用浏览器 Worker。",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:node": "vue-tsc --noEmit && vite build --mode node",
     "typecheck": "vue-tsc --noEmit",
     "lint": "oxlint",
     "format": "oxfmt",

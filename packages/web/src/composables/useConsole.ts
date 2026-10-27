@@ -1,7 +1,14 @@
 import type { ServerMethodName, ServerParams, ServerResult } from '@gt6tg/core';
 import type { CompareResult } from '@gt6tg/runtime';
 import { reactive } from 'vue';
-import { createBackend, type BackendCapabilities, type FileRole, type FileSlot, type HistoryEntry } from '../backend';
+import {
+  createBackend,
+  resolveRpcUrl,
+  type BackendCapabilities,
+  type FileRole,
+  type FileSlot,
+  type HistoryEntry,
+} from '../backend';
 import type { ConnectionStatus } from '../rpc/client';
 
 interface ConsoleState {
@@ -30,10 +37,7 @@ const state = reactive<ConsoleState>({
   capabilities: backend.capabilities,
 });
 
-const rpcUrl =
-  backend.mode === 'repl'
-    ? '浏览器 REPL · Worker（内存）'
-    : (import.meta.env.VITE_RPC_URL ?? 'ws://127.0.0.1:5175/__gt6tg_rpc');
+const rpcUrl = backend.mode === 'repl' ? '浏览器 REPL · Worker（内存）' : resolveRpcUrl();
 let connecting = false;
 let cancelling = false;
 

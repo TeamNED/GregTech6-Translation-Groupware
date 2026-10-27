@@ -1,14 +1,16 @@
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { RpcNotification } from '@gt6tg/core';
 import type { CoreEvent } from '@gt6tg/runtime';
 import { WebSocketServer, type WebSocket } from 'ws';
 import { NodeEngineClient } from './engine-client';
 import { createHandlers } from './handlers';
-import { createHttpFileServer } from './http';
+import { createHttpServer } from './http';
+import { webDistRoot } from './paths';
 import { ProjectStore } from './projectStore';
 import { attachRpc } from './rpc';
 
-const port = Number(process.env.GT6TG_RPC_PORT ?? '5175');
-const httpPort = Number(process.env.GT6TG_HTTP_PORT ?? '5176');
+const port = Number(process.env.GT6TG_PORT ?? process.env.GT6TG_HTTP_PORT ?? '5176');
 const host = '127.0.0.1';
 
 const store = new ProjectStore();
@@ -26,24 +28,24 @@ engine.onEvent((event) => {
   }
 });
 
+const httpServer = createHttpServer();
 const server = new WebSocketServer({
-  host,
-  port,
+  server: httpServer,
   path: '/__gt6tg_rpc',
   maxPayload: 32 * 1024 * 1024,
 });
 
-const httpServer = createHttpFileServer();
-httpServer.listen(httpPort, host, () => {
-  console.log(`[gt6tg] HTTP 文件通道已启动：http://${host}:${httpPort}/health`);
+if (!existsSync(resolve(webDistRoot, 'index.html'))) {
+  console.warn('[gt6tg] 未找到 packages/web/dist；页面请求会返回 503，请先运行 npm run dev。');
+}
+
+httpServer.listen(port, host, () => {
+  console.log(`[gt6tg] 控制台已启动：http://${host}:${port}/`);
+  console.log(`[gt6tg] WebSocket RPC：ws://${host}:${port}/__gt6tg_rpc`);
 });
 httpServer.on('error', (error) => {
-  console.error('[gt6tg] HTTP 文件通道错误:', error);
+  console.error('[gt6tg] HTTP 服务错误:', error);
   process.exitCode = 1;
-});
-
-server.on('listening', () => {
-  console.log(`[gt6tg] WebSocket RPC 已启动：ws://${host}:${port}/__gt6tg_rpc`);
 });
 
 server.on('connection', (socket) => {

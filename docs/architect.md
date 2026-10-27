@@ -15,9 +15,9 @@
 Node 用来做两件事：
 
 1. **CLI 门禁**：在仓库里读取配置、语料和 golden，运行算法与检查，输出结果与退出码。CLI 不写配置，只写可重建的 dist 与 perf 记录。
-2. **本地 web 开发控制台**：Vite dev server 提供统一 web UI，Node dev server 提供 WebSocket 控制通道和 HTTP 文件通道。算法运行在 Node `worker_threads` 中，HTTP/WS 主线程不被 1.9 s 的生成阻塞。
+2. **本地 web 开发控制台**：`packages/node` 的 dev 任务先构建 `packages/web/dist`（node 模式），再由 Node dev server 同源托管页面、WebSocket 控制通道和 HTTP 文件通道。算法运行在 Node `worker_threads` 中，HTTP/WS 主线程不被 1.9 s 的生成阻塞。
 
-Node server 只在开发环境存在。**不提供生产版 Node web 服务**。
+Node server 只在开发环境存在。**不提供生产版 Node web 服务**；静态生产形态仍是不依赖 Node 的浏览器 REPL。
 
 ### 1.2 浏览器生产环境
 
@@ -68,7 +68,7 @@ packages/
 | --- | --- | --- |
 | `core` | 分词、编译、匹配、生成、单条 trace、parity 比较原语、配置 schema/JSONC 解析/lint、Hook 类型、领域类型 | Node / 浏览器 Worker（同构） |
 | `runtime` | EngineHost、JobRunner、编译缓存、协议端点、客户端/传输接口、hash/clock 注入点 | Node / 浏览器 Worker（同构） |
-| `node` | CLI 门禁、dev server（WS/HTTP）、worker_threads 宿主、fs、配置写、dist/perf | 仅 Node |
+| `node` | CLI 门禁、dev server（web 静态托管 + WS/HTTP）、worker_threads 宿主、fs、配置写、dist/perf | 仅 Node |
 | `web` | 统一面板式 UI、浏览器 Worker 入口、Worker/WS 两种客户端、File API、历史对比 | 仅浏览器 |
 | `legacy` | C++ oracle 与职场语料 | 不参与 TS 依赖 |
 
@@ -86,7 +86,7 @@ legacy  → 无 TS 依赖
 - `core` / `runtime` import `node:*`、`fs`、`path`、`process`、`Buffer`、`yaml`、DOM API。
 - `core` 依赖 `runtime` / `node` / `web`。
 - `web` 依赖 `node` 的运行时代码；仅允许构建期读取 `packages/node/project.jsonc` 作为数据。
-- `node` 依赖 `web` 的运行时代码；dev 启动由根脚本编排。
+- `node` 依赖 `web` 的运行时代码；dev 任务只在脚本层调用 `web` 的 node 模式构建，并作为静态文件托管 `packages/web/dist`。
 
 ### 2.3 包迁移
 
@@ -103,10 +103,11 @@ legacy  → 无 TS 依赖
 ### 3.1 Node 开发
 
 ```
-Vite web UI
+web（`vite build --mode node` → packages/web/dist）
+  ├── GET /                   → node dev server → 静态文件
   ├── WebSocket /__gt6tg_rpc  → node dev server → worker_threads → runtime → core
   └── HTTP /api/files/*       → node dev server → fs / 上传缓冲
-node dev server
+node dev server（页面、WS、文件通道同端口）
   ├── 读 packages/node/project.jsonc
   ├── 写 packages/node/project.jsonc（唯一写入者）
   └── 桥接 WS 与 worker 协议
@@ -117,7 +118,8 @@ CLI
 
 关键点：
 
-- Node dev server 的主线程只做 HTTP/WS/文件与生命周期，不跑算法。
+- `npm run dev`（node 包）先构建 web 的 node 模式产物，再启动 server；页面通过同源地址连接 WS。
+- Node dev server 的主线程只做静态文件/HTTP/WS/文件与生命周期，不跑算法。
 - Node CLI 也通过 `worker_threads` 跑算法，保持与 dev server 相同的 runtime 路径。
 - 停止任务 = `worker.terminate()`；下一次任务重新创建 worker 并重新编译（约 16–35 ms）。
 
@@ -143,8 +145,8 @@ Dedicated Web Worker
 
 `web` 同一套 UI，通过 `CoreClient` 选择传输：
 
-- **开发**：默认 `dev` 模式，用 `VITE_RPC_URL` 连接 Node dev server；URL `?mode=repl` 可强制 Worker，`?mode=dev` 可强制 WS；支持保存仓库配置，HTTP 文件通道已提供但当前 UI 主要读取仓库文件。
-- **生产**：默认 `worker`，纯静态；配置只读默认值/内存编辑/JSONC 导出；File API。
+- **node 托管构建**：`vite build --mode node`（由 node dev 任务自动调用）默认 `dev` 模式，通过页面同源地址连接 Node dev server；Vite dev 默认也走 `dev`（默认连 `ws://127.0.0.1:5176/__gt6tg_rpc`），可用 `VITE_RPC_URL` 覆盖。URL `?mode=repl` 可强制 Worker，`?mode=dev` 可强制 WS；支持保存仓库配置，HTTP 文件通道已提供但当前 UI 主要读取仓库文件。
+- **纯静态生产**：`vite build` 默认 `worker`，不依赖 Node；配置只读默认值/内存编辑/JSONC 导出；File API。
 
 UI 必须显式显示当前模式及能力差异（例如“保存到仓库”只在 dev 可用）。
 
@@ -456,13 +458,14 @@ gt6tg gate        # lint + parity + hash + perf
 
 ### 11.2 传输选择
 
-- 开发：`RpcClient`（WS）+ `fetch`/HTTP 文件。
-- 生产：`BrowserWorkerTransport` + File API。
+- node 托管构建：`RpcClient`（同源 WS）+ `fetch`/HTTP 文件。
+- 纯静态生产：`BrowserWorkerTransport` + File API。
 - `ConsoleBackend` 对上暴露统一方法；组件不直接依赖 WebSocket/Worker。
 
-### 11.3 生产构建
+### 11.3 构建
 
-- `vite build` 输出静态文件；`base: './'` 以支持任意静态托管。
+- `vite build` 输出纯静态 REPL；`vite build --mode node` 输出由 node 托管的构建，默认使用同源 WS。
+- `base: './'` 以支持任意静态托管。
 - Worker 作为独立 chunk 打包。
 - 默认配置在构建期从 `packages/node/project.jsonc` 读取（`?raw`/alias），作为数据依赖，不引入 node 运行时。
 - 构建门禁：若 Worker bundle 出现 `node:*`/`fs`，构建失败。
@@ -499,7 +502,7 @@ packages/node/src/
   index.ts                # dev server / 组合根
   rpc.ts                  # WS framing/队列
   handlers.ts             # RPC 方法表
-  http.ts                 # HTTP 文件通道
+  http.ts                 # web dist 静态托管 + HTTP 文件通道
   engine-client.ts        # worker_threads 客户端
   projectStore.ts         # 配置状态/保存/备份
   io.ts                   # checkIo/generate/testEntry
@@ -559,8 +562,8 @@ packages/web/src/
 - `packages/server` 重命名为 `packages/node`，包名 `@gt6tg/node`。
 - CLI 并入 node；删除 `packages/core/scripts`。
 - 迁移 `project.jsonc`、`dist`、`.perf` 到 `packages/node`。
-- CLI 改为只读门禁；dev server 只保留 WS/HTTP API。
-- 更新 `rush.json`、`scripts/dev.mjs`、`.gitignore`、README。
+- CLI 改为只读门禁；dev server 提供 WS/HTTP API，并托管 web 的 node 模式构建产物。
+- 更新 `rush.json`、`.gitignore`、README；删除根目录 `scripts/dev.mjs`，dev 由 `packages/node` 的 dev 任务统一编排。
 
 ### 阶段 5：worker_threads + esbuild
 
@@ -585,7 +588,7 @@ packages/web/src/
 
 ### 阶段 8：验收
 
-- `rush build`、core/runtime tests、CLI `gate`、parity 基线、`vite build`、dev 控制台冒烟。
+- `rush build`、core/runtime tests、CLI `gate`、parity 基线、web 的静态/node 模式构建、dev 控制台冒烟。
 - 独立子代理逐项对照本文档验收；失败修复后重新验收。
 
 ---
@@ -617,7 +620,7 @@ packages/web/src/
    - `hash=db41064a4b4c34dd`
    - `roundTrip.ok=true`
 4. CLI `lint/parity/hash/perf` 均可独立运行，退出码语义正确。
-5. Node dev server：配置读写、IO 检查、生成、单条测试、停止任务均可用；配置保存为原子写 + 备份。
+5. Node dev server：托管 `packages/web/dist`、配置读写、IO 检查、生成、单条测试、停止任务均可用；配置保存为原子写 + 备份。
 6. 浏览器生产构建：
    - `vite build` 成功；
    - 无 Node 运行时依赖；

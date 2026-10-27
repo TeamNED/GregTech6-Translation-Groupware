@@ -7,12 +7,13 @@
 | `dev` | WebSocket → `@gt6tg/node` dev server | 本地开发；可读写仓库配置、读取仓库语料 |
 | `repl` | 浏览器 Dedicated Worker | 生产静态 REPL；配置/文件仅在内存 |
 
-选择：开发默认 `dev`，生产构建默认 `repl`；开发时可用 `?mode=repl` 强制 Worker，`?mode=dev` 强制 WS。
+选择：Vite dev 与 `vite build --mode node` 默认 `dev`，纯静态构建默认 `repl`；可用 `?mode=repl` 强制 Worker、`?mode=dev` 强制 WS。node 模式构建按页面同源地址连接 `ws://<host>/__gt6tg_rpc`。
 
 ```bash
 cd packages/web
-npx vite            # dev
-npx vite build      # 生产静态 dist/
+npx vite                  # Vite dev（配合 packages/node 的 dev server）
+npm run build             # 生产静态 dist/（浏览器 Worker）
+npm run build:node        # node 托管 dist/（同源 WebSocket，由 packages/node dev 任务自动调用）
 ```
 
 ## REPL 能力

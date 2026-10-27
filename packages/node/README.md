@@ -26,12 +26,13 @@ npm run gate -- --runs=1 --warmup=0   # lint + parity + hash + perf
 
 ```bash
 npm run dev
-# WS:   ws://127.0.0.1:5175/__gt6tg_rpc
-# HTTP: http://127.0.0.1:5176/health
+# 页面: http://127.0.0.1:5176/
+# WS:   ws://127.0.0.1:5176/__gt6tg_rpc
 ```
 
-开发 web 由 `packages/web` 的 Vite dev server 提供；Node server 只提供 WS 控制与 HTTP 文件通道，不托管生产静态页面。
+`dev` 先用 `build:web`（`vite build --mode node`）构建 `packages/web/dist`，再构建 worker，最后启动 `tsx watch src/index.ts`。Node server 同源托管构建产物、`/api/files` 文件通道和 WebSocket 控制通道；端口用 `GT6TG_PORT` 调整。
 
+- 页面与 WS 同端口，web 构建默认连接页面同源地址，不再需要 `VITE_RPC_URL`。
 - 配置写入：**只有 dev server 写 `project.jsonc`**，使用临时文件 + rename 原子写和毫秒级 `.bak-*` 备份。
 - 算法：`worker_threads` 中运行 `@gt6tg/runtime`；CLI 与 dev server 共用 `NodeEngineClient`。
 - 停止任务：terminate worker；下一次请求重新创建并编译。
@@ -50,7 +51,7 @@ src/
   index.ts         dev server 启动/组合根
   rpc.ts          WebSocket JSON-RPC framing/队列
   handlers.ts     RPC 方法表
-  http.ts         HTTP 文件通道
+  http.ts         web dist 静态托管 + HTTP 文件通道
   engine-client.ts  worker_threads 客户端
   projectStore.ts 配置状态、校验、保存/备份/legacy YAML 导入
   config/         legacyYaml.ts（config.yml -> v2）
