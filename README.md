@@ -107,6 +107,7 @@ npm run build
 ## 设计文档
 
 - [架构设计](docs/architect.md)
+- [材料出处索引](docs/materials/README.md)
 - [core 使用与 API](packages/core/README.md)
 - [算法实现说明](packages/core/docs/algorithms.md)
 - [性能评估](packages/core/docs/perf-evaluation.md)
