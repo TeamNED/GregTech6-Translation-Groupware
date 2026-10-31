@@ -14,7 +14,7 @@
 
 ## 子 Wiki
 
-以下子 Wiki 统一记录在此，不单独成文件；引用时给具体页面 URL。
+以下子 Wiki 统一登记在此，引用时给具体页面 URL。内容多到需要单独成文件的子 Wiki（目前只有 FTB Wiki）仍在表中占一行，详情放到对应文件，避免同一套注意事项在两处维护。
 
 | 子 Wiki | URL | 涵盖内容 | 注意事项 |
 | --- | --- | --- | --- |
@@ -24,6 +24,7 @@
 | CrazyOres | https://crazyores.fandom.com/ | Zectium、Starconium、Tapazite、Invisium、Osmonium 等矿石 | 直接抓取常返回 403，需 browser use；mcmod.cn/class/27755 可补充。 |
 | Dragon Booster | https://dragonbooster.fandom.com/ | Draconium 等虚构能量矿物 | Draconium 作为虚构能量矿物的最早出处。 |
 | Final Fantasy | https://finalfantasy.fandom.com | Adamantite、Mythril 等系列物品/材料 | WebFetch 会 403；用 curl 带浏览器 UA 请求 api.php 取 wikitext。 |
+| FTB Wiki | https://ftb.fandom.com/wiki/GregTech_6 | FTB 整合包与 GregTech 各版本的机器、材料、教程 | 详情见 `ftb-wiki.md`；开发站 dev.ftbwiki.org 见 `mod-wikis.md`。 |
 | HBM's Nuclear Tech Mod | https://ntm.fandom.com/ | Red Copper（Minecraft Grade Copper / Mingrade）等命名与配方 | 以俄语为主，注意与 GT6 的 HBM 兼容名对应。 |
 | Hexxit | https://hexxit.fandom.com/wiki/Autumn_Woods | Extra Biomes XL 的 Autumn Woods / 秋树 | 整合包 Wiki，材料归属需回到 EBXL 本体确认。 |
 | Marvel Database | https://marvel.fandom.com | Adamantium、Vibranium 等条目与首次登场信息 | 用 api.php 取 wikitext；WebFetch 直接访问会 403。 |

@@ -6,8 +6,8 @@
 | --- | --- | --- |
 | `search-engines.md` | Google/Bing/DuckDuckGo/百度、DeepSeek 搜索、browser use | 广撒网、找作品 Wiki、打开原始页面 |
 | `wikipedia.md` | Wikipedia 中文/英文 | 现实元素、化合物、矿物、宝石；作品条目 |
-| `huijiwiki.md` | 灰机 Wiki（GTNH 中文站、作品站） | GTNH 中文资料、ACG/游戏作品设定 |
-| `fandom.md` | Fandom（含“子 Wiki”段） | Minecraft mod、影视游戏作品 Wiki；各子 Wiki 统一记录在该文件的“子 Wiki”段，不单独成文件 |
+| `huijiwiki.md` | 灰机 Wiki 平台与作品站 | 平台入口与作品站；GTNH 中文站资料见 `gtnh-wiki.md` |
+| `fandom.md` | Fandom（含子 Wiki 登记表） | Minecraft mod、影视游戏作品 Wiki；子 Wiki 统一在该文件的表里登记 |
 | `gamepedia.md` | Gamepedia（已并入 Fandom） | 旧链接迁移、历史 Wiki 页面 |
 | `ftb-wiki.md` | FTB Wiki（ftb.fandom.com） | GregTech 各版本条目、整合包资料 |
 | `mcmod.md` | MC百科 | 中文 mod 条目、物品/材料页、教程 |
@@ -22,7 +22,16 @@
 | `real-world-databases.md` | Mindat / ATHENA / NIMRF / PubChem / POWO / Geology.com / JOGG | 现实矿物、植物、化合物、岩石、宝石数据库 |
 | `minecraft-wiki.md` | https://minecraft.wiki/w/Nether_Star | Minecraft Wiki：下界之星/下界石英/红石/腐肉等原版物品 |
 
-通用规则：
+## 登记约定
+
+- 同一个站点只在一个文件里展开写，其他文件用一句话指向它，避免两处维护同一套注意事项。
+- 平台与其上的具体 Wiki 分开登记：Fandom、灰机作为平台各占一行，具体 Wiki 在平台的“子 Wiki”表里逐条列出。
+- 已重定向的旧域名（Gamepedia）保留独立文件用于迁移，但不算独立站点。
+- 单一材料的单篇新闻、评测、论文不单独成文件，作为材料条目的证据 URL 保留。
+
+规模（2026-10-31 统计）：17 个信源文件，去重后 67 个独立站点。按文件内条目逐条计为 72 条，多出的 5 条是跨文件登记：GTNH 中文站、TeamNED 本仓、CurseForge、FTB Wiki 各登记两次，Gamepedia 与 Fandom 同源。
+
+## 通用规则
 
 1. 一手来源（代码、官方 changelog、官方 Wiki）优先于二手来源（玩家 Wiki、教程、视频）。
 2. 同一个事实尽量用两个独立信源交叉验证；只有单一来源时注明来源。

@@ -3,19 +3,19 @@
 ## 信源信息
 
 - 平台：https://www.huijiwiki.com
-- GTNH 中文维基：https://gtnh.huijiwiki.com
+- GTNH 中文维基：https://gtnh.huijiwiki.com —— 与英文站一并维护在 `gtnh-wiki.md`，这里只保留入口。
 - 各作品站：形如 `https://<作品>.huijiwiki.com`，例如东方、型月、明日方舟等作品的 Wiki。
 
 ## 涵盖内容
 
-- GTNH 中文资料：材料、机器、任务、工艺流程、版本改动。
+- GTNH 中文资料：内容见 `gtnh-wiki.md`；本文件只记灰机平台本身。
 - ACG/游戏作品的中文设定资料：角色、道具、材料、地名、术语。
 - 部分 Wiki 有中英对照表，适合查“某个英文名在中文社区怎么叫”。
 
 ## 注意事项
 
 - 社区维护，内容可能滞后于最新版本；注意页面标注的适用版本。
-- GTNH 站是 GT5U/GTNH 体系，不是 GT6 原版；材料译名可以借鉴，但不能直接当 GT6 官方译名。
+- GTNH 站是 GT5U/GTNH 体系，不是 GT6 原版，注意事项见 `gtnh-wiki.md`。
 - 作品站分“官方设定”和“二次设定/同人”，引用前确认段落来源。
 - 页面可能对爬虫返回 403，用 browser use 打开。
 - 站内搜索对中文分词一般，英文名和中文名都要试。

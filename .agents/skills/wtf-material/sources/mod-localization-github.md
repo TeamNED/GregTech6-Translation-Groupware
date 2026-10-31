@@ -8,7 +8,7 @@
 - GTNH 中央汉化：https://github.com/GTNewHorizons/GTNH-Translations
   - 格雷相关中文：`zh_CN/GregTech_zh_CN.lang`
 - GTNH 整合包汉化（Kiwi233）：https://github.com/Kiwi233/Translation-of-GTNH
-- TeamNED GT6 汉化：https://github.com/TeamNED/GregTech6-Translation-Groupware
+- TeamNED GT6 汉化：https://github.com/TeamNED/GregTech6-Translation-Groupware（仓库自身的 docs、issue、译名历史见 `gt6tg-github.md`）
 - 其他 GT6 汉化项目（可作旁证）：
   - https://github.com/TehporP/GregTech6-Translation-Project
   - https://github.com/LonelySteve/GregTech6-Translation-Lang

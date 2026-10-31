@@ -8,7 +8,7 @@
 - Changelog：https://github.com/GregTech6/gregtech6/blob/master/CHANGELOG.md
 - 材料定义（一手）：https://github.com/GregTech6/gregtech6/blob/master/src/main/java/gregapi/data/MT.java
 - 语言注册：https://github.com/GregTech6/gregtech6/blob/master/src/main/java/gregapi/lang/LanguageHandler.java
-- NeoForge 移植版（非原版）：https://www.curseforge.com/minecraft/mc-mods/gregtech-6-neoforge
+- NeoForge 移植版（非原版）：https://www.curseforge.com/minecraft/mc-mods/gregtech-6-neoforge（CurseForge/Modrinth 的通用用法见 `mod-release-pages.md`）
 
 ## 涵盖内容
 
